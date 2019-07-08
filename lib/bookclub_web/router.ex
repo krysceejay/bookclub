@@ -11,6 +11,7 @@ defmodule BookclubWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug BookclubWeb.Plugs.Context
   end
 
   scope "/", BookclubWeb do
@@ -20,7 +21,14 @@ defmodule BookclubWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", BookclubWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+
+    forward("/graphql", Absinthe.Plug, schema: BookclubWeb.Schema)
+
+    if Mix.env() == :dev do
+      forward("/graphiql", Absinthe.Plug.GraphiQL, schema: BookclubWeb.Schema)
+    end
+  end
+
 end

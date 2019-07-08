@@ -68,8 +68,10 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :bookclub, Bookclub.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "bookclub_dev",
-  hostname: "localhost",
+  username: "fcadmin",
+  password: "F@rmcr0wdY",
+  database: "bookclubdb",
+  hostname: "localhost:8080",
+  port: 3306,
+  socket: "/Applications/MAMP/tmp/mysql/mysql.sock",
   pool_size: 10
