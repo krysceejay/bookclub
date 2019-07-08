@@ -4,7 +4,7 @@ defmodule Bookclub.Accounts.Role do
 
   schema "roles" do
     field :name, :string
-    has_many :user, Bookclub.Accounts.User
+    has_many :users, Bookclub.Accounts.User
 
     timestamps()
   end

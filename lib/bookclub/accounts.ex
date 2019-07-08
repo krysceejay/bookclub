@@ -17,6 +17,15 @@ defmodule Bookclub.Accounts do
       [%Role{}, ...]
 
   """
+
+  def data() do
+      Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
+
   def list_roles do
     Repo.all(Role)
   end
