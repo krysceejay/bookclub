@@ -8,6 +8,7 @@ defmodule BookclubWeb.Schema do
 
   #import Types
   import_types Types
+  import_types Absinthe.Plug.Types
 
   def context(ctx) do
   loader =
@@ -26,8 +27,16 @@ end
     @desc "Get all users"
     field :users, list_of(:user_type) do
       #Resolver
-      middleware Middleware.Authorize, 2
+      middleware Middleware.Authorize, 1
       resolve &Resolvers.UserResolver.users/3
+    end
+
+    @desc "Get single user"
+    field :user, :user_type do
+      #Resolver
+      #middleware Middleware.Authorize, 1
+      arg :id, non_null(:id)
+      resolve &Resolvers.UserResolver.user/3
     end
 
     @desc "Get all roles"
@@ -56,6 +65,17 @@ end
     field :create_role, type: :role_type do
       arg :input, non_null(:role_input_type)
       resolve &Resolvers.RoleResolver.create_role/3
+    end
+
+    @desc "Upload file"
+    field :upload_file, :string do
+      arg :file_data, non_null(:upload)
+
+      resolve fn args, _ ->
+        args.file_data # this is a `%Plug.Upload{}` struct.
+
+        {:ok, "success"}
+      end
     end
 
 
