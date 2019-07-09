@@ -13,6 +13,7 @@ defmodule Bookclub.Accounts.User do
     field :username, :string
     #field :role_id, :id
     belongs_to :role, Bookclub.Accounts.Role
+    has_many :books, Bookclub.Content.Book
 
     ##Virtual Fields ##
     field :passwordfield, :string, virtual: true
