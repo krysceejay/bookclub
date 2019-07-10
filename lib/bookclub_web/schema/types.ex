@@ -6,5 +6,5 @@ defmodule BookclubWeb.Schema.Types do
   import_types Types.Usertype
   import_types Types.Roletype
   import_types Types.SessionType
-  # import_types Types.CommentType
+  import_types Types.Booktype
 end

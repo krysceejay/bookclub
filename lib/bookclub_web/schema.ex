@@ -4,7 +4,7 @@ defmodule BookclubWeb.Schema do
   alias BookclubWeb.Schema.Types
   alias BookclubWeb.Resolvers
   alias BookclubWeb.Schema.Middleware
-  alias Bookclub.Accounts
+  alias Bookclub.{Accounts, Content}
 
   #import Types
   import_types Types
@@ -14,6 +14,7 @@ defmodule BookclubWeb.Schema do
   loader =
     Dataloader.new
     |> Dataloader.add_source(Accounts, Accounts.data())
+    |> Dataloader.add_source(Content, Content.data())
 
   Map.put(ctx, :loader, loader)
   end
@@ -46,6 +47,13 @@ end
       resolve &Resolvers.RoleResolver.roles/3
     end
 
+    @desc "Get all books"
+    field :allbooks, list_of(:book_type) do
+      #Resolver
+      #middleware Middleware.Authorize, :any
+      resolve &Resolvers.BookResolver.all_books/3
+    end
+
   end
 
   mutation do
@@ -65,6 +73,12 @@ end
     field :create_role, type: :role_type do
       arg :input, non_null(:role_input_type)
       resolve &Resolvers.RoleResolver.create_role/3
+    end
+
+    @desc "Create book"
+    field :create_book, type: :book_type do
+      arg :input, non_null(:book_input_type)
+      resolve &Resolvers.BookResolver.create_book/3
     end
 
     @desc "Upload file"

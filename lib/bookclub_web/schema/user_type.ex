@@ -12,6 +12,7 @@ defmodule BookclubWeb.Schema.Types.Usertype do
       field :username, :string
       field :status, :integer
       #field :role, :string
+      field :books, list_of(:book_type), resolve: dataloader(Accounts)
       field :role, :role_type, resolve: dataloader(Accounts)
     end
 

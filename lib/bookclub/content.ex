@@ -8,6 +8,14 @@ defmodule Bookclub.Content do
 
   alias Bookclub.Content.Book
 
+  def data() do
+      Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
+
   @doc """
   Returns the list of books.
 
@@ -17,6 +25,7 @@ defmodule Bookclub.Content do
       [%Book{}, ...]
 
   """
+
   def list_books do
     Repo.all(Book)
   end
