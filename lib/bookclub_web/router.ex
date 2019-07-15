@@ -18,6 +18,21 @@ defmodule BookclubWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/logout", LoginController, :delete
+    delete "/logout", LoginController, :delete
+    get "/login", LoginController, :login
+    post "/login", LoginController, :create
+    get "/dashboard",  UserController, :dashboard
+
+    get "/users/new", UserController, :new
+    get "/users", UserController, :index
+    get "/users/:id/edit", UserController, :edit
+    get "/users/:id", UserController, :show
+    post "/users", UserController, :create
+    patch "/users/:id", UserController, :update
+    put "/users/:id", UserController, :update
+    delete "/users/:id", UserController, :delete
+
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/vendors/iconfonts/ti-icons/css/themify-icons.css") %>"/>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/vendors/css/vendor.bundle.base.css") %>"/>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/vendors/css/vendor.bundle.addons.css") %>"/>
+    <!-- endinject -->
+  <!-- plugin css for this page -->
+  
+  <%# <link rel="stylesheet" href="/vendors/summernote/dist/summernote-bs4.css"> %>
+  <script src="/ckeditor/ckeditor.js"></script>
+  <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/style.css") %>"/>
+    <link rel="shortcut icon" href="<%= Routes.static_path(@conn, "/images/favicon.png") %>"/>
+  </head>
+
+  <body>
+
+      <%= render @view_module, @view_template, assigns %>
+   
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/off-canvas.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/hoverable-collapse.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/template.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/settings.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/todolist.js") %>"></script>
+    
+  </body>
+</html>
