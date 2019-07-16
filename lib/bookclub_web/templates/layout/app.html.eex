@@ -148,14 +148,12 @@
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
-              <form action="/user/logout" method="POST">
+
+              <%= link to: Routes.login_path(@conn, :delete), method: :delete, class: "dropdown-item" do %>
                 <i class="ti-power-off text-primary"></i>
-                <button type="submit" class="btn btn-primary btn-sm">
                 Logout
-                </button>
-                </form>
-              </a>
+              <% end %>
+
             </div>
           </li>
           <li class="nav-item nav-settings d-none d-lg-flex">
@@ -327,21 +325,23 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/user/dashboard">
-              <i class="ti-home menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
+            <%= link to: Routes.admin_path(@conn, :dashboard), class: "nav-link" do %>
+                  <i class="ti-home menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+            <% end %>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
               <i class="ti-view-list menu-icon"></i>
-              <span class="menu-title">Post</span>
+              <span class="menu-title">Users</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-advanced">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/post">Post</a></li>
+                <li class="nav-item">
+                  <%= link "Manage Users", to: Routes.admin_path(@conn, :users), class: "nav-link" %>
+                </li>
                 <li class="nav-item"> <a class="nav-link" href="/post/addpost">Add Post</a></li>
 
               </ul>
@@ -399,7 +399,7 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/dashboard.js") %>"></script>
-<!-- 
+<!--
   <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/file-upload.js") %>"></script>
   <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/iCheck.js") %>"></script>
   <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/typeahead.js") %>"></script>

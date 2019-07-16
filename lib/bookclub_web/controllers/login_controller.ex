@@ -28,7 +28,7 @@ defmodule BookclubWeb.LoginController do
     conn
     |> delete_session(:current_user)
     |> put_flash(:info, "Logged out")
-    |> redirect(to: Routes.login_path(conn, :new))
+    |> redirect(to: Routes.login_path(conn, :login))
   end
 
 

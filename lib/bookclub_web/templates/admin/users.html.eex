@@ -1,0 +1,100 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Users</h4>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>
+                    Profile Image
+                  </th>
+                  <th>
+                    Full Name
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Created Date
+                  </th>
+                  <th>
+                    Updated Date
+                  </th>
+                  <th>
+                    Action
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+              <%= for user <- @users do %>
+                <tr>
+                  <td class="py-1">
+                    <img src="<%= Routes.static_path(@conn, "/images/faces/face28.jpg")%>" alt="profile"/>
+                  </td>
+                  <td>
+                    <%= user.first_name <>" "<> user.last_name  %>
+                  </td>
+                  <td>
+                    <%= user.email %>
+                  </td>
+                  <td>
+                    <label class="badge badge-danger">Inactive</label>
+
+                  </td>
+                  <td>
+                    <%= user.inserted_at |> Date.to_string %>
+                  </td>
+                  <td>
+                  <%= user.updated_at %>
+                  </td>
+                  <td>
+                  <div class="dropdown">
+              <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuSizeButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton2">
+                <h6 class="dropdown-header">Settings</h6>
+                <%= link "Show", to: Routes.admin_path(@conn, :user, user), class: "dropdown-item" %>
+                <!-- <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a> -->
+              </div>
+            </div>
+                  </td>
+                </tr>
+                <% end %>
+
+
+              </tbody>
+            </table>
+
+          </div>
+          <div>
+
+          </div>
+
+        </div>
+        <nav>
+          <ul class="pagination flex-wrap pagination-rounded-flat justify-content-end pagination-info">
+            <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

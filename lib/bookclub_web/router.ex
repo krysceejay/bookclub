@@ -22,16 +22,10 @@ defmodule BookclubWeb.Router do
     delete "/logout", LoginController, :delete
     get "/login", LoginController, :login
     post "/login", LoginController, :create
-    get "/dashboard",  UserController, :dashboard
+    get "/dashboard",  AdminController, :dashboard
+    get "/users",  AdminController, :users
+    get "/user/:id",  AdminController, :user
 
-    get "/users/new", UserController, :new
-    get "/users", UserController, :index
-    get "/users/:id/edit", UserController, :edit
-    get "/users/:id", UserController, :show
-    post "/users", UserController, :create
-    patch "/users/:id", UserController, :update
-    put "/users/:id", UserController, :update
-    delete "/users/:id", UserController, :delete
 
   end
 
