@@ -5,6 +5,11 @@ defmodule BookclubWeb.LoginController do
   alias Bookclub.Accounts.{User, Auth}
 
   def login(conn, _params) do
+
+    if conn.assigns[:user] do
+      redirect(conn, to: Routes.admin_path(conn, :dashboard))
+    end
+
     render conn, "login.html", layout: {BookclubWeb.LayoutView, "auth.html"}
   end
 
@@ -12,9 +17,9 @@ defmodule BookclubWeb.LoginController do
     case Auth.login(login_params, Repo) do
       {:ok, user} ->
         conn
-        |> put_session(:current_user, user.id)
+        |> put_session(:user_id, user.id)
         |> put_flash(:info, "Logged in")
-        |> redirect(to: Routes.user_path(conn, :dashboard))
+        |> redirect(to: Routes.admin_path(conn, :dashboard))
 
       :error ->
         conn
@@ -26,7 +31,7 @@ defmodule BookclubWeb.LoginController do
 
   def delete(conn, _) do
     conn
-    |> delete_session(:current_user)
+    |> configure_session(drop: true)
     |> put_flash(:info, "Logged out")
     |> redirect(to: Routes.login_path(conn, :login))
   end

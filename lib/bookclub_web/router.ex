@@ -7,6 +7,7 @@ defmodule BookclubWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug BookclubWeb.Plugs.AuthUser
   end
 
   pipeline :api do
@@ -25,6 +26,8 @@ defmodule BookclubWeb.Router do
     get "/dashboard",  AdminController, :dashboard
     get "/users",  AdminController, :users
     get "/user/:id",  AdminController, :user
+    get "/books",  AdminController, :books
+    get "/book/:id",  AdminController, :book
 
 
   end

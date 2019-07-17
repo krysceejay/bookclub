@@ -3,26 +3,29 @@
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Users</h4>
+          <h4 class="card-title">Books</h4>
 
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>
-                    Profile Image
+                    Book Cover
                   </th>
                   <th>
-                    Full Name
+                    Title
                   </th>
                   <th>
-                    Email
+                    Author
                   </th>
                   <th>
-                    Role
+                    Added By
                   </th>
                   <th>
                     Status
+                  </th>
+                  <th>
+                    Genre
                   </th>
                   <th>
                     Created Date
@@ -37,22 +40,22 @@
               </thead>
 
               <tbody>
-              <%= for user <- @users do %>
+              <%= for book <- @books do %>
                 <tr>
                   <td class="py-1">
                     <img src="<%= Routes.static_path(@conn, "/images/faces/face28.jpg")%>" alt="profile"/>
                   </td>
                   <td>
-                    <%= user.first_name <>" "<> user.last_name  %>
+                    <%= book.title  %>
                   </td>
                   <td>
-                    <%= user.email %>
+                    <%= book.author %>
                   </td>
                   <td>
-                    <%= user.role.name %>
+                    <%= book.user.first_name %>
                   </td>
                   <td>
-                    <%= if user.status == 1 do %>
+                    <%= if book.published == true do %>
                       <label class="badge badge-success">Active</label>
                       <%= else %>
                       <label class="badge badge-danger">Inactive</label>
@@ -60,10 +63,13 @@
 
                   </td>
                   <td>
-                    <%= user.inserted_at |> Date.to_string %>
+                    <%= Enum.join(book.genre, ", ") %>
                   </td>
                   <td>
-                  <%= user.updated_at |> Date.to_string %>
+                    <%= book.inserted_at |> Date.to_string %>
+                  </td>
+                  <td>
+                  <%= book.updated_at |> Date.to_string %>
                   </td>
                   <td>
                   <div class="dropdown">
@@ -72,7 +78,7 @@
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton2">
                 <h6 class="dropdown-header">Settings</h6>
-                <%= link "Show", to: Routes.admin_path(@conn, :user, user), class: "dropdown-item" %>
+                <%= link "Show", to: Routes.admin_path(@conn, :book, book), class: "dropdown-item" %>
                 <!-- <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>

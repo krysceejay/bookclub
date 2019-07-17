@@ -27,7 +27,7 @@ defmodule Bookclub.Content do
   """
 
   def list_books do
-    Repo.all(Book)
+    Repo.all(Book) |> Repo.preload(:user)
   end
 
   @doc """

@@ -1,13 +1,14 @@
 defmodule BookclubWeb.AdminController do
   use BookclubWeb, :controller
 
-  alias Bookclub.Accounts
+  alias Bookclub.{Accounts, Repo, Content}
   alias Bookclub.Accounts.User
-  #alias Bookclub.Accounts.Auth
-  alias Bookclub.Content
   alias Bookclub.Content.Book
 
+  plug BookclubWeb.Plugs.RequireAuth
+
   def dashboard(conn, _params) do
+
     render(conn, "dashboard.html")
   end
 
@@ -19,6 +20,16 @@ defmodule BookclubWeb.AdminController do
   def user(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     render(conn, "user.html", user: user)
+  end
+
+  def books(conn, _params) do
+    books = Content.list_books()
+    render(conn, "books.html", books: books)
+  end
+
+  def book(conn, %{"id" => id}) do
+    book = Content.get_book!(id)
+    render(conn, "user.html", book: book)
   end
 
 
