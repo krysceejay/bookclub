@@ -14,7 +14,7 @@ defmodule Bookclub.Application do
       BookclubWeb.Endpoint,
       # Starts a worker by calling: Bookclub.Worker.start_link(arg)
       # {Bookclub.Worker, arg},
-      #{Absinthe.Subscription, [BookclubWeb.Endpoint]}
+      {Absinthe.Subscription, [BookclubWeb.Endpoint]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

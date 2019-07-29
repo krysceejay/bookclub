@@ -41,7 +41,10 @@ defmodule BookclubWeb.Router do
 
     if Mix.env == :dev do
       forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: BookclubWeb.Schema
+      schema: BookclubWeb.Schema,
+      socket: BookclubWeb.UserSocket,
+      interface: :advanced
+
     end
   end
 

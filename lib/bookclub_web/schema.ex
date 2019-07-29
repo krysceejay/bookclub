@@ -95,14 +95,14 @@ end
 
   end
 
-  # subscription do
-  #   @desc "Comment subscription"
-  #   field :new_book, :book_type do
-  #     config fn _args, _info ->
-  #       {:ok, topic: true}
-  #     end
-  #
-  #   end
-  # end
+  subscription do
+    @desc "Comment subscription"
+    field :new_book, :book_type do
+      config fn _args, _info ->
+        {:ok, topic: "*"}
+      end
+
+    end
+  end
 
 end

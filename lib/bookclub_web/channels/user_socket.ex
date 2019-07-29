@@ -1,5 +1,6 @@
 defmodule BookclubWeb.UserSocket do
   use Phoenix.Socket
+  use Absinthe.Phoenix.Socket, schema: BookclubWeb.Schema
 
   ## Channels
   #channel "book:*", BookclubWeb.RoomChannel
