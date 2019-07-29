@@ -1,9 +1,7 @@
 defmodule BookclubWeb.AdminController do
   use BookclubWeb, :controller
 
-  alias Bookclub.{Accounts, Repo, Content}
-  alias Bookclub.Accounts.User
-  alias Bookclub.Content.Book
+  alias Bookclub.{Accounts, Content}
 
   plug BookclubWeb.Plugs.RequireAuth
 

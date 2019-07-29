@@ -18,7 +18,7 @@ defmodule BookclubWeb.Router do
   scope "/", BookclubWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", LoginController, :login
     get "/logout", LoginController, :delete
     delete "/logout", LoginController, :delete
     get "/login", LoginController, :login
@@ -36,10 +36,12 @@ defmodule BookclubWeb.Router do
   scope "/api" do
     pipe_through :api
 
-    forward("/graphql", Absinthe.Plug, schema: BookclubWeb.Schema)
+    forward "/graphql", Absinthe.Plug,
+    schema: BookclubWeb.Schema
 
-    if Mix.env() == :dev do
-      forward("/graphiql", Absinthe.Plug.GraphiQL, schema: BookclubWeb.Schema)
+    if Mix.env == :dev do
+      forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: BookclubWeb.Schema
     end
   end
 

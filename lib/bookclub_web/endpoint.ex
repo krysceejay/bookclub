@@ -1,9 +1,6 @@
 defmodule BookclubWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :bookclub
-
-  socket "/socket", BookclubWeb.UserSocket,
-    websocket: true,
-    longpoll: false
+  #use Absinthe.Phoenix.Endpoint
 
   # Serve at "/" the static files from "priv/static" directory.
   #

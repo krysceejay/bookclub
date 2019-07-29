@@ -388,7 +388,7 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-
+<!-- <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script> -->
   <script src="<%= Routes.static_path(@conn, "/vendors/js/vendor.bundle.base.js") %>"></script>
   <script src="<%= Routes.static_path(@conn, "/vendors/js/vendor.bundle.addons.js") %>"></script>
 
