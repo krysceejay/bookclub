@@ -15,6 +15,21 @@ defmodule BookclubWeb.Router do
     plug BookclubWeb.Plugs.Context
   end
 
+  pipeline :admin_dashboard do
+    plug :put_layout, {BookclubWeb.LayoutView, :admin}
+  end
+
+  scope "/bkadmin", BookclubWeb do
+    pipe_through [:browser, :admin_dashboard]
+
+    get "/",  AdminController, :dashboard
+    get "/users",  AdminController, :users
+    get "/user/:id",  AdminController, :user
+    get "/books",  AdminController, :books
+    get "/book/:id",  AdminController, :book
+
+  end
+
   scope "/", BookclubWeb do
     pipe_through :browser
 
@@ -23,12 +38,6 @@ defmodule BookclubWeb.Router do
     delete "/logout", LoginController, :delete
     get "/login", LoginController, :login
     post "/login", LoginController, :create
-    get "/dashboard",  AdminController, :dashboard
-    get "/users",  AdminController, :users
-    get "/user/:id",  AdminController, :user
-    get "/books",  AdminController, :books
-    get "/book/:id",  AdminController, :book
-
 
   end
 
