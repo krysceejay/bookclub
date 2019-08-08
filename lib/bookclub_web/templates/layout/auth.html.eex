@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/vendors/css/vendor.bundle.addons.css") %>"/>
     <!-- endinject -->
   <!-- plugin css for this page -->
-  
+
   <%# <link rel="stylesheet" href="/vendors/summernote/dist/summernote-bs4.css"> %>
-  <script src="/ckeditor/ckeditor.js"></script>
+  <!-- <script src="/ckeditor/ckeditor.js"></script> -->
   <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/style.css") %>"/>
@@ -24,14 +24,14 @@
   </head>
 
   <body>
-
+  
       <%= render @view_module, @view_template, assigns %>
-   
+
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/off-canvas.js") %>"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/hoverable-collapse.js") %>"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/template.js") %>"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/settings.js") %>"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/todolist.js") %>"></script>
-    
+
   </body>
 </html>

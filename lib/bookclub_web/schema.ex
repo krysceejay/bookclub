@@ -76,7 +76,7 @@ end
     end
 
     @desc "Create book"
-    field :create_book, type: :book_type do
+    field :create_book, :book_type do
       arg :input, non_null(:book_input_type)
       resolve &Resolvers.BookResolver.create_book/3
     end
@@ -95,8 +95,14 @@ end
 
   end
 
-  # subscription do
-  #
-  # end
+  subscription do
+    @desc "Comment subscription"
+    field :new_book, :book_type do
+      config fn _args, _info ->
+        {:ok, topic: "*"}
+      end
+
+    end
+  end
 
 end

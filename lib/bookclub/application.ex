@@ -11,9 +11,10 @@ defmodule Bookclub.Application do
       # Start the Ecto repository
       Bookclub.Repo,
       # Start the endpoint when the application starts
-      BookclubWeb.Endpoint
+      BookclubWeb.Endpoint,
       # Starts a worker by calling: Bookclub.Worker.start_link(arg)
       # {Bookclub.Worker, arg},
+      {Absinthe.Subscription, [BookclubWeb.Endpoint]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

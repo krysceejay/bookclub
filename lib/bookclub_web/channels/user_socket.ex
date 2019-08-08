@@ -1,8 +1,9 @@
 defmodule BookclubWeb.UserSocket do
   use Phoenix.Socket
+  use Absinthe.Phoenix.Socket, schema: BookclubWeb.Schema
 
   ## Channels
-  # channel "room:*", BookclubWeb.RoomChannel
+  #channel "book:*", BookclubWeb.RoomChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -18,6 +19,7 @@ defmodule BookclubWeb.UserSocket do
   def connect(_params, socket, _connect_info) do
     {:ok, socket}
   end
+
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #
