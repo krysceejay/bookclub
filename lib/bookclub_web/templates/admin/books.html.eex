@@ -57,7 +57,7 @@
                   <td>
                     <%= if book.published == true do %>
                       <label class="badge badge-success">Active</label>
-                      <%= else %>
+                      <% else %>
                       <label class="badge badge-danger">Inactive</label>
                     <% end %>
 

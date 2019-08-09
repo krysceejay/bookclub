@@ -33,7 +33,9 @@ defmodule BookclubWeb.Router do
   scope "/", BookclubWeb do
     pipe_through :browser
 
-    get "/", LoginController, :login
+    get "/", HomeController, :index
+
+    get "/login", LoginController, :login
     get "/logout", LoginController, :delete
     delete "/logout", LoginController, :delete
     get "/login", LoginController, :login

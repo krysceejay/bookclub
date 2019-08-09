@@ -1,4 +1,4 @@
-defmodule BookclubWeb.PageController do
+defmodule BookclubWeb.HomeController do
   use BookclubWeb, :controller
 
   def index(conn, _params) do
