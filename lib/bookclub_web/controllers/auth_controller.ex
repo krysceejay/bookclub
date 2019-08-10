@@ -2,30 +2,53 @@ defmodule BookclubWeb.AuthController do
   use BookclubWeb, :controller
 
   alias Bookclub.Repo
+  alias Bookclub.Accounts
   alias Bookclub.Accounts.{User, Auth}
 
-  def login(conn, _params) do
+  def loginform(conn, _params) do
 
     if conn.assigns[:user] do
-      redirect(conn, to: Routes.admin_path(conn, :dashboard))
+      redirect(conn, to: Routes.user_path(conn, :index))
     end
 
-    render conn, "login.html", layout: {BookclubWeb.LayoutView, "auth.html"}
+    render(conn, "login.html")
   end
 
-  def create(conn, login_params) do
+  def registerform(conn, _params) do
+    
+    if conn.assigns[:user] do
+      redirect(conn, to: Routes.user_path(conn, :index))
+    end
+
+    changeset = Accounts.change_user(%User{})
+    render(conn, "register.html", changeset: changeset)
+  end
+
+  def login(conn, login_params) do
     case Auth.login(login_params, Repo) do
       {:ok, user} ->
         conn
         |> put_session(:user_id, user.id)
         |> put_flash(:info, "Logged in")
-        |> redirect(to: Routes.admin_path(conn, :dashboard))
+        |> redirect(to: Routes.user_path(conn, :index))
 
       :error ->
         conn
         |> put_flash(:error, "Incorrect email or password")
-        |> render("login.html", layout: {BookclubWeb.LayoutView, "auth.html"})
+        |> render("login.html")
 
+    end
+  end
+
+  def register(conn, %{"user" => user_params}) do
+    case Accounts.create_user(user_params) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "User created successfully.")
+        |> redirect(to: Routes.user_path(conn, :index))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "register.html", changeset: changeset)
     end
   end
 

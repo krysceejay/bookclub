@@ -37,8 +37,11 @@ defmodule BookclubWeb.Router do
 
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete
-    get "/login", AuthController, :login
-    post "/login", AuthController, :create
+    get "/login", AuthController, :loginform
+    post "/login", AuthController, :login
+    get "/register", AuthController, :registerform
+    post "/register", AuthController, :register
+    get "/dashboard", UserController, :index
 
   end
 

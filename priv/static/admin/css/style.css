@@ -18148,40 +18148,40 @@ input:focus {
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../../fonts/Roboto/Roboto-Light.eot");
-  src: url("../../fonts/Roboto/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Light.woff2") format("woff2"), url("../../fonts/Roboto/Roboto-Light.woff") format("woff"), url("../../fonts/Roboto/Roboto-Light.ttf") format("truetype");
+  src: url("/admin/fonts/Roboto/Roboto-Light.eot");
+  src: url("/admin/fonts/Roboto/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("/admin/fonts/Roboto/Roboto-Light.woff2") format("woff2"), url("/admin/fonts/Roboto/Roboto-Light.woff") format("woff"), url("/admin/fonts/Roboto/Roboto-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../../fonts/Roboto/Roboto-Bold.eot");
-  src: url("../../fonts/Roboto/Roboto-Bold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Bold.woff2") format("woff2"), url("../../fonts/Roboto/Roboto-Bold.woff") format("woff"), url("../../fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+  src: url("/admin/fonts/Roboto/Roboto-Bold.eot");
+  src: url("/admin/fonts/Roboto/Roboto-Bold.eot?#iefix") format("embedded-opentype"), url("/admin/fonts/Roboto/Roboto-Bold.woff2") format("woff2"), url("/admin/fonts/Roboto/Roboto-Bold.woff") format("woff"), url("/admin/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../../fonts/Roboto/Roboto-Medium.eot");
-  src: url("../../fonts/Roboto/Roboto-Medium.eot?#iefix") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Medium.woff2") format("woff2"), url("../../fonts/Roboto/Roboto-Medium.woff") format("woff"), url("../../fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+  src: url("/admin/fonts/Roboto/Roboto-Medium.eot");
+  src: url("/admin/fonts/Roboto/Roboto-Medium.eot?#iefix") format("embedded-opentype"), url("/admin/fonts/Roboto/Roboto-Medium.woff2") format("woff2"), url("/admin/fonts/Roboto/Roboto-Medium.woff") format("woff"), url("/admin/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../../fonts/Roboto/Roboto-Regular.eot");
-  src: url("../../fonts/Roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Regular.woff2") format("woff2"), url("../../fonts/Roboto/Roboto-Regular.woff") format("woff"), url("../../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  src: url("/admin/fonts/Roboto/Roboto-Regular.eot");
+  src: url("/admin/fonts/Roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("/admin/fonts/Roboto/Roboto-Regular.woff2") format("woff2"), url("/admin/fonts/Roboto/Roboto-Regular.woff") format("woff"), url("/admin/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../../fonts/Roboto/Roboto-Black.eot");
-  src: url("../../fonts/Roboto/Roboto-Black.eot?#iefix") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Black.woff2") format("woff2"), url("../../fonts/Roboto/Roboto-Black.woff") format("woff"), url("../../fonts/Roboto/Roboto-Black.ttf") format("truetype");
+  src: url("/admin/fonts/Roboto/Roboto-Black.eot");
+  src: url("/admin/fonts/Roboto/Roboto-Black.eot?#iefix") format("embedded-opentype"), url("/admin/fonts/Roboto/Roboto-Black.woff2") format("woff2"), url("/admin/fonts/Roboto/Roboto-Black.woff") format("woff"), url("/admin/fonts/Roboto/Roboto-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
 }
@@ -18932,15 +18932,15 @@ code {
 }
 
 .performance-overview-carousel .carousel-inner .item .icon.icon-a::before {
-  content: url("../../images/shape-1.svg");
+  content: url("/admin/images/shape-1.svg");
 }
 
 .performance-overview-carousel .carousel-inner .item .icon.icon-b::before {
-  content: url("../../images/shape-1.svg");
+  content: url("/admin/images/shape-1.svg");
 }
 
 .performance-overview-carousel .carousel-inner .item .icon.icon-c::before {
-  content: url("../../images/shape-3.svg");
+  content: url("/admin/images/shape-3.svg");
 }
 
 .performance-overview-carousel .carousel-control-prev,
@@ -20876,7 +20876,7 @@ code {
 }
 
 .data-icon-card-primary .background-icon::before {
-  content: url("../../images/shape-4.svg");
+  content: url("/admin/images/shape-4.svg");
   position: absolute;
 }
 
@@ -20895,7 +20895,7 @@ code {
 }
 
 .data-icon-card-secondary .background-icon::before {
-  content: url("../../images/shape-4.svg");
+  content: url("/admin/images/shape-4.svg");
   position: absolute;
 }
 
@@ -20914,7 +20914,7 @@ code {
 }
 
 .data-icon-card-success .background-icon::before {
-  content: url("../../images/shape-4.svg");
+  content: url("/admin/images/shape-4.svg");
   position: absolute;
 }
 
@@ -20933,7 +20933,7 @@ code {
 }
 
 .data-icon-card-info .background-icon::before {
-  content: url("../../images/shape-4.svg");
+  content: url("/admin/images/shape-4.svg");
   position: absolute;
 }
 
@@ -20952,7 +20952,7 @@ code {
 }
 
 .data-icon-card-warning .background-icon::before {
-  content: url("../../images/shape-4.svg");
+  content: url("/admin/images/shape-4.svg");
   position: absolute;
 }
 
@@ -20971,7 +20971,7 @@ code {
 }
 
 .data-icon-card-danger .background-icon::before {
-  content: url("../../images/shape-4.svg");
+  content: url("/admin/images/shape-4.svg");
   position: absolute;
 }
 
@@ -20990,7 +20990,7 @@ code {
 }
 
 .data-icon-card-light .background-icon::before {
-  content: url("../../images/shape-4.svg");
+  content: url("/admin/images/shape-4.svg");
   position: absolute;
 }
 
@@ -21009,7 +21009,7 @@ code {
 }
 
 .data-icon-card-dark .background-icon::before {
-  content: url("../../images/shape-4.svg");
+  content: url("/admin/images/shape-4.svg");
   position: absolute;
 }
 
@@ -25497,7 +25497,7 @@ body.avgrund-active {
 
 /* Js-grid */
 .jsgrid .jsgrid-button {
-  background-image: url(../../images/sprites/jsgrid-icons.png);
+  background-image: url("/admin/images/sprites/jsgrid-icons.png");
 }
 
 .jsgrid .jsgrid-grid-header {
@@ -27016,17 +27016,17 @@ div.tagsinput span.tag a {
 /* === Landing screens === */
 /* Auth */
 .auth .login-half-bg {
-  background: url("../../images/auth/login-bg.jpg");
+  background: url("/admin/images/auth/login-bg.jpg");
   background-size: cover;
 }
 
 .auth .register-half-bg {
-  background: url("../../images/auth/register-bg.jpg");
+  background: url("/admin/images/auth/register-bg.jpg");
   background-size: cover;
 }
 
 .auth.lock-full-bg {
-  background: url("../../images/auth/lockscreen-bg.jpg");
+  background: url("/admin/images/auth/lockscreen-bg.jpg");
   background-size: cover;
 }
 
