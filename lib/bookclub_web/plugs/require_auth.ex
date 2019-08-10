@@ -16,7 +16,7 @@ defmodule BookclubWeb.Plugs.RequireAuth do
     else
       conn
       |> put_flash(:error, "You must be logged in")
-      |> redirect(to: Helpers.login_path(conn, :login))
+      |> redirect(to: Helpers.auth_path(conn, :login))
       |> halt()
 
     end

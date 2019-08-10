@@ -35,11 +35,10 @@ defmodule BookclubWeb.Router do
 
     get "/", HomeController, :index
 
-    get "/login", LoginController, :login
-    get "/logout", LoginController, :delete
-    delete "/logout", LoginController, :delete
-    get "/login", LoginController, :login
-    post "/login", LoginController, :create
+    get "/logout", AuthController, :delete
+    delete "/logout", AuthController, :delete
+    get "/login", AuthController, :login
+    post "/login", AuthController, :create
 
   end
 
