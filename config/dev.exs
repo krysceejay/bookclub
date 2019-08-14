@@ -52,7 +52,8 @@ config :bookclub, BookclubWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/bookclub_web/views/.*(ex)$},
-      ~r{lib/bookclub_web/templates/.*(eex)$}
+      ~r{lib/bookclub_web/templates/.*(eex)$},
+      ~r{lib/bookclub_web/live/.*(ex)$}
     ]
   ]
 

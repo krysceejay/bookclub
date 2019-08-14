@@ -8,6 +8,7 @@ defmodule BookclubWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug BookclubWeb.Plugs.AuthUser
+    plug Phoenix.LiveView.Flash
   end
 
   pipeline :api do

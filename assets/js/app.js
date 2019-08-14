@@ -10,8 +10,11 @@ import css from "../css/app.css"
 // Import dependencies
 //
 import "phoenix_html"
+import LiveSocket from "phoenix_live_view"
 
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
 //import socket from "./socket"
+let ls = new LiveSocket("/live")
+ls.connect()

@@ -51,7 +51,8 @@ defmodule Bookclub.MixProject do
       {:absinthe_plug, "~> 1.4"},
       {:dataloader, "~> 1.0"},
       {:guardian, "~> 1.0"},
-      {:absinthe_phoenix, "~> 1.4"}
+      {:absinthe_phoenix, "~> 1.4"},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"}
     ]
   end
 
