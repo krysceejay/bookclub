@@ -35,6 +35,7 @@ defmodule BookclubWeb.Router do
     pipe_through :browser
 
     get "/", HomeController, :index
+    get "/books", HomeController, :books
 
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete
