@@ -26,8 +26,24 @@ defmodule Bookclub.Content do
 
   """
 
+  # def list_books do
+  #   Repo.all(Book) |> Repo.preload(:user)
+  # end
+
+  # def list_users(current_page, per_page) do
+  #   Repo.all(
+  #     from u in User,
+  #       order_by: [asc: u.id],
+  #       offset: ^((current_page - 1) * per_page),
+  #       limit: ^per_page
+  #   )
+  # end
+
   def list_books do
-    Repo.all(Book) |> Repo.preload(:user)
+    Repo.all(
+      from b in Book,
+        order_by: [desc: b.id]
+    ) |> Repo.preload(:user)
   end
 
   @doc """
@@ -44,7 +60,7 @@ defmodule Bookclub.Content do
       ** (Ecto.NoResultsError)
 
   """
-  def get_book!(id), do: Repo.get!(Book, id)
+  def get_book!(id), do: Repo.get!(Book, id) |> Repo.preload(:user)
 
   @doc """
   Creates a book.

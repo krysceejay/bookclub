@@ -4,7 +4,7 @@
             <div class="content">
                 <div class="section background-opacity page-title set-height-top">
                     <div class="container">
-                        <div class="page-title-wrapper"><!--.page-title-content--><h2 class="captions">all categories</h2>
+                        <div class="page-title-wrapper"><!--.page-title-content--><h2 class="captions">booklist</h2>
                             <ol class="breadcrumb">
                                 <li><a href="index.html">Home</a></li>
                                 <li class="active"><a href="#">Categories</a></li>
@@ -49,7 +49,7 @@
                                         <li role="presentation"><a href="#students" data-toggle="tab" class="text">Students</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <ul class="btn-list-grid list-unstyled text-right">
                                         <li class="active">
                                             <button class="btn-grid"><i class="fa fa-th-large"></i></button>
@@ -58,20 +58,26 @@
                                             <button class="btn-list"><i class="fa fa-th-list"></i></button>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- Tab panes-->
                             <div class="tab-content courses-content">
                                 <div id="campus" role="tabpanel" class="tab-pane fade in active">
                                     <div class="style-show style-grid row">
+
+                                        <%= for book <- @books do %>
                                         <div class="col-style">
                                             <div class="edugate-layout-2">
                                                 <div class="edugate-layout-2-wrapper">
-                                                    <div class="edugate-content"><a href="courses-detail.html" class="title">Photoghaphy Master</a>
+                                                    <div class="edugate-content">
+                                                      <%= link book.title, to: Routes.home_path(@conn, :book, book), class: "title" %>
 
                                                         <div class="info">
-                                                            <div class="author item"><a href="#">By Admin</a></div>
-                                                            <div class="date-time item"><a href="#">17 sep 2015</a></div>
+                                                            <div class="author item">
+                                                              <a href="#">By <%= book.user.first_name %></a>
+                                                            </div>
+
+                                                            <div class="date-time item"><a href="#"><%= book.inserted_at |> Date.to_string %></a></div>
                                                         </div>
                                                         <div class="info-more">
                                                             <div class="view item"><i class="fa fa-user"></i>
@@ -82,139 +88,30 @@
                                                                 <p> 239</p></div>
                                                         </div>
                                                         <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
-                                                        <div class="description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using. It is a long established fact that a reader will be distracted by the readable content of a page when l ooking at its layout. The point of using. Dalmatian hello amazing the rmore flung as thanks a manta dealt to under emu some the and one baldbe dear sobbingly save and spitefully less</div>
-                                                        <button class="btn btn-green"><span>learn now</span></button>
+
+                                                        <div class="description">
+                                                        <%= book.description |> String.slice(0..150) %>
+                                                        </div>
+
+                                                        <%= link to: Routes.home_path(@conn, :book, book) do %>
+                                                          <button class="btn btn-green"><span>View details</span></button>
+                                                        <% end %>
                                                     </div>
-                                                    <div class="edugate-image"><img src="assets/images/courses/courses-4.jpg" alt="" class="img-responsive"/></div>
+                                                    <div class="edugate-image">
+                                                      <%= link to: Routes.home_path(@conn, :book, book) do %>
+                                                        <img src="<%= Routes.static_path(@conn, "/home/assets/images/courses/courses-4.jpg") %>" alt="" class="img-responsive"/>
+
+                                                      <% end %>
+
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-style">
-                                            <div class="edugate-layout-2">
-                                                <div class="edugate-layout-2-wrapper">
-                                                    <div class="edugate-content"><a href="courses-detail.html" class="title">Photoghaphy Master</a>
 
-                                                        <div class="info">
-                                                            <div class="author item"><a href="#">By Admin</a></div>
-                                                            <div class="date-time item"><a href="#">17 sep 2015</a></div>
-                                                        </div>
-                                                        <div class="info-more">
-                                                            <div class="view item"><i class="fa fa-user"></i>
+                                        <% end %>
 
-                                                                <p> 56</p></div>
-                                                            <div class="comment item"><i class="fa fa-comment"></i>
-
-                                                                <p> 239</p></div>
-                                                        </div>
-                                                        <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-60"><strong class="rating">5.00</strong> out of 5</span></div>
-                                                        <div class="description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using. It is a long established fact that a reader will be distracted by the readable content of a page when l ooking at its layout. The point of using. Dalmatian hello amazing the rmore flung as thanks a manta dealt to under emu some the and one baldbe dear sobbingly save and spitefully less</div>
-                                                        <button class="btn btn-green"><span>learn now</span></button>
-                                                    </div>
-                                                    <div class="edugate-image"><img src="assets/images/categories/categories-1.jpg" alt="" class="img-responsive"/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-style">
-                                            <div class="edugate-layout-2">
-                                                <div class="edugate-layout-2-wrapper">
-                                                    <div class="edugate-content"><a href="courses-detail.html" class="title">Photoghaphy Master</a>
-
-                                                        <div class="info">
-                                                            <div class="author item"><a href="#">By Admin</a></div>
-                                                            <div class="date-time item"><a href="#">17 sep 2015</a></div>
-                                                        </div>
-                                                        <div class="info-more">
-                                                            <div class="view item"><i class="fa fa-user"></i>
-
-                                                                <p> 56</p></div>
-                                                            <div class="comment item"><i class="fa fa-comment"></i>
-
-                                                                <p> 239</p></div>
-                                                        </div>
-                                                        <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-60"><strong class="rating">5.00</strong> out of 5</span></div>
-                                                        <div class="description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using. It is a long established fact that a reader will be distracted by the readable content of a page when l ooking at its layout. The point of using. Dalmatian hello amazing the rmore flung as thanks a manta dealt to under emu some the and one baldbe dear sobbingly save and spitefully less</div>
-                                                        <button class="btn btn-green"><span>learn now</span></button>
-                                                    </div>
-                                                    <div class="edugate-image"><img src="assets/images/courses/courses-2.jpg" alt="" class="img-responsive"/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-style">
-                                            <div class="edugate-layout-2">
-                                                <div class="edugate-layout-2-wrapper">
-                                                    <div class="edugate-content"><a href="courses-detail.html" class="title">Photoghaphy Master</a>
-
-                                                        <div class="info">
-                                                            <div class="author item"><a href="#">By Admin</a></div>
-                                                            <div class="date-time item"><a href="#">17 sep 2015</a></div>
-                                                        </div>
-                                                        <div class="info-more">
-                                                            <div class="view item"><i class="fa fa-user"></i>
-
-                                                                <p> 56</p></div>
-                                                            <div class="comment item"><i class="fa fa-comment"></i>
-
-                                                                <p> 239</p></div>
-                                                        </div>
-                                                        <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-40"><strong class="rating">5.00</strong> out of 5</span></div>
-                                                        <div class="description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using. It is a long established fact that a reader will be distracted by the readable content of a page when l ooking at its layout. The point of using. Dalmatian hello amazing the rmore flung as thanks a manta dealt to under emu some the and one baldbe dear sobbingly save and spitefully less</div>
-                                                        <button class="btn btn-green"><span>learn now</span></button>
-                                                    </div>
-                                                    <div class="edugate-image"><img src="assets/images/courses/courses-1.jpg" alt="" class="img-responsive"/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-style">
-                                            <div class="edugate-layout-2">
-                                                <div class="edugate-layout-2-wrapper">
-                                                    <div class="edugate-content"><a href="courses-detail.html" class="title">Photoghaphy Master</a>
-
-                                                        <div class="info">
-                                                            <div class="author item"><a href="#">By Admin</a></div>
-                                                            <div class="date-time item"><a href="#">17 sep 2015</a></div>
-                                                        </div>
-                                                        <div class="info-more">
-                                                            <div class="view item"><i class="fa fa-user"></i>
-
-                                                                <p> 56</p></div>
-                                                            <div class="comment item"><i class="fa fa-comment"></i>
-
-                                                                <p> 239</p></div>
-                                                        </div>
-                                                        <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-30"><strong class="rating">5.00</strong> out of 5</span></div>
-                                                        <div class="description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using. It is a long established fact that a reader will be distracted by the readable content of a page when l ooking at its layout. The point of using. Dalmatian hello amazing the rmore flung as thanks a manta dealt to under emu some the and one baldbe dear sobbingly save and spitefully less</div>
-                                                        <button class="btn btn-green"><span>learn now</span></button>
-                                                    </div>
-                                                    <div class="edugate-image"><img src="assets/images/courses/courses-3.jpg" alt="" class="img-responsive"/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-style">
-                                            <div class="edugate-layout-2">
-                                                <div class="edugate-layout-2-wrapper">
-                                                    <div class="edugate-content"><a href="courses-detail.html" class="title">Photoghaphy Master</a>
-
-                                                        <div class="info">
-                                                            <div class="author item"><a href="#">By Admin</a></div>
-                                                            <div class="date-time item"><a href="#">17 sep 2015</a></div>
-                                                        </div>
-                                                        <div class="info-more">
-                                                            <div class="view item"><i class="fa fa-user"></i>
-
-                                                                <p> 56</p></div>
-                                                            <div class="comment item"><i class="fa fa-comment"></i>
-
-                                                                <p> 239</p></div>
-                                                        </div>
-                                                        <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-10"><strong class="rating">5.00</strong> out of 5</span></div>
-                                                        <div class="description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using. It is a long established fact that a reader will be distracted by the readable content of a page when l ooking at its layout. The point of using. Dalmatian hello amazing the rmore flung as thanks a manta dealt to under emu some the and one baldbe dear sobbingly save and spitefully less</div>
-                                                        <button class="btn btn-green"><span>learn now</span></button>
-                                                    </div>
-                                                    <div class="edugate-image"><img src="assets/images/categories/categories-4.jpg" alt="" class="img-responsive"/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <nav class="pagination col-md-12">
+                                        <!-- <nav class="pagination col-md-12">
                                             <ul class="pagination__list">
                                                 <li><a rel="prev" href="#" class="pagination__previous btn-squae disable">&#8249;</a></li>
                                                 <li><span class="pagination__page btn-squae active">1</span></li>
@@ -223,7 +120,7 @@
                                                 <li><a href="#" class="pagination__page btn-squae">14</a></li>
                                                 <li><a rel="next" href="#" class="pagination__next btn-squae">&#8250;</a></li>
                                             </ul>
-                                        </nav>
+                                        </nav> -->
                                     </div>
                                 </div>
                                 <div id="education" role="tabpanel" class="tab-pane fade">
