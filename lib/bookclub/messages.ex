@@ -29,7 +29,7 @@ defmodule Bookclub.Messages do
 
   """
   def list_chats do
-    Repo.all(Chat)
+    Repo.all(Chat)|> Repo.preload(:user)
   end
 
   @doc """
@@ -64,6 +64,7 @@ defmodule Bookclub.Messages do
     %Chat{}
     |> Chat.changeset(attrs)
     |> Repo.insert()
+    |> notify_subscribers([:chat, :inserted])
   end
 
   @doc """
@@ -82,6 +83,7 @@ defmodule Bookclub.Messages do
     chat
     |> Chat.changeset(attrs)
     |> Repo.update()
+    |> notify_subscribers([:chat, :updated])
   end
 
   @doc """
@@ -98,6 +100,7 @@ defmodule Bookclub.Messages do
   """
   def delete_chat(%Chat{} = chat) do
     Repo.delete(chat)
+    |> notify_subscribers([:chat, :deleted])
   end
 
   @doc """
@@ -109,8 +112,12 @@ defmodule Bookclub.Messages do
       %Ecto.Changeset{source: %Chat{}}
 
   """
-  def change_chat(%Chat{} = chat) do
-    Chat.changeset(chat, %{})
+  # def change_chat(%Chat{} = chat) do
+  #   Chat.changeset(chat, %{})
+  # end
+
+  def change_chat(%Chat{} = chat, attrs \\ %{}) do
+    Chat.changeset(chat, attrs)
   end
 
 

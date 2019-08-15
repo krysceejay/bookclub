@@ -38,6 +38,8 @@ defmodule BookclubWeb.Router do
     get "/books", HomeController, :books
     get "/book/:id",  HomeController, :book
 
+    get "/chat",  ChatController, :index
+
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete
     get "/login", AuthController, :loginform

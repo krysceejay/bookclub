@@ -1,0 +1,7 @@
+<ul id="msgs" style="list-style: none; min-height:400px; border: 1px solid; padding: 10px;">
+    <%= for chat <- @chats do %>
+        <li><strong> <%= chat.user.first_name %> : </strong> <%= chat.message %> </li>
+    <% end %>
+</ul>
+
+<%= render "form.html", assigns %>

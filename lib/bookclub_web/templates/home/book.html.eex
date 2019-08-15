@@ -312,7 +312,10 @@
                                                             <div title="Rated 5.00 out of 5" class="pull-right star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-green"><span>join now</span></button>
+                                                    <%= link to: Routes.chat_path(@conn, :index) do %>
+                                                      <button class="btn btn-green"><span>join now</span></button>
+                                                    <% end %>
+
                                                 </div>
                                             </div>
                                         </div>
