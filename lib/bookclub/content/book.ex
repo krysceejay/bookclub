@@ -14,6 +14,7 @@ defmodule Bookclub.Content.Book do
     field :bookcover_field, :string, virtual: true
 
     belongs_to :user, Bookclub.Accounts.User
+    has_many :chats, Bookclub.Messages.Chat
 
     timestamps()
   end

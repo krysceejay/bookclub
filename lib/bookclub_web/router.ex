@@ -8,6 +8,7 @@ defmodule BookclubWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug BookclubWeb.Plugs.AuthUser
+    plug Phoenix.LiveView.Flash
   end
 
   pipeline :api do
@@ -34,6 +35,10 @@ defmodule BookclubWeb.Router do
     pipe_through :browser
 
     get "/", HomeController, :index
+    get "/books", HomeController, :books
+    get "/book/:id",  HomeController, :book
+
+    get "/chat",  ChatController, :index
 
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete

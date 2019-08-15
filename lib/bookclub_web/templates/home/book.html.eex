@@ -1,0 +1,428 @@
+<div id="wrapper-content"><!-- PAGE WRAPPER-->
+    <div id="page-wrapper"><!-- MAIN CONTENT-->
+        <div class="main-content"><!-- CONTENT-->
+            <div class="content">
+                <div class="section background-opacity page-title set-height-top">
+                    <div class="container">
+                        <div class="page-title-wrapper"><!--.page-title-content--><h2 class="captions">book detail</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                  <%= link "Home", to: Routes.home_path(@conn, :index) %>
+                                </li>
+                                <li><a href="categories.html">Categories</a></li>
+                                <li>
+                                  <%= link "Books", to: Routes.home_path(@conn, :books) %>
+                                </li>
+                                <li class="active"><a href="#">Book Detail</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="search-input">
+                        <div class="container">
+                            <div class="search-input-wrapper">
+                                <form><select class="form-select style-1 selectbox">
+                                    <option value="all">all categories</option>
+                                    <option value="languages">languages</option>
+                                    <option value="science">science</option>
+                                </select><select class="form-select style-2 selectbox">
+                                    <option value="price">price</option>
+                                    <option value="datetime">datetime</option>
+                                    <option value="teacher">teacher</option>
+                                </select><input type="text" placeholder="Do you want to learn today?" class="form-input"/>
+                                    <button type="submit" class="form-submit btn btn-blue"><span>search now<i class="fa fa-search"></i></span></button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section section-padding courses-detail">
+                    <div class="container">
+                        <div class="courses-detail-wrapper">
+                            <div class="row">
+                              <!-- <h1 class="event-detail-title">Next meeting</h1>
+
+                                  <div class="course-info info info-event-detail">
+                                      <div class="row">
+                                          <div class="col-sm-4">
+                                              <div class="note-time-block"><span class="label-time">Start</span><span class="note-time">June 20, 2016 - 10:00 am</span></div>
+                                              <div class="note-time-block"><span class="label-time">End</span><span class="note-time">June 23, 2016 - 08:00 pm</span></div>
+                                          </div>
+                                          <div class="col-sm-4">
+                                              <div class="address-info"><span class="label-time">Medium</span>Chat| Video| Audio</div>
+                                          </div>
+                                      </div>
+                                  </div> -->
+                                <div class="col-md-9 layout-left"><h3 class="course-title"><%= @book.title |> String.upcase() %></h3>
+
+                                    <div class="course-info info">
+                                        <div class="author item"><a href="#"><span>By&nbsp;</span><span><%= @book.user.first_name %></span></a></div>
+                                        <div class="date-time item"><a href="#"><%= @book.inserted_at |> Date.to_string %></a></div>
+                                    </div>
+                                    <!-- <div class="course-video">
+                                        <iframe src="https://www.youtube.com/embed/xo1VInw-SKc?list=PL7JgdmQ0zTfatnGhUnRBnhMwYEraSIRdD" allowfullscreen="allowfullscreen"></iframe>
+                                        <div class="video-btn">
+                                            <button class="btn btn-grey video-btn-right pull-right"><span>next lesson</span><i class="fa fa-angle-right"></i></button>
+                                            <button class="btn btn-grey video-btn-left pull-right"><i class="fa fa-angle-left"></i><span>previous lesson</span></button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div> -->
+                                    <div class="event-detail-thumb"><img src="<%= Routes.static_path(@conn, "/home/assets/images/event-detail-1.jpg") %>" alt="" class="img-responsive"/></div>
+
+                                    <div class="course-des">
+                                        <div class="course-des-title underline">Book Description</div>
+                                        <div class="course-des-content">
+                                          <%= @book.description %>
+                                        </div>
+
+                                        <div class="news-list">
+                                            <div class="list-expand-title">Requirements</div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <ul class="list-unstyled list-detail">
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Phasellus sit amet velit auctor turpis rhoncus.</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Phasellus sed dolor sodales, eleifend ipsum eu.</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Nullam id dolor in ex eleifend tempus.</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Etiam id lorem vel neque faucibus fermentum.</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Nunc tincidunt augue in enim sollicitudin feugiat.</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <ul class="list-unstyled list-detail">
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Phasellus sit amet velit auctor turpis rhoncus.</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Phasellus sed dolor sodales, eleifend ipsum eu.</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Nullam id dolor in ex eleifend tempus.</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Etiam id lorem vel neque faucibus fermentum.</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#">Nunc tincidunt augue in enim sollicitudin feugiat.</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="course-syllabus">
+                                        <div class="course-syllabus-title underline">Courses syllabus</div>
+                                        <div class="course-table">
+                                            <div class="outer-container">
+                                                <div class="inner-container">
+                                                    <div class="table-header">
+                                                        <table class="edu-table-responsive">
+                                                            <thead>
+                                                            <tr class="heading-table">
+                                                                <th class="col-1">title</th>
+                                                                <th class="col-2">estimate time</th>
+                                                                <th class="col-3">spent time</th>
+                                                                <th class="col-4">status</th>
+                                                            </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                    <div class="table-body">
+                                                        <table class="edu-table-responsive table-hover">
+                                                            <tbody>
+                                                            <tr class="heading-content">
+                                                                <td colspan="4" class="left heading-content">1. Introduction</td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>1.1 Introduction</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"><i class="w20 fa fa-clock-o"></i><span>40:20</span></td>
+                                                                <td class="green-color col-4"><i class="w27 fa fa-check-square"></i><span>Complete</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>1.1 Creating your project</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"><i class="w20 fa fa-clock-o"></i><span>20:20</span></td>
+                                                                <td class="bold-color col-4"><i class="w27 fa fa-pencil-square-o"></i><span>Learning</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>1.1 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="col-4">
+                                                                    <div class="bg-yellow">FREE</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>1.1 Introduction</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="spacing-table">
+                                                                <td colspan="4"></td>
+                                                            </tr>
+                                                            <tr class="heading-content">
+                                                                <td colspan="4" class="left heading-content">2. Creating your project</td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>2.1 Introduction</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"><i class="w20 fa fa-clock-o"></i><span>40:20</span></td>
+                                                                <td class="green-color col-4"><i class="w27 fa fa-check-square"></i><span>Complete</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>2.2 Creating your project</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"><i class="w20 fa fa-clock-o"></i><span>20:20</span></td>
+                                                                <td class="bold-color col-4"><i class="w27 fa fa-pencil-square-o"></i><span>Learning</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>2.3 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="col-4">
+                                                                    <div class="bg-yellow">FREE</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>2.4 Introduction</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>2.5 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>2.6 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="col-4">
+                                                                    <div class="bg-yellow">FREE</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>2.7 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>2.8 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="spacing-table">
+                                                                <td colspan="4"></td>
+                                                            </tr>
+                                                            <tr class="heading-content">
+                                                                <td colspan="4" class="left heading-content">3. Creating your apps</td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>3.1 Introduction</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"><i class="w20 fa fa-clock-o"></i><span>40:20</span></td>
+                                                                <td class="green-color col-4"><i class="w27 fa fa-check-square"></i><span>Complete</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>3.2 Creating your project</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"><i class="w20 fa fa-clock-o"></i><span>20:20</span></td>
+                                                                <td class="bold-color col-4"><i class="w27 fa fa-pencil-square-o"></i><span>Learning</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>3.3 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="col-4">
+                                                                    <div class="bg-yellow">FREE</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>3.4 Introduction</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>3.5 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="mr18 fa fa-file-text"></i><span>3.6 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="col-4">
+                                                                    <div class="bg-yellow">FREE</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>3.7 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="table-row col-4">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>3.8 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>3.9 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            <tr class="table-row">
+                                                                <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>3.10 Document setup and background</span></a></td>
+                                                                <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>50:20</span></td>
+                                                                <td class="col-3"></td>
+                                                                <td class="bolder-color col-4"><i class="w27 fa fa-lock"></i><span>Private</span></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 sidebar layout-right">
+                                    <div class="row">
+                                        <div class="course-price-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget"><p>Next Meeting</p></div>
+                                            <div class="content-widget">
+                                                <div class="course-price-widget-wrapper">
+                                                    <div class="row">
+                                                        <div class="col-md-12 info-row col-sm-12 col-xs-12">
+                                                            <div class="pull-left title">Date:</div>
+                                                            <div class="pull-right level">June 20, 2016 - 10:00 am</div>
+                                                        </div>
+
+                                                        <div class="col-md-12 info-row col-sm-12 col-xs-12">
+                                                            <div class="pull-left title">Medium:</div>
+                                                            <div class="pull-right level">Chat| Video| Audio</div>
+                                                        </div>
+                                                        <div class="col-md-12 info-row col-sm-12 col-xs-12">
+                                                            <div class="pull-left title">Duration:</div>
+                                                            <div class="pull-right level">5hrs</div>
+                                                        </div>
+                                                        <div class="col-md-12 info-row col-sm-12 col-xs-12">
+                                                            <div class="pull-left title">Rate:</div>
+                                                            <div title="Rated 5.00 out of 5" class="pull-right star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <%= link to: Routes.chat_path(@conn, :index) do %>
+                                                      <button class="btn btn-green"><span>join now</span></button>
+                                                    <% end %>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="author-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">about emma watson</div>
+                                            <div class="content-widget">
+                                                <div class="staff-item author-widget-wrapper customize">
+                                                    <div class="staff-item-wrapper">
+                                                        <div class="staff-info"><a href="#" class="staff-avatar"><img src="<%= Routes.static_path(@conn, "/home/assets/images/people-avatar-3.jpg") %>" alt="" class="img-responsive"/></a><a href="#" class="staff-name">lana simth</a>
+
+                                                            <div class="staff-job">vice head teacher</div>
+                                                            <div class="staff-desctiption">Nam libelo tempore, cum soluta nobis est eligendi optio cumque nilhi impedil quo minus end maximie fade posimus the end.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="staff-socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="popular-course-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">popular courses</div>
+                                            <div class="content-widget">
+                                                <div class="media">
+                                                    <div class="media-left"><a href="courses-detail.html" class="link"><img src="<%= Routes.static_path(@conn,"/home/assets/images/popular/popular-1.jpg") %>" alt="" class="media-image"/></a></div>
+                                                    <div class="media-right">
+                                                        <div class="cur">35</div>
+                                                        <a href="courses-detail.html" class="link title">Adobe Lightroom CC for Photographers</a>
+
+                                                        <div class="info">
+                                                            <div class="author item"><a href="#"><span>By Sandara</span></a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="media-left"><a href="courses-detail.html" class="link"><img src="<%= Routes.static_path(@conn,"/home/assets/images/popular/popular-2.jpg") %>" alt="" class="media-image"/></a></div>
+                                                    <div class="media-right">
+                                                        <div class="cur">40</div>
+                                                        <a href="courses-detail.html" class="link title">Adobe Lightroom CC for Photographers</a>
+
+                                                        <div class="info">
+                                                            <div class="author item"><a href="#"><span>By Sandara</span></a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="media-left"><a href="courses-detail.html" class="link"><img src="<%= Routes.static_path(@conn,"/home/assets/images/popular/popular-3.jpg") %>" alt="" class="media-image"/></a></div>
+                                                    <div class="media-right">
+                                                        <div class="cur">34</div>
+                                                        <a href="courses-detail.html" class="link title">Adobe Lightroom CC for Photographers</a>
+
+                                                        <div class="info">
+                                                            <div class="author item"><a href="#"><span>By Sandara</span></a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="media-left"><a href="courses-detail.html" class="link"><img src="<%= Routes.static_path(@conn,"/home/assets/images/popular/popular-4.jpg") %>" alt="" class="media-image"/></a></div>
+                                                    <div class="media-right">
+                                                        <div class="cur">27</div>
+                                                        <a href="courses-detail.html" class="link title">Adobe Lightroom CC for Photographers</a>
+
+                                                        <div class="info">
+                                                            <div class="author item"><a href="#"><span>By Sandara</span></a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="category-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">categories</div>
+                                            <div class="content-widget">
+                                                <ul class="category-widget list-unstyled">
+                                                    <li><a href="categories.html" class="link cat-item"><span class="pull-left">Web Design</span><span class="pull-right">125</span></a></li>
+                                                    <li><a href="categories.html" class="link cat-item"><span class="pull-left">Wordpress Themes</span><span class="pull-right">97</span></a></li>
+                                                    <li><a href="categories.html" class="link cat-item"><span class="pull-left">Photography</span><span class="pull-right">56</span></a></li>
+                                                    <li><a href="categories.html" class="link cat-item"><span class="pull-left">Video</span><span class="pull-right">24</span></a></li>
+                                                    <li><a href="categories.html" class="link cat-item"><span class="pull-left">Miscellaneous</span><span class="pull-right">13</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="tag-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">tags</div>
+                                            <div class="content-widget">
+                                                <ul class="tag-widget list-unstyled">
+                                                    <li><a href="#" class="tag-item">Software</a></li>
+                                                    <li><a href="#" class="tag-item">Music</a></li>
+                                                    <li><a href="#" class="tag-item">Photography</a></li>
+                                                    <li><a href="#" class="tag-item">Communication</a></li>
+                                                    <li><a href="#" class="tag-item">Tutorial</a></li>
+                                                    <li><a href="#" class="tag-item">Biology</a></li>
+                                                    <li><a href="#" class="tag-item">Photoshop</a></li>
+                                                    <li><a href="#" class="tag-item">Economics</a></li>
+                                                    <li><a href="#" class="tag-item">Statistics</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTON BACK TO TOP-->
+    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+</div>

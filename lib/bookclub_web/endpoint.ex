@@ -2,6 +2,8 @@ defmodule BookclubWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :bookclub
   use Absinthe.Phoenix.Endpoint
 
+  socket "/live", Phoenix.LiveView.Socket
+
   socket "/socket", BookclubWeb.UserSocket,
     websocket: true,
     longpoll: false
