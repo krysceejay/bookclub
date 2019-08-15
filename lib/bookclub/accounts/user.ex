@@ -14,6 +14,7 @@ defmodule Bookclub.Accounts.User do
     #field :role_id, :id
     belongs_to :role, Bookclub.Accounts.Role
     has_many :books, Bookclub.Content.Book
+    has_many :chats, Bookclub.Messages.Chat
 
     ##Virtual Fields ##
     field :passwordfield, :string, virtual: true

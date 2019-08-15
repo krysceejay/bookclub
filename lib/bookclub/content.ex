@@ -222,4 +222,5 @@ defmodule Bookclub.Content do
   def change_genre(%Genre{} = genre) do
     Genre.changeset(genre, %{})
   end
+
 end

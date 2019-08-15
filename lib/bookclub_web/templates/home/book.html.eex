@@ -55,7 +55,7 @@
                                           </div>
                                       </div>
                                   </div> -->
-                                <div class="col-md-9 layout-left"><h1 class="course-title"><%= @book.title %></h1>
+                                <div class="col-md-9 layout-left"><h3 class="course-title"><%= @book.title |> String.upcase() %></h3>
 
                                     <div class="course-info info">
                                         <div class="author item"><a href="#"><span>By&nbsp;</span><span><%= @book.user.first_name %></span></a></div>

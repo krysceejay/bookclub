@@ -70,7 +70,7 @@
                                             <div class="edugate-layout-2">
                                                 <div class="edugate-layout-2-wrapper">
                                                     <div class="edugate-content">
-                                                      <%= link book.title, to: Routes.home_path(@conn, :book, book), class: "title" %>
+                                                      <%= link book.title |> String.upcase(), to: Routes.home_path(@conn, :book, book), class: "title" %>
 
                                                         <div class="info">
                                                             <div class="author item">
