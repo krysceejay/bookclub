@@ -11,13 +11,13 @@ defmodule Bookclub.Messages do
 
   @topic inspect(__MODULE__)
 
-  def subscribe do
-    Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic)
-  end
-
-  # def subscribe(book_id) do
-  #   Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic <> "#{book_id}")
+  # def subscribe do
+  #   Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic)
   # end
+
+  def subscribe(book_id) do
+    Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic <> "#{book_id}")
+  end
 
   @doc """
   Returns the list of chats.
@@ -67,9 +67,9 @@ defmodule Bookclub.Messages do
   #   |> notify_subscribers([:chat, :inserted])
   # end
 
-  def create_chat(user, attrs \\ %{}) do
+  def create_chat(user, %{id: bookid}, attrs \\ %{}) do
     user
-    |> Ecto.build_assoc(:chats)
+    |> Ecto.build_assoc(:chats, book_id: bookid)
     |> Chat.changeset(attrs)
     |> Repo.insert()
     |> notify_subscribers([:chat, :inserted])
@@ -130,8 +130,8 @@ defmodule Bookclub.Messages do
 
 
   defp notify_subscribers({:ok, result}, event) do
-    Phoenix.PubSub.broadcast(Bookclub.PubSub, @topic, {__MODULE__, event, result})
-    # Phoenix.PubSub.broadcast(Bookclub.PubSub, @topic <> "#{result.id}", {__MODULE__, event, result})
+    #Phoenix.PubSub.broadcast(Bookclub.PubSub, @topic, {__MODULE__, event, result})
+    Phoenix.PubSub.broadcast(Bookclub.PubSub, @topic <> "#{result.book_id}", {__MODULE__, event, result})
     {:ok, result}
   end
 

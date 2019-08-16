@@ -4,8 +4,6 @@
   <%= text_input f, :message %>
   <%= error_tag f, :message %>
 
-  <%= hidden_input f, :book_id, value: 20 %>
-
   <div>
     <%= submit "Send", phx_disable_with: "Loading..." %>
   </div>

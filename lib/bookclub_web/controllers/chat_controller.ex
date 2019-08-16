@@ -1,11 +1,14 @@
 defmodule BookclubWeb.ChatController do
   use BookclubWeb, :controller
+  alias Bookclub.Content
 
-  def index(conn, _params) do
+  def index(conn, %{"id" => book_id}) do
+    book = Content.get_book!(book_id)
+
     Phoenix.LiveView.Controller.live_render(
     conn,
     BookclubWeb.Live.Index,
-    session: %{current_user: conn.assigns.user}
+    session: %{book: book, current_user: conn.assigns.user}
     )
   end
 end
