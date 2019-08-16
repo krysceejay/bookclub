@@ -32,6 +32,14 @@ defmodule Bookclub.Messages do
     Repo.all(Chat)|> Repo.preload(:user)
   end
 
+  def list_chats_by_bookid(bookid) do
+    Repo.all(
+      from c in Chat,
+        where: c.book_id == ^bookid
+    ) |> Repo.preload(:user)
+
+  end
+
   @doc """
   Gets a single chat.
 
