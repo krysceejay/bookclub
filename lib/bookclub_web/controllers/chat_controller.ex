@@ -2,6 +2,8 @@ defmodule BookclubWeb.ChatController do
   use BookclubWeb, :controller
   alias Bookclub.Content
 
+  plug BookclubWeb.Plugs.RequireAuth
+
   def index(conn, %{"id" => book_id}) do
     book = Content.get_book!(book_id)
 

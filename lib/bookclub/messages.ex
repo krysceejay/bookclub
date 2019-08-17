@@ -38,10 +38,13 @@ defmodule Bookclub.Messages do
   end
 
   def list_chats_by_bookid(bookid) do
-    Repo.all(
+
+    query =
       from c in Chat,
-        where: c.book_id == ^bookid
-    ) |> Repo.preload(:user)
+        where: c.book_id == ^bookid,
+        preload: [:user]
+
+    Repo.all(query)
 
   end
 
@@ -145,9 +148,9 @@ defmodule Bookclub.Messages do
   #   Chat.changeset(%Chat{})
   # end
 
-  def change_chat(changeset, changes) do
-    Chat.changeset(changeset, changes)
-  end
+  # def change_chat(changeset, changes) do
+  #   Chat.changeset(changeset, changes)
+  # end
 
 
   defp notify_subscribers({:ok, result}, event) do

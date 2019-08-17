@@ -22,7 +22,7 @@ defmodule BookclubWeb.Live.Index do
     BookclubWeb.ChatView.render("index.html", assigns)
   end
 
-  def fetch(socket, book, current_user, message \\ nil) do
+  def fetch(socket, book, current_user) do
     assign(socket, %{
       chats: Messages.list_chats_by_bookid(book.id),
       changeset: Messages.change_chat(%Chat{}),
@@ -101,5 +101,21 @@ end
      typing: false
    }
  end
+
+ # defp random_color do
+ #    hex_code =
+ #      ColorStream.hex()
+ #      |> Enum.take(1)
+ #      |> List.first()
+ #
+ #    "##{hex_code}"
+ #  end
+ #
+ #  def username_colors(chat) do
+ #    Enum.map(chat.messages, fn message -> message.user end)
+ #    |> Enum.map(fn user -> user.email end)
+ #    |> Enum.uniq()
+ #    |> Enum.into(%{}, fn email -> {email, random_color()} end)
+ #  end
 
 end

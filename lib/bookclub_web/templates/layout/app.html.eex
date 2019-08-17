@@ -352,7 +352,6 @@
     <script src="<%= Routes.static_path(@conn, "/home/assets/libs/isotope/isotope.pkgd.min.js") %>"></script>
     <script src="<%= Routes.static_path(@conn, "/home/assets/libs/isotope/fit-columns.js") %>"></script>
     <script src="<%= Routes.static_path(@conn, "/home/assets/js/pages/homepage.js") %>"></script>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     </body>
 
     </html>

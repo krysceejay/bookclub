@@ -5,6 +5,8 @@ defmodule BookclubWeb.AdminController do
 
   plug BookclubWeb.Plugs.RequireAuth
 
+  plug BookclubWeb.Plugs.AdminAuth
+
   def dashboard(conn, _params) do
 
     render(conn, "dashboard.html")
