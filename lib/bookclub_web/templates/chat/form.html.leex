@@ -5,6 +5,6 @@
   <%= error_tag f, :message %>
 
   <div>
-    <%= submit "Send", phx_disable_with: "Loading..." %>
+    <%= submit "Send", phx_disable_with: "Loading...", phx_blur: "stop_typing" %>
   </div>
 </form>

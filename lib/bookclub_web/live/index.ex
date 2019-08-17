@@ -3,9 +3,17 @@ defmodule BookclubWeb.Live.Index do
 
   alias Bookclub.Messages
   alias Bookclub.Messages.Chat
+  alias BookclubWeb.Presence
 
   def mount(%{book: book, current_user: current_user}, socket) do
     if connected?(socket), do: Messages.subscribe(book.id)
+
+    Presence.track(
+    self(),
+    Messages.get_topic(book.id),
+    current_user.id,
+    default_user_presence_payload(current_user)
+  )
 
     {:ok, fetch(socket, book, current_user)}
   end
@@ -17,13 +25,24 @@ defmodule BookclubWeb.Live.Index do
   def fetch(socket, book, current_user, message \\ nil) do
     assign(socket, %{
       chats: Messages.list_chats_by_bookid(book.id),
-      changeset: Messages.change_chat(%Chat{message: message}),
+      changeset: Messages.change_chat(%Chat{}),
       book: book,
-      current_user: current_user
+      current_user: current_user,
+      users: Presence.list_presences(Messages.get_topic(book.id))
       })
   end
 
-  def handle_event("validate", %{"chat" => params}, socket) do
+  def handle_event("validate", %{"chat" => params}, socket = %{assigns: %{book: book, current_user: user}}) do
+
+    %{"message" => value} = params
+
+      if value != "" do
+        Presence.update_presence(self(), Messages.get_topic(book.id), user.id, %{typing: true})
+
+      else
+        Presence.update_presence(self(), Messages.get_topic(book.id), user.id, %{typing: false})
+      end
+
    changeset =
      %Chat{}
      |> Messages.change_chat(params)
@@ -32,9 +51,21 @@ defmodule BookclubWeb.Live.Index do
    {:noreply, assign(socket, changeset: changeset)}
  end
 
+ def handle_event(
+        "stop_typing",
+        value,
+        socket = %{assigns: %{book: book, current_user: user, changeset: message}}
+      ) do
+    message = Messages.change_chat(message, %{message: value})
+    Presence.update_presence(self(), Messages.get_topic(book.id), user.id, %{typing: false})
+    {:noreply, assign(socket, message: message)}
+  end
+
  def handle_event("send_message", %{"chat" => params}, socket) do
    case Messages.create_chat(get_current_user(socket), get_book(socket), params) do
-     {:ok, _chat} ->
+     {:ok, chat} ->
+       Presence.update_presence(self(), Messages.get_topic(chat.book_id), chat.user_id, %{typing: false})
+
        {:noreply, fetch(socket, get_book(socket), get_current_user(socket))}
 
      {:error, %Ecto.Changeset{} = changeset} ->
@@ -42,14 +73,15 @@ defmodule BookclubWeb.Live.Index do
    end
  end
 
+ def handle_info(%{event: "presence_diff", payload: _payload}, socket = %{assigns: %{book: book}}) do
+
+  {:noreply, assign(socket, users: Presence.list_presences(Messages.get_topic(book.id)))}
+end
+
  def handle_info({Messages, [:chat, :inserted], _chat}, socket) do
    {:noreply, fetch(socket, get_book(socket), get_current_user(socket))}
  end
 
- #  defp get_user_name(socket) do
- #    socket.assigns
- #    |> Map.get(:user_name)
- #  end
  defp get_current_user(socket) do
    socket.assigns
    |> Map.get(:current_user)
@@ -58,6 +90,16 @@ defmodule BookclubWeb.Live.Index do
  defp get_book(socket) do
    socket.assigns
    |> Map.get(:book)
+ end
+
+ defp default_user_presence_payload(current_user) do
+   %{
+     first_name: current_user.first_name,
+     email: current_user.email,
+     user_id: current_user.id,
+     user_name: current_user.username,
+     typing: false
+   }
  end
 
 end

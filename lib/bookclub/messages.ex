@@ -15,6 +15,11 @@ defmodule Bookclub.Messages do
   #   Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic)
   # end
 
+  def get_topic(book_id) do
+    @topic <> "#{book_id}"
+  end
+
+
   def subscribe(book_id) do
     Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic <> "#{book_id}")
   end
@@ -134,6 +139,14 @@ defmodule Bookclub.Messages do
 
   def change_chat(%Chat{} = chat, attrs \\ %{}) do
     Chat.changeset(chat, attrs)
+  end
+
+  # def change_chat do
+  #   Chat.changeset(%Chat{})
+  # end
+
+  def change_chat(changeset, changes) do
+    Chat.changeset(changeset, changes)
   end
 
 
