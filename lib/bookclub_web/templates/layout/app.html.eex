@@ -15,6 +15,7 @@
     <!-- LIBRARY CSS-->
     <link type="text/css" rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/assets/libs/animate/animate.css") %>" />
     <link type="text/css" rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/assets/libs/bootstrap-3.3.5/css/bootstrap.css") %>" />
+    <link type="text/css" rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/assets/libs/bootstrap-3.3.5/css/bootstrap.css.map") %>" />
     <link type="text/css" rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/assets/libs/owl-carousel-2.0/assets/owl.carousel.css") %>"/>
     <link type="text/css" rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/assets/libs/selectbox/css/jquery.selectbox.css") %>"/>
     <link type="text/css" rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/assets/libs/fancybox/css/jquery.fancybox.css") %>"/>

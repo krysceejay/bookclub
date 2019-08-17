@@ -12,6 +12,7 @@ defmodule Bookclub.Application do
       Bookclub.Repo,
       # Start the endpoint when the application starts
       BookclubWeb.Endpoint,
+      BookclubWeb.Presence,
       # Starts a worker by calling: Bookclub.Worker.start_link(arg)
       # {Bookclub.Worker, arg},
       {Absinthe.Subscription, [BookclubWeb.Endpoint]}

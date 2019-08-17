@@ -11,9 +11,14 @@ defmodule Bookclub.Messages do
 
   @topic inspect(__MODULE__)
 
-  def subscribe do
-    Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic)
+  # def subscribe do
+  #   Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic)
+  # end
+
+  def get_topic(book_id) do
+    @topic <> "#{book_id}"
   end
+
 
   def subscribe(book_id) do
     Phoenix.PubSub.subscribe(Bookclub.PubSub, @topic <> "#{book_id}")
@@ -30,6 +35,17 @@ defmodule Bookclub.Messages do
   """
   def list_chats do
     Repo.all(Chat)|> Repo.preload(:user)
+  end
+
+  def list_chats_by_bookid(bookid) do
+
+    query =
+      from c in Chat,
+        where: c.book_id == ^bookid,
+        preload: [:user]
+
+    Repo.all(query)
+
   end
 
   @doc """
@@ -60,8 +76,16 @@ defmodule Bookclub.Messages do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_chat(attrs \\ %{}) do
-    %Chat{}
+  # def create_chat(attrs \\ %{}) do
+  #   %Chat{}
+  #   |> Chat.changeset(attrs)
+  #   |> Repo.insert()
+  #   |> notify_subscribers([:chat, :inserted])
+  # end
+
+  def create_chat(user, %{id: bookid}, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:chats, book_id: bookid)
     |> Chat.changeset(attrs)
     |> Repo.insert()
     |> notify_subscribers([:chat, :inserted])
@@ -120,10 +144,18 @@ defmodule Bookclub.Messages do
     Chat.changeset(chat, attrs)
   end
 
+  # def change_chat do
+  #   Chat.changeset(%Chat{})
+  # end
+
+  # def change_chat(changeset, changes) do
+  #   Chat.changeset(changeset, changes)
+  # end
+
 
   defp notify_subscribers({:ok, result}, event) do
-    Phoenix.PubSub.broadcast(Bookclub.PubSub, @topic, {__MODULE__, event, result})
-    Phoenix.PubSub.broadcast(Bookclub.PubSub, @topic <> "#{result.id}", {__MODULE__, event, result})
+    #Phoenix.PubSub.broadcast(Bookclub.PubSub, @topic, {__MODULE__, event, result})
+    Phoenix.PubSub.broadcast(Bookclub.PubSub, @topic <> "#{result.book_id}", {__MODULE__, event, result})
     {:ok, result}
   end
 

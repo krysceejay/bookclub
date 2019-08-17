@@ -20,6 +20,10 @@ defmodule BookclubWeb.Router do
     plug :put_layout, {BookclubWeb.LayoutView, :admin}
   end
 
+  pipeline :chat_layout do
+    plug :put_layout, {BookclubWeb.LayoutView, :chat}
+  end
+
   scope "/bkadmin", BookclubWeb do
     pipe_through [:browser, :admin_dashboard]
 
@@ -31,14 +35,19 @@ defmodule BookclubWeb.Router do
 
   end
 
+  scope "/chat", BookclubWeb do
+    pipe_through [:browser, :chat_layout]
+
+    get "/:id",  ChatController, :index
+
+  end
+
   scope "/", BookclubWeb do
     pipe_through :browser
 
     get "/", HomeController, :index
     get "/books", HomeController, :books
     get "/book/:id",  HomeController, :book
-
-    get "/chat",  ChatController, :index
 
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete

@@ -4,4 +4,12 @@
     <% end %>
 </ul>
 
+<h3>Members</h3>
+<%= for user <- @users do %>
+  <p>
+    <%= user.user_name %>
+    <%= if user.typing, do: "typing..." %>
+  </p>
+<% end %>
+
 <%= render "form.html", assigns %>
