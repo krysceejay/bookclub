@@ -46,6 +46,19 @@ defmodule Bookclub.Content do
     ) |> Repo.preload(:user)
   end
 
+  def list_books_page(current_page, per_page) do
+    Repo.all(
+      from b in Book,
+        order_by: [desc: b.id],
+        offset: ^((current_page - 1) * per_page),
+        limit: ^per_page
+    ) |> Repo.preload(:user)
+  end
+
+  def count_all_books do
+    Repo.one(from b in Book, select: count("*"))
+  end
+
   @doc """
   Gets a single book.
 

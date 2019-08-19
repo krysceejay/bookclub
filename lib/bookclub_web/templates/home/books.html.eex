@@ -65,6 +65,8 @@
                                 <div id="campus" role="tabpanel" class="tab-pane fade in active">
                                     <div class="style-show style-grid row">
 
+                                      <%= if @books != [] do %>
+
                                         <%= for book <- @books do %>
                                         <div class="col-style">
                                             <div class="edugate-layout-2">
@@ -111,19 +113,48 @@
 
                                         <% end %>
 
-                                        <!-- <nav class="pagination col-md-12">
+                                      <!-- pagination -->
+
+                                        <nav class="pagination col-md-12">
                                             <ul class="pagination__list">
-                                                <li><a rel="prev" href="#" class="pagination__previous btn-squae disable">&#8249;</a></li>
-                                                <li><span class="pagination__page btn-squae active">1</span></li>
-                                                <li><a href="#" class="pagination__page btn-squae">2</a></li>
-                                                <li><a href="#" class="pagination__page btn-squae">...</a></li>
-                                                <li><a href="#" class="pagination__page btn-squae">14</a></li>
-                                                <li><a rel="next" href="#" class="pagination__next btn-squae">&#8250;</a></li>
+                                              <%= if @page > 1 do %>
+                                                <li>
+                                                  <%= link to: Routes.home_path(@conn, :bookpage, @page - 1),
+                                                  class: "pagination__previous btn-squae", rel: "prev" do %>
+                                                  &#8249;
+                                                  <% end %>
+                                                </li>
+                                              <% end %>
+
+                                              <%= for i <- (@page - 5)..(@page + 5), i > 0 && i <= @num_links do %>
+                                                <li>
+                                                  <%= if i == @page do %>
+                                                    <%= link i, to: Routes.home_path(@conn, :bookpage, i), class: "pagination__page btn-squae active" %>
+                                                  <% else %>
+                                                    <%= link i, to: Routes.home_path(@conn, :bookpage, i), class: "pagination__page btn-squae" %>
+                                                  <% end %>
+
+                                                </li>
+                                              <% end %>
+
+                                                <%= if @page < @num_links do %>
+                                                <li>
+                                                  <%= link to: Routes.home_path(@conn, :bookpage, @page + 1),
+                                                  class: "pagination__previous btn-squae", rel: "next" do %>
+                                                  &#8250;
+                                                  <% end %>
+                                                </li>
+                                                <% end %>
                                             </ul>
-                                        </nav> -->
+                                        </nav>
+                                        <!-- End pagination -->
+                                        <% else %>
+                                        <h4>no books</h4>
+                                      <% end %>
+
                                     </div>
                                 </div>
-                            
+
                             </div>
                         </div>
                     </div>

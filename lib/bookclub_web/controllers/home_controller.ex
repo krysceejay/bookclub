@@ -8,13 +8,38 @@ defmodule BookclubWeb.HomeController do
   end
 
   def books(conn, _params) do
-    books = Content.list_books()
-    render(conn, "books.html", books: books)
+    page = 1
+    per_page = 3
+    total_books = Content.count_all_books()
+    num_links = number_of_links(total_books, per_page)
+    books = Content.list_books_page(page, per_page)
+
+    render(conn, "books.html", books: books, page: page, num_links: num_links)
   end
 
   def book(conn, %{"id" => id}) do
     book = Content.get_book!(id)
     render(conn, "book.html", book: book)
+  end
+
+  def bookpage(conn, %{"page" => page_num}) do
+    {page, ""} = Integer.parse(page_num || "1")
+    per_page = 3
+    total_books = Content.count_all_books()
+    num_links = number_of_links(total_books, per_page)
+    books = Content.list_books_page(page, per_page)
+
+    render(conn, "books.html", books: books, page: page, num_links: num_links)
+  end
+
+  defp number_of_links(t, pp) do
+    links_div = div(t, pp)
+    num_links_rems = rem(t, pp)
+    if num_links_rems == 0 do
+      links_div
+    else
+      links_div + 1
+    end
   end
 
 end
