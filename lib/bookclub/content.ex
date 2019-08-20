@@ -87,8 +87,9 @@ defmodule Bookclub.Content do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_book(attrs \\ %{}) do
-    %Book{}
+  def create_book(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:books)
     |> Book.changeset(attrs)
     |> Repo.insert()
   end

@@ -56,7 +56,10 @@ defmodule BookclubWeb.Router do
     post "/login", AuthController, :login
     get "/register", AuthController, :registerform
     post "/register", AuthController, :register
+    
     get "/dashboard", UserController, :index
+    get "/dashboard/addbook", UserController, :addbook
+    post "/dashboard/createbook", UserController, :createbook
 
   end
 
