@@ -4,12 +4,17 @@ defmodule BookclubWeb.HomeController do
   alias Bookclub.Content
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    top_books = Content.list_books()
+    [first, second | rest_books] = top_books
+
+    [third, fourth | others] = rest_books
+
+    render(conn, "index.html", first: first, second: second, third: third, fourth: fourth)
   end
 
   def books(conn, _params) do
     page = 1
-    per_page = 3
+    per_page = 1
     total_books = Content.count_all_books()
     num_links = number_of_links(total_books, per_page)
     books = Content.list_books_page(page, per_page)
@@ -24,7 +29,7 @@ defmodule BookclubWeb.HomeController do
 
   def bookpage(conn, %{"page" => page_num}) do
     {page, ""} = Integer.parse(page_num || "1")
-    per_page = 3
+    per_page = 1
     total_books = Content.count_all_books()
     num_links = number_of_links(total_books, per_page)
     books = Content.list_books_page(page, per_page)

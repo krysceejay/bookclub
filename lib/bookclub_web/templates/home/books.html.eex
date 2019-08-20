@@ -95,8 +95,8 @@
                                                         <%= book.description |> String.slice(0..150) %>
                                                         </div>
 
-                                                        <%= link to: Routes.home_path(@conn, :book, book) do %>
-                                                          <button class="btn btn-green"><span>View details</span></button>
+                                                        <%= link to: Routes.home_path(@conn, :book, book), class: "btn btn-green" do %>
+                                                          <span>View details</span>
                                                         <% end %>
                                                     </div>
                                                     <div class="edugate-image">
