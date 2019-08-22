@@ -1,0 +1,2 @@
+<h1>Edit Book</h1>
+<%= render "bookform.html", Map.put(assigns, :action, Routes.user_path(@conn, :updatebook, @book)) %>

@@ -30,15 +30,6 @@ defmodule Bookclub.Content do
   #   Repo.all(Book) |> Repo.preload(:user)
   # end
 
-  # def list_users(current_page, per_page) do
-  #   Repo.all(
-  #     from u in User,
-  #       order_by: [asc: u.id],
-  #       offset: ^((current_page - 1) * per_page),
-  #       limit: ^per_page
-  #   )
-  # end
-
   def list_books do
     Repo.all(
       from b in Book,
@@ -46,13 +37,19 @@ defmodule Bookclub.Content do
     ) |> Repo.preload(:user)
   end
 
-  def list_books_page(current_page, per_page) do
-    Repo.all(
-      from b in Book,
-        order_by: [desc: b.id],
-        offset: ^((current_page - 1) * per_page),
-        limit: ^per_page
-    ) |> Repo.preload(:user)
+  # def list_books_page(current_page, per_page) do
+  #   Repo.all(
+  #     from b in Book,
+  #       order_by: [desc: b.id],
+  #       offset: ^((current_page - 1) * per_page),
+  #       limit: ^per_page
+  #   ) |> Repo.preload(:user)
+  # end
+
+  def all_books do
+    Book
+    |> order_by(desc: :id)
+    |> preload(:user)
   end
 
   def count_all_books do

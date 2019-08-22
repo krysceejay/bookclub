@@ -2,6 +2,8 @@ defmodule Bookclub.Content.Book do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Phoenix.Param, key: :title}
+
   schema "books" do
     field :author, :string
     field :bookcover, :string
@@ -21,10 +23,12 @@ defmodule Bookclub.Content.Book do
 
   @doc false
   def changeset(book, attrs) do
+
     book
     |> cast(attrs, [:title, :author, :genre, :link, :description, :published, :user_id])
     |> validate_required([:title, :author, :genre, :link, :description, :published, :user_id])
     |> uploadfile(attrs)
+    |> slug_map(attrs)
   end
 
   defp uploadfile(changeset, attrs) do
@@ -41,6 +45,20 @@ defmodule Bookclub.Content.Book do
       put_change(changeset, :bookcover, "noimage.jpg")
     end
 
+  end
+
+  defp slug_map(changeset, attrs) do
+    # %{"slug" => slug}
+    if title = attrs["title"] do
+      slug = String.downcase(title) |> String.replace(" ", "-")
+
+      put_change(changeset, :bslug, slug)
+
+      changeset
+    else
+
+      changeset
+    end
   end
 
 end

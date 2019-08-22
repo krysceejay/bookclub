@@ -1,4 +1,10 @@
-<h3>Add Book</h3>
+
+<%= if @changeset.action do %>
+  <div class="alert alert-danger">
+    <p>Oops, something went wrong! Please check the errors below.</p>
+  </div>
+<% end %>
+
 <%= form_for @changeset, @action, [multipart: true], fn f -> %>
   <div class="form-group">
     <%= label f, :title %>
@@ -24,7 +30,7 @@
   <div class="form-group">
     <%= label f, :genre %>
     <!-- <%= select f, :genre, ["foo": "1","bar": "2","baz": "3"], multiple: "multiple"  %> -->
-    <%= multiple_select f, :genre, Enum.map(@genre, &{&1.name, &1.name}) %>
+    <%= multiple_select f, :genre, Enum.map(@genre, &{&1.name, &1.name}), selected: @book.genre %>
     <%= error_tag f, :genre %>
   </div>
 
@@ -33,15 +39,19 @@
     <%= file_input f, :bookcover_field %>
     <%= error_tag f, :bookcover_field %>
   </div>
+  <%= if @book.bookcover != nil do %>
+    <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> @book.bookcover) %>" alt="" class="book_cover"/>
+  <% end %>
 
   <div class="form-group">
     <%= label f, :published, "Draft" %>
-    <%= radio_button f, :published, "0" %>
+    <%= radio_button f, :published, "0", checked: @book.published == false %>
     <%= error_tag f, :published %>
   </div>
+
   <div class="form-group">
     <%= label f, :published, "Publish" %>
-    <%= radio_button f, :published, "1" %>
+    <%= radio_button f, :published, "1", checked: @book.published == true %>
     <%= error_tag f, :published %>
   </div>
 

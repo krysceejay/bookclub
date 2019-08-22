@@ -48,7 +48,7 @@ defmodule BookclubWeb.Router do
     get "/", HomeController, :index
     get "/books", HomeController, :books
     get "/book/:id",  HomeController, :book
-    get "/books/page/:page", HomeController, :bookpage
+    get "/books/page/:page", HomeController, :books
 
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete
@@ -56,10 +56,12 @@ defmodule BookclubWeb.Router do
     post "/login", AuthController, :login
     get "/register", AuthController, :registerform
     post "/register", AuthController, :register
-    
+
     get "/dashboard", UserController, :index
     get "/dashboard/addbook", UserController, :addbook
     post "/dashboard/createbook", UserController, :createbook
+    get "/dashboard/editbook/:id", UserController, :editbook
+    put "/dashboard/updatebook/:id", UserController, :updatebook
 
   end
 
