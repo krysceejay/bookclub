@@ -2,12 +2,14 @@ defmodule BookclubWeb.HomeController do
   use BookclubWeb, :controller
 
   alias Bookclub.Content
-  alias Bookclub.Content.Book
   alias BookclubWeb.Pagination
 
   def index(conn, _params) do
     top_books = Content.list_books()
     [first, second | rest_books] = top_books
+    IO.puts "00000000000000"
+    IO.inspect rest_books
+    IO.puts "00000000000000"
 
     [third, fourth | others] = rest_books
 
@@ -24,8 +26,8 @@ defmodule BookclubWeb.HomeController do
     render(conn, "books.html", books: books, page: page, num_links: num_links)
   end
 
-  def book(conn, %{"id" => id}) do
-    book = Content.get_book!(id)
+  def book(conn, %{"slug" => slug}) do
+    book = Content.get_book_by_slug!(slug)
     render(conn, "book.html", book: book)
   end
 

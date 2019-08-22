@@ -92,7 +92,7 @@
                                                         <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
 
                                                         <div class="description">
-                                                        <%= book.description |> String.slice(0..150) %>
+                                                        <%= book.description |> String.slice(0..150) %>...
                                                         </div>
 
                                                         <%= link to: Routes.home_path(@conn, :book, book), class: "btn btn-green" do %>

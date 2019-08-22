@@ -72,6 +72,8 @@ defmodule Bookclub.Content do
   """
   def get_book!(id), do: Repo.get!(Book, id) |> Repo.preload(:user)
 
+  def get_book_by_slug!(slug), do: Repo.get_by!(Book, slug: slug) |> Repo.preload(:user)
+
   @doc """
   Creates a book.
 

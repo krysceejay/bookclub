@@ -2,7 +2,7 @@ defmodule Bookclub.Content.Book do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Phoenix.Param, key: :title}
+  @derive {Phoenix.Param, key: :slug}
 
   schema "books" do
     field :author, :string
@@ -12,6 +12,7 @@ defmodule Bookclub.Content.Book do
     field :link, :string
     field :published, :boolean, default: false
     field :title, :string
+    field :slug, :string
     #Virtual Fields
     field :bookcover_field, :string, virtual: true
 
@@ -51,10 +52,8 @@ defmodule Bookclub.Content.Book do
     # %{"slug" => slug}
     if title = attrs["title"] do
       slug = String.downcase(title) |> String.replace(" ", "-")
+      put_change(changeset, :slug, "#{slug}-#{DateTime.utc_now |> DateTime.to_unix}")
 
-      put_change(changeset, :bslug, slug)
-
-      changeset
     else
 
       changeset

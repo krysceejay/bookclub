@@ -38,7 +38,7 @@ defmodule BookclubWeb.Router do
   scope "/chat", BookclubWeb do
     pipe_through [:browser, :chat_layout]
 
-    get "/:id",  ChatController, :index
+    get "/:slug",  ChatController, :index
 
   end
 
@@ -47,7 +47,7 @@ defmodule BookclubWeb.Router do
 
     get "/", HomeController, :index
     get "/books", HomeController, :books
-    get "/book/:id",  HomeController, :book
+    get "/book/:slug",  HomeController, :book
     get "/books/page/:page", HomeController, :books
 
     get "/logout", AuthController, :delete
