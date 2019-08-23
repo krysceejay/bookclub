@@ -2,6 +2,7 @@ defmodule BookclubWeb.HomeController do
   use BookclubWeb, :controller
 
   alias Bookclub.Content
+  alias Bookclub.Content.Book
   alias BookclubWeb.Pagination
 
   def index(conn, _params) do
@@ -19,11 +20,18 @@ defmodule BookclubWeb.HomeController do
   def books(conn, params) do
     {page, ""} = Integer.parse(params["page"] || "1")
 
-    bookquery = Content.all_books |> Pagination.paginate(6, page)
-    num_links = bookquery.number_of_links
-    books = bookquery.page
+    {books, num_links} =
+      Content.all_books
+      |> Pagination.paginate(10, page)
 
-    render(conn, "books.html", books: books, page: page, num_links: num_links)
+    render(conn, "books.html", books: books, num_links: num_links)
+
+    # {books, paginate} =
+    #   Book
+    #   |> Content.all_books
+    #   |> Repo.paginate(params, per_page: 1)
+    #
+    #   render(conn, "books.html", books: books, paginate: paginate)
   end
 
   def book(conn, %{"slug" => slug}) do

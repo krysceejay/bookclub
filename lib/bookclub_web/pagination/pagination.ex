@@ -17,9 +17,9 @@ defmodule BookclubWeb.Pagination do
   end
 
   def paginate(query, per_page, current_page \\ 1) do
-    %{
-      page: page(query, per_page, current_page),
-      number_of_links: number_of_links(query, per_page)
+    {
+      page(query, per_page, current_page),
+      number_of_links(query, per_page)
     }
 
   end
@@ -32,6 +32,7 @@ defmodule BookclubWeb.Pagination do
     else
       links_div + 1
     end
+    
   end
 
 end

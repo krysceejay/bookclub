@@ -53,9 +53,7 @@ defmodule Bookclub.Content.Book do
     if title = attrs["title"] do
       slug = String.downcase(title) |> String.replace(" ", "-")
       put_change(changeset, :slug, "#{slug}-#{DateTime.utc_now |> DateTime.to_unix}")
-
     else
-
       changeset
     end
   end

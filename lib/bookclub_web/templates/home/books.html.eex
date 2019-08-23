@@ -92,7 +92,7 @@
                                                         <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
 
                                                         <div class="description">
-                                                        <%= book.description |> String.slice(0..150) %>...
+                                                        <%= book.description |> String.slice(0..100) %>...
                                                         </div>
 
                                                         <%= link to: Routes.home_path(@conn, :book, book), class: "btn btn-green" do %>
@@ -101,7 +101,7 @@
                                                     </div>
                                                     <div class="edugate-image">
                                                       <%= link to: Routes.home_path(@conn, :book, book) do %>
-                                                        <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="" class="img-responsive" style="object-fit: cover;"/>
+                                                        <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="" class="img-responsive" style="object-fit: contain;"/>
 
                                                       <% end %>
 
@@ -114,39 +114,9 @@
                                         <% end %>
 
                                       <!-- pagination -->
-
-                                        <nav class="pagination col-md-12">
-                                            <ul class="pagination__list">
-                                              <%= if @page > 1 do %>
-                                                <li>
-                                                  <%= link to: Routes.home_path(@conn, :books, @page - 1),
-                                                  class: "pagination__previous btn-squae", rel: "prev" do %>
-                                                  &#8249;
-                                                  <% end %>
-                                                </li>
-                                              <% end %>
-
-                                              <%= for i <- (@page - 5)..(@page + 5), i > 0 && i <= @num_links do %>
-                                                <li>
-                                                  <%= if i == @page do %>
-                                                    <%= link i, to: Routes.home_path(@conn, :books, i), class: "pagination__page btn-squae active" %>
-                                                  <% else %>
-                                                    <%= link i, to: Routes.home_path(@conn, :books, i), class: "pagination__page btn-squae" %>
-                                                  <% end %>
-
-                                                </li>
-                                              <% end %>
-
-                                                <%= if @page < @num_links do %>
-                                                <li>
-                                                  <%= link to: Routes.home_path(@conn, :books, @page + 1),
-                                                  class: "pagination__previous btn-squae", rel: "next" do %>
-                                                  &#8250;
-                                                  <% end %>
-                                                </li>
-                                                <% end %>
-                                            </ul>
-                                        </nav>
+                                        <%= if @num_links != 1 do %>
+                                        <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
+                                        <% end %>
                                         <!-- End pagination -->
                                         <% else %>
                                         <h4>no books</h4>
