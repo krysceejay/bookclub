@@ -1,7 +1,5 @@
 defmodule BookclubWeb.Plugs.AuthUser do
   import Plug.Conn
-  import Phoenix.Controller
-
   alias Bookclub.Repo
   alias Bookclub.Accounts.User
 

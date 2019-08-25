@@ -12,7 +12,7 @@ defmodule BookclubWeb.Resolvers.BookResolver do
       end
   end
 
-  def all_books(_,_,%{context: context}) do
+  def all_books(_,_,%{context: _context}) do
     #IO.inspect(Accounts.list_users())
     {:ok, Content.list_books()}
   end

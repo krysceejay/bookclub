@@ -29,7 +29,6 @@
 
   <div class="form-group">
     <%= label f, :genre %>
-    <!-- <%= select f, :genre, ["foo": "1","bar": "2","baz": "3"], multiple: "multiple"  %> -->
     <%= multiple_select f, :genre, Enum.map(@genre, &{&1.name, &1.name}), selected: @book.genre %>
     <%= error_tag f, :genre %>
   </div>

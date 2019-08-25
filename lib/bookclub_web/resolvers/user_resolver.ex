@@ -1,7 +1,7 @@
 defmodule BookclubWeb.Resolvers.UserResolver do
   alias Bookclub.Accounts
 
-  def users(_,_,%{context: context}) do
+  def users(_,_,%{context: _context}) do
     #IO.inspect(Accounts.list_users())
     {:ok, Accounts.list_users()}
   end
