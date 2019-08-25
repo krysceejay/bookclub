@@ -30,20 +30,29 @@ defmodule Bookclub.Content do
   #   Repo.all(Book) |> Repo.preload(:user)
   # end
 
-  # def list_users(current_page, per_page) do
-  #   Repo.all(
-  #     from u in User,
-  #       order_by: [asc: u.id],
-  #       offset: ^((current_page - 1) * per_page),
-  #       limit: ^per_page
-  #   )
-  # end
-
   def list_books do
     Repo.all(
       from b in Book,
         order_by: [desc: b.id]
     ) |> Repo.preload(:user)
+  end
+
+  def top_books(per_page) do
+    Repo.all(
+      from b in Book,
+        order_by: [desc: b.id],
+        limit: ^per_page
+    ) |> Repo.preload(:user)
+  end
+
+  def all_books do
+    Book
+    |> order_by(desc: :id)
+    |> preload(:user)
+  end
+
+  def count_all_books do
+    Repo.one(from b in Book, select: count("*"))
   end
 
   @doc """
@@ -62,6 +71,8 @@ defmodule Bookclub.Content do
   """
   def get_book!(id), do: Repo.get!(Book, id) |> Repo.preload(:user)
 
+  def get_book_by_slug!(slug), do: Repo.get_by!(Book, slug: slug) |> Repo.preload(:user)
+
   @doc """
   Creates a book.
 
@@ -74,8 +85,9 @@ defmodule Bookclub.Content do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_book(attrs \\ %{}) do
-    %Book{}
+  def create_book(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:books)
     |> Book.changeset(attrs)
     |> Repo.insert()
   end

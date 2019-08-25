@@ -4,8 +4,8 @@ defmodule BookclubWeb.ChatController do
 
   plug BookclubWeb.Plugs.RequireAuth
 
-  def index(conn, %{"id" => book_id}) do
-    book = Content.get_book!(book_id)
+  def index(conn, %{"slug" => slug}) do
+    book = Content.get_book_by_slug!(slug)
 
     Phoenix.LiveView.Controller.live_render(
     conn,

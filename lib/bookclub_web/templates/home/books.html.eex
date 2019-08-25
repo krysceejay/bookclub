@@ -65,6 +65,8 @@
                                 <div id="campus" role="tabpanel" class="tab-pane fade in active">
                                     <div class="style-show style-grid row">
 
+                                      <%= if @books != [] do %>
+
                                         <%= for book <- @books do %>
                                         <div class="col-style">
                                             <div class="edugate-layout-2">
@@ -90,16 +92,16 @@
                                                         <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
 
                                                         <div class="description">
-                                                        <%= book.description |> String.slice(0..150) %>
+                                                        <%= book.description |> String.slice(0..100) %>...
                                                         </div>
 
-                                                        <%= link to: Routes.home_path(@conn, :book, book) do %>
-                                                          <button class="btn btn-green"><span>View details</span></button>
+                                                        <%= link to: Routes.home_path(@conn, :book, book), class: "btn btn-green" do %>
+                                                          <span>View details</span>
                                                         <% end %>
                                                     </div>
                                                     <div class="edugate-image">
                                                       <%= link to: Routes.home_path(@conn, :book, book) do %>
-                                                        <img src="<%= Routes.static_path(@conn, "/home/assets/images/courses/courses-4.jpg") %>" alt="" class="img-responsive"/>
+                                                        <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="" class="img-responsive" style="object-fit: contain;"/>
 
                                                       <% end %>
 
@@ -111,19 +113,18 @@
 
                                         <% end %>
 
-                                        <!-- <nav class="pagination col-md-12">
-                                            <ul class="pagination__list">
-                                                <li><a rel="prev" href="#" class="pagination__previous btn-squae disable">&#8249;</a></li>
-                                                <li><span class="pagination__page btn-squae active">1</span></li>
-                                                <li><a href="#" class="pagination__page btn-squae">2</a></li>
-                                                <li><a href="#" class="pagination__page btn-squae">...</a></li>
-                                                <li><a href="#" class="pagination__page btn-squae">14</a></li>
-                                                <li><a rel="next" href="#" class="pagination__next btn-squae">&#8250;</a></li>
-                                            </ul>
-                                        </nav> -->
+                                      <!-- pagination -->
+                                        <%= if @num_links != 1 do %>
+                                        <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
+                                        <% end %>
+                                        <!-- End pagination -->
+                                        <% else %>
+                                        <h4>no books</h4>
+                                      <% end %>
+
                                     </div>
                                 </div>
-                            
+
                             </div>
                         </div>
                     </div>

@@ -1,14 +1,14 @@
 <ul id="msgs" style="list-style: none; min-height:400px; border: 1px solid; padding: 10px;">
     <%= for chat <- @chats do %>
-        <li><strong> <%= chat.user.first_name %> : </strong> <%= chat.message %> </li>
+        <li><strong> <%= chat.user.username |> String.capitalize() %> : </strong> <%= chat.message %> </li>
     <% end %>
 </ul>
 
 <h3>Members</h3>
 <%= for user <- @users do %>
   <p>
-    <%= user.user_name %>
-    <%= if user.typing, do: "typing..." %>
+    <%= user.user_name |> String.capitalize() %>
+    <%= if user.typing, do: "is typing..." %>
   </p>
 <% end %>
 

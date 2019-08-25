@@ -42,6 +42,7 @@ defmodule Bookclub.Messages do
     query =
       from c in Chat,
         where: c.book_id == ^bookid,
+        order_by: [asc: c.id],
         preload: [:user]
 
     Repo.all(query)
