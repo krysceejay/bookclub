@@ -298,8 +298,10 @@ tr:nth-child(even) {
   background-color: $light-color;
 }
 
-.form-error {
-  text-align: left !important;
+.form-error,
+.help-block {
+  color: #ff0000;
+  font-size: 0.9rem;
 }
 
 // Chat

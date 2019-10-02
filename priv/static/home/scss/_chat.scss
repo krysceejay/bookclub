@@ -4,7 +4,7 @@
   #chat-nav {
     //flex: 1;
     background: #fff;
-    max-width: 70px;
+    max-width: 5vw;
     height: 100vh;
     .chat-nav-logo {
       background: $secondary-color;
@@ -39,7 +39,8 @@
   }
 
   #chat-section {
-    flex: 18;
+    //flex: 18;
+    min-width: 92vw;
     background: $light-color;
     height: 100vh;
 
