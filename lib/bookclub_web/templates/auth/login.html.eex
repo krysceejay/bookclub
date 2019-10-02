@@ -1,52 +1,36 @@
-<div id="wrapper-content"><!-- PAGE WRAPPER-->
-    <div id="page-wrapper"><!-- MAIN CONTENT-->
-        <div class="main-content"><!-- CONTENT-->
-            <div class="content">
-                <div class="page-login rlp">
-                    <div class="container">
-                        <div class="login-wrapper rlp-wrapper">
-                            <div class="login-table rlp-table">
-                              <!-- <a href="index.html">
-                                <img src="<%= Routes.static_path(@conn, "/home/assets/images/logo-color-1.png") %>" alt="" class="login"/>
-                              </a> -->
-                              <%= unless is_nil(get_flash(@conn, :info)) do %>
-                              <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-                              <% end %>
-                              <%= unless is_nil(get_flash(@conn, :error)) do %>
-                              <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-                              <% end %>
+    <!-- Section A: Contact -->
+    <section id="contact-a" class="text-center py-4">
+      <div class="container">
+        <h2 class="section-title"><span class="text-primary">Sign</span> In</h2>
+        <p class="lead">
+          Please enter your credentials to login
+        </p>
 
-                                <div class="login-title rlp-title">login</div>
-                                <%= form_for @conn, Routes.auth_path(@conn, :login), fn f -> %>
+        <%= unless is_nil(get_flash(@conn, :info)) do %>
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <% end %>
+        <%= unless is_nil(get_flash(@conn, :error)) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <% end %>
 
-                                <div class="login-form bg-w-form rlp-form">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                          <label for="email" class="control-label form-label">email <span class="highlight">*</span></label>
-                                          <%= email_input f, :email, class: "form-control form-input", placeholder: "Email", required: "required", autofocus: "on" %>
+        <div class="field">
+          <div class="field-form">
+            <%= form_for @conn, Routes.auth_path(@conn, :login), fn f -> %>
+              <div class="form-group">
+                <%= email_input f, :email, placeholder: "Enter email", required: "required", autofocus: "on" %>
 
-                                        </div>
-                                        <div class="col-md-12">
-                                          <label for="password" class="control-label form-label">password <span class="highlight">*</span></label>
+              </div>
+              <div class="form-group">
 
-                                          <%= password_input f, :password, class: "form-control form-input", placeholder: "Password", required: "required" %>
+                <%= password_input f, :password, placeholder: "Enter password", required: "required" %>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="login-submit">
-                                    <!-- <button type="submit" onclick="window.location.href='index.html'" class="btn btn-login btn-green"><span>sign in</span></button> -->
-                                    <%= submit "LOGIN", class: "btn btn-login btn-green" %>
-                                </div>
-                                <% end %>
+              </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              <!-- <input type="submit" value="Send" class="btn btn-dark" /> -->
+              <%= submit "Sign In", class: "btn btn-dark" %>
+            <% end %>
+          </div>
         </div>
-    </div>
-    <!-- BUTTON BACK TO TOP-->
-    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
-</div>
+      </div>
+    </section>
+    <!-- / End Section A -->

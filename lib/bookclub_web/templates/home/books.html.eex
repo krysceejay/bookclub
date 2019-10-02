@@ -1,137 +1,102 @@
-<div id="wrapper-content"><!-- PAGE WRAPPER-->
-    <div id="page-wrapper"><!-- MAIN CONTENT-->
-        <div class="main-content"><!-- CONTENT-->
-            <div class="content">
-                <div class="section background-opacity page-title set-height-top">
-                    <div class="container">
-                        <div class="page-title-wrapper"><!--.page-title-content--><h2 class="captions">booklist</h2>
-                            <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a></li>
-                                <li class="active"><a href="#">Categories</a></li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="search-input">
-                        <div class="container">
-                            <div class="search-input-wrapper">
-                                <form><select class="form-select style-1 selectbox">
-                                    <option value="all">all categories</option>
-                                    <option value="languages">languages</option>
-                                    <option value="science">science</option>
-                                </select><select class="form-select style-2 selectbox">
-                                    <option value="price">price</option>
-                                    <option value="datetime">datetime</option>
-                                    <option value="teacher">teacher</option>
-                                </select><input type="text" placeholder="Do you want to learn today?" class="form-input"/>
-                                    <button type="submit" class="form-submit btn btn-blue"><span>search now<i class="fa fa-search"></i></span></button>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section section-padding courses">
-                    <div class="container">
-                        <div class="group-title-index"><h2 class="center-title">Language courses</h2><h4 class="top-title">Having over <b>7 million students</b> worldwide and more than <b>30,000 online courses</b></h4><!--.bottom-title<i class="bottom-icon icon-a-1-01"></i>--></div>
-                        <div class="courses-wrapper"><!-- Nav tabs-->
-                            <div class="row top-content">
-                                <div class="col-md-3">
-                                    <div class="result-output text-left"><p class="result-count">Showing <strong>1-6</strong> of total <strong>12</strong> courses</p></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <ul role="tablist" class="nav nav-tabs edugate-tabs">
-                                        <li role="presentation" class="active"><a href="#campus" data-toggle="tab" class="text">Campus</a></li>
-                                        <li role="presentation"><a href="#education" data-toggle="tab" class="text">Education</a></li>
-                                        <li role="presentation"><a href="#building" data-toggle="tab" class="text">Building</a></li>
-                                        <li role="presentation"><a href="#teachers" data-toggle="tab" class="text">Teachers</a></li>
-                                        <li role="presentation"><a href="#students" data-toggle="tab" class="text">Students</a></li>
-                                    </ul>
-                                </div>
-                                <!-- <div class="col-md-3">
-                                    <ul class="btn-list-grid list-unstyled text-right">
-                                        <li class="active">
-                                            <button class="btn-grid"><i class="fa fa-th-large"></i></button>
-                                        </li>
-                                        <li>
-                                            <button class="btn-list"><i class="fa fa-th-list"></i></button>
-                                        </li>
-                                    </ul>
-                                </div> -->
-                            </div>
-                            <!-- Tab panes-->
-                            <div class="tab-content courses-content">
-                                <div id="campus" role="tabpanel" class="tab-pane fade in active">
-                                    <div class="style-show style-grid row">
+<section id="book-cat">
+      <div class="pandsort">
+        <form>
+          <div class="sort-form">
+            <select name="cars">
+              <option value="">All genre</option>
+              <option value="saab">Saab</option>
+              <option value="fiat">Fiat</option>
+              <option value="audi">Audi</option>
+            </select>
+            <select name="cars">
+              <option value="">All genre</option>
+              <option value="saab">Saab</option>
+              <option value="fiat">Fiat</option>
+              <option value="audi">Audi</option>
+            </select>
+            <input type="text" placeholder="title" />
+          </div>
 
-                                      <%= if @books != [] do %>
+          <div class="sort-submit">
+            <button class="btn-main" type="submit">
+              <i class="fa fa-search fa-2x"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
 
-                                        <%= for book <- @books do %>
-                                        <div class="col-style">
-                                            <div class="edugate-layout-2">
-                                                <div class="edugate-layout-2-wrapper">
-                                                    <div class="edugate-content">
-                                                      <%= link book.title |> String.upcase(), to: Routes.home_path(@conn, :book, book), class: "title" %>
+    <!-- Section A: All books -->
+    <section id="book-a" class="text-center py-4">
 
-                                                        <div class="info">
-                                                            <div class="author item">
-                                                              <a href="#">By <%= book.user.first_name %></a>
-                                                            </div>
-
-                                                            <div class="date-time item"><a href="#"><%= book.inserted_at |> Date.to_string %></a></div>
-                                                        </div>
-                                                        <div class="info-more">
-                                                            <div class="view item"><i class="fa fa-user"></i>
-
-                                                                <p> 56</p></div>
-                                                            <div class="comment item"><i class="fa fa-comment"></i>
-
-                                                                <p> 239</p></div>
-                                                        </div>
-                                                        <div title="Rated 5.00 out of 5" class="star-rating"><span class="width-80"><strong class="rating">5.00</strong> out of 5</span></div>
-
-                                                        <div class="description">
-                                                        <%= book.description |> String.slice(0..100) %>...
-                                                        </div>
-
-                                                        <%= link to: Routes.home_path(@conn, :book, book), class: "btn btn-green" do %>
-                                                          <span>View details</span>
-                                                        <% end %>
-                                                    </div>
-                                                    <div class="edugate-image">
-                                                      <%= link to: Routes.home_path(@conn, :book, book) do %>
-                                                        <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="" class="img-responsive" style="object-fit: contain;"/>
-
-                                                      <% end %>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <% end %>
-
-                                      <!-- pagination -->
-                                        <%= if @num_links != 1 do %>
-                                        <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
-                                        <% end %>
-                                        <!-- End pagination -->
-                                        <% else %>
-                                        <h4>no books</h4>
-                                      <% end %>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">
+          <span class="text-primary">All</span> Books
+        </h2>
+        <p class="lead">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+        <div class="all-books">
+          <%= if @books != [] do %>
+          <%= for book <- @books do %>
+          <div class="all-books-content">
+            <div class="all-books-img">
+              <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="image" />
             </div>
+            <div class="all-books-text">
+              <h3>Awesome Title</h3>
+              <p>Added By Admin | 17 Sept 2015</p>
+              <!-- <p>56| 78</p> -->
+              <p>
+                <span class="fill"
+                  ><i class="fa fa-star" aria-hidden="true"></i
+                ></span>
+                <span class="fill"
+                  ><i class="fa fa-star" aria-hidden="true"></i
+                ></span>
+                <span class="fill"
+                  ><i class="fa fa-star" aria-hidden="true"></i
+                ></span>
+                <span class="fill"
+                  ><i class="fa fa-star" aria-hidden="true"></i
+                ></span>
+                <span class="nofill"
+                  ><i class="fa fa-star" aria-hidden="true"></i
+                ></span>
+              </p>
+              <p class="all-books-desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit...
+              </p>
+            </div>
+            <div class="link-btn">
+              <%= link "View Details", to: Routes.home_path(@conn, :book, book), class: "btn-sec" %>
+            </div>
+          </div>
+
+          <% end %>
+          <% end %>
+
+
         </div>
-    </div>
-    <!-- BUTTON BACK TO TOP-->
-    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
-</div>
+        <div class="paginate-links my-4">
+          <ul class="paginate-links-menu">
+            <li class="">
+              <a href="#" class="btn-lighten"
+                ><i class="fa fa-angle-left"></i
+              ></a>
+            </li>
+            <li class=""><a href="#" class="btn-lighten current">1</a></li>
+            <li class=""><a href="#" class="btn-lighten">2</a></li>
+            <li class=""><a href="#" class="btn-lighten">3</a></li>
+            <li class=""><a href="#" class="btn-lighten">4</a></li>
+            <li class=""><a href="#" class="btn-lighten">5</a></li>
+            <li class="">
+              <a href="#" class="btn-lighten"
+                ><i class="fa fa-angle-right"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- / End Section A -->

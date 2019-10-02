@@ -6,9 +6,10 @@ defmodule BookclubWeb.HomeController do
 
   def index(conn, _params) do
 
-  [first, second, third, fourth] = Content.top_books(4)
+  top_rated = Content.top_books(3)
 
-  render(conn, "index.html", first: first, second: second, third: third, fourth: fourth)
+  # render(conn, "index.html", first: first, second: second, third: third, fourth: fourth)
+  render(conn, "index.html", top_rated: top_rated)
   end
 
   def books(conn, params) do

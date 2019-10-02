@@ -12,13 +12,14 @@ defmodule BookclubWeb.UserController do
 
   def addbook(conn, _params) do
     genre = Content.list_genres()
-    changeset = Content.change_book(%Book{})
     book = %Book{}
+    changeset = Content.change_book(book)
     render(conn, "addbook.html", changeset: changeset, book: book, genre: genre)
   end
 
   def createbook(conn, %{"book" => book_params}) do
-
+    genre = Content.list_genres()
+    book = %Book{}
     case Content.create_book(conn.assigns.user, book_params) do
       {:ok, _book} ->
         conn
@@ -26,7 +27,7 @@ defmodule BookclubWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "addbook.html", changeset: changeset)
+        render(conn, "addbook.html", changeset: changeset, book: book,genre: genre)
     end
   end
 
@@ -40,6 +41,7 @@ defmodule BookclubWeb.UserController do
 
   def updatebook(conn, %{"id" => id, "book" => book_params}) do
     book = Content.get_book!(id)
+    genre = Content.list_genres()
 
     case Content.update_book(book, book_params) do
       {:ok, _book} ->
@@ -48,7 +50,7 @@ defmodule BookclubWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "editbook.html", book: book, changeset: changeset)
+        render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
     end
   end
 

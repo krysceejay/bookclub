@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- Fontawesome -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <!-- Google Font -->
+    <!-- <link
+      href="https://fonts.googleapis.com/css?family=Catamaran&display=swap"
+      rel="stylesheet"
+    /> -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
+      rel="stylesheet"
+    />
+    <!-- /End Google Font -->
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
+    <title>Bookclub: Dashboard</title>
+  </head>
+  <body>
+    <main id="dashboard-main">
+      <!-- Sidebar -->
+      <aside id="dashboard-main-aside">
+        <ul class="main-aside-ul">
+          <li class="main-aside-li">
+            <%= link to: Routes.user_path(@conn, :index) do %>
+            <i class="fa fa-dashboard"></i>Dashboard
+            <% end %>
+          </li>
+          <!-- <a href="managebook.html"
+            > -->
+          <li class="main-aside-li">
+            <i class="fa fa-book"></i>Books
+            <i class="fa fa-angle-down"></i>
+            <ul>
+              <li>
+                <a href="managebook.html">Manage Books</a>
+              </li>
+              <li>
+                <%= link "Add Book", to: Routes.user_path(@conn, :addbook) %>
+              </li>
+            </ul>
+          </li>
+          <!-- </a> -->
+          <!-- <a href="addbook.html"
+            ><li><i class="fa fa-book"></i> Add Books</li></a
+          > -->
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Section A: Dashboard Home -->
+      <section id="dashboard-main-section">
+        <nav id="dashboard-main-nav">
+          <div class="header_top">
+            <div class="top_right">
+              <ul>
+                <li><a href="../index.html">Home</a></li>
+                |
+                <li><a href="../contact.html">Contact</a></li>
+              </ul>
+            </div>
+            <div class="top_left">
+              <div class="nav-img">
+                <img src="<%= Routes.static_path(@conn, "/home/img/the-way.jpg") %>" alt="proimage" />
+              </div>
+              <!-- <form action="">
+                <button type="submit" class="">Log Out</button>
+              </form> -->
+            </div>
+          </div>
+        </nav>
+
+      <%= render @view_module, @view_template, assigns %>
+      </section>
+    </main>
+    <!-- / End Section A -->
+
+    <!-- Bootstrap Js -->
+  </body>
+</html>

@@ -1,1 +1,71 @@
-<%= render "form.html", Map.put(assigns, :action, Routes.auth_path(@conn, :register)) %>
+<!-- Section A: Register -->
+    <section id="register-a" class="py-4">
+      <div class="container">
+        <h2 class="section-title"><span class="text-primary">Sign</span> Up</h2>
+        <p class="lead">
+          Create a free account
+        </p>
+        <div class="field">
+          <div class="field-form">
+            <form>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  placeholder="Enter first name"
+                />
+                <span class="form-error">erroee</span>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  placeholder="Enter last name"
+                />
+                <span class="form-error">erroee</span>
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter email"
+                />
+                <span class="form-error">erroee</span>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="Enter user name"
+                />
+                <span class="form-error">erroee</span>
+              </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Enter password"
+                />
+                <span class="form-error">erroee</span>
+              </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  name="confpassword"
+                  id="confpassword"
+                  placeholder="confirm password"
+                />
+                <span class="form-error">erroee</span>
+              </div>
+              <input type="submit" value="Submit" class="btn btn-dark" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- / End Section A -->

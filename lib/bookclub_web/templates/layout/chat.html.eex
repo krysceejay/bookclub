@@ -1,41 +1,85 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Soho - Chat and Discussion Platform</title>
+    <!-- Fontawesome -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
+      rel="stylesheet"
+    />
+    <!-- /End Google Font -->
 
-    <!-- Favicon -->
-    <link rel="icon" href="<%= Routes.static_path(@conn, "/chat/dist/media/img/favicon.png") %>" type="image/png">
-    <!-- Soho css -->
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/chat/dist/css/soho.min.css") %>">
-</head>
+    <!-- Bootstrap css-->
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css" /> -->
 
-<!--/ HEADER-->
-<body>
+    <!-- / End Bootstrap -->
 
-      <%= render @view_module, @view_template, assigns %>
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
+    <title>Bookclub: Chat</title>
+  </head>
+  <body>
+<main id="chat-page">
+  <!-- Nav -->
+  <nav id="chat-nav">
+    <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
+    <div class="chat-nav-logo">
+      <h1 class="logo"><a href="index.html">Logo</a></h1>
+    </div>
 
-<!-- JQuery -->
-<script src="<%= Routes.static_path(@conn, "/chat/vendor/jquery-3.4.1.min.js") %>"></script>
+    <ul class="chat-nav-menu">
+      <div class="chat-nav-menu-up">
+        <li>
+          <a href="index.html" class="current"
+            ><i class="fa fa-user-o"></i
+          ></a>
+        </li>
+        <li>
+          <a href="index.html" class="current"
+            ><i class="fa fa-comment-o"></i
+          ></a>
+        </li>
+        <li>
+          <a href="index.html" class="current"
+            ><i class="fa fa-star-o"></i
+          ></a>
+        </li>
+      </div>
 
-<script src="<%= Routes.static_path(@conn, "/chat/vendor/popper.min.js") %>"></script>
+      <div class="chat-nav-menu-down">
+        <li>
+          <a href="index.html" class="current"
+            ><i class="fa fa-pencil"></i
+          ></a>
+        </li>
+        <li>
+          <a href="index.html" class="current"
+            ><i class="fa fa-gears"></i
+          ></a>
+        </li>
+        <li>
+          <%= link to: Routes.auth_path(@conn, :delete), method: :delete do %>
+          <i class="fa fa-power-off"></i>
+          <% end %>
+        </li>
+      </div>
+    </ul>
+  </nav>
+  <!-- / End Nav -->
+    <%= render @view_module, @view_template, assigns %>
 
-<script src="<%= Routes.static_path(@conn, "/chat/vendor/bootstrap/bootstrap.min.js") %>"></script>
+</main>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 
-
-<!-- Nicescroll -->
-<script src="<%= Routes.static_path(@conn, "/chat/vendor/jquery.nicescroll.min.js") %>"></script>
-
-<!-- Soho -->
-<script src="<%= Routes.static_path(@conn, "/chat/dist/js/soho.min.js") %>"></script>
-
-<!-- Examples -->
-<script src="<%= Routes.static_path(@conn, "/chat/dist/js/examples.js") %>"></script>
-<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-</body>
-
+  </body>
 </html>

@@ -1,0 +1,15 @@
+<%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :send_message, autocomplete: :off] %>
+    <%= text_input f, :message, class: "form-control", placeholder: "Recipient's username", "aria-label": "Recipient's username", "aria-describedby": "button-addon2" %>
+    <%= error_tag f, :message %>
+    <div class="form-buttons">
+        <button class="btn btn-light btn-floating" type="button">
+            <i class="fa fa-paperclip"></i>
+        </button>
+        <button class="btn btn-light btn-floating" type="button">
+            <i class="fa fa-microphone"></i>
+        </button>
+        <%= submit phx_disable_with: "Loading...", phx_blur: "stop_typing", class: "btn btn-primary btn-floating" do %>
+          <i class="fa fa-send"></i>
+        <% end %>
+    </div>
+</form>

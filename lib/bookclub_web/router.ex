@@ -20,6 +20,10 @@ defmodule BookclubWeb.Router do
     plug :put_layout, {BookclubWeb.LayoutView, :admin}
   end
 
+  pipeline :user_dashboard do
+    plug :put_layout, {BookclubWeb.LayoutView, :user}
+  end
+
   pipeline :chat_layout do
     plug :put_layout, {BookclubWeb.LayoutView, :chat}
   end
@@ -32,6 +36,17 @@ defmodule BookclubWeb.Router do
     get "/user/:id",  AdminController, :user
     get "/books",  AdminController, :books
     get "/book/:id",  AdminController, :book
+
+  end
+
+  scope "/dashboard", BookclubWeb do
+    pipe_through [:browser, :user_dashboard]
+
+    get "/", UserController, :index
+    get "/addbook", UserController, :addbook
+    post "/createbook", UserController, :createbook
+    get "/editbook/:id", UserController, :editbook
+    put "/updatebook/:id", UserController, :updatebook
 
   end
 
@@ -55,13 +70,6 @@ defmodule BookclubWeb.Router do
     post "/login", AuthController, :login
     get "/register", AuthController, :registerform
     post "/register", AuthController, :register
-
-    get "/dashboard", UserController, :index
-    get "/dashboard/addbook", UserController, :addbook
-    post "/dashboard/createbook", UserController, :createbook
-    get "/dashboard/editbook/:id", UserController, :editbook
-    put "/dashboard/updatebook/:id", UserController, :updatebook
-
   end
 
   # Other scopes may use custom stacks.
