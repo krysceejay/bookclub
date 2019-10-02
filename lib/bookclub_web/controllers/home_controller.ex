@@ -17,7 +17,7 @@ defmodule BookclubWeb.HomeController do
 
     {books, num_links} =
       Content.all_books
-      |> Pagination.paginate(10, page)
+      |> Pagination.paginate(12, page)
 
     render(conn, "books.html", books: books, num_links: num_links)
 

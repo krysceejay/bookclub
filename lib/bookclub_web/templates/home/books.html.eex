@@ -36,8 +36,9 @@
         <p class="lead">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
+        <%= if @books != [] do %>
         <div class="all-books">
-          <%= if @books != [] do %>
+
           <%= for book <- @books do %>
           <div class="all-books-content">
             <div class="all-books-img">
@@ -72,31 +73,20 @@
               <%= link "View Details", to: Routes.home_path(@conn, :book, book), class: "btn-sec" %>
             </div>
           </div>
-
           <% end %>
-          <% end %>
-
-
         </div>
+        <% else %>
+        <h4>no books</h4>
+        <% end %>
+        <!-- pagination -->
         <div class="paginate-links my-4">
-          <ul class="paginate-links-menu">
-            <li class="">
-              <a href="#" class="btn-lighten"
-                ><i class="fa fa-angle-left"></i
-              ></a>
-            </li>
-            <li class=""><a href="#" class="btn-lighten current">1</a></li>
-            <li class=""><a href="#" class="btn-lighten">2</a></li>
-            <li class=""><a href="#" class="btn-lighten">3</a></li>
-            <li class=""><a href="#" class="btn-lighten">4</a></li>
-            <li class=""><a href="#" class="btn-lighten">5</a></li>
-            <li class="">
-              <a href="#" class="btn-lighten"
-                ><i class="fa fa-angle-right"></i
-              ></a>
-            </li>
-          </ul>
+
+            <%= if @num_links != 1 do %>
+            <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
+            <% end %>
+
         </div>
+        <!-- End pagination -->
       </div>
     </section>
     <!-- / End Section A -->

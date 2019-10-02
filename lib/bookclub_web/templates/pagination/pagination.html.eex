@@ -1,33 +1,30 @@
-<nav class="pagination col-md-12">
-    <ul class="pagination__list">
-      <%= if get_param(@conn.query_params) > 1 do %>
-        <li>
-          <%= link to: "#{@conn.request_path}?page=#{get_param(@conn.query_params) - 1}",
-          class: "pagination__previous btn-squae", rel: "prev" do %>
-          &#8249;
-          <% end %>
-        </li>
-      <% end %>
+<ul class="paginate-links-menu">
+  <%= if get_param(@conn.query_params) > 1 do %>
+  <li class="">
+    <%= link to: "#{@conn.request_path}?page=#{get_param(@conn.query_params) - 1}",
+    class: "btn-lighten" do %>
+    <i class="fa fa-angle-left"></i>
+    <% end %>
+  </li>
+  <% end %>
 
-      <%= for i <- (get_param(@conn.query_params) - 5)..(get_param(@conn.query_params) + 5), i > 0 && i <= @num_links do %>
-        <li>
-          <%= if i == get_param(@conn.query_params) do %>
-            <%= link i, to: "#{@conn.request_path}?page=#{i}", class: "pagination__page btn-squae active" %>
-          <% else %>
-            <%= link i, to: "#{@conn.request_path}?page=#{i}", class: "pagination__page btn-squae" %>
-          <% end %>
+  <%= for i <- (get_param(@conn.query_params) - 5)..(get_param(@conn.query_params) + 5), i > 0 && i <= @num_links do %>
+  <li class="">
+    <%= if i == get_param(@conn.query_params) do %>
+    <%= link i, to: "#{@conn.request_path}?page=#{i}", class: "btn-lighten current" %>
+    <% else %>
+      <%= link i, to: "#{@conn.request_path}?page=#{i}", class: "btn-lighten" %>
+    <% end %>
+  </li>
+  <% end %>
 
-        </li>
-      <% end %>
+  <%= if get_param(@conn.query_params) < @num_links do %>
+  <li>
+    <%= link to: "#{@conn.request_path}?page=#{get_param(@conn.query_params) + 1}",
+    class: "btn-lighten" do %>
+    <i class="fa fa-angle-right"></i>
+    <% end %>
+  </li>
+  <% end %>
 
-        <%= if get_param(@conn.query_params) < @num_links do %>
-        <li>
-          <%= link to: "#{@conn.request_path}?page=#{get_param(@conn.query_params) + 1}",
-          class: "pagination__previous btn-squae", rel: "next" do %>
-          &#8250;
-          <% end %>
-        </li>
-        <% end %>
-
-    </ul>
-</nav>
+</ul>
