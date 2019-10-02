@@ -3,7 +3,7 @@
       <div class="chat-container-online-users">
         <div class="chat-head-section">
           <h2>online-users</h2>
-          <div class="details-close-btn">
+          <div id="users-close-btn" class="details-close-btn">
             <i class="fa fa-close"></i>
           </div>
         </div>
@@ -40,7 +40,7 @@
             <span><%= @book.title %></span>
           </div>
         </div>
-        <div class="chat-area-body">
+        <div id="chat-body-id" class="chat-area-body">
 
         <%= for chat <- @chats do %>
 
@@ -76,7 +76,7 @@
       <div class="chat-container-bookdetails">
         <div class="chat-head-section">
           <h2>Details</h2>
-          <div class="details-close-btn">
+          <div id="detail-close-btn" class="details-close-btn">
             <i class="fa fa-close"></i>
           </div>
         </div>
@@ -122,4 +122,3 @@
       </div>
     </div>
   </section>
-

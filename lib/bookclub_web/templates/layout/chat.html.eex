@@ -40,13 +40,13 @@
     <ul class="chat-nav-menu">
       <div class="chat-nav-menu-up">
         <li>
-          <a href="index.html" class="current"
-            ><i class="fa fa-user-o"></i
+          <a id="online-users-show" class="current"
+            ><i class="fa fa-users"></i
           ></a>
         </li>
         <li>
-          <a href="index.html" class="current"
-            ><i class="fa fa-comment-o"></i
+          <a id="book-details-show" class="current"
+            ><i class="fa fa-book"></i
           ></a>
         </li>
         <li>
@@ -79,6 +79,15 @@
     <%= render @view_module, @view_template, assigns %>
 
 </main>
+<!-- <script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"
+></script> -->
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 
   </body>

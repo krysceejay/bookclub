@@ -18,3 +18,5 @@ import LiveSocket from "phoenix_live_view"
 //import socket from "./socket"
 let ls = new LiveSocket("/live")
 ls.connect()
+
+import socket from "./chat"
