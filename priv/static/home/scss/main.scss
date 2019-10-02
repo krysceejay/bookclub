@@ -75,6 +75,9 @@ div[class^="btn-"],
   background: $secondary-color;
   z-index: 1;
   color: #fff;
+  a {
+    color: #fff;
+  }
 
   .main-nav-menu {
     display: flex;

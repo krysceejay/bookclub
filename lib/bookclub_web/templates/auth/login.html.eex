@@ -7,10 +7,10 @@
         </p>
 
         <%= unless is_nil(get_flash(@conn, :info)) do %>
-        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <div class="pop pop-info"><%= get_flash(@conn, :info) %></div>
         <% end %>
         <%= unless is_nil(get_flash(@conn, :error)) do %>
-        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <div class="pop pop-error"><%= get_flash(@conn, :error) %></div>
         <% end %>
 
         <div class="field">

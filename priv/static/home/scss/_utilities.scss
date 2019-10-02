@@ -185,6 +185,29 @@ select:focus {
 .text-primary {
   color: $main-color !important;
 }
+
+//Alert pop up
+%pop-shared {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+.pop {
+  &-info {
+    @extend %pop-shared;
+    color: #0c5460;
+    background-color: #d1ecf1;
+  }
+  &-error {
+    @extend %pop-shared;
+    color: #721c24;
+    background-color: #f8d7da;
+  }
+}
+//.pop pop-info
+
 .sidebar-cat-text {
   font-weight: 700;
   margin-right: 2rem;
