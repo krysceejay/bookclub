@@ -1,5 +1,14 @@
+<section id="below-nav">
+        <div class="container">
+                <ul class="below-nav-list">
+                        <li>Home /</li>
+                        <li>Books</li>
+                    </ul>
+        </div>
+
+    </section>
 <section id="book-cat">
-      <div class="pandsort">
+      <div class="container pandsort">
         <form>
           <div class="sort-form">
             <select name="cars">
@@ -8,20 +17,14 @@
               <option value="fiat">Fiat</option>
               <option value="audi">Audi</option>
             </select>
-            <select name="cars">
-              <option value="">All genre</option>
-              <option value="saab">Saab</option>
-              <option value="fiat">Fiat</option>
-              <option value="audi">Audi</option>
-            </select>
-            <input type="text" placeholder="title" />
+            <input class="search-books" type="text" placeholder="Search for books, authors, title e.t.c" />
+            <div class="sort-submit">
+              <button class="btn-main" type="submit">
+                <i class="fa fa-search fa-3x"></i>
+              </button>
+            </div>
           </div>
 
-          <div class="sort-submit">
-            <button class="btn-main" type="submit">
-              <i class="fa fa-search fa-2x"></i>
-            </button>
-          </div>
         </form>
       </div>
     </section>
@@ -31,7 +34,7 @@
 
       <div class="container">
         <h2 class="section-title">
-          <span class="text-primary">All</span> Books
+          <span class="text-primary">All </span>Books
         </h2>
         <p class="lead">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -40,13 +43,17 @@
         <div class="all-books">
 
           <%= for book <- @books do %>
+
           <div class="all-books-content">
+            <%= link to: Routes.home_path(@conn, :book, book) do %>
             <div class="all-books-img">
               <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="image" />
             </div>
+            <% end %>
             <div class="all-books-text">
-              <h3>Awesome Title</h3>
-              <p>Added By Admin | 17 Sept 2015</p>
+              <div class="booktext-title"><%= book.title %></div>
+              <div class="booktext-author"><%= book.author %></div>
+              <div>Added By <span class="booktext-user"> <%= book.user.first_name %></span></div>
               <!-- <p>56| 78</p> -->
               <p>
                 <span class="fill"
@@ -65,14 +72,15 @@
                   ><i class="fa fa-star" aria-hidden="true"></i
                 ></span>
               </p>
-              <p class="all-books-desc">
+              <!-- <p class="all-books-desc">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit...
-              </p>
+              </p> -->
             </div>
-            <div class="link-btn">
+            <!-- <div class="link-btn">
               <%= link "View Details", to: Routes.home_path(@conn, :book, book), class: "btn-sec" %>
-            </div>
+            </div> -->
           </div>
+
           <% end %>
         </div>
         <% else %>

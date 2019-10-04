@@ -20,7 +20,7 @@
               </div>
               <div class="bdetails-beside-img">
                 <h2>
-                  <span>The World Of Abstract art</span>
+                  <span><%= @book.title |> String.capitalize() %></span>
                 </h2>
                 <p class="author">
                   Emma Watson
@@ -60,7 +60,7 @@
 
                 <div class="join-chat">
                   <p class="join-chat-head">Join The Discussion</p>
-                  
+
                   <%= link to: Routes.chat_path(@conn, :index, @book) do %>
                   <span class="join-chat-icon"
                     ><i class="fa fa-comment-o" aria-hidden="true"></i>

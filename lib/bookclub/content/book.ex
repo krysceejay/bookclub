@@ -9,10 +9,11 @@ defmodule Bookclub.Content.Book do
     field :bookcover, :string
     field :description, :string
     field :genre, {:array, :string}
-    field :link, :string
     field :published, :boolean, default: false
     field :title, :string
     field :slug, :string
+    field :meeting_date, :string
+    field :meeting_time, :time
     #Virtual Fields
     field :bookcover_field, :string, virtual: true
 
@@ -26,8 +27,8 @@ defmodule Bookclub.Content.Book do
   def changeset(book, attrs) do
 
     book
-    |> cast(attrs, [:title, :author, :genre, :link, :description, :published, :user_id])
-    |> validate_required([:title, :author, :genre, :link, :description, :published, :user_id])
+    |> cast(attrs, [:title, :author, :genre, :description, :published, :user_id, :meeting_date, :meeting_time])
+    |> validate_required([:title, :author, :genre, :description, :published, :user_id, :meeting_date, :meeting_time])
     |> uploadfile(attrs)
     |> slug_map(attrs)
   end

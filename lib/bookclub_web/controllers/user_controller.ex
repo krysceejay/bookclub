@@ -18,6 +18,9 @@ defmodule BookclubWeb.UserController do
   end
 
   def createbook(conn, %{"book" => book_params}) do
+    # IO.puts "+++++++++++++++"
+    # IO.inspect book_params
+    # IO.puts "+++++++++++++++"
     genre = Content.list_genres()
     book = %Book{}
     case Content.create_book(conn.assigns.user, book_params) do

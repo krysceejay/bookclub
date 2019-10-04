@@ -30,13 +30,14 @@
                     <% end %>
                   </div>
                   <div class="form-group">
-                    <label for="title">Meeting Date</label>
-                    <input type="date" name="date" id="date" />
+                    <%= label f, :meeting_date %>
+                    <%= date_input f, :meeting_date %>
+                    <%= error_tag f, :meeting_date %>
                   </div>
                   <div class="form-group">
-                    <label for="author">Time</label>
-
-                    <input type="time" name="time" />
+                    <%= label f, :meeting_time %>
+                    <%= time_input f, :meeting_time %>
+                    <%= error_tag f, :meeting_time %>
                   </div>
 
                   <div class="form-group">
@@ -45,9 +46,10 @@
                     <%= error_tag f, :description %>
                   </div>
                   <div class="form-group">
-                    <label for="author">Publish</label>
-                    <input type="radio" name="age" value="1" /> Yes
-                    <input type="radio" name="age" value="0" /> No
+                    <%= label f, :published %>
+                    <%= radio_button f, :published, "1", checked: @book.published == true %> Yes
+                    <%= radio_button f, :published, "0", checked: @book.published == false %> No
+                    <%= error_tag f, :published %>
                   </div>
                 </div>
                 <div class="form-group">

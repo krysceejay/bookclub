@@ -7,8 +7,10 @@ defmodule Bookclub.Repo.Migrations.CreateBooks do
       add :author, :string
       add :genre, {:array, :string}
       add :bookcover, :string
-      add :link, :text
       add :description, :text
+      add :meeting_date, :string
+      add :meeting_time, :time
+      add :slug, :string
       add :published, :boolean, default: false, null: false
       add :user_id, references(:users, on_delete: :nothing)
 
