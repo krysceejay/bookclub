@@ -1,9 +1,10 @@
 $(document).ready(function(){
   chatDivScroll();
+  chatDivChange();
 
-  $("#chatareaform").submit(function(){
-    chatDivScrollT();
-  });
+  // $("#chatareaform").submit(function(){
+  //   chatDivScrollT();
+  // });
 
   function chatDivScroll(){
       const chatdivh = $("#chat-body-id").prop('scrollHeight');
@@ -16,6 +17,12 @@ $(document).ready(function(){
       setTimeout(function(){
          $("#chat-body-id").scrollTop(chatdivh);
        }, 100);
+     }
+
+     function chatDivChange(){
+         $("#chat-body-id").bind("DOMSubtreeModified", function(){
+           chatDivScrollT();
+         });
      }
 
      $("#users-close-btn").click(function () {
@@ -35,5 +42,7 @@ $(document).ready(function(){
 
        $(".chat-container-bookdetails").show();
      });
+
+
 
 });

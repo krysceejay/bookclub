@@ -56,9 +56,6 @@ defmodule BookclubWeb.Live.Index do
         value,
         socket = %{assigns: %{book: book, current_user: user, changeset: message}}
       ) do
-        IO.puts "+++++++++++++"
-        IO.inspect value
-        IO.puts "+++++++++++++"
     message = Messages.change_chat(message, %{message: value})
     Presence.update_presence(self(), Messages.get_topic(book.id), user.id, %{typing: false})
     {:noreply, assign(socket, message: message)}
