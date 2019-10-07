@@ -1,31 +1,34 @@
 <section id="below-nav">
         <div class="container">
                 <ul class="below-nav-list">
-                        <li>Home /</li>
-                        <li>Books</li>
+                        <li><%= link "Home", to: Routes.home_path(@conn, :index) %> /</li>
+                        <li class="last-breadcrumb">
+                          <a href="#">Books</a>
+                        </li>
                     </ul>
         </div>
 
     </section>
 <section id="book-cat">
       <div class="container pandsort">
-        <form>
+        <%= form_for @conn, Routes.home_path(@conn, :searchbooks), [method: :get],  fn f -> %>
           <div class="sort-form">
-            <select name="cars">
-              <option value="">All genre</option>
-              <option value="saab">Saab</option>
-              <option value="fiat">Fiat</option>
-              <option value="audi">Audi</option>
+            <select name="book-genre">
+              <option value="">All genres</option>
+              <%= for genre <- @genres do %>
+              <option value="<%= genre.name %>"><%= genre.name %></option>
+
+              <% end %>
             </select>
-            <input class="search-books" type="text" placeholder="Search for books, authors, title e.t.c" />
+            <input class="search-books" type="text" name="searchbooks" placeholder="Search for books, authors, title e.t.c" />
             <div class="sort-submit">
-              <button class="btn-main" type="submit">
-                <i class="fa fa-search fa-3x"></i>
-              </button>
+              <%= submit class: "btn-main" do %>
+              <i class="fa fa-search fa-3x"></i>
+              <% end %>
             </div>
           </div>
 
-        </form>
+        <% end %>
       </div>
     </section>
 

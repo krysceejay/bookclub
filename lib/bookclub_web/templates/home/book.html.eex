@@ -1,9 +1,9 @@
 <section id="below-nav">
         <div class="container">
                 <ul class="below-nav-list">
-                        <li>Home /</li>
-                        <li>Books /</li>
-                        <li>Tess Of The Road</li>
+                        <li><%= link "Home", to: Routes.home_path(@conn, :index) %> /</li>
+                        <li><%= link "Books", to: Routes.home_path(@conn, :books) %> /</li>
+                        <li class="last-breadcrumb"><a href="#"><%= @book.title |> String.downcase() |> String.replace(" ", "-") %></a></li>
                     </ul>
         </div>
 
@@ -20,10 +20,10 @@
               </div>
               <div class="bdetails-beside-img">
                 <h2>
-                  <span><%= @book.title |> String.capitalize() %></span>
+                  <span><%= @book.title %></span>
                 </h2>
-                <p class="author">
-                  Emma Watson
+                <p class="author text-trans-cap">
+                  <%= @book.author %>
                 </p>
                 <div class="details-cat-div">
                   <span class="details-cat">Fiction </span>
@@ -86,11 +86,7 @@
               <h3>Book Details</h3>
 
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis incidunt necessitatibus dolores eum enim eaque
-                ratione laudantium, dolor minus doloribus optio vel earum
-                sapiente deleniti! A omnis laudantium saepe obcaecati.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel repudiandae quaerat odio magni consequatur? Velit nulla ratione nostrum quasi dicta.
+                <%= @book.description %>
               </p>
             </div>
           </div>

@@ -86,6 +86,16 @@ input[class^="btn-"]:focus {
   text-align: center;
 }
 
+.text-trans-cap {
+  text-transform: capitalize;
+}
+
+.last-breadcrumb {
+  a {
+    color: $main-color;
+  }
+}
+
 .parent-sub-menu {
   .nav-sub-menu {
     display: none;

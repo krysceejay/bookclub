@@ -139,6 +139,39 @@ defmodule Bookclub.Content do
     Book.changeset(book, %{})
   end
 
+  def search_books_by_genre(genre) do
+      genres = [genre]
+      query =
+        from b in Book,
+        where: fragment("? @> ?", b.genre, ^genres),
+        order_by: [desc: b.id],
+        preload: [:user]
+  end
+
+  def search_books_by_text(txt \\ "") do
+    query =
+      from b in Book,
+      where: ilike(b.title, ^"%#{txt}%"),
+      or_where: ilike(b.author, ^"%#{txt}%"),
+      or_where: ilike(b.description, ^"%#{txt}%"),
+      order_by: [desc: b.id],
+      preload: [:user]
+  end
+
+  def search_books_by_genre(genre, txt) do
+    genres = [genre]
+    filters = [title: txt, author: txt, description: txt]
+
+      Enum.reduce(filters, Book, fn {key, value},
+      query ->
+        from q in query,
+        where: fragment("? @> ?", q.genre, ^genres),
+        or_where: field(q, ^key) == ^value,
+        order_by: [desc: q.id],
+        preload: [:user]
+      end)
+  end
+
   alias Bookclub.Content.Genre
 
   @doc """

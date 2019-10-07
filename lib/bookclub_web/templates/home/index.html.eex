@@ -147,13 +147,15 @@
     <div class="top-rated">
       <%= for book <- @top_rated do %>
       <div class="top-rated-content">
+        <%= link to: Routes.home_path(@conn, :book, book) do %>
         <div class="top-rated-img">
           <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="image" />
         </div>
+        <% end %>
         <div class="top-rated-text">
-          <h3><%= book.title %></h3>
-          <p>Added By <%= book.user.username %> | <%= book.inserted_at |> Date.to_string %></p>
-          <!-- <p>56| 78</p> -->
+          <div class="toprated-title"><%= book.title %></div>
+          <div class="toprated-author"><%= book.author %></div>
+          <div>Added By <span class="toprated-user"> <%= book.user.first_name %></span></div>
           <p>
             <span class="fill"
               ><i class="fa fa-star" aria-hidden="true"></i
@@ -171,12 +173,12 @@
               ><i class="fa fa-star-o" aria-hidden="true"></i
             ></span>
           </p>
-          <p class="top-rated-desc">
+          <!-- <p class="top-rated-desc">
             <%= book.description |> String.slice(0..60) %>...
           </p>
           <div class="link-btn">
             <%= link "View Details", to: Routes.home_path(@conn, :book, book), class: "btn-sec" %>
-          </div>
+          </div> -->
         </div>
       </div>
       <% end %>
