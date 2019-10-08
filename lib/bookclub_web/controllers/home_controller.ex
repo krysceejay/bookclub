@@ -35,35 +35,41 @@ defmodule BookclubWeb.HomeController do
   end
 
   def searchbooks(conn, %{"book-genre" => genre , "searchbooks" => textsearch}) do
+    params = %{"book-genre" => genre , "searchbooks" => textsearch}
 
     conn = conn |> put_session(:genre, genre) |> put_session(:textsearch, textsearch)
 
     genres = Content.list_genres()
     page = 1
 
-    {books, num_links} =
-      Content.search_books_by_genre(genre)
-      |> Pagination.paginate(2, page)
+    case params do
+      %{"book-genre" => "" , "searchbooks" => ""} ->
+        {books, num_links} = Content.all_books |> Pagination.paginate(10, page)
+        render(conn, "books.html", books: books, num_links: num_links, genres: genres)
 
-    render(conn, "books.html", books: books, num_links: num_links, genres: genres)
+      _ ->
+        {books, num_links} = Content.search_books_by_fields(genre,textsearch) |> Pagination.paginate(2, page)
+        render(conn, "books.html", books: books, num_links: num_links, genres: genres)
+    end
+
 
   end
 
   def searchbooks(conn, %{"page" => pagenum}) do
-    IO.puts "++++++++++++"
-    IO.inspect conn
-    IO.puts "++++++++++++"
-
-    gen = get_session(conn, :genre)
+    paramt = %{gen: get_session(conn, :genre), txtsearch: get_session(conn, :textsearch)}
 
     genres = Content.list_genres()
     {page, ""} = Integer.parse(pagenum || "1")
 
-    {books, num_links} =
-      Content.search_books_by_genre(gen)
-      |> Pagination.paginate(2, page)
+      case paramt do
+        %{gen: "", txtsearch: ""} ->
+          {books, num_links} = Content.all_books |> Pagination.paginate(10, page)
+          render(conn, "books.html", books: books, num_links: num_links, genres: genres)
 
-    render(conn, "books.html", books: books, num_links: num_links, genres: genres)
+        _ ->
+          {books, num_links} = Content.search_books_by_fields(paramt.gen, paramt.txtsearch) |> Pagination.paginate(2, page)
+          render(conn, "books.html", books: books, num_links: num_links, genres: genres)
+      end
 
   end
 
