@@ -65,9 +65,13 @@
           <div class="header_top">
             <div class="top_right">
               <ul>
-                <li><a href="../index.html">Home</a></li>
+                <li>
+                  <%= link "Home", to: Routes.home_path(@conn, :index) %>
+                </li>
                 |
-                <li><a href="../contact.html">Contact</a></li>
+                <li>
+                  <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
+                </li>
               </ul>
             </div>
             <div class="top_left">

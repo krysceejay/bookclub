@@ -202,9 +202,7 @@
       </p>
     </div>
     <div>
-      <a href="dashboard/addbook.html" class="btn btn-lighten"
-        >Add A Book Now</a
-      >
+      <%= link "Add A Book Now", to: Routes.user_path(@conn, :addbook), class: "btn btn-lighten" %>
     </div>
   </div>
 </section>

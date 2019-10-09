@@ -34,7 +34,9 @@
   <nav id="chat-nav">
     <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
     <div class="chat-nav-logo">
-      <h1 class="logo"><a href="index.html">Logo</a></h1>
+      <h1 class="logo">
+        <%= link "Logo", to: Routes.home_path(@conn, :index) %>
+      </h1>
     </div>
 
     <ul class="chat-nav-menu">

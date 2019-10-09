@@ -1,0 +1,51 @@
+<!-- Section A: Contact -->
+    <section id="contact-a" class="text-center py-4">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="text-primary">Get</span> In Touch
+        </h2>
+        <p class="lead">
+          Please fill out this form to contact us
+        </p>
+        <div class="field">
+          <div class="field-form">
+            <form>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Enter name"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter email"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="phone"
+                  name="phone"
+                  id="phone"
+                  placeholder="Enter phone"
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  name="message"
+                  id="message"
+                  placeholder="Enter message"
+                ></textarea>
+              </div>
+
+              <input type="submit" value="Send" class="btn btn-dark" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- / End Section A -->

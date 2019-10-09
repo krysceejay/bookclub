@@ -49,7 +49,9 @@
         <li>
           <%= link "Books", to: Routes.home_path(@conn, :books) %>
         </li>
-        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
+        </li>
         <%= if @conn.assigns[:user] do %>
         <li><%= link "Dashboard", to: Routes.user_path(@conn, :index) %></li>
         <% end %>
@@ -83,9 +85,11 @@
           <div>
             <div>
               <ul>
-                <li><a href="index.html" class="current">Home</a></li>
-                <li><a href="books.html">Books</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><%= link "Home", to: Routes.home_path(@conn, :index), class: "current" %></li>
+                <li><%= link "Books", to: Routes.home_path(@conn, :books) %></li>
+                <li>
+                  <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
+                </li>
                 <%= if @conn.assigns[:user] do %>
                 <li><%= link "Dashboard", to: Routes.user_path(@conn, :index) %></li>
                 <% end %>
