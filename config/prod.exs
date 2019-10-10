@@ -11,8 +11,12 @@ use Mix.Config
 # before starting your production server.
 config :bookclub, BookclubWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  url: [host: "localhost", port: System.get_env("PORT")],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true,
+  code_reloader: false,
+  root: ".",
+  version: Application.spec(:bookclub, :vsn)
 
 # Do not print debug messages in production
 config :logger, level: :info
