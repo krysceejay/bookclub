@@ -17,34 +17,3 @@ pre_erlang_get_and_update_deps() {
     "
   fi
 }
-
-pre_erlang_clean_compile() {
-  status "Installing NPM dependencies"
-  __sync_remote "
-    [ -f ~/.profile ] && source ~/.profile
-    set -e
-
-    cd '$BUILD_AT/assets'
-    npm install $SILENCE
-  "
-
-  status "Building static files"
-    __sync_remote "
-      [ -f ~/.profile ] && source ~/.profile
-      set -e
-
-      cd '$BUILD_AT'
-      mkdir -p priv/static
-      cd '$BUILD_AT/assets'
-      npm run deploy $SILENCE
-   "
-
-   status "Running phx.digest"
-   __sync_remote "
-     [ -f ~/.profile ] && source ~/.profile
-     set -e
-
-     cd '$BUILD_AT'
-     APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
-   "
-}
