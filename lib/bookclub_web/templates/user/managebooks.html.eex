@@ -1,0 +1,191 @@
+
+<div class="dashboard-main-section-content">
+  <h3 class="dashboard-content-header">Manage Books</h3>
+  <div class="dash-book-list">
+    <div class="dash-book-list-single">
+      <div class="dash-book-img">
+        <img src="../img/courses-1.jpg" alt="image" />
+      </div>
+      <div class="dash-books-text">
+        <h3>Awesome Title</h3>
+        <p>By Admin | 17 Sept 2015</p>
+        <p class="users-and-rating">
+          <i class="fa fa-users users"></i> 78
+          <span class="text-primary">|</span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="nofill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+        </p>
+
+        <div class="dash-link-btn">
+          <a href="book.html"><i class="fa fa-eye"></i></a>
+          <a href="book.html"><i class="fa fa-pencil"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="dash-book-list-single">
+      <div class="dash-book-img">
+        <img src="../img/courses-1.jpg" alt="image" />
+      </div>
+      <div class="dash-books-text">
+        <h3>Awesome Title</h3>
+        <p>By Admin | 17 Sept 2015</p>
+        <p class="users-and-rating">
+          <i class="fa fa-users users"></i> 78
+          <span class="text-primary">|</span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="nofill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+        </p>
+
+        <div class="dash-link-btn">
+          <a href="book.html"><i class="fa fa-eye"></i></a>
+          <a href="editbook.html"><i class="fa fa-pencil"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="dash-book-list-single">
+      <div class="dash-book-img">
+        <img src="../img/courses-1.jpg" alt="image" />
+      </div>
+      <div class="dash-books-text">
+        <h3>Awesome Title</h3>
+        <p>By Admin | 17 Sept 2015</p>
+        <p class="users-and-rating">
+          <i class="fa fa-users users"></i> 78
+          <span class="text-primary">|</span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="nofill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+        </p>
+
+        <div class="dash-link-btn">
+          <a href="book.html"><i class="fa fa-eye"></i></a>
+          <a href="editbook.html"><i class="fa fa-pencil"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="dash-book-list-single">
+      <div class="dash-book-img">
+        <img src="../img/courses-1.jpg" alt="image" />
+      </div>
+      <div class="dash-books-text">
+        <h3>Awesome Title</h3>
+        <p>By Admin | 17 Sept 2015</p>
+        <p class="users-and-rating">
+          <i class="fa fa-users users"></i> 78
+          <span class="text-primary">|</span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="nofill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+        </p>
+
+        <div class="dash-link-btn">
+          <a href="book.html"><i class="fa fa-eye"></i></a>
+          <a href="book.html"><i class="fa fa-pencil"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="dash-book-list-single">
+      <div class="dash-book-img">
+        <img src="../img/courses-1.jpg" alt="image" />
+      </div>
+      <div class="dash-books-text">
+        <h3>Awesome Title</h3>
+        <p>By Admin | 17 Sept 2015</p>
+        <p class="users-and-rating">
+          <i class="fa fa-users users"></i> 78
+          <span class="text-primary">|</span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="fill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+          <span class="nofill"
+            ><i class="fa fa-star" aria-hidden="true"></i
+          ></span>
+        </p>
+
+        <div class="dash-link-btn">
+          <a href="book.html"><i class="fa fa-eye"></i></a>
+          <a href="book.html"><i class="fa fa-pencil"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="paginate-links my-4">
+    <ul class="paginate-links-menu">
+      <li class="">
+        <a href="#" class="btn-lighten"
+          ><i class="fa fa-angle-left"></i
+        ></a>
+      </li>
+      <li class=""><a href="#" class="btn-lighten current">1</a></li>
+      <li class=""><a href="#" class="btn-lighten">2</a></li>
+      <li class=""><a href="#" class="btn-lighten">3</a></li>
+      <li class=""><a href="#" class="btn-lighten">4</a></li>
+      <li class=""><a href="#" class="btn-lighten">5</a></li>
+      <li class="">
+        <a href="#" class="btn-lighten"
+          ><i class="fa fa-angle-right"></i
+        ></a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -44,7 +44,7 @@
             <i class="fa fa-angle-down"></i>
             <ul>
               <li>
-                <a href="managebook.html">Manage Books</a>
+                <%= link "Manage Books", to: Routes.user_path(@conn, :managebooks) %>
               </li>
               <li>
                 <%= link "Add Book", to: Routes.user_path(@conn, :addbook) %>

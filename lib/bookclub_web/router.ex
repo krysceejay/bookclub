@@ -43,6 +43,7 @@ defmodule BookclubWeb.Router do
     pipe_through [:browser, :user_dashboard]
 
     get "/", UserController, :index
+    get "/managebooks", UserController, :managebooks
     get "/addbook", UserController, :addbook
     post "/createbook", UserController, :createbook
     get "/editbook/:id", UserController, :editbook

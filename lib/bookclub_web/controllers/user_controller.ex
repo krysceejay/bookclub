@@ -10,6 +10,11 @@ defmodule BookclubWeb.UserController do
     render(conn, "dashboard.html")
   end
 
+  def managebooks(conn, _params) do
+    books = Content.list_books()
+    render(conn, "managebooks.html", books: books)
+  end
+
   def addbook(conn, _params) do
     genre = Content.list_genres()
     book = %Book{}
