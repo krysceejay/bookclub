@@ -34,8 +34,6 @@
   }
 
   //   Stack Grid Colums
-  #home-a .what,
-  #home-c .top-rated,
   #book-a .all-books,
   #main-footer .footer-content {
     grid-template-columns: 1fr;
@@ -46,8 +44,8 @@
     //Home Section A
     &-a {
       .what {
+        grid-template-columns: repeat(2, 1fr);
         &-content {
-          border-bottom: 2px dotted $light-color;
           text-align: center;
           padding-bottom: 2rem;
           &:last-child {
@@ -72,6 +70,31 @@
 
     //Home Section C
     &-c {
+      .top-rated {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2rem;
+        &-content {
+          padding-bottom: 0;
+          .top-rated-img {
+            height: 20rem;
+          }
+          .top-rated-text {
+            padding: 0;
+            text-align: center;
+            .toprated {
+              &-title {
+                font-size: 1.2rem;
+              }
+              &-author {
+                font-size: 1rem;
+              }
+              &-user {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
       .view-all {
         width: 50%;
       }
@@ -89,6 +112,50 @@
     }
   }
 
+  //Book Sections
+  #book {
+    //Book Section A
+    &-a {
+      .all-books {
+        grid-template-columns: repeat(2, 1fr);
+        &-content {
+          .all-books-img {
+            height: 20rem;
+          }
+          .all-books-text {
+            text-align: center;
+            padding: 0;
+            .booktext {
+              &-title {
+                font-size: 1.2rem;
+              }
+              &-author {
+                font-size: 1rem;
+              }
+              &-user {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //Book Details Sections
+  #bdetails {
+    //Book Section A
+    &-a {
+      .bdetails-content {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+          "main main"
+          "popular top-cat";
+        grid-gap: 2rem;
+      }
+    }
+  }
+
   //Footer
   #main-footer {
     .footer-content {
@@ -101,6 +168,99 @@
     }
   }
 }
+
 //Smartphones
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+  //Book Details Sections
+  #bdetails {
+    //Book Section A
+    &-a {
+      .bdetails-content {
+        display: block;
+
+        .bdetails-main {
+          &-top {
+            display: block;
+            .bdetails-img {
+              height: 350px;
+              width: 300px;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+              }
+            }
+          }
+        }
+        .bdetails-popular {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+  }
+}
+//Smartphones
+@media (max-width: 450px) {
+  //Home Sections
+  #home {
+    //Home Section A
+    &-a {
+      .what {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    //Home Section C
+    &-c {
+      .top-rated {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  //Contact Sections
+  #register {
+    //contact Section A
+    &-a {
+      .field {
+        &-form {
+          form {
+            grid-template-columns: 1fr;
+          }
+        }
+      }
+    }
+  }
+
+  //Book Sections
+  #book {
+    &-cat {
+      .pandsort {
+        margin: 1rem auto;
+        padding: 0.8rem;
+        form {
+          .sort-form {
+            display: block;
+            text-align: left;
+            input,
+            select {
+              margin: 1rem 0;
+            }
+            input {
+              width: 100%;
+            }
+            select {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+    //Book Section A
+    &-a {
+      .all-books {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
 }

@@ -78,9 +78,9 @@
                 </div>
               </div>
             </div>
-            <div class="book-vendor">
+            <!-- <div class="book-vendor">
               <i class="fa fa-comment-o" aria-hidden="true"></i> Roven Bird
-            </div>
+            </div> -->
 
             <div class="bdetails-rest py-3">
               <h3>Book Details</h3>
@@ -163,6 +163,7 @@
                         <div class="book-sidebar-heading py-1"><h3>Top Categories</h3></div>
 
             <ul class="top-cat-list">
+              <li>Fantasy</li>
               <li>Fantasy</li>
               <li>Fantasy</li>
               <li>Fantasy</li>
