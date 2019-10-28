@@ -44,13 +44,13 @@
       </h1>
       <ul class="main-nav-menu">
         <li>
-          <%= link "Home", to: Routes.home_path(@conn, :index), class: "current" %>
+          <%= link "Home", to: Routes.home_path(@conn, :index),  class: if @conn.request_path == "/", do: "current", else: "" %>
         </li>
         <li>
-          <%= link "Books", to: Routes.home_path(@conn, :books) %>
+          <%= link "Books", to: Routes.home_path(@conn, :books), class: if @conn.request_path == "/books" or @conn.request_path == "/book/:slug", do: "current", else: "" %>
         </li>
         <li>
-          <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
+          <%= link "Contact", to: Routes.home_path(@conn, :contact), class: if @conn.request_path == "/contact", do: "current", else: "" %>
         </li>
         <%= if @conn.assigns[:user] do %>
         <li><%= link "Dashboard", to: Routes.user_path(@conn, :index) %></li>

@@ -88,13 +88,38 @@
     //Manage Books
     .dash-book-list {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 1rem;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 2rem;
       &-single {
-        border-radius: 5px;
+        //border-radius: 5px;
+        padding-bottom: 1rem;
         background: #ffffff;
+        .dash-books-img {
+          height: 16rem;
+          margin-bottom: 1rem;
+          background-color: #f53ba3;
+          img {
+            width: 50%;
+            height: 50%;
+            object-fit: contain;
+          }
+        }
         .dash-books-text {
-          padding: 1rem;
+          text-align: left;
+          padding: 0 0.6rem;
+          .booktext {
+            &-title {
+              text-transform: capitalize;
+              font-size: 1rem;
+              font-weight: 700;
+            }
+            &-author {
+              text-transform: capitalize;
+              font-size: 0.9rem;
+              color: #444444;
+            }
+          }
+
           .users-and-rating {
             .users {
               color: $sec-fade-color;
