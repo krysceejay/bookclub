@@ -6,7 +6,7 @@ BUILD_AT="/home/chrisusr/app_build"
 
 PRODUCTION_HOSTS="142.93.6.157"
 PRODUCTION_USER="chrisusr"
-DELIVER_TO="/home/sammy/app_release"
+DELIVER_TO="/home/chrisusr/app_release"
 
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
