@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :bookclub, BookclubWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [host: "107.173.190.199", port: System.get_env("PORT")],
+  url: [host: "142.93.6.157", port: System.get_env("PORT")],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   code_reloader: false,

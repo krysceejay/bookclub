@@ -5,7 +5,7 @@
     <%= for book <- @books do %>
     <div class="dash-book-list-single">
       <div class="dash-book-img">
-        
+
       </div>
       <div class="dash-books-text">
         <div class="booktext-title"><%= book.title %></div>
