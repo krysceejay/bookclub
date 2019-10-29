@@ -41,5 +41,4 @@ npm-debug.log
 # variables.
 /config/dev.exs
 /config/*.secret.exs
-/lib/bookclub/repo.ex
 .deliver/releases/
