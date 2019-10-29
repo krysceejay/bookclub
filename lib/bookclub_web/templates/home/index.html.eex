@@ -3,8 +3,7 @@
     <div class="header-content">
       <h1>Welcome To Bookclub</h1>
       <p class="lead">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,
-        fugiat!
+        Let's read!!!!
       </p>
       <%= link "Get Started", to: Routes.home_path(@conn, :books), class: "btn btn-main" %>
     </div>
