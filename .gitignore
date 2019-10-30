@@ -42,3 +42,4 @@ npm-debug.log
 /config/dev.exs
 /config/*.secret.exs
 .deliver/releases/
+/priv/static/images/
