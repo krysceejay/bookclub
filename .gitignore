@@ -43,3 +43,4 @@ npm-debug.log
 /config/*.secret.exs
 .deliver/releases/
 /priv/static/images/
+/priv/static/cache_manifest.json
