@@ -3,7 +3,7 @@
     <div class="header-content">
       <h1>Welcome To Bookclub</h1>
       <p class="lead">
-        Let's read!!!!
+        Let's build a community of people the love to read!!
       </p>
       <%= link "Get Started", to: Routes.home_path(@conn, :books), class: "btn btn-main" %>
     </div>
