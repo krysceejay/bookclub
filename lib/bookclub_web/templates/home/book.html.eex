@@ -20,7 +20,7 @@
               </div>
               <div class="bdetails-beside-img">
                 <h2>
-                  <span><%= @book.title %></span>
+                  <%= @book.title %>
                 </h2>
                 <p class="author text-trans-cap">
                   <%= @book.author %>

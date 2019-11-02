@@ -9,7 +9,7 @@ defmodule Bookclub.Content do
   alias Bookclub.Content.Book
 
   def data() do
-      Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
+    Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
   end
 
   def query(queryable, _params) do
@@ -34,7 +34,8 @@ defmodule Bookclub.Content do
     Repo.all(
       from b in Book,
         order_by: [desc: b.id]
-    ) |> Repo.preload(:user)
+    )
+    |> Repo.preload(:user)
   end
 
   def top_books(per_page) do
@@ -42,7 +43,8 @@ defmodule Bookclub.Content do
       from b in Book,
         order_by: [desc: b.id],
         limit: ^per_page
-    ) |> Repo.preload(:user)
+    )
+    |> Repo.preload(:user)
   end
 
   def all_books do
@@ -141,23 +143,25 @@ defmodule Bookclub.Content do
 
   def search_books_by_fields(genre \\ "", txt \\ "") do
     genres = [genre]
+
     query =
       from b in Book,
-      where: fragment("? @> ?", b.genre, ^genres),
-      where: ilike(b.title, ^"%#{txt}%") or
-      ilike(b.author, ^"%#{txt}%") or
-      ilike(b.description, ^"%#{txt}%"),
-      order_by: [desc: b.id],
-      preload: [:user]
+        where:
+          fragment("? @> ?", b.genre, ^genres) or
+            ilike(b.title, ^"%#{txt}%") or
+            ilike(b.author, ^"%#{txt}%") or
+            ilike(b.description, ^"%#{txt}%"),
+        order_by: [desc: b.id],
+        preload: [:user]
 
-      # Enum.reduce(filters, Book, fn {key, value},
-      # query ->
-      #   from q in query,
-      #   where: fragment("? @> ?", q.genre, ^genres),
-      #   where: field(q, ^key) == ^value,
-      #   order_by: [desc: q.id],
-      #   preload: [:user]
-      # end)
+    # Enum.reduce(filters, Book, fn {key, value},
+    # query ->
+    #   from q in query,
+    #   where: fragment("? @> ?", q.genre, ^genres),
+    #   where: field(q, ^key) == ^value,
+    #   order_by: [desc: q.id],
+    #   preload: [:user]
+    # end)
   end
 
   alias Bookclub.Content.Genre
@@ -255,5 +259,4 @@ defmodule Bookclub.Content do
   def change_genre(%Genre{} = genre) do
     Genre.changeset(genre, %{})
   end
-
 end
