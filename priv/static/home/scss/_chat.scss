@@ -40,7 +40,7 @@
 
   #chat-section {
     //flex: 18;
-    min-width: 92vw;
+    max-width: 92vw;
     background: $light-color;
     height: 100vh;
 
@@ -111,7 +111,7 @@
         height: 90vh;
         padding: 0 2rem;
         overflow: hidden;
-
+        position: relative;
         .chat-area-head {
           display: flex;
           align-items: center;
@@ -138,21 +138,24 @@
         }
         .chat-area-body {
           margin: 1rem 0;
-          height: 66vh;
-          overflow: scroll;
-          border-bottom: 2px #e1e1e1 solid;
+          height: 72vh;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          //border-bottom: 2px #e1e1e1 solid;
           &-receiver {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-areas: "receiver . .";
-            grid-gap: 2rem;
+            // display: grid;
+            // grid-template-columns: repeat(3, 1fr);
+            // grid-template-areas: "receiver . .";
+            // grid-gap: 2rem;
             margin: 1rem 0;
+            display: block;
+            max-width: 80%;
+            float: left;
             .msg-receiver {
-              grid-area: receiver;
-              &-name {
-                font-size: 0.8rem;
-              }
+              //grid-area: receiver;
               &-text {
+                display: block;
+                overflow-wrap: break-word;
                 background: #fff;
                 padding: 0.6rem 1rem;
                 border-radius: 0 15px 15px 15px;
@@ -160,14 +163,19 @@
             }
           }
           &-sender {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-areas: ". . sender";
-            grid-gap: 2rem;
+            // display: grid;
+            // grid-template-columns: repeat(3, 1fr);
+            // grid-template-areas: ". . sender";
+            // grid-gap: 2rem;
             margin: 1rem 0;
+            display: block;
+            max-width: 80%;
+            float: right;
             .msg-sender {
-              grid-area: sender;
+              //grid-area: sender;
               &-text {
+                display: block;
+                overflow-wrap: break-word;
                 background: #cdcdcd;
                 padding: 0.6rem 1rem;
                 border-radius: 15px 15px 0 15px;
@@ -176,6 +184,10 @@
           }
         }
         .chat-area-input {
+          position: absolute;
+          bottom: 0;
+          left: 0.5rem;
+          right: 0.5rem;
           form {
             // background: $dark-color;
             width: 100%;

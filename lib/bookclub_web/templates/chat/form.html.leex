@@ -1,5 +1,5 @@
 <%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :send_message, autocomplete: :off, id: :chatareaform] %>
-  <%= text_input f, :message, placeholder: "Enter message" %>
+  <%= text_input f, :message, placeholder: "Enter message", id: "chat-area-input" %>
 
   <%= submit phx_disable_with: "Loading...", class: "send-btn" do %>
     <i class="fa fa-send"></i>
