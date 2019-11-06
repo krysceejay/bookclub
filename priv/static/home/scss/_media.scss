@@ -141,12 +141,12 @@
     //Home Section C
     &-c {
       .top-rated {
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 2rem;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 1rem;
         &-content {
           padding-bottom: 0;
           .top-rated-img {
-            height: 20rem;
+            height: 10rem;
           }
           .top-rated-text {
             padding: 0;
@@ -187,10 +187,10 @@
     //Book Section A
     &-a {
       .all-books {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         &-content {
           .all-books-img {
-            height: 20rem;
+            height: 10rem;
           }
           .all-books-text {
             text-align: center;
@@ -507,6 +507,35 @@
 
 //Smartphones
 @media (max-width: 600px) {
+  //Home Sections
+  #home {
+    //Home Section C
+    &-c {
+      .top-rated {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1rem;
+        &-content {
+          .top-rated-img {
+            height: 9rem;
+          }
+        }
+      }
+    }
+  }
+  //Book Sections
+  #book {
+    //Book Section A
+    &-a {
+      .all-books {
+        grid-template-columns: repeat(3, 1fr);
+        &-content {
+          .all-books-img {
+            height: 10rem;
+          }
+        }
+      }
+    }
+  }
   //Book Details Sections
   #bdetails {
     //Book Section A
@@ -563,7 +592,7 @@
     //Home Section C
     &-c {
       .top-rated {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   }
@@ -609,7 +638,15 @@
     //Book Section A
     &-a {
       .all-books {
-        grid-template-columns: 1fr;
+        //grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+        &-content {
+          padding-bottom: 1rem;
+          .all-books-img {
+            margin-bottom: 0.5rem;
+          }
+        }
       }
     }
   }

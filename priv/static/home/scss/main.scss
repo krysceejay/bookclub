@@ -487,8 +487,8 @@ div[class^="btn-"],
 
     .all-books {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: 2rem;
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: 1rem;
 
       &-content {
         //border: $light-color 1px solid;
@@ -496,7 +496,7 @@ div[class^="btn-"],
         //position: relative;
         padding-bottom: 1rem;
         .all-books-img {
-          height: 16rem;
+          height: 12rem;
           margin-bottom: 1rem;
           img {
             width: 100%;
@@ -507,11 +507,12 @@ div[class^="btn-"],
         .all-books-text {
           text-align: left;
           padding: 0 0.6rem;
+          //padding: 0;
           .booktext {
             &-title {
               text-transform: capitalize;
-              font-size: 1rem;
-              font-weight: 700;
+              font-size: 0.9rem;
+              font-weight: 800;
             }
             &-author {
               text-transform: capitalize;
