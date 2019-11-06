@@ -1,0 +1,379 @@
+.container {
+  max-width: $website-width;
+  padding: 0 1.5rem;
+  margin: auto;
+  overflow: hidden;
+}
+
+//Buttons
+%btn-shared {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  transition: all 0.5s;
+  cursor: pointer;
+  //border-radius: 5px;
+  text-decoration: none !important;
+  box-shadow: none;
+}
+
+.btn {
+  &-main {
+    @extend %btn-shared;
+    color: #f4f4f4;
+    background-color: $main-color;
+  }
+  &-sec {
+    @extend %btn-shared;
+    color: #f4f4f4;
+    background-color: #3a4155;
+  }
+  &-lighten {
+    @extend %btn-shared;
+    color: #333;
+    background-color: $light-color;
+  }
+  &-dark {
+    @extend %btn-shared;
+    color: #f4f4f4;
+    background-color: $dark-color;
+  }
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+button[class^="btn-"]:hover,
+a[class^="btn-"]:hover,
+input[class^="btn-"]:hover {
+  background-color: set-btn-hover-color($light-color);
+  color: set-text-color($light-color);
+  box-shadow: none;
+  outline: none;
+  z-index: 0;
+}
+
+button[class^="btn-"]:focus,
+a[class^="btn-"]:focus,
+input[class^="btn-"]:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+//Backgrouds
+.bg {
+  &-main {
+    background: $main-color;
+    color: set-text-color($main-color);
+  }
+  &-dark {
+    background: $dark-color;
+    color: set-text-color($dark-color);
+  }
+  &-lighten {
+    background: $light-color;
+    color: set-text-color($light-color);
+  }
+  &-medium {
+    background: $medium-color;
+    color: set-text-color($medium-color);
+  }
+}
+
+.lead {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.text-trans-cap {
+  text-transform: capitalize;
+}
+
+.last-breadcrumb {
+  a {
+    color: $main-color;
+  }
+}
+
+.parent-sub-menu {
+  .nav-sub-menu {
+    display: none;
+  }
+
+  &:hover ul {
+    display: block;
+    background: $sec-fade-color;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+form {
+  input,
+  select,
+  textarea {
+    border: 1px $light-color solid;
+    padding: 12px;
+    font-size: 1rem;
+    height: 50px;
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  span {
+    display: inline-block;
+  }
+
+  // select[multiple] {
+  //   border-style: inset;
+  //   -moz-appearance: menulist;
+  //   -webkit-appearance: menulist;
+  //   appearance: menulist;
+  // }
+
+  label {
+    display: block;
+    font-size: 1.1rem;
+    color: $sec-fade-color;
+  }
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border: 1px $main-color solid;
+}
+
+//Padding
+.py {
+  &-1 {
+    padding: 1rem 0 !important;
+  }
+  &-2 {
+    padding: 2rem 0 !important;
+  }
+  &-3 {
+    padding: 3rem 0 !important;
+  }
+  &-4 {
+    padding: 4rem 0 !important;
+  }
+}
+
+//Margin
+.my {
+  &-1 {
+    margin: 1rem 0 !important;
+  }
+  &-2 {
+    margin: 2rem 0 !important;
+  }
+  &-3 {
+    margin: 3rem 0 !important;
+  }
+  &-4 {
+    margin: 4rem 0 !important;
+  }
+}
+
+%overlay {
+  background-color: $overlay-color;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.text-primary {
+  color: $main-color !important;
+}
+
+//Alert pop up
+%pop-shared {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+.pop {
+  &-info {
+    @extend %pop-shared;
+    color: #0c5460;
+    background-color: #d1ecf1;
+  }
+  &-error {
+    @extend %pop-shared;
+    color: #721c24;
+    background-color: #f8d7da;
+  }
+}
+//.pop pop-info
+
+.sidebar-cat-text {
+  font-weight: 700;
+  margin-right: 2rem;
+}
+
+.section-title,
+.section-title-dash {
+  font-size: 2rem;
+  display: block;
+  padding-bottom: 0.5rem;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.section-title {
+  text-align: center;
+}
+
+// Star Color
+.fill,
+.nofill,
+.half-fill {
+  color: $star-color;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: $main-color !important;
+  box-shadow: none;
+}
+
+.paginate-links {
+  &-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    li {
+      a {
+        border-radius: 0;
+        padding: 0.6rem 1rem;
+        margin: auto 0.1rem;
+        border: rgba(0, 0, 0, 0.1) 0.5px solid;
+        &:hover,
+        &.current {
+          background-color: $main-color;
+          color: $light-color;
+        }
+      }
+    }
+  }
+}
+
+.sorting {
+  button {
+    padding: 0.4rem 1rem;
+  }
+}
+
+.book-sidebar-heading {
+  h3 {
+    color: #444444;
+    font-weight: bolder;
+
+    font-size: 24px;
+    line-height: 28px;
+    text-transform: capitalize;
+  }
+}
+.book-sidebar-content {
+  background: $light-color;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+// Dashboard
+.dashboard-content-header {
+  color: $sec-fade-color;
+  text-transform: capitalize;
+  font-size: 24px;
+  margin: 0 1rem 1rem 0;
+}
+.dashboard-main-section-content {
+  margin: 2rem;
+  padding: 2rem;
+  background: $light-color;
+  box-shadow: 2px 3px 5px 0.5px rgba(0, 0, 0, 0.2);
+  //box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: $sec-fade-color;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: $light-color;
+}
+
+.form-error,
+.help-block {
+  color: #ff0000;
+  font-size: 0.9rem;
+}
+
+// Chat
+// .chat-head-section {
+//   margin-bottom: 1.3rem;
+// }
+.chat-head-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //margin-bottom: 1.3rem;
+  padding: 1.3rem;
+
+  .details-close-btn {
+    background: $medium-color;
+    border-radius: 5px;
+    padding: 0.3rem 0.7rem;
+    .fa {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.msg-chat-time {
+  font-size: 0.7rem;
+  text-align: right;
+}
+.msg-receiver-name {
+  font-size: 0.8rem;
+}
+
+.clear-flt {
+  clear: both;
+}
+
+//   .bottom-line {
+//     height: 2px;
+//     width: 3rem;
+//     background: $main-color;
+//     display: block;
+//     margin: 0 auto 1rem auto;
+//   }
