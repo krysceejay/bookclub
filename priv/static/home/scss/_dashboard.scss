@@ -46,10 +46,13 @@
         color: #f53ba3;
       }
     }
+    .top_right-menu-icon {
+      display: none;
+    }
   }
   &-section {
     flex: 5;
-    margin-left: 200px;
+    margin-left: 180px;
     // head nav
     #dashboard-main-nav {
       .header_top {
@@ -88,24 +91,24 @@
     //Manage Books
     .dash-book-list {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: 2rem;
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: 1rem;
       &-single {
         //border-radius: 5px;
         padding-bottom: 1rem;
-        background: #ffffff;
-        .dash-books-img {
-          height: 16rem;
+        //background: #ffffff;
+        //background: #cdcdcd;
+        .dash-book-img {
+          height: 10rem;
           margin-bottom: 1rem;
-          background-color: #f53ba3;
           img {
-            width: 50%;
-            height: 50%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
           }
         }
         .dash-books-text {
-          text-align: left;
+          text-align: center;
           padding: 0 0.6rem;
           .booktext {
             &-title {

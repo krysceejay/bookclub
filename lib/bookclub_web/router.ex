@@ -31,12 +31,11 @@ defmodule BookclubWeb.Router do
   scope "/bkadmin", BookclubWeb do
     pipe_through [:browser, :admin_dashboard]
 
-    get "/",  AdminController, :dashboard
-    get "/users",  AdminController, :users
-    get "/user/:id",  AdminController, :user
-    get "/books",  AdminController, :books
-    get "/book/:id",  AdminController, :book
-
+    get "/", AdminController, :dashboard
+    get "/users", AdminController, :users
+    get "/user/:id", AdminController, :user
+    get "/books", AdminController, :books
+    get "/book/:id", AdminController, :book
   end
 
   scope "/dashboard", BookclubWeb do
@@ -46,16 +45,14 @@ defmodule BookclubWeb.Router do
     get "/managebooks", UserController, :managebooks
     get "/addbook", UserController, :addbook
     post "/createbook", UserController, :createbook
-    get "/editbook/:id", UserController, :editbook
+    get "/editbook/:slug", UserController, :editbook
     put "/updatebook/:id", UserController, :updatebook
-
   end
 
   scope "/chat", BookclubWeb do
     pipe_through [:browser, :chat_layout]
 
-    get "/:slug",  ChatController, :index
-
+    get "/:slug", ChatController, :index
   end
 
   scope "/", BookclubWeb do
@@ -63,8 +60,8 @@ defmodule BookclubWeb.Router do
 
     get "/", HomeController, :index
     get "/books", HomeController, :books
-    get "/book/:slug",  HomeController, :book
-    get "/searchbooks",  HomeController, :searchbooks
+    get "/book/:slug", HomeController, :book
+    get "/searchbooks", HomeController, :searchbooks
     get "/contact", HomeController, :contact
 
     get "/logout", AuthController, :delete
@@ -79,16 +76,13 @@ defmodule BookclubWeb.Router do
   scope "/api" do
     pipe_through :api
 
-    forward "/graphql", Absinthe.Plug,
-    schema: BookclubWeb.Schema
+    forward "/graphql", Absinthe.Plug, schema: BookclubWeb.Schema
 
-    if Mix.env == :dev do
+    if Mix.env() == :dev do
       forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: BookclubWeb.Schema,
-      socket: BookclubWeb.UserSocket,
-      interface: :advanced
-
+        schema: BookclubWeb.Schema,
+        socket: BookclubWeb.UserSocket,
+        interface: :advanced
     end
   end
-
 end

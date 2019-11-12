@@ -3,6 +3,7 @@ defmodule BookclubWeb.UserController do
 
   alias Bookclub.Content
   alias Bookclub.Content.Book
+  alias BookclubWeb.Pagination
 
   plug BookclubWeb.Plugs.RequireAuth
 
@@ -10,9 +11,14 @@ defmodule BookclubWeb.UserController do
     render(conn, "dashboard.html")
   end
 
-  def managebooks(conn, _params) do
-    books = Content.list_books()
-    render(conn, "managebooks.html", books: books)
+  def managebooks(conn, params) do
+    {page, ""} = Integer.parse(params["page"] || "1")
+
+    {books, num_links} =
+      Content.book_by_user(conn.assigns.user.id)
+      |> Pagination.paginate(30, page)
+
+    render(conn, "managebooks.html", books: books, num_links: num_links)
   end
 
   def addbook(conn, _params) do
@@ -28,6 +34,7 @@ defmodule BookclubWeb.UserController do
     # IO.puts "+++++++++++++++"
     genre = Content.list_genres()
     book = %Book{}
+
     case Content.create_book(conn.assigns.user, book_params) do
       {:ok, _book} ->
         conn
@@ -35,13 +42,13 @@ defmodule BookclubWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "addbook.html", changeset: changeset, book: book,genre: genre)
+        render(conn, "addbook.html", changeset: changeset, book: book, genre: genre)
     end
   end
 
-  def editbook(conn, %{"id" => id}) do
+  def editbook(conn, %{"slug" => slug}) do
     genre = Content.list_genres()
-    book = Content.get_book!(id)
+    book = Content.get_book_by_slug!(slug)
     changeset = Content.change_book(book)
 
     render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
@@ -61,5 +68,4 @@ defmodule BookclubWeb.UserController do
         render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
     end
   end
-
 end

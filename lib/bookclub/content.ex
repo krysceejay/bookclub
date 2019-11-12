@@ -33,6 +33,7 @@ defmodule Bookclub.Content do
   def list_books do
     Repo.all(
       from b in Book,
+        where: b.published == true,
         order_by: [desc: b.id]
     )
     |> Repo.preload(:user)
@@ -41,6 +42,7 @@ defmodule Bookclub.Content do
   def top_books(per_page) do
     Repo.all(
       from b in Book,
+        where: b.published == true,
         order_by: [desc: b.id],
         limit: ^per_page
     )
@@ -146,6 +148,7 @@ defmodule Bookclub.Content do
 
     query =
       from b in Book,
+        where: b.published == true,
         where:
           fragment("? @> ?", b.genre, ^genres) or
             ilike(b.title, ^"%#{txt}%") or
@@ -162,6 +165,14 @@ defmodule Bookclub.Content do
     #   order_by: [desc: q.id],
     #   preload: [:user]
     # end)
+  end
+
+  def book_by_user(user_id) do
+    query =
+      from b in Book,
+      where: b.user_id == ^user_id,
+      where: b.published == true,
+      order_by: [desc: b.id]
   end
 
   alias Bookclub.Content.Genre

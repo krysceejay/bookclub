@@ -4,15 +4,18 @@
   <div class="dash-book-list">
     <%= for book <- @books do %>
     <div class="dash-book-list-single">
-      <div class="dash-book-img">
-
-      </div>
+      
+      <%= link to: Routes.home_path(@conn, :book, book) do %>
+            <div class="dash-book-img">
+              <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="image" />
+            </div>
+            <% end %>
       <div class="dash-books-text">
         <div class="booktext-title"><%= book.title %></div>
         <div class="booktext-author"><%= book.author %></div>
         <p class="users-and-rating">
-          <i class="fa fa-users users"></i> 78
-          <span class="text-primary">|</span>
+          
+          
           <span class="fill"
             ><i class="fa fa-star" aria-hidden="true"></i
           ></span>
@@ -31,9 +34,14 @@
         </p>
 
         <div class="dash-link-btn">
-          <a href="book.html"><i class="fa fa-eye"></i></a>
-          <a href="book.html"><i class="fa fa-pencil"></i></a>
+          <%# <a href="book.html"><i class="fa fa-eye"></i></a> %>
+          <%= link to: Routes.user_path(@conn, :editbook, book) do %>
+          <i class="fa fa-pencil"></i>
+          <% end %>
+          <a href="#"><i class="fa fa-users users"></i></a>
+          
         </div>
+        <%# <i class="fa fa-users users"></i> 78 %>
       </div>
     </div>
     <% end %>
@@ -41,22 +49,8 @@
   </div>
 
   <div class="paginate-links my-4">
-    <ul class="paginate-links-menu">
-      <li class="">
-        <a href="#" class="btn-lighten"
-          ><i class="fa fa-angle-left"></i
-        ></a>
-      </li>
-      <li class=""><a href="#" class="btn-lighten current">1</a></li>
-      <li class=""><a href="#" class="btn-lighten">2</a></li>
-      <li class=""><a href="#" class="btn-lighten">3</a></li>
-      <li class=""><a href="#" class="btn-lighten">4</a></li>
-      <li class=""><a href="#" class="btn-lighten">5</a></li>
-      <li class="">
-        <a href="#" class="btn-lighten"
-          ><i class="fa fa-angle-right"></i
-        ></a>
-      </li>
-    </ul>
+    <%= if @num_links != 1 do %>
+        <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
+    <% end %>
   </div>
 </div>
