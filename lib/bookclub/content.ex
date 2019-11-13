@@ -77,6 +77,8 @@ defmodule Bookclub.Content do
 
   def get_book_by_slug!(slug), do: Repo.get_by!(Book, slug: slug) |> Repo.preload(:user)
 
+  def get_only_book!(id), do: Repo.get!(Book, id)
+
   @doc """
   Creates a book.
 
@@ -108,9 +110,9 @@ defmodule Bookclub.Content do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_book(%Book{} = book, attrs) do
+  def update_book(%Book{} = book, attrs, id) do
     book
-    |> Book.changeset(attrs)
+    |> Book.changeset(attrs, get_only_book!(id))
     |> Repo.update()
   end
 
@@ -170,9 +172,8 @@ defmodule Bookclub.Content do
   def book_by_user(user_id) do
     query =
       from b in Book,
-      where: b.user_id == ^user_id,
-      where: b.published == true,
-      order_by: [desc: b.id]
+        where: b.user_id == ^user_id,
+        order_by: [desc: b.id]
   end
 
   alias Bookclub.Content.Genre

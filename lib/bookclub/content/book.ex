@@ -14,7 +14,7 @@ defmodule Bookclub.Content.Book do
     field :slug, :string
     field :meeting_date, :string
     field :meeting_time, :time
-    #Virtual Fields
+    # Virtual Fields
     field :bookcover_field, :string, virtual: true
 
     belongs_to :user, Bookclub.Accounts.User
@@ -24,39 +24,63 @@ defmodule Bookclub.Content.Book do
   end
 
   @doc false
-  def changeset(book, attrs) do
-
+  def changeset(book, attrs, bk \\ %{}) do
     book
-    |> cast(attrs, [:title, :author, :genre, :description, :published, :user_id, :meeting_date, :meeting_time])
-    |> validate_required([:title, :author, :genre, :description, :published, :user_id, :meeting_date, :meeting_time])
-    |> uploadfile(attrs)
+    |> cast(attrs, [
+      :title,
+      :author,
+      :genre,
+      :description,
+      :published,
+      :user_id,
+      :meeting_date,
+      :meeting_time
+    ])
+    |> validate_required([
+      :title,
+      :author,
+      :genre,
+      :description,
+      :published,
+      :user_id,
+      :meeting_date,
+      :meeting_time
+    ])
+    |> uploadfile(attrs, bk)
     |> slug_map(attrs)
   end
 
-  defp uploadfile(changeset, attrs) do
+  defp uploadfile(changeset, attrs, bk) do
     if upload = attrs["bookcover_field"] do
       extension = Path.extname(upload.filename)
-      time = DateTime.utc_now |> DateTime.to_unix
+      time = DateTime.utc_now() |> DateTime.to_unix()
       filename = Path.basename(upload.filename, extension)
       newFilename = "#{filename}_#{time}#{extension}"
       File.cp!(upload.path, "priv/static/images/bookcover/#{newFilename}")
 
+      if bk != %{} do
+        if bk.bookcover != "noimage.jpg" do
+          File.rm("priv/static/images/bookcover/#{bk.bookcover}")
+        end
+      end
+
       put_change(changeset, :bookcover, newFilename)
-
     else
-      put_change(changeset, :bookcover, "noimage.jpg")
+      if bk == %{} do
+        put_change(changeset, :bookcover, "noimage.jpg")
+      else
+        put_change(changeset, :bookcover, bk.bookcover)
+      end
     end
-
   end
 
   defp slug_map(changeset, attrs) do
     # %{"slug" => slug}
     if title = attrs["title"] do
       slug = String.downcase(title) |> String.replace(" ", "-")
-      put_change(changeset, :slug, "#{slug}-#{DateTime.utc_now |> DateTime.to_unix}")
+      put_change(changeset, :slug, "#{slug}-#{DateTime.utc_now() |> DateTime.to_unix()}")
     else
       changeset
     end
   end
-
 end

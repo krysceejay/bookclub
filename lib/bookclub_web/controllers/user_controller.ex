@@ -39,7 +39,7 @@ defmodule BookclubWeb.UserController do
       {:ok, _book} ->
         conn
         |> put_flash(:info, "Book added successfully.")
-        |> redirect(to: Routes.user_path(conn, :index))
+        |> redirect(to: Routes.user_path(conn, :managebooks))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "addbook.html", changeset: changeset, book: book, genre: genre)
@@ -54,15 +54,15 @@ defmodule BookclubWeb.UserController do
     render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
   end
 
-  def updatebook(conn, %{"id" => id, "book" => book_params}) do
-    book = Content.get_book!(id)
+  def updatebook(conn, %{"slug" => slug, "book" => book_params}) do
+    book = Content.get_book_by_slug!(slug)
     genre = Content.list_genres()
 
-    case Content.update_book(book, book_params) do
+    case Content.update_book(book, book_params, book.id) do
       {:ok, _book} ->
         conn
         |> put_flash(:info, "Book updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :index))
+        |> redirect(to: Routes.user_path(conn, :managebooks))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)

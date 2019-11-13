@@ -46,7 +46,7 @@ defmodule BookclubWeb.Router do
     get "/addbook", UserController, :addbook
     post "/createbook", UserController, :createbook
     get "/editbook/:slug", UserController, :editbook
-    put "/updatebook/:id", UserController, :updatebook
+    put "/updatebook/:slug", UserController, :updatebook
   end
 
   scope "/chat", BookclubWeb do
