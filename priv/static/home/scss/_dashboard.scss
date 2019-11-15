@@ -46,10 +46,13 @@
         color: #f53ba3;
       }
     }
+    .top_right-menu-icon {
+      display: none;
+    }
   }
   &-section {
     flex: 5;
-    margin-left: 200px;
+    margin-left: 180px;
     // head nav
     #dashboard-main-nav {
       .header_top {
@@ -88,24 +91,24 @@
     //Manage Books
     .dash-book-list {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: 2rem;
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: 1rem;
       &-single {
         //border-radius: 5px;
         padding-bottom: 1rem;
-        background: #ffffff;
-        .dash-books-img {
-          height: 16rem;
+        //background: #ffffff;
+        //background: #cdcdcd;
+        .dash-book-img {
+          height: 10rem;
           margin-bottom: 1rem;
-          background-color: #f53ba3;
           img {
-            width: 50%;
-            height: 50%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
           }
         }
         .dash-books-text {
-          text-align: left;
+          text-align: center;
           padding: 0 0.6rem;
           .booktext {
             &-title {
@@ -142,6 +145,44 @@
                 background: $main-light-color;
                 color: $light-color;
               }
+            }
+          }
+        }
+      }
+    }
+
+    //Book Readers
+    .dash-reader-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 2rem;
+      &-single {
+        padding: 1rem;
+        background: #e6e6e6;
+
+        .dash-reader-img {
+          height: 5rem;
+          width: 5rem;
+          margin: 0 auto;
+          margin-bottom: 1rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+          }
+        }
+        .dash-reader-text {
+          text-align: left;
+          padding: 0;
+          //background: #ffffff;
+          .reader {
+            &-name {
+              text-transform: capitalize;
+              font-size: 0.9rem;
+              font-weight: 500;
+              padding-left: 0.5rem;
             }
           }
         }

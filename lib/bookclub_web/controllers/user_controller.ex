@@ -3,6 +3,7 @@ defmodule BookclubWeb.UserController do
 
   alias Bookclub.Content
   alias Bookclub.Content.Book
+  alias BookclubWeb.Pagination
 
   plug BookclubWeb.Plugs.RequireAuth
 
@@ -10,9 +11,14 @@ defmodule BookclubWeb.UserController do
     render(conn, "dashboard.html")
   end
 
-  def managebooks(conn, _params) do
-    books = Content.list_books()
-    render(conn, "managebooks.html", books: books)
+  def managebooks(conn, params) do
+    {page, ""} = Integer.parse(params["page"] || "1")
+
+    {books, num_links} =
+      Content.book_by_user(conn.assigns.user.id)
+      |> Pagination.paginate(30, page)
+
+    render(conn, "managebooks.html", books: books, num_links: num_links)
   end
 
   def addbook(conn, _params) do
@@ -28,38 +34,76 @@ defmodule BookclubWeb.UserController do
     # IO.puts "+++++++++++++++"
     genre = Content.list_genres()
     book = %Book{}
+
     case Content.create_book(conn.assigns.user, book_params) do
       {:ok, _book} ->
         conn
         |> put_flash(:info, "Book added successfully.")
-        |> redirect(to: Routes.user_path(conn, :index))
+        |> redirect(to: Routes.user_path(conn, :managebooks))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "addbook.html", changeset: changeset, book: book,genre: genre)
+        render(conn, "addbook.html", changeset: changeset, book: book, genre: genre)
     end
   end
 
-  def editbook(conn, %{"id" => id}) do
+  def editbook(conn, %{"slug" => slug}) do
     genre = Content.list_genres()
-    book = Content.get_book!(id)
+    book = Content.get_book_by_slug!(slug)
     changeset = Content.change_book(book)
 
     render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
   end
 
-  def updatebook(conn, %{"id" => id, "book" => book_params}) do
-    book = Content.get_book!(id)
+  def updatebook(conn, %{"slug" => slug, "book" => book_params}) do
+    book = Content.get_book_by_slug!(slug)
     genre = Content.list_genres()
 
-    case Content.update_book(book, book_params) do
+    case Content.update_book(book, book_params, book.id) do
       {:ok, _book} ->
         conn
         |> put_flash(:info, "Book updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :index))
+        |> redirect(to: Routes.user_path(conn, :managebooks))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
     end
   end
+
+  def bookreaders(conn, %{"slug" => slug}) do
+    book = Content.get_book_by_slug!(slug)
+    # {page, ""} = Integer.parse(params["page"] || "1")
+    page = 1
+
+    {readers, num_links} =
+      Content.get_readers_by_book(book.id)
+      |> Pagination.paginate(30, page)
+
+    render(conn, "book_readers.html", readers: readers, num_links: num_links)
+  end
+
+  def joinreaders(conn, %{"slug" => slug}) do
+    book = Content.get_book_by_slug!(slug)
+
+    if Content.check_if_reader_exist(conn.assigns.user.id, book.id) != [] do
+      conn
+      |> put_flash(:info, "You have already joined.")
+      |> redirect(to: Routes.home_path(conn, :book, book))
+
+    else
+      case Content.create_reader(conn.assigns.user, book) do
+        {:ok, _reader} ->
+          conn
+          |> put_flash(:info, "Joined successfully.")
+          |> redirect(to: Routes.home_path(conn, :book, book))
+
+        {:error, _reason} ->
+          conn
+          |> put_flash(:info, "Join not successfull.")
+          |> redirect(to: Routes.home_path(conn, :book, book))
+      end
+    end
+
+  end
+
 
 end

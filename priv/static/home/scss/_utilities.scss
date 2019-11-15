@@ -201,7 +201,7 @@ select:focus {
   width: 100%;
   padding: 0.7rem;
   border-radius: 5px;
-  margin: 1rem;
+  margin: 1rem 0;
 }
 
 .pop {
@@ -306,20 +306,22 @@ select:focus {
   padding: 2rem;
   background: $light-color;
   box-shadow: 2px 3px 5px 0.5px rgba(0, 0, 0, 0.2);
+  min-height: 85vh;
   //box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
-  margin: 1rem;
+  //margin: 1rem;
 }
 
 td,
 th {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: 1rem;
+  height: 3rem;
 }
 
 th {
@@ -368,6 +370,103 @@ tr:nth-child(even) {
 
 .clear-flt {
   clear: both;
+}
+
+.top_right-menu-icon {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: -70px;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  z-index: 1;
+  //background: #9b3838;
+  //font-size: 2rem;
+  //cursor: pointer;
+
+  span {
+    display: block;
+    width: 2rem;
+    height: 3px;
+    background: #262626;
+    position: absolute;
+    top: 24px;
+    transition: 0.3s;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #262626;
+      transition: 0.3s;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #262626;
+      transition: 0.3s;
+    }
+  }
+}
+.toggle {
+  right: -5px;
+  span {
+    background: transparent;
+
+    &:before {
+      top: 0;
+      transform: rotate(45deg);
+      background: #ffffff;
+    }
+
+    &:after {
+      top: 0;
+      transform: rotate(-45deg);
+      background: #ffffff;
+    }
+  }
+}
+
+.book_cover {
+  height: 50px;
+  width: 50px;
+  //border-radius: 50%;
+  object-fit: contain;
+}
+.read-title {
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+%stats-shared {
+  display: inline-block;
+  transition: all 0.5s;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+}
+
+.stats {
+  &-active {
+    @extend %stats-shared;
+    background-color: #80c080;
+  }
+  &-not-active {
+    @extend %stats-shared;
+    background-color: #ffb3b3;
+  }
+}
+.flash-msg {
+  display: block;
 }
 
 //   .bottom-line {

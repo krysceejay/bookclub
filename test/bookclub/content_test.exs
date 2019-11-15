@@ -132,4 +132,65 @@ defmodule Bookclub.ContentTest do
       assert %Ecto.Changeset{} = Content.change_genre(genre)
     end
   end
+
+  describe "readers" do
+    alias Bookclub.Content.Reader
+
+    @valid_attrs %{book_id: 42, user_id: 42}
+    @update_attrs %{book_id: 43, user_id: 43}
+    @invalid_attrs %{book_id: nil, user_id: nil}
+
+    def reader_fixture(attrs \\ %{}) do
+      {:ok, reader} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_reader()
+
+      reader
+    end
+
+    test "list_readers/0 returns all readers" do
+      reader = reader_fixture()
+      assert Content.list_readers() == [reader]
+    end
+
+    test "get_reader!/1 returns the reader with given id" do
+      reader = reader_fixture()
+      assert Content.get_reader!(reader.id) == reader
+    end
+
+    test "create_reader/1 with valid data creates a reader" do
+      assert {:ok, %Reader{} = reader} = Content.create_reader(@valid_attrs)
+      assert reader.book_id == 42
+      assert reader.user_id == 42
+    end
+
+    test "create_reader/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_reader(@invalid_attrs)
+    end
+
+    test "update_reader/2 with valid data updates the reader" do
+      reader = reader_fixture()
+      assert {:ok, %Reader{} = reader} = Content.update_reader(reader, @update_attrs)
+      assert reader.book_id == 43
+      assert reader.user_id == 43
+    end
+
+    test "update_reader/2 with invalid data returns error changeset" do
+      reader = reader_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_reader(reader, @invalid_attrs)
+      assert reader == Content.get_reader!(reader.id)
+    end
+
+    test "delete_reader/1 deletes the reader" do
+      reader = reader_fixture()
+      assert {:ok, %Reader{}} = Content.delete_reader(reader)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_reader!(reader.id) end
+    end
+
+    test "change_reader/1 returns a reader changeset" do
+      reader = reader_fixture()
+      assert %Ecto.Changeset{} = Content.change_reader(reader)
+    end
+  end
 end

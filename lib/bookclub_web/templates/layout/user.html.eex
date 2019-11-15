@@ -51,11 +51,16 @@
               </li>
             </ul>
           </li>
-          <!-- </a> -->
-          <!-- <a href="addbook.html"
-            ><li><i class="fa fa-book"></i> Add Books</li></a
-          > -->
+          <!-- <li class="main-aside-li">
+            <%= link to: Routes.auth_path(@conn, :delete), method: :delete do %>
+            <i class="fa fa-power-off"></i>Log out
+            <% end %>
+          </li> -->
         </ul>
+            <div id="dash-bar" class="top_right-menu-icon">
+            <%# <span id="dash-bar"><i id="dash-icon-id" class="fa fa-bars fa-2x" aria-hidden="true"></i></span> %>
+            <span></span>
+            </div>
       </aside>
       <!-- End Sidebar -->
 
@@ -63,17 +68,7 @@
       <section id="dashboard-main-section">
         <nav id="dashboard-main-nav">
           <div class="header_top">
-            <div class="top_right">
-              <ul>
-                <li>
-                  <%= link "Home", to: Routes.home_path(@conn, :index) %>
-                </li>
-                |
-                <li>
-                  <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
-                </li>
-              </ul>
-            </div>
+
             <div class="top_left">
               <div class="nav-img">
                 <img src="<%= Routes.static_path(@conn, "/home/img/the-way.jpg") %>" alt="proimage" />
@@ -81,15 +76,38 @@
               <!-- <form action="">
                 <button type="submit" class="">Log Out</button>
               </form> -->
+
             </div>
+             <div class="top_right">
+              <ul>
+                <li>
+                  <%= link "Home", to: Routes.home_path(@conn, :index) %>
+                </li>
+                |
+                <li>
+                  <%= link "Books", to: Routes.home_path(@conn, :books) %>
+                </li>
+                |
+                <li>
+                  <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
+                </li>
+              </ul>
+              <div class="clear-flt"></div>
+            </div>
+
           </div>
         </nav>
-
+        <%= render BookclubWeb.MsgView, "msg.html", conn: @conn %>
       <%= render @view_module, @view_template, assigns %>
       </section>
     </main>
     <!-- / End Section A -->
 
     <!-- Bootstrap Js -->
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/script.js") %>"></script>
   </body>
 </html>
