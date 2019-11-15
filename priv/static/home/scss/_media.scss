@@ -13,6 +13,16 @@
           }
         }
       }
+      //Book Readers
+      .dash-reader-list {
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 1rem;
+        &-single {
+          .dash-reader-img {
+            height: 5rem;
+          }
+        }
+      }
     }
   }
 }
@@ -508,6 +518,9 @@
           }
         }
       }
+      .dashboard-main-section-content {
+        padding: 1rem;
+      }
       //Manage Books
       .dash-book-list {
         grid-template-columns: repeat(4, 1fr);
@@ -555,6 +568,10 @@
     &-section {
       //Manage Books
       .dash-book-list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      //Book Readers
+      .dash-reader-list {
         grid-template-columns: repeat(3, 1fr);
       }
     }
@@ -640,6 +657,10 @@
     &-section {
       //Manage Books
       .dash-book-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      //Book Readers
+      .dash-reader-list {
         grid-template-columns: repeat(2, 1fr);
       }
     }

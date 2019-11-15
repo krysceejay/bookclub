@@ -19,6 +19,7 @@ defmodule Bookclub.Content.Book do
 
     belongs_to :user, Bookclub.Accounts.User
     has_many :chats, Bookclub.Messages.Chat
+    has_many :readers, Bookclub.Content.Reader
 
     timestamps()
   end
@@ -47,7 +48,7 @@ defmodule Bookclub.Content.Book do
       :meeting_time
     ])
     |> uploadfile(attrs, bk)
-    |> slug_map(attrs)
+    |> slug_map(attrs, bk)
   end
 
   defp uploadfile(changeset, attrs, bk) do
@@ -74,11 +75,16 @@ defmodule Bookclub.Content.Book do
     end
   end
 
-  defp slug_map(changeset, attrs) do
+  defp slug_map(changeset, attrs, bk) do
     # %{"slug" => slug}
     if title = attrs["title"] do
-      slug = String.downcase(title) |> String.replace(" ", "-")
-      put_change(changeset, :slug, "#{slug}-#{DateTime.utc_now() |> DateTime.to_unix()}")
+      if bk != %{} do
+        put_change(changeset, :slug, bk.slug)
+      else
+        slug = String.downcase(title) |> String.replace(" ", "-")
+        put_change(changeset, :slug, "#{slug}-#{DateTime.utc_now() |> DateTime.to_unix()}")
+      end
+
     else
       changeset
     end

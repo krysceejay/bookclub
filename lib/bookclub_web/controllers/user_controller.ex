@@ -68,4 +68,42 @@ defmodule BookclubWeb.UserController do
         render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
     end
   end
+
+  def bookreaders(conn, %{"slug" => slug}) do
+    book = Content.get_book_by_slug!(slug)
+    # {page, ""} = Integer.parse(params["page"] || "1")
+    page = 1
+
+    {readers, num_links} =
+      Content.get_readers_by_book(book.id)
+      |> Pagination.paginate(30, page)
+
+    render(conn, "book_readers.html", readers: readers, num_links: num_links)
+  end
+
+  def joinreaders(conn, %{"slug" => slug}) do
+    book = Content.get_book_by_slug!(slug)
+
+    if Content.check_if_reader_exist(conn.assigns.user.id, book.id) != [] do
+      conn
+      |> put_flash(:info, "You have already joined.")
+      |> redirect(to: Routes.home_path(conn, :book, book))
+
+    else
+      case Content.create_reader(conn.assigns.user, book) do
+        {:ok, _reader} ->
+          conn
+          |> put_flash(:info, "Joined successfully.")
+          |> redirect(to: Routes.home_path(conn, :book, book))
+
+        {:error, _reason} ->
+          conn
+          |> put_flash(:info, "Join not successfull.")
+          |> redirect(to: Routes.home_path(conn, :book, book))
+      end
+    end
+
+  end
+
+
 end

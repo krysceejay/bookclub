@@ -271,4 +271,133 @@ defmodule Bookclub.Content do
   def change_genre(%Genre{} = genre) do
     Genre.changeset(genre, %{})
   end
+
+  alias Bookclub.Content.Reader
+
+  @doc """
+  Returns the list of readers.
+
+  ## Examples
+
+      iex> list_readers()
+      [%Reader{}, ...]
+
+  """
+  def list_readers do
+    Repo.all(Reader)
+  end
+
+  @doc """
+  Gets a single reader.
+
+  Raises `Ecto.NoResultsError` if the Reader does not exist.
+
+  ## Examples
+
+      iex> get_reader!(123)
+      %Reader{}
+
+      iex> get_reader!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_reader!(id), do: Repo.get!(Reader, id)
+
+  # def get_reader_for_book(user_id, book_id) do
+  #   query =
+  #     from b in Book,
+  #       where: b.user_id == ^user_id,
+  #       order_by: [desc: b.id]
+  # end
+  def check_if_reader_exist(user_id, book_id) do
+
+    Repo.all(
+    from r in Reader,
+    where: r.user_id == ^user_id,
+    where: r.book_id == ^book_id,
+    limit: 1
+    )
+
+  end
+
+  def get_readers_by_book(book_id) do
+    query =
+      from r in Reader,
+        where: r.book_id == ^book_id,
+        order_by: [desc: r.id],
+        preload: [:user]
+  end
+
+
+  @doc """
+  Creates a reader.
+
+  ## Examples
+
+      iex> create_reader(%{field: value})
+      {:ok, %Reader{}}
+
+      iex> create_reader(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  # def create_reader(attrs \\ %{}) do
+  #   %Reader{}
+  #   |> Reader.changeset(attrs)
+  #   |> Repo.insert()
+  # end
+
+  def create_reader(user, %{id: bookid}, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:readers, book_id: bookid)
+    |> Reader.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a reader.
+
+  ## Examples
+
+      iex> update_reader(reader, %{field: new_value})
+      {:ok, %Reader{}}
+
+      iex> update_reader(reader, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_reader(%Reader{} = reader, attrs) do
+    reader
+    |> Reader.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Reader.
+
+  ## Examples
+
+      iex> delete_reader(reader)
+      {:ok, %Reader{}}
+
+      iex> delete_reader(reader)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_reader(%Reader{} = reader) do
+    Repo.delete(reader)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking reader changes.
+
+  ## Examples
+
+      iex> change_reader(reader)
+      %Ecto.Changeset{source: %Reader{}}
+
+  """
+  def change_reader(%Reader{} = reader) do
+    Reader.changeset(reader, %{})
+  end
 end

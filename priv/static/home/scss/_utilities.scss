@@ -201,7 +201,7 @@ select:focus {
   width: 100%;
   padding: 0.7rem;
   border-radius: 5px;
-  margin: 1rem;
+  margin: 1rem 0;
 }
 
 .pop {
@@ -313,14 +313,15 @@ select:focus {
 table {
   border-collapse: collapse;
   width: 100%;
-  margin: 1rem;
+  //margin: 1rem;
 }
 
 td,
 th {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: 1rem;
+  height: 3rem;
 }
 
 th {
@@ -439,6 +440,33 @@ tr:nth-child(even) {
   width: 50px;
   //border-radius: 50%;
   object-fit: contain;
+}
+.read-title {
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+%stats-shared {
+  display: inline-block;
+  transition: all 0.5s;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+}
+
+.stats {
+  &-active {
+    @extend %stats-shared;
+    background-color: #80c080;
+  }
+  &-not-active {
+    @extend %stats-shared;
+    background-color: #ffb3b3;
+  }
+}
+.flash-msg {
+  display: block;
 }
 
 //   .bottom-line {

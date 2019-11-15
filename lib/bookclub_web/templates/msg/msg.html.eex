@@ -1,0 +1,8 @@
+<div class="flash-msg">
+  <%= unless is_nil(get_flash(@conn, :info)) do %>
+  <div class="pop pop-info"><%= get_flash(@conn, :info) %></div>
+  <% end %>
+  <%= unless is_nil(get_flash(@conn, :error)) do %>
+  <div class="pop pop-error"><%= get_flash(@conn, :error) %></div>
+  <% end %>
+</div>

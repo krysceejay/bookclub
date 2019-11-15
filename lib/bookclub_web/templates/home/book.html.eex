@@ -8,6 +8,7 @@
         </div>
 
     </section>
+    <%= render BookclubWeb.MsgView, "msg.html", conn: @conn %>
 
     <!-- Section A: Book Details -->
     <section id="bdetails-a" class="py-4">
@@ -68,13 +69,20 @@
                   >
                   <% end %>
 
+                  <%= link to: Routes.user_path(@conn, :joinreaders, @book) do %>
                   <span class="join-chat-icon"
+                    ><i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    Join</span
+                  >
+                  <% end %>
+
+                  <!-- <span class="join-chat-icon"
                     ><i class="fa fa-video-camera" aria-hidden="true"></i>
                     Video</span
                   >
                   <span class="join-chat-icon"
                     ><i class="fa fa-phone" aria-hidden="true"></i>Audio</span
-                  >
+                  > -->
                 </div>
               </div>
             </div>

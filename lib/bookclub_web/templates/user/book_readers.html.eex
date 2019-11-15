@@ -1,0 +1,37 @@
+
+<div class="dashboard-main-section-content">
+  <h3 class="dashboard-content-header">Readers</h3>
+
+  <div class="dash-reader-list">
+    <%= for reader <- @readers do %>
+    <div class="dash-reader-list-single">
+
+            <div class="dash-reader-img">
+              <img src="<%= Routes.static_path(@conn,"/images/bookcover/noimage.jpg") %>" alt="image" />
+            </div>
+
+      <div class="dash-reader-text">
+        <div class="read-title">Name: </div>
+        <div class="reader-name"><%= reader.user.first_name <>" "<> reader.user.last_name %></div>
+        <div class="read-title">Status: </div>
+        <div class="reader-name">
+        <%= if reader.status == true do %>
+          <span class="stats-active">Active</span>
+        <% else %>
+        <span class="stats-not-active">Not Active</span>
+        <% end %>
+      </div>
+
+
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+
+  <div class="paginate-links my-4">
+    <%= if @num_links != 1 do %>
+        <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
+    <% end %>
+  </div>
+</div>
