@@ -4,6 +4,7 @@ defmodule BookclubWeb.UserController do
   alias Bookclub.Content
   alias Bookclub.Content.Book
   alias BookclubWeb.Pagination
+  alias Bookclub.Repo
 
   plug BookclubWeb.Plugs.RequireAuth
 
@@ -13,12 +14,13 @@ defmodule BookclubWeb.UserController do
 
   def managebooks(conn, params) do
     {page, ""} = Integer.parse(params["page"] || "1")
+    book_count = Content.book_by_user(conn.assigns.user.id) |> Pagination.count_query
 
     {books, num_links} =
       Content.book_by_user(conn.assigns.user.id)
       |> Pagination.paginate(30, page)
 
-    render(conn, "managebooks.html", books: books, num_links: num_links)
+    render(conn, "managebooks.html", books: books, book_count: book_count, num_links: num_links)
   end
 
   def addbook(conn, _params) do
@@ -69,16 +71,17 @@ defmodule BookclubWeb.UserController do
     end
   end
 
-  def bookreaders(conn, %{"slug" => slug}) do
+  def bookreaders(conn, params) do
+    %{"slug" => slug} = params
     book = Content.get_book_by_slug!(slug)
-    # {page, ""} = Integer.parse(params["page"] || "1")
-    page = 1
+    readers_count = Content.get_readers_by_book(book.id) |> Pagination.count_query
+    {page, ""} = Integer.parse(params["page"] || "1")
 
     {readers, num_links} =
       Content.get_readers_by_book(book.id)
       |> Pagination.paginate(30, page)
 
-    render(conn, "book_readers.html", readers: readers, num_links: num_links)
+    render(conn, "book_readers.html", readers: readers, num_links: num_links, readers_count: readers_count)
   end
 
   def joinreaders(conn, %{"slug" => slug}) do

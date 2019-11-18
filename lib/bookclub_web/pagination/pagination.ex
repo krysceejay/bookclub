@@ -24,6 +24,10 @@ defmodule BookclubWeb.Pagination do
 
   end
 
+  def count_query(query)  do
+    query |> Repo.aggregate(:count, :id)
+  end
+
   defp links(t, pp) do
     links_div = div(t, pp)
     num_links_rems = rem(t, pp)
@@ -32,7 +36,7 @@ defmodule BookclubWeb.Pagination do
     else
       links_div + 1
     end
-    
+
   end
 
 end

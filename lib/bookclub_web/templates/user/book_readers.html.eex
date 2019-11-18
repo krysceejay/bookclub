@@ -1,6 +1,6 @@
 
 <div class="dashboard-main-section-content">
-  <h3 class="dashboard-content-header">Readers</h3>
+  <h3 class="dashboard-content-header">Readers (<%= @readers_count %>)</h3>
 
   <div class="dash-reader-list">
     <%= for reader <- @readers do %>

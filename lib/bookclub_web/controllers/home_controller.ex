@@ -30,7 +30,8 @@ defmodule BookclubWeb.HomeController do
 
   def book(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
-    render(conn, "book.html", book: book)
+    reader = Content.check_if_reader_exist(conn.assigns.user.id, book.id)
+    render(conn, "book.html", book: book, reader: reader)
   end
 
   def searchbooks(conn, %{"book-genre" => genre, "searchbooks" => textsearch}) do

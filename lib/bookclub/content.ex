@@ -328,6 +328,8 @@ defmodule Bookclub.Content do
         preload: [:user]
   end
 
+  
+
 
   @doc """
   Creates a reader.
