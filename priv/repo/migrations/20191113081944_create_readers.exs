@@ -10,5 +10,8 @@ defmodule Bookclub.Repo.Migrations.CreateReaders do
       timestamps()
     end
 
+    create index(:readers, [:user_id])
+    create index(:readers, [:book_id])
+
   end
 end

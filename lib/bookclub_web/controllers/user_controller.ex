@@ -4,7 +4,6 @@ defmodule BookclubWeb.UserController do
   alias Bookclub.Content
   alias Bookclub.Content.Book
   alias BookclubWeb.Pagination
-  alias Bookclub.Repo
 
   plug BookclubWeb.Plugs.RequireAuth
 
@@ -12,13 +11,12 @@ defmodule BookclubWeb.UserController do
     render(conn, "dashboard.html")
   end
 
-  def managebooks(conn, params) do
-    {page, ""} = Integer.parse(params["page"] || "1")
+  def managebooks(conn, _params) do
     book_count = Content.book_by_user(conn.assigns.user.id) |> Pagination.count_query
 
     {books, num_links} =
       Content.book_by_user(conn.assigns.user.id)
-      |> Pagination.paginate(30, page)
+      |> Pagination.paginate(30, conn)
 
     render(conn, "managebooks.html", books: books, book_count: book_count, num_links: num_links)
   end
@@ -75,11 +73,10 @@ defmodule BookclubWeb.UserController do
     %{"slug" => slug} = params
     book = Content.get_book_by_slug!(slug)
     readers_count = Content.get_readers_by_book(book.id) |> Pagination.count_query
-    {page, ""} = Integer.parse(params["page"] || "1")
 
     {readers, num_links} =
       Content.get_readers_by_book(book.id)
-      |> Pagination.paginate(30, page)
+      |> Pagination.paginate(30, conn)
 
     render(conn, "book_readers.html", readers: readers, num_links: num_links, readers_count: readers_count)
   end
@@ -87,7 +84,7 @@ defmodule BookclubWeb.UserController do
   def joinreaders(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
 
-    if Content.check_if_reader_exist(conn.assigns.user.id, book.id) != [] do
+    if Content.check_if_reader_exist(conn.assigns.user.id, book.id) do
       conn
       |> put_flash(:info, "You have already joined.")
       |> redirect(to: Routes.home_path(conn, :book, book))
@@ -107,6 +104,5 @@ defmodule BookclubWeb.UserController do
     end
 
   end
-
 
 end

@@ -20,6 +20,7 @@ defmodule Bookclub.Content.Book do
     belongs_to :user, Bookclub.Accounts.User
     has_many :chats, Bookclub.Messages.Chat
     has_many :readers, Bookclub.Content.Reader
+    has_many :ratings, Bookclub.Content.Rating
 
     timestamps()
   end

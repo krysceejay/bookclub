@@ -29,7 +29,7 @@
                 <div class="details-cat-div">
                   <span class="details-cat"><%= Enum.join(@book.genre, ", ") %> </span>
                   <div>
-                    <span class="fill"
+                    <!-- <span class="fill"
                       ><i class="fa fa-star" aria-hidden="true"></i
                     ></span>
                     <span class="fill"
@@ -41,10 +41,31 @@
                     <span class="fill"
                       ><i class="fa fa-star" aria-hidden="true"></i
                     ></span>
-                    <span class="nofill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
+                    <span class="fill">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                        &#x2605;
+                    </span> -->
+                    <!-- <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-half">&#x2605;</span>
+                    </span> -->
+                    <div class="stars" style="--rating: <%= @star_rating %>;"></div>
+
+                    <span class="review-text"><%= @star_rating %> of <%= @rating_count%> reviews </span>
                   </div>
+
+
 
                 </div>
                 <div class="details-meetings">
@@ -64,21 +85,21 @@
                 <div class="join-chat">
                   <p class="join-chat-head">Join The Discussion</p>
 
-                  <%= if @reader == [] do %>
-
-                    <%= link to: Routes.user_path(@conn, :joinreaders, @book) do %>
-                    <span class="join-chat-icon"
-                      ><i class="fa fa-handshake-o" aria-hidden="true"></i>
-                      Join</span>
-                    <% end %>
-
-                  <%= else %>
+                  <%= if @reader do %>
 
                     <%= link to: Routes.chat_path(@conn, :index, @book) do %>
                     <span class="join-chat-icon"
                       ><i class="fa fa-comment-o" aria-hidden="true"></i>
                       Chat</span>
                     <% end %>
+
+                  <%= else %>
+
+                  <%= link to: Routes.user_path(@conn, :joinreaders, @book) do %>
+                  <span class="join-chat-icon"
+                    ><i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    Join</span>
+                  <% end %>
 
                   <% end %>
 
@@ -107,34 +128,7 @@
             </div>
             <div class="bdetails-rate py-3">
               <h3>Rate This Book</h3>
-              <div class="user-ratings">
-                <span class="nofill"
-                  ><i id="rt-1" class="fa fa-star-o" aria-hidden="true"></i
-                >
-                <h5>1</h5>
-                </span>
-                <span class="nofill"
-                  ><i id="rt-2" class="fa fa-star-o" aria-hidden="true"></i
-                >
-                <h5>2</h5>
-                </span>
-                <span class="nofill"
-                  ><i id="rt-3" class="fa fa-star-o" aria-hidden="true"></i
-                >
-                <h5>3</h5>
-                </span>
-                <span class="nofill"
-                  ><i id="rt-4" class="fa fa-star-o" aria-hidden="true"></i
-                >
-                <h5>4</h5>
-                </span>
-                <span class="nofill"
-                  ><i id="rt-5" class="fa fa-star-o" aria-hidden="true"></i
-                >
-                <h5>5</h5>
-                </span>
-                <div><button class="btn btn-dark">Submit</button></div>
-              </div>
+              <%= render "rating_form.html", Map.put(assigns, :action, Routes.home_path(@conn, :createrating)) %>
             </div>
           </div>
 

@@ -1,0 +1,109 @@
+<%= form_for @changeset, @action, fn f -> %>
+
+
+<div class="user-ratings">
+  <!-- <span
+    ><i id="rt-1" num="1" class="fa fa-star" aria-hidden="true"></i
+  >
+  <h5>1</h5>
+  </span>
+  <span
+    ><i id="rt-2" num="2" class="fa fa-star" aria-hidden="true"></i
+  >
+  <h5>2</h5>
+  </span>
+  <span
+    ><i id="rt-3" num="3" class="fa fa-star" aria-hidden="true"></i
+  >
+  <h5>3</h5>
+  </span>
+  <span
+    ><i id="rt-4" num="4" class="fa fa-star" aria-hidden="true"></i
+  >
+  <h5>4</h5>
+  </span>
+  <span
+    ><i id="rt-5" num="5" class="fa fa-star" aria-hidden="true"></i
+  >
+  <h5>5</h5>
+  </span>
+  <div><button class="btn btn-dark">Submit</button></div> -->
+
+  <!-- <input id="star-5" type="radio" name="rating" value="star-5">
+  <label for="star-5" title="5 stars">
+      <i class="active fa fa-star" aria-hidden="true"></i>
+      <h5>5</h5>
+  </label>
+
+
+  <input id="star-4" type="radio" name="rating" value="star-4">
+  <label for="star-4" title="4 stars">
+      <i class="active fa fa-star" aria-hidden="true"></i>
+      <h5>4</h5>
+  </label>
+
+
+  <input id="star-3" type="radio" name="rating" value="star-3">
+  <label for="star-3" title="3 stars">
+      <i class="active fa fa-star" aria-hidden="true"></i>
+      <h5>3</h5>
+  </label>
+
+
+  <input id="star-2" type="radio" name="rating" value="star-2">
+  <label for="star-2" title="2 stars">
+      <i class="active fa fa-star" aria-hidden="true"></i>
+      <h5>2</h5>
+  </label>
+
+
+  <input id="star-1" type="radio" name="rating" value="star-1">
+  <label for="star-1" title="1 star">
+      <i class="active fa fa-star" aria-hidden="true"></i>
+      <h5>1</h5>
+  </label> -->
+
+
+    <%= radio_button f, :rating, "5", id: "star-5" %>
+    <%= label f, :rating, for: "star-5", title: "5 stars" do %>
+      &#x2605;
+      <h5>5</h5>
+    <% end %>
+
+    <%= radio_button f, :rating, "4", id: "star-4" %>
+    <%= label f, :rating, for: "star-4", title: "4 stars" do %>
+      &#x2605;
+      <h5>4</h5>
+    <% end %>
+
+    <%= radio_button f, :rating, "3", id: "star-3" %>
+    <%= label f, :rating, for: "star-3", title: "3 stars" do %>
+      &#x2605;
+      <h5>3</h5>
+    <% end %>
+
+    <%= radio_button f, :rating, "2", id: "star-2" %>
+    <%= label f, :rating, for: "star-2", title: "2 stars" do %>
+      &#x2605;
+      <h5>2</h5>
+    <% end %>
+
+    <%= radio_button f, :rating, "1", id: "star-1" %>
+    <%= label f, :rating, for: "star-1", title: "1 star" do %>
+      &#x2605;
+      <h5>1</h5>
+    <% end %>
+
+</div>
+<div class="rating-comment">
+  <%= label f, :comment, for: "rate-comment" %>
+  <%= textarea f, :comment, placeholder: "Enter comment" %>
+  <%= error_tag f, :comment %>
+
+</div>
+  <%= hidden_input f, :book_id, value: @book.id %>
+
+<div class="form-group">
+  <%= submit "Submit", class: "btn btn-dark" %>
+</div>
+<% end %>

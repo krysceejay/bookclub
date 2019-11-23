@@ -16,6 +16,7 @@ defmodule Bookclub.Accounts.User do
     has_many :books, Bookclub.Content.Book
     has_many :chats, Bookclub.Messages.Chat
     has_many :readers, Bookclub.Content.Reader
+    has_many :ratings, Bookclub.Content.Rating
 
     ##Virtual Fields ##
     field :passwordfield, :string, virtual: true

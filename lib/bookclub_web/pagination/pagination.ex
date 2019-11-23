@@ -1,6 +1,8 @@
 defmodule BookclubWeb.Pagination do
+
   import Ecto.Query, warn: false
   alias Bookclub.Repo
+  alias BookclubWeb.PaginationView
 
   defp page(query, per_page, current_page \\ 1) do
     query
@@ -11,14 +13,14 @@ defmodule BookclubWeb.Pagination do
   end
 
   defp number_of_links(query, pp) do
-    total_result = Repo.aggregate(query, :count, :id)
+    total_result = count_query(query)
 
     links(total_result, pp)
   end
 
-  def paginate(query, per_page, current_page \\ 1) do
+  def paginate(query, per_page, conn) do
     {
-      page(query, per_page, current_page),
+      page(query, per_page, get_current_page(conn)),
       number_of_links(query, per_page)
     }
 
@@ -26,6 +28,11 @@ defmodule BookclubWeb.Pagination do
 
   def count_query(query)  do
     query |> Repo.aggregate(:count, :id)
+  end
+
+  def get_current_page(conn) do
+    curpage = PaginationView.get_param(conn.query_params)
+    curpage
   end
 
   defp links(t, pp) do

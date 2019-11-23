@@ -683,12 +683,47 @@ div[class^="btn-"],
           }
           .user-ratings {
             font-size: 2rem;
-            span {
-              display: inline-block;
+            // span {
+            //   display: inline-block;
+            //   margin-right: 1rem;
+            //   h5 {
+            //     color: $dark-color;
+            //   }
+            // }
+            //direction: rtl;
+            //display: inline-block;
+
+            input[type="radio"] {
+              display: none;
+              &:checked ~ label {
+                color: $star-color;
+              }
+            }
+            label {
+              color: $star-background;
+              padding: 0;
               margin-right: 1rem;
+              cursor: pointer;
+              transition: all 0.3s ease-in-out;
+              display: inline-block;
+              font-size: 2rem;
               h5 {
                 color: $dark-color;
+                font-size: 1rem;
               }
+
+              &:hover,
+              &:hover ~ label {
+                color: $star-color;
+              }
+            }
+          }
+          .rating-comment {
+            label {
+              display: block;
+            }
+            textarea {
+              width: 90%;
             }
           }
         }
