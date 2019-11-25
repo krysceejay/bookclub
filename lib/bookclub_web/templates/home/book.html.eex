@@ -135,48 +135,15 @@
           <div class="bdetails-popular">
             <div class="book-sidebar-content toprated-sidebar">
               <div class="book-sidebar-heading py-1"><h3>Recommended Books</h3></div>
-              <div class="toprated-sidebar-single">
-                <div class="pop-img">
-                  <img src="<%= Routes.static_path(@conn, "/home/img/letters-to-husband.jpg") %>" alt="" />
-                </div>
-                <div class="pop-content">
-                  <p>
-                    Lorem ipsum dolor, sit amet
-                  </p>
-                  <p>
-                    By Emma Watson
-                  </p>
-                  <p>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="nofill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                  </p>
-                </div>
-              </div>
-              <div class="toprated-sidebar-single">
-                <div class="pop-img">
-                  <img src="<%= Routes.static_path(@conn, "/home/img/tessoftheroad.jpeg") %>" alt="" />
-                </div>
-                <div class="pop-content">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  </p>
 
-                  <p>
-                    By Emma Watson
-                  </p>
+              <%= for book <- @recommended_books do %>
+              <div class="toprated-sidebar-single">
+                <div class="pop-img">
+                  <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="" />
+                </div>
+                <div class="pop-content">
+                  <div class="pop-content-title"><%= book.title %></div>
+                  <div class="pop-content-author"><%= book.author %></div>
                   <p>
                     <span class="fill"
                       ><i class="fa fa-star" aria-hidden="true"></i
@@ -193,22 +160,27 @@
                     <span class="nofill"
                       ><i class="fa fa-star" aria-hidden="true"></i
                     ></span>
+
+                       <!-- <%= for rate <- book.ratings do %>
+                       <%= rate.rating %>
+                       <% end %> -->
                   </p>
                 </div>
               </div>
+
+              <% end %>
+
             </div>
           </div>
 
           <div class="top-cat">
                 <div class="book-sidebar-content toprated-sidebar">
-                        <div class="book-sidebar-heading py-1"><h3>Top Categories</h3></div>
+                        <div class="book-sidebar-heading py-1"><h3>Top Genres</h3></div>
 
             <ul class="top-cat-list">
-              <li>Fantasy</li>
-              <li>Fantasy</li>
-              <li>Fantasy</li>
-              <li>Fantasy</li>
-              <li>Fantasy</li>
+              <%= for gen <- @genre_sort do %>
+                <li class="text-trans-cap"><%= elem(gen, 0) %> (<%= elem(gen, 1) %> books)</li>
+              <% end %>
 
             </ul>
 

@@ -1,10 +1,9 @@
 defmodule BookclubWeb.HomeController do
   use BookclubWeb, :controller
-  alias Bookclub.Repo
   alias Bookclub.Content
   alias BookclubWeb.Pagination
   alias Bookclub.Content.Rating
-  alias Bookclub.Aggregate
+  alias Bookclub.Functions
 
   plug BookclubWeb.Plugs.RequireAuth when action in [:createrating]
 
@@ -35,26 +34,14 @@ defmodule BookclubWeb.HomeController do
   def book(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
     changeset = Content.change_rating(%Rating{})
+    recommended_books = Content.recommended_books(book.id)
 
-    column_sum = Content.get_ratings_by_book(book.id) |> Aggregate.sum_column(:rating)
-    column_count = Content.get_ratings_by_book(book.id) |> Aggregate.count_column(:rating)
+    # IO.puts "cccccccccccccc"
+    # IO.inspect recommended_books
+    # IO.puts "ccccccccccccc"
+    genre_sort = Functions.top_five_genres
 
-    rating_sum =
-          case column_sum do
-            nil -> 5
-            _ -> 5 + column_sum
-          end
-    rating_count =
-          case column_count do
-            0 -> 1
-            _ -> 1 + column_count
-          end
-
-    star_rating = rating_sum / rating_count
-
-    IO.puts "cccccccccccccc"
-    IO.inspect star_rating
-    IO.puts "ccccccccccccc"
+    {rating_count, star_rating} = Functions.calculate_ratings(book.id)
 
     reader =
       case conn.assigns[:user] do
@@ -62,7 +49,9 @@ defmodule BookclubWeb.HomeController do
         _ -> Content.check_if_reader_exist(conn.assigns.user.id, book.id)
       end
 
-    render(conn, "book.html", book: book, reader: reader, changeset: changeset, star_rating: star_rating, rating_count: rating_count)
+    render(conn, "book.html", book: book, reader: reader, changeset: changeset,
+    star_rating: star_rating, rating_count: rating_count,
+    recommended_books: recommended_books, genre_sort: genre_sort)
 
   end
 

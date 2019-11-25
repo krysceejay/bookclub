@@ -749,7 +749,14 @@ div[class^="btn-"],
             }
             .pop-content {
               text-align: left;
-              p:first-child {
+              &-title {
+                font-size: 1.1rem;
+                text-transform: capitalize;
+              }
+              &-author {
+                //font-size: 1.1rem;
+                color: $text-color;
+                font-size: 0.9rem;
                 text-transform: capitalize;
               }
             }
