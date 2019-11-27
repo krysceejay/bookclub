@@ -27,23 +27,45 @@
                   <%= @book.author %>
                 </p>
                 <div class="details-cat-div">
-                  <span class="details-cat">Fiction </span>
+                  <span class="details-cat"><%= Enum.join(@book.genre, ", ") %> </span>
+                  <div>
+                    <!-- <span class="fill"
+                      ><i class="fa fa-star" aria-hidden="true"></i
+                    ></span>
+                    <span class="fill"
+                      ><i class="fa fa-star" aria-hidden="true"></i
+                    ></span>
+                    <span class="fill"
+                      ><i class="fa fa-star" aria-hidden="true"></i
+                    ></span>
+                    <span class="fill"
+                      ><i class="fa fa-star" aria-hidden="true"></i
+                    ></span>
+                    <span class="fill">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                        &#x2605;
+                    </span> -->
+                    <!-- <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-half">&#x2605;</span>
+                    </span> -->
 
-                  <span class="fill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
-                  <span class="fill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
-                  <span class="fill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
-                  <span class="fill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
-                  <span class="nofill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
+                    <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: @book.id %>
+                  </div>
+
+
+
                 </div>
                 <div class="details-meetings">
                   <p class="details-meetings-head">
@@ -62,19 +84,25 @@
                 <div class="join-chat">
                   <p class="join-chat-head">Join The Discussion</p>
 
-                  <%= link to: Routes.chat_path(@conn, :index, @book) do %>
-                  <span class="join-chat-icon"
-                    ><i class="fa fa-comment-o" aria-hidden="true"></i>
-                    Chat</span
-                  >
-                  <% end %>
+                  <%= if @reader do %>
+
+                    <%= link to: Routes.chat_path(@conn, :index, @book) do %>
+                    <span class="join-chat-icon"
+                      ><i class="fa fa-comment-o" aria-hidden="true"></i>
+                      Chat</span>
+                    <% end %>
+
+                  <%= else %>
 
                   <%= link to: Routes.user_path(@conn, :joinreaders, @book) do %>
                   <span class="join-chat-icon"
                     ><i class="fa fa-handshake-o" aria-hidden="true"></i>
-                    Join</span
-                  >
+                    Join</span>
                   <% end %>
+
+                  <% end %>
+
+
 
                   <!-- <span class="join-chat-icon"
                     ><i class="fa fa-video-camera" aria-hidden="true"></i>
@@ -97,85 +125,43 @@
                 <%= @book.description %>
               </p>
             </div>
+            <div class="bdetails-rate py-3">
+              <h3>Rate This Book</h3>
+              <%= render "rating_form.html", Map.put(assigns, :action, Routes.home_path(@conn, :createrating)) %>
+            </div>
           </div>
 
           <div class="bdetails-popular">
             <div class="book-sidebar-content toprated-sidebar">
               <div class="book-sidebar-heading py-1"><h3>Recommended Books</h3></div>
-              <div class="toprated-sidebar-single">
-                <div class="pop-img">
-                  <img src="<%= Routes.static_path(@conn, "/home/img/letters-to-husband.jpg") %>" alt="" />
-                </div>
-                <div class="pop-content">
-                  <p>
-                    Lorem ipsum dolor, sit amet
-                  </p>
-                  <p>
-                    By Emma Watson
-                  </p>
-                  <p>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="nofill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                  </p>
-                </div>
-              </div>
-              <div class="toprated-sidebar-single">
-                <div class="pop-img">
-                  <img src="<%= Routes.static_path(@conn, "/home/img/tessoftheroad.jpeg") %>" alt="" />
-                </div>
-                <div class="pop-content">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  </p>
 
-                  <p>
-                    By Emma Watson
-                  </p>
-                  <p>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="nofill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                  </p>
+              <%= for book <- @recommended_books do %>
+              <div class="toprated-sidebar-single">
+                <div class="pop-img">
+                  <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="" />
+                </div>
+                <div class="pop-content">
+                  <div class="pop-content-title"><%= book.title %></div>
+                  <div class="pop-content-author"><%= book.author %></div>
+
+                  <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
+                  
                 </div>
               </div>
+
+              <% end %>
+
             </div>
           </div>
 
           <div class="top-cat">
                 <div class="book-sidebar-content toprated-sidebar">
-                        <div class="book-sidebar-heading py-1"><h3>Top Categories</h3></div>
+                        <div class="book-sidebar-heading py-1"><h3>Top Genres</h3></div>
 
             <ul class="top-cat-list">
-              <li>Fantasy</li>
-              <li>Fantasy</li>
-              <li>Fantasy</li>
-              <li>Fantasy</li>
-              <li>Fantasy</li>
+              <%= for gen <- @genre_sort do %>
+                <li class="text-trans-cap"><%= elem(gen, 0) %> (<%= elem(gen, 1) %> books)</li>
+              <% end %>
 
             </ul>
 

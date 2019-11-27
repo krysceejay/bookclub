@@ -1,4 +1,5 @@
 <div class="dashboard-main-section-content">
+  <h2>Welcome <%= @conn.assigns[:user].first_name %></h2>
   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod iste
   fugit ipsam distinctio rem corporis corrupti facilis possimus quasi
   pariatur! Lorem ipsum dolor sit amet consectetur adipisicing elit.

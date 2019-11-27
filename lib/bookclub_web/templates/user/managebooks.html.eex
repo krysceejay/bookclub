@@ -1,6 +1,6 @@
 
 <div class="dashboard-main-section-content">
-  <h3 class="dashboard-content-header">Manage Books</h3>
+  <h3 class="dashboard-content-header">Manage Books (<%= @book_count %>)</h3>
   <div class="dash-book-list">
     <%= for book <- @books do %>
     <div class="dash-book-list-single">

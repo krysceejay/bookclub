@@ -207,5 +207,11 @@
     ></script>
     <script src="js/bootstrap.min.js"></script> -->
     <!-- /End Bootstrap Js -->
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/script.js") %>"></script>
+  </body>
   </body>
 </html>

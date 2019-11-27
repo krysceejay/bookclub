@@ -11,14 +11,14 @@ defmodule BookclubWeb.UserController do
     render(conn, "dashboard.html")
   end
 
-  def managebooks(conn, params) do
-    {page, ""} = Integer.parse(params["page"] || "1")
+  def managebooks(conn, _params) do
+    book_count = Content.book_by_user(conn.assigns.user.id) |> Pagination.count_query
 
     {books, num_links} =
       Content.book_by_user(conn.assigns.user.id)
-      |> Pagination.paginate(30, page)
+      |> Pagination.paginate(30, conn)
 
-    render(conn, "managebooks.html", books: books, num_links: num_links)
+    render(conn, "managebooks.html", books: books, book_count: book_count, num_links: num_links)
   end
 
   def addbook(conn, _params) do
@@ -69,22 +69,22 @@ defmodule BookclubWeb.UserController do
     end
   end
 
-  def bookreaders(conn, %{"slug" => slug}) do
+  def bookreaders(conn, params) do
+    %{"slug" => slug} = params
     book = Content.get_book_by_slug!(slug)
-    # {page, ""} = Integer.parse(params["page"] || "1")
-    page = 1
+    readers_count = Content.get_readers_by_book(book.id) |> Pagination.count_query
 
     {readers, num_links} =
       Content.get_readers_by_book(book.id)
-      |> Pagination.paginate(30, page)
+      |> Pagination.paginate(30, conn)
 
-    render(conn, "book_readers.html", readers: readers, num_links: num_links)
+    render(conn, "book_readers.html", readers: readers, num_links: num_links, readers_count: readers_count)
   end
 
   def joinreaders(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
 
-    if Content.check_if_reader_exist(conn.assigns.user.id, book.id) != [] do
+    if Content.check_if_reader_exist(conn.assigns.user.id, book.id) do
       conn
       |> put_flash(:info, "You have already joined.")
       |> redirect(to: Routes.home_path(conn, :book, book))
@@ -104,6 +104,5 @@ defmodule BookclubWeb.UserController do
     end
 
   end
-
 
 end

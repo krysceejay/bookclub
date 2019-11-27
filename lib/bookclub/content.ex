@@ -44,9 +44,9 @@ defmodule Bookclub.Content do
       from b in Book,
         where: b.published == true,
         order_by: [desc: b.id],
-        limit: ^per_page
+        limit: ^per_page,
+        preload: [:user, :ratings]
     )
-    |> Repo.preload(:user)
   end
 
   def all_books do
@@ -167,6 +167,32 @@ defmodule Bookclub.Content do
     #   order_by: [desc: q.id],
     #   preload: [:user]
     # end)
+    query
+
+  end
+
+  def books_by_genre (genre) do
+
+    query =
+      from b in Book,
+        where: b.published == true,
+        where:
+          fragment("? @> ?", b.genre, ^genre),
+        order_by: [desc: b.id]
+
+    query
+
+  end
+
+  def recommended_books(id) do
+    Repo.all(
+      from b in Book,
+        where: b.published == true,
+        where: b.id != ^id,
+        order_by: [desc: b.id],
+        limit: 2,
+        preload: [:user, :ratings]
+    )
   end
 
   def book_by_user(user_id) do
@@ -174,6 +200,8 @@ defmodule Bookclub.Content do
       from b in Book,
         where: b.user_id == ^user_id,
         order_by: [desc: b.id]
+
+    query
   end
 
   alias Bookclub.Content.Genre
@@ -303,20 +331,13 @@ defmodule Bookclub.Content do
   """
   def get_reader!(id), do: Repo.get!(Reader, id)
 
-  # def get_reader_for_book(user_id, book_id) do
-  #   query =
-  #     from b in Book,
-  #       where: b.user_id == ^user_id,
-  #       order_by: [desc: b.id]
-  # end
   def check_if_reader_exist(user_id, book_id) do
+    query =
+      from r in Reader,
+        where: r.user_id == ^user_id,
+        where: r.book_id == ^book_id
 
-    Repo.all(
-    from r in Reader,
-    where: r.user_id == ^user_id,
-    where: r.book_id == ^book_id,
-    limit: 1
-    )
+    Repo.exists?(query)
 
   end
 
@@ -326,7 +347,11 @@ defmodule Bookclub.Content do
         where: r.book_id == ^book_id,
         order_by: [desc: r.id],
         preload: [:user]
+
+    query
   end
+
+
 
 
   @doc """
@@ -400,4 +425,113 @@ defmodule Bookclub.Content do
   def change_reader(%Reader{} = reader) do
     Reader.changeset(reader, %{})
   end
+
+  alias Bookclub.Content.Rating
+
+  @doc """
+  Returns the list of ratings.
+
+  ## Examples
+
+      iex> list_ratings()
+      [%Rating{}, ...]
+
+  """
+  def list_ratings do
+    Repo.all(Rating)
+  end
+
+  @doc """
+  Gets a single rating.
+
+  Raises `Ecto.NoResultsError` if the Rating does not exist.
+
+  ## Examples
+
+      iex> get_rating!(123)
+      %Rating{}
+
+      iex> get_rating!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_rating!(id), do: Repo.get!(Rating, id)
+
+  @doc """
+  Creates a rating.
+
+  ## Examples
+
+      iex> create_rating(%{field: value})
+      {:ok, %Rating{}}
+
+      iex> create_rating(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+
+
+  def create_rating(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:ratings)
+    |> Rating.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a rating.
+
+  ## Examples
+
+      iex> update_rating(rating, %{field: new_value})
+      {:ok, %Rating{}}
+
+      iex> update_rating(rating, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_rating(%Rating{} = rating, attrs) do
+    rating
+    |> Rating.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Rating.
+
+  ## Examples
+
+      iex> delete_rating(rating)
+      {:ok, %Rating{}}
+
+      iex> delete_rating(rating)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_rating(%Rating{} = rating) do
+    Repo.delete(rating)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking rating changes.
+
+  ## Examples
+
+      iex> change_rating(rating)
+      %Ecto.Changeset{source: %Rating{}}
+
+  """
+  def change_rating(%Rating{} = rating) do
+    Rating.changeset(rating, %{})
+  end
+
+  def get_ratings_by_book(book_id) do
+    query =
+      from r in Rating,
+        where: r.book_id == ^book_id,
+        order_by: [desc: r.id]
+
+    query
+  end
+
 end
