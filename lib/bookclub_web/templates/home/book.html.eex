@@ -60,9 +60,8 @@
                     <span class="star-container">
                         <span class="star-half">&#x2605;</span>
                     </span> -->
-                    <div class="stars" style="--rating: <%= @star_rating %>;"></div>
 
-                    <span class="review-text"><%= @star_rating %> of <%= @rating_count%> reviews </span>
+                    <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: @book.id %>
                   </div>
 
 
@@ -144,27 +143,9 @@
                 <div class="pop-content">
                   <div class="pop-content-title"><%= book.title %></div>
                   <div class="pop-content-author"><%= book.author %></div>
-                  <p>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="nofill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
 
-                       <!-- <%= for rate <- book.ratings do %>
-                       <%= rate.rating %>
-                       <% end %> -->
-                  </p>
+                  <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
+                  
                 </div>
               </div>
 

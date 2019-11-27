@@ -154,24 +154,9 @@
         <div class="top-rated-text">
           <div class="toprated-title"><%= book.title %></div>
           <div class="toprated-author"><%= book.author %></div>
-          <div>Added By <span class="toprated-user"> <%= book.user.first_name %></span></div>
-          <p>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="nofill"
-              ><i class="fa fa-star-o" aria-hidden="true"></i
-            ></span>
-            <span class="nofill"
-              ><i class="fa fa-star-o" aria-hidden="true"></i
-            ></span>
-          </p>
+          <div class="added_by">Added By <span class="toprated-user"> <%= book.user.first_name %></span></div>
+          
+          <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
           <!-- <p class="top-rated-desc">
             <%= book.description |> String.slice(0..60) %>...
           </p>

@@ -35,13 +35,8 @@ defmodule BookclubWeb.HomeController do
     book = Content.get_book_by_slug!(slug)
     changeset = Content.change_rating(%Rating{})
     recommended_books = Content.recommended_books(book.id)
-
-    # IO.puts "cccccccccccccc"
-    # IO.inspect recommended_books
-    # IO.puts "ccccccccccccc"
+    
     genre_sort = Functions.top_five_genres
-
-    {rating_count, star_rating} = Functions.calculate_ratings(book.id)
 
     reader =
       case conn.assigns[:user] do
@@ -50,7 +45,6 @@ defmodule BookclubWeb.HomeController do
       end
 
     render(conn, "book.html", book: book, reader: reader, changeset: changeset,
-    star_rating: star_rating, rating_count: rating_count,
     recommended_books: recommended_books, genre_sort: genre_sort)
 
   end

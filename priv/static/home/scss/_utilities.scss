@@ -243,8 +243,9 @@ select:focus {
   color: $star-color;
 }
 .review-text {
+  display: block;
   font-size: 0.8rem;
-  padding: 0.5rem;
+  padding: 0;
 }
 
 // .star-container {
@@ -568,4 +569,8 @@ tr:nth-child(even) {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+}
+
+.added_by {
+  font-size: 0.9rem;
 }
