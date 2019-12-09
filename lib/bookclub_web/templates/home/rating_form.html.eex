@@ -93,6 +93,7 @@
       &#x2605;
       <h5>1</h5>
     <% end %>
+    <%= error_tag f, :rating %>
 
 </div>
 <div class="rating-comment">

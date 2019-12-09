@@ -35,7 +35,7 @@ defmodule BookclubWeb.HomeController do
     book = Content.get_book_by_slug!(slug)
     changeset = Content.change_rating(%Rating{})
     recommended_books = Content.recommended_books(book.id)
-    
+
     genre_sort = Functions.top_five_genres
 
     reader =
@@ -97,6 +97,9 @@ defmodule BookclubWeb.HomeController do
 
     book = Content.get_only_book!(book_id)
     reader = Content.check_if_reader_exist(conn.assigns.user.id, book.id)
+    recommended_books = Content.recommended_books(book.id)
+
+    genre_sort = Functions.top_five_genres
 
     case Content.create_rating(conn.assigns.user, rating_params) do
       {:ok, _rating} ->
@@ -105,8 +108,23 @@ defmodule BookclubWeb.HomeController do
         |> redirect(to: Routes.home_path(conn, :book, book))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "book.html", changeset: changeset, book: book, reader: reader)
+        render(conn, "book.html", changeset: changeset, book: book, reader: reader,
+        recommended_books: recommended_books, genre_sort: genre_sort)
     end
+  end
+
+  def genre(conn, %{"slug" => slug}) do
+    genres = Content.list_genres()
+
+    {books, num_links} =
+      Content.books_by_genre([slug])
+      |> Pagination.paginate(30, conn)
+
+    render(conn, "books.html", books: books, num_links: num_links, genres: genres)
+  end
+
+  def reviews(conn, %{"slug" => slug}) do
+    IO.inspect slug
   end
 
 end

@@ -54,7 +54,10 @@
             </div>
             <% end %>
             <div class="all-books-text">
-              <div class="booktext-title"><%= book.title %></div>
+              <div class="booktext-title">
+                <%= if String.length(book.title) < 16, do: book.title, else: String.slice(book.title, 0..15)<>"..." %>
+
+              </div>
               <div class="booktext-author"><%= book.author %></div>
               <div class="added_by">Added By <span class="booktext-user"> <%= book.user.first_name %></span></div>
               <!-- <p>56| 78</p> -->

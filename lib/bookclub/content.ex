@@ -79,6 +79,8 @@ defmodule Bookclub.Content do
 
   def get_only_book!(id), do: Repo.get!(Book, id)
 
+
+
   @doc """
   Creates a book.
 
@@ -178,7 +180,8 @@ defmodule Bookclub.Content do
         where: b.published == true,
         where:
           fragment("? @> ?", b.genre, ^genre),
-        order_by: [desc: b.id]
+        order_by: [desc: b.id],
+        preload: [:user]
 
     query
 

@@ -137,15 +137,18 @@
 
               <%= for book <- @recommended_books do %>
               <div class="toprated-sidebar-single">
-                <div class="pop-img">
-                  <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="" />
-                </div>
+                <%= link to: Routes.home_path(@conn, :book, book) do %>
+                  <div class="pop-img">
+                    <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="" />
+                  </div>
+                <% end %>
+
                 <div class="pop-content">
                   <div class="pop-content-title"><%= book.title %></div>
                   <div class="pop-content-author"><%= book.author %></div>
 
                   <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
-                  
+
                 </div>
               </div>
 
@@ -160,7 +163,9 @@
 
             <ul class="top-cat-list">
               <%= for gen <- @genre_sort do %>
-                <li class="text-trans-cap"><%= elem(gen, 0) %> (<%= elem(gen, 1) %> books)</li>
+                <%= link to: Routes.home_path(@conn, :genre, elem(gen, 0)) do %>
+                  <li class="text-trans-cap"><%= elem(gen, 0) %> (<%= elem(gen, 1) %> books)</li>
+                <% end %>
               <% end %>
 
             </ul>

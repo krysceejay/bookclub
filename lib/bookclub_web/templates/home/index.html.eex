@@ -152,10 +152,12 @@
         </div>
         <% end %>
         <div class="top-rated-text">
-          <div class="toprated-title"><%= book.title %></div>
+          <div class="toprated-title">
+            <%= if String.length(book.title) <= 16, do: book.title, else: String.slice(book.title, 0..15)<>"..." %>
+          </div>
           <div class="toprated-author"><%= book.author %></div>
           <div class="added_by">Added By <span class="toprated-user"> <%= book.user.first_name %></span></div>
-          
+
           <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
           <!-- <p class="top-rated-desc">
             <%= book.description |> String.slice(0..60) %>...

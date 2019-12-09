@@ -1,3 +1,8 @@
 <div class="stars" style="--rating: <%= elem(calculate_ratings(@book_id), 1) %>;"></div>
 
-<span class="review-text"><%= elem(calculate_ratings(@book_id), 1) %> of <%= elem(calculate_ratings(@book_id), 0) %> reviews </span>
+<span class="review-text">
+  <%= elem(calculate_ratings(@book_id), 1) %> of
+  <%= link to: Routes.home_path(@conn, :reviews, @book_id) do %>
+    <%= elem(calculate_ratings(@book_id), 0) %> review(s)
+  <% end %>
+</span>

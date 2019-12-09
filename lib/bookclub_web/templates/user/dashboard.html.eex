@@ -1,37 +1,6 @@
 <div class="dashboard-main-section-content">
-  <h2>Welcome <%= @conn.assigns[:user].first_name %></h2>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod iste
-  fugit ipsam distinctio rem corporis corrupti facilis possimus quasi
-  pariatur! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-  Quas, placeat ea quae natus voluptas quidem ratione aut obcaecati
-  earum quibusdam fugiat veniam consequuntur magni asperiores harum ab
-  nisi perspiciatis illo? Lorem ipsum dolor sit amet consectetur
-  adipisicing elit. Quod iste fugit ipsam distinctio rem corporis
-  corrupti facilis possimus quasi pariatur! Lorem ipsum dolor sit amet
-  consectetur adipisicing elit. Quas, placeat ea quae natus voluptas
-  quidem ratione aut obcaecati earum quibusdam fugiat veniam
-  consequuntur magni asperiores harum ab nisi perspiciatis illo? nisi
-  perspiciatis illo? Lorem ipsum dolor sit amet consectetur adipisicing
-  elit. Quod iste fugit ipsam distinctio rem corporis corrupti facilis
-  possimus quasi pariatur! Lorem ipsum dolor sit amet consectetur
-  adipisicing elit. Quas, placeat ea quae natus voluptas quidem ratione
-  aut obcaecati earum quibusdam fugiat veniam consequuntur magni
-  asperiores harum ab nisi perspiciatis illo? nisi perspiciatis illo?
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod iste
-  fugit ipsam distinctio rem corporis corrupti facilis possimus quasi
-  pariatur! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-  Quas, placeat ea quae natus voluptas quidem ratione aut obcaecati
-  earum quibusdam fugiat veniam consequuntur magni asperiores harum ab
-  nisi perspiciatis illo? Lorem ipsum dolor sit amet consectetur
-  adipisicing elit. Cumque quis illum ea similique ipsum. Reprehenderit
-  voluptatum dolore, debitis repudiandae iure unde neque libero
-  accusantium illo odio excepturi, aperiam, eligendi quaerat corrupti.
-  Fugit ipsa magni minus. Rem consequatur voluptate magni possimus
-  tempore quod exercitationem eveniet. Similique animi quibusdam iusto
-  expedita facere nemo, odio eveniet pariatur ratione vel atque unde
-  voluptatem dolor hic architecto dolorum cumque consequuntur non fuga
-  rerum saepe! Ipsum et reiciendis enim dolores debitis architecto porro
-  delectus obcaecati quaerat! Voluptas aut magnam odio, eum numquam enim
-  atque vero consequuntur dolorem aliquid earum quo ullam ab, repellat
-  fugiat excepturi possimus?
+  <p>Welcome <%= @conn.assigns[:user].first_name %></p>
+  <div></div>
+  <div></div>
+  <div></div>
 </div>

@@ -19,7 +19,10 @@ defmodule BookclubWeb.StarView do
             _ -> 1 + column_count
           end
 
-    star_rating = rating_sum / rating_count
+    star_rating =
+      rating_sum / rating_count
+          |> Decimal.from_float
+          |> Decimal.round(1)
 
     {
       rating_count,
