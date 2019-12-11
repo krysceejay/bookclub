@@ -50,4 +50,8 @@ $(document).ready(function() {
     chatDivScroll();
     chatDivChange();
   });
+
+  $("#menu-bar-users").click(function() {
+    $(".dropdown-content").toggleClass("display-element");
+  });
 });

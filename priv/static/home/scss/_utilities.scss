@@ -560,7 +560,7 @@ tr:nth-child(even) {
   font-size: $star-size;
   line-height: 1;
 
-  &::before {
+  &:before {
     content: "★★★★★";
     //letter-spacing: 3px;
     background: linear-gradient(
@@ -577,19 +577,19 @@ tr:nth-child(even) {
   font-size: 0.9rem;
 }
 
-.empty-book {
+%empty-state-shared {
   height: 65vh;
   width: 100%;
   display: grid;
   justify-content: center;
   align-content: center;
+}
+
+.empty-book {
+  @extend %empty-state-shared;
   //background-color: #ffffff;
   background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='%23f53ba3' fill-opacity='0.07' fill-rule='evenodd'/%3E%3C/svg%3E");
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // margin-left: -7.5rem;
-  // margin-top: -7.5rem;
+
   svg {
     width: 20rem;
     //stroke: #242c42;
@@ -607,5 +607,82 @@ tr:nth-child(even) {
   .btn {
     padding: 0.4rem 0.7rem;
     border-radius: 5px;
+  }
+}
+
+.empty-chat {
+  @extend %empty-state-shared;
+  svg {
+    width: 20rem;
+  }
+}
+
+.empty-chat-text {
+  //height: 5vh;
+  font-size: 1rem;
+  text-align: center;
+  margin: 1rem;
+}
+
+.chat-top-right-menu-icon {
+  display: block;
+  //position: absolute;
+  // top: 0;
+  // right: -70px;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  z-index: 1;
+  //background: #9b3838;
+  //font-size: 2rem;
+  //cursor: pointer;
+
+  span {
+    display: block;
+    width: 2rem;
+    height: 3px;
+    background: #262626;
+    position: absolute;
+    top: 24px;
+    transition: 0.3s;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #262626;
+      transition: 0.3s;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #262626;
+      transition: 0.3s;
+    }
+  }
+}
+.chat-toggle {
+  //right: -5px;
+  span {
+    background: transparent;
+
+    &:before {
+      top: 0;
+      transform: rotate(45deg);
+      //background: #ffffff;
+    }
+
+    &:after {
+      top: 0;
+      transform: rotate(-45deg);
+      //background: #ffffff;
+    }
   }
 }

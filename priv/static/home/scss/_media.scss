@@ -49,16 +49,22 @@
         }
         &-area {
           .chat-area-head {
-            .book-cover {
-              flex: 1;
-            }
+            // .book-cover {
+            //   flex: 1;
+            // }
             .book-details-text {
-              flex: 9;
+              flex: 7;
             }
             .menu-bar-icon {
               display: block;
-              flex: 1;
-              font-size: 2rem;
+              flex: 3;
+              //background: coral;
+              display: flex;
+              justify-content: space-around;
+              color: $main-color;
+              i {
+                font-size: 1rem;
+              }
             }
           }
         }
@@ -303,15 +309,26 @@
             //height: 10vh;
             height: 10vh;
             position: sticky;
-            //background-color: $light-color;
-            .book-cover {
-              flex: 1;
-              max-width: 60px;
-              height: 60px;
-              margin-right: 1rem;
-            }
+            background-color: $light-color;
+            // .book-cover {
+            //   flex: 1;
+            //   max-width: 60px;
+            //   height: 60px;
+            //   margin-right: 1rem;
+            // }
             .book-details-text {
               flex: 2;
+            }
+            .menu-bar-icon {
+              display: block;
+              flex: 3;
+              //background: coral;
+              display: flex;
+              justify-content: space-around;
+              color: $main-color;
+              i {
+                font-size: 1rem;
+              }
             }
           }
           .chat-area-body {
@@ -378,13 +395,14 @@
               display: inline-block;
               line-height: 0;
               position: relative;
-              input {
+              textarea {
                 width: 100%;
                 min-height: 50px;
                 //height: 8vh;
                 outline: none;
                 border: none;
                 border-radius: 5px;
+                padding-right: 42px;
                 &:focus {
                   outline: none;
                 }
