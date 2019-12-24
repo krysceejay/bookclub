@@ -51,6 +51,14 @@ $(document).ready(function() {
     chatDivChange();
   });
 
+  $("#menu-bar-ellipsis").click(function() {
+    $(".chat-container-menu-ellipsis").addClass("display-element");
+  });
+
+  $("#menu-ellipsis-close").click(function() {
+    $(".chat-container-menu-ellipsis").removeClass("display-element");
+  });
+
   //let display = "none";
   // sessionStorage.setItem("onlineUsers", "onlineusers");
   // if (sessionStorage.onlineUsers == "onlineusers") {

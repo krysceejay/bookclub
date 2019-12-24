@@ -39,6 +39,10 @@
     }
   }
 
+  .chat-container-menu-ellipsis {
+    display: none;
+  }
+
   #chat-section {
     //flex: 18;
     max-width: 92vw;
@@ -245,6 +249,14 @@
               }
             }
           }
+        }
+
+        .chat-container-online-users-sm {
+          display: none;
+        }
+
+        .chat-container-bookdetails-sm {
+          display: none;
         }
       }
       &-bookdetails {

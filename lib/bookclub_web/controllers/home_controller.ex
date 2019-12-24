@@ -33,6 +33,11 @@ defmodule BookclubWeb.HomeController do
 
   def book(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
+
+    # IO.puts "++++++++++++++"
+    # IO.puts NaiveDateTime.to_time(book.updated_at)
+    # IO.puts "++++++++++++++"
+
     changeset = Content.change_rating(%Rating{})
     recommended_books = Content.recommended_books(book.id)
 

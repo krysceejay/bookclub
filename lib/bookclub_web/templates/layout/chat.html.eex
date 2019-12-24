@@ -77,6 +77,20 @@
       </div>
     </ul>
   </nav>
+
+  <div class="chat-container-menu-ellipsis">
+    <div class="chat-head-section">
+      <div class="details-close-btn" id="menu-ellipsis-close">
+        <i class="fa fa-close"></i>
+      </div>
+    </div>
+
+    <ul>
+      <li><%= link "Home", to: Routes.home_path(@conn, :index) %></li>
+      <li><%= link "Dashboard", to: Routes.user_path(@conn, :index) %></li>
+      <li><%= link "Log out", to: Routes.auth_path(@conn, :delete), method: :delete %></li>
+    </ul>
+  </div>
   <!-- / End Nav -->
     <%= render @view_module, @view_template, assigns %>
 
