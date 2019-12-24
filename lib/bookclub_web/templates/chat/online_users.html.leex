@@ -1,0 +1,31 @@
+<div class="chat-container-online-users-sm <%= if @show_users == 1, do: "display-element", else: '' %>">
+  <div class="chat-head-section">
+    <h2>online-users</h2>
+    <div id="users-close-btn-sm" class="details-close-btn" phx-click="hide-users">
+      <i class="fa fa-close"></i>
+    </div>
+  </div>
+
+  <form action="">
+    <input
+      class="search-user"
+      type="text"
+      placeholder="search users"
+    />
+  </form>
+  <div class="online-users-list">
+
+  <%= for user <- @users do %>
+    <div class="single-user-details">
+      <div class="user-propix">
+        <img src="<%= Routes.static_path(@socket, "/home/img/courses-1.jpg") %>" alt="" />
+      </div>
+      <div class="user-details-text">
+        <span><%= user.user_name |> String.capitalize() %></span>
+        <span><%= if user.typing, do: "is typing..." %></span>
+      </div>
+    </div>
+  <% end %>
+
+  </div>
+</div>

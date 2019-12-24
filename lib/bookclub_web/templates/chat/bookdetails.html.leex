@@ -1,0 +1,47 @@
+<div class="chat-container-bookdetails-sm <%= if @show_bookdetails == 1, do: "display-element", else: '' %>">
+  <div class="chat-head-section">
+    <h2>Details</h2>
+    <div id="detail-close-btn" class="details-close-btn" phx-click="hide-bookdetails">
+      <i class="fa fa-close"></i>
+    </div>
+  </div>
+  <div class="book-chat-anchor">
+    <div class="book-chat-anchor-img">
+      <img src="<%= Routes.static_path(@socket, "/home/img/the-way.jpg") %>" alt="" />
+    </div>
+    <div class="book-chat-anchor-det">
+      <span class="text-primary">Anchor:</span> Krys Baba
+    </div>
+  </div>
+  <div class="book-chat-topics">
+    <div class="book-chat-topics-head">
+      Topics
+    </div>
+    <ul class="book-chat-topics-list">
+      <li>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Fugiat, maxime!
+      </li>
+      <li>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Fugiat, maxime!
+      </li>
+      <li class="list-active">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Fugiat, maxime!
+      </li>
+      <li>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Fugiat, maxime!
+      </li>
+      <li>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Fugiat, maxime!
+      </li>
+      <li>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Fugiat, form
+      </li>
+    </ul>
+  </div>
+</div>

@@ -27,7 +27,7 @@
   }
 }
 
-@media (min-width: 820px) and (max-width: 950px) {
+@media (max-width: 950px) {
   #home {
     //Home Section A
     &-a {
@@ -66,6 +66,129 @@
                 font-size: 1rem;
               }
             }
+          }
+
+          .chat-container-online-users-sm {
+            display: none;
+            position: absolute;
+            top: 0.2rem;
+            right: 0.3rem;
+            width: 50vw;
+
+            background: #fff;
+            //flex: 1;
+            height: 75vh;
+            //max-width: 360px;
+            border-radius: 5px;
+            //text-align: center;
+            //padding: 1.3rem;
+            overflow: hidden;
+
+            form {
+              padding: 0 1.3rem;
+              .search-user {
+                width: 100%;
+                height: 40px;
+                border-radius: 5px;
+              }
+            }
+            .online-users-list {
+              //   margin-bottom: 1.3rem;
+
+              height: 55vh;
+              overflow: scroll;
+              .single-user-details {
+                display: flex;
+                align-items: center;
+                padding: 1rem 0;
+                border-bottom: 2px $border-bottom dotted;
+                padding: 1.2rem 1.3rem;
+                &:last-child {
+                  border-bottom: 0;
+                }
+
+                .user-propix {
+                  flex: 1;
+                  max-width: 45px;
+                  height: 45px;
+                  margin-right: 1rem;
+
+                  img {
+                    border-radius: 50%;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                  }
+                }
+                .user-details-text {
+                  //background: $light-color;
+                  flex: 5;
+                }
+              }
+            }
+          }
+
+          .chat-container-bookdetails-sm {
+            display: none;
+            position: absolute;
+            top: 0.2rem;
+            right: 0.3rem;
+            width: 50vw;
+
+            background: #fff;
+            //flex: 1;
+            height: 75vh;
+            //max-width: 360px;
+            border-radius: 5px;
+            //padding: 1.3rem;
+            overflow: hidden;
+            .book-chat-anchor {
+              text-align: center;
+              border-bottom: 1px #e1e1e1 solid;
+              padding-bottom: 1rem;
+              &-img {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                //border-radius: 50%;
+                img {
+                  border-radius: 50%;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+              }
+              &-det {
+                font-size: 1.25rem;
+              }
+            }
+            .book-chat-topics {
+              &-head {
+                font-size: 1.1rem;
+                font-weight: 600;
+                //margin-top: 1rem;
+                padding: 1.3rem;
+              }
+              &-list {
+                height: 25vh;
+                overflow: scroll;
+                li {
+                  border-bottom: 2px $border-bottom dotted;
+                  padding: 1rem 1.3rem;
+                  &:last-child {
+                    border-bottom: 0;
+                  }
+                }
+                .list-active {
+                  border-left: 4px $main-color solid;
+                  background: $border-bottom;
+                }
+              }
+            }
+          }
+
+          .display-element {
+            display: block;
           }
         }
         &-bookdetails {
@@ -238,61 +361,6 @@
 
         &-online-users {
           display: none;
-          background: #fff;
-          flex: 1;
-          height: 90vh;
-          max-width: 360px;
-          border-radius: 5px;
-          //text-align: center;
-          //padding: 1.3rem;
-          overflow: hidden;
-
-          form {
-            padding: 0 1.3rem;
-            .search-user {
-              width: 100%;
-              height: 40px;
-              border-radius: 5px;
-              //margin-bottom: 1.3rem;
-              //   &:focus {
-              //     border: 1px $light-color solid;
-              //   }
-            }
-          }
-          .online-users-list {
-            //   margin-bottom: 1.3rem;
-
-            height: 76vh;
-            overflow: scroll;
-            .single-user-details {
-              display: flex;
-              align-items: center;
-              padding: 1rem 0;
-              border-bottom: 2px $border-bottom dotted;
-              padding: 1.2rem 1.3rem;
-              &:last-child {
-                border-bottom: 0;
-              }
-
-              .user-propix {
-                flex: 1;
-                width: 43px;
-                height: 43px;
-                margin-right: 1rem;
-
-                img {
-                  border-radius: 50%;
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                }
-              }
-              .user-details-text {
-                //background: $light-color;
-                flex: 5;
-              }
-            }
-          }
         }
         &-area {
           background: $light-color;
@@ -310,12 +378,12 @@
             height: 10vh;
             position: sticky;
             background-color: $light-color;
-            // .book-cover {
-            //   flex: 1;
-            //   max-width: 60px;
-            //   height: 60px;
-            //   margin-right: 1rem;
-            // }
+            .book-cover {
+              flex: 1;
+              max-width: 60px;
+              height: 60px;
+              margin-right: 1rem;
+            }
             .book-details-text {
               flex: 2;
             }
@@ -441,59 +509,53 @@
               }
             }
           }
+
+          .chat-container-online-users-sm {
+            display: none;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.3rem;
+            width: 80vw;
+
+            background: #fff;
+            //flex: 1;
+            height: 80vh;
+            //max-width: 360px;
+            border-radius: 5px;
+            //text-align: center;
+            //padding: 1.3rem;
+            overflow: hidden;
+
+            .online-users-list {
+              //   margin-bottom: 1.3rem;
+
+              height: 60vh;
+              overflow: scroll;
+            }
+          }
+
+          .chat-container-bookdetails-sm {
+            display: none;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.3rem;
+            width: 80vw;
+
+            background: #fff;
+            //flex: 1;
+            height: 80vh;
+            //max-width: 360px;
+            border-radius: 5px;
+            //padding: 1.3rem;
+            overflow: hidden;
+          }
+
+          .display-element {
+            display: block;
+          }
         }
         &-bookdetails {
           display: none;
-          background: #fff;
-          flex: 1;
-          height: 90vh;
-          max-width: 360px;
-          border-radius: 5px;
-          //padding: 1.3rem;
-          overflow: hidden;
-          .book-chat-anchor {
-            text-align: center;
-            border-bottom: 1px #e1e1e1 solid;
-            padding-bottom: 1rem;
-            &-img {
-              display: inline-block;
-              width: 100px;
-              height: 100px;
-              //border-radius: 50%;
-              img {
-                border-radius: 50%;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-              }
-            }
-            &-det {
-              font-size: 1.25rem;
-            }
-          }
-          .book-chat-topics {
-            &-head {
-              font-size: 1.1rem;
-              font-weight: 600;
-              //margin-top: 1rem;
-              padding: 1.3rem;
-            }
-            &-list {
-              height: 40vh;
-              overflow: scroll;
-              li {
-                border-bottom: 2px $border-bottom dotted;
-                padding: 1rem 1.3rem;
-                &:last-child {
-                  border-bottom: 0;
-                }
-              }
-              .list-active {
-                border-left: 4px $main-color solid;
-                background: $border-bottom;
-              }
-            }
-          }
         }
       }
     }

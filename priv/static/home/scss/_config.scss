@@ -33,3 +33,11 @@ $star-size: 1rem;
     @return $light-color;
   }
 }
+
+@function display-users($display) {
+  @if ($display == 0) {
+    @return none;
+  } @else {
+    @return block;
+  }
+}

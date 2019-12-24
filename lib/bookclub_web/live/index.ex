@@ -15,20 +15,22 @@ defmodule BookclubWeb.Live.Index do
     default_user_presence_payload(current_user)
   )
 
-    {:ok, fetch(socket, book, current_user)}
+    {:ok, fetch(socket, book, current_user, 0, 0)}
   end
 
   def render(assigns) do
     BookclubWeb.ChatView.render("index.html", assigns)
   end
 
-  def fetch(socket, book, current_user) do
+  def fetch(socket, book, current_user, show_users, bookdetails) do
     assign(socket, %{
       chats: Messages.list_chats_by_bookid(book.id),
       changeset: Messages.change_chat(%Chat{}),
       book: book,
       current_user: current_user,
-      users: Presence.list_presences(Messages.get_topic(book.id))
+      users: Presence.list_presences(Messages.get_topic(book.id)),
+      show_users: show_users,
+      show_bookdetails: bookdetails
       })
   end
 
@@ -66,11 +68,32 @@ defmodule BookclubWeb.Live.Index do
      {:ok, chat} ->
        Presence.update_presence(self(), Messages.get_topic(chat.book_id), chat.user_id, %{typing: false})
 
-       {:noreply, fetch(socket, get_book(socket), get_current_user(socket))}
+       {:noreply, fetch(socket, get_book(socket), get_current_user(socket), get_show_users(socket), get_show_bookdetails(socket))}
 
      {:error, %Ecto.Changeset{} = changeset} ->
        {:noreply, assign(socket, changeset: changeset)}
    end
+ end
+
+ def handle_event("show-users", _value, socket) do
+   # value = 1
+   # IO.puts "++++++++++++++"
+   # IO.puts value
+   # IO.puts "++++++++++++++"
+   {:noreply, assign(socket, show_users: 1)}
+ end
+
+ def handle_event("hide-users", _value, socket) do
+   {:noreply, assign(socket, show_users: 0)}
+ end
+
+ def handle_event("show-bookdetails", _value, socket) do
+
+   {:noreply, assign(socket, show_bookdetails: 1)}
+ end
+
+ def handle_event("hide-bookdetails", _value, socket) do
+   {:noreply, assign(socket, show_bookdetails: 0)}
  end
 
  def handle_info(%{event: "presence_diff", payload: _payload}, socket = %{assigns: %{book: book}}) do
@@ -79,7 +102,7 @@ defmodule BookclubWeb.Live.Index do
 end
 
  def handle_info({Messages, [:chat, :inserted], _chat}, socket) do
-   {:noreply, fetch(socket, get_book(socket), get_current_user(socket))}
+   {:noreply, fetch(socket, get_book(socket), get_current_user(socket), get_show_users(socket), get_show_bookdetails(socket))}
  end
 
  defp get_current_user(socket) do
@@ -90,6 +113,16 @@ end
  defp get_book(socket) do
    socket.assigns
    |> Map.get(:book)
+ end
+
+ defp get_show_users(socket) do
+   socket.assigns
+   |> Map.get(:show_users)
+ end
+
+ defp get_show_bookdetails(socket) do
+   socket.assigns
+   |> Map.get(:show_bookdetails)
  end
 
  defp default_user_presence_payload(current_user) do

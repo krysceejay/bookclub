@@ -246,22 +246,6 @@
             }
           }
         }
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          top: 0.5rem;
-          right: 0.3rem;
-          background: $main-color;
-          width: 80vw;
-          border-radius: 3px;
-          a {
-            display: block;
-            padding: 0.5rem;
-          }
-        }
-        .display-element {
-          display: block;
-        }
       }
       &-bookdetails {
         background: #fff;
