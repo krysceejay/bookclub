@@ -22,21 +22,21 @@
       position: relative;
       cursor: pointer;
       //margin-bottom: 0.5rem;
-      ul {
-        display: none;
-      }
-      &:hover ul {
-        display: block;
-        position: absolute;
-        left: 3rem;
-        margin-top: 1rem;
+      // ul {
+      //   display: none;
+      // }
+      // &:hover ul {
+      //   display: block;
+      //   position: absolute;
+      //   left: 3rem;
+      //   margin-top: 1rem;
 
-        li:hover {
-          a {
-            color: $main-color;
-          }
-        }
-      }
+      //   li:hover {
+      //     a {
+      //       color: $main-color;
+      //     }
+      //   }
+      // }
       a {
         color: set-text-color($sec-fade-color);
       }

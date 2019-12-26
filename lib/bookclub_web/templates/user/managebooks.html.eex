@@ -65,7 +65,7 @@
 
   </div>
   <div class="empty-book-text">
-    looks like you've not added a book. Kindly 
+    Looks like you've not added a book. Kindly
     <%= link "Add a book", to: Routes.user_path(@conn, :addbook), class: "btn btn-main" %>
   </div>
   <% end %>

@@ -39,9 +39,12 @@
           </li>
           <!-- <a href="managebook.html"
             > -->
-          <li class="main-aside-li">
+          <li class="main-aside-li drop-acc-li">
+            <input type="checkbox" checked>
             <i class="fa fa-book"></i>Books
-            <i class="fa fa-angle-down"></i>
+            <!-- <i class="fa fa-angle-down"></i> -->
+
+            <i class="angle-icon"></i>
             <ul>
               <li>
                 <%= link "Manage Books", to: Routes.user_path(@conn, :managebooks) %>
@@ -51,11 +54,11 @@
               </li>
             </ul>
           </li>
-          <!-- <li class="main-aside-li">
+          <li class="main-aside-li">
             <%= link to: Routes.auth_path(@conn, :delete), method: :delete do %>
             <i class="fa fa-power-off"></i>Log out
             <% end %>
-          </li> -->
+          </li>
         </ul>
             <div id="dash-bar" class="top_right-menu-icon">
             <%# <span id="dash-bar"><i id="dash-icon-id" class="fa fa-bars fa-2x" aria-hidden="true"></i></span> %>
