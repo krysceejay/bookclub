@@ -37,6 +37,15 @@
     color: #f4f4f4;
     background-color: $dark-color;
   }
+  &-profile {
+    @extend %btn-shared;
+    //color: black
+    border-radius: 50px;
+    //background-color: #f4f4f4;
+    padding: 0.3rem 1rem;
+    border: 1px solid $main-color;
+  }
+
   &:focus {
     box-shadow: none;
     outline: none;
@@ -713,10 +722,6 @@ tr:nth-child(even) {
 
 .drop-acc-li {
   position: relative;
-  padding: 0;
-  margin: 0;
-  padding-bottom: 4px;
-  padding-top: 18px;
   animation: flipdown 0.5s ease both;
 
   .angle-icon {
@@ -754,9 +759,8 @@ tr:nth-child(even) {
 
     & ~ ul {
       margin-left: 2rem;
-      perspective: 900;
       li {
-        margin: 0.5rem auto;
+        //margin-top: 2rem;
         a {
           font-size: 0.9rem;
         }

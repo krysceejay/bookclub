@@ -222,5 +222,59 @@
         text-align: center;
       }
     }
+
+    //User Profile
+    .dash-user-profile {
+      display: block;
+      margin: 2rem auto;
+      background: #fff;
+      width: 70%;
+      padding: 1.5rem;
+      border-radius: 25px;
+      position: relative;
+
+      &-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 60%;
+        //background: chartreuse;
+        margin-bottom: 2rem;
+        &-name {
+          .full-name {
+            font-size: 1.5rem;
+            display: block;
+          }
+          .user-name {
+            font-size: 1rem;
+            display: block;
+          }
+        }
+      }
+
+      &-pic {
+        position: absolute;
+        top: -3rem;
+        right: 3rem;
+        height: 180px;
+        width: 180px;
+        img {
+          border: 12px solid #fff;
+          border-radius: 50%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &-about {
+        .profile-about-head {
+          color: $main-color;
+          letter-spacing: 0.2rem;
+          font-weight: 600;
+          margin-bottom: 1.2rem;
+        }
+      }
+    }
   }
 }

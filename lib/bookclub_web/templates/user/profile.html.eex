@@ -1,0 +1,27 @@
+<div class="dashboard-main-section-content">
+  <h3 class="dashboard-content-header">profile</h3>
+
+  <div class="dash-user-profile">
+    <div class="dash-user-profile-top">
+      <div class="dash-user-profile-top-name">
+        <span class="full-name">Christopher Chijioke</span>
+        <span class="user-name">Diaroy | chrysclass16@gmail.com</span>
+      </div>
+
+
+      <%= link "Edit Profile", to: Routes.home_path(@conn, :books), class: "btn btn-profile" %>
+    </div>
+
+    <div class="dash-user-profile-pic">
+      <img src="<%= Routes.static_path(@conn, "/home/img/the-way.jpg") %>" alt="proimage" />
+    </div>
+
+    <div class="dash-user-profile-about">
+      <h4 class="profile-about-head">About</h4>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+
+  </div>
+
+</div>

@@ -105,4 +105,10 @@ defmodule BookclubWeb.UserController do
 
   end
 
+
+  def profile(conn, _params) do
+
+    render(conn, "profile.html")
+  end
+
 end
