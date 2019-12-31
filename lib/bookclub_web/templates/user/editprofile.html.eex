@@ -1,0 +1,8 @@
+<div class="dashboard-main-section-content">
+  <h3 class="dashboard-content-header">Edit Profile</h3>
+    <div class="dashboard-editprofile">
+      <div class="field">
+      <%= render "profileform.html", Map.put(assigns, :action, Routes.user_path(@conn, :updateprofile)) %>
+      </div>
+    </div>
+</div>

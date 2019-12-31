@@ -142,6 +142,8 @@ defmodule Bookclub.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_user_by_username(name), do: Repo.get_by(User, username: name)
+
   @doc """
   Creates a user.
 
@@ -178,6 +180,12 @@ defmodule Bookclub.Accounts do
     |> Repo.update()
   end
 
+  def update_user_slim(%User{} = user, attrs) do
+    user
+    |> User.changeset_update(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a User.
 
@@ -206,4 +214,5 @@ defmodule Bookclub.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
-end
+
+ end

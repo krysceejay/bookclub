@@ -11,6 +11,8 @@ defmodule Bookclub.Accounts.User do
     field :password, :string
     field :status, :integer
     field :username, :string
+    field :about, :string
+    field :propix, :string
     #field :role_id, :id
     belongs_to :role, Bookclub.Accounts.Role
     has_many :books, Bookclub.Content.Book
@@ -21,6 +23,7 @@ defmodule Bookclub.Accounts.User do
     ##Virtual Fields ##
     field :passwordfield, :string, virtual: true
     field :passwordfield_confirmation, :string, virtual: true
+    field :propix_field, :string, virtual: true
 
     timestamps()
   end
@@ -37,6 +40,15 @@ defmodule Bookclub.Accounts.User do
     |> unique_constraint(:email)
     |> unique_constraint(:username)
     |> encrypt_password
+    |> default_pic
+  end
+
+  def changeset_update(user, attrs) do
+    user
+    |> cast(attrs, [:first_name, :last_name, :username, :about])
+    |> validate_required([:first_name, :last_name, :username])
+    |> unique_constraint(:username)
+    |> uploadfile(attrs, user)
   end
 
   defp encrypt_password(changeset) do
@@ -52,6 +64,36 @@ defmodule Bookclub.Accounts.User do
     end
 
   end
+
+  defp uploadfile(changeset, attrs, pr) do
+
+    if upload = attrs["propix_field"] do
+      extension = Path.extname(upload.filename)
+      time = DateTime.utc_now() |> DateTime.to_unix()
+      filename = Path.basename(upload.filename, extension)
+      newFilename = "#{filename}_#{time}#{extension}"
+      File.cp!(upload.path, "priv/static/images/profiles/#{newFilename}")
+
+      if pr != %{} do
+        if pr.propix != "noimage.png" do
+          File.rm("priv/static/images/profiles/#{pr.propix}")
+        end
+      end
+
+      put_change(changeset, :propix, newFilename)
+    else
+      if pr == %{} do
+        put_change(changeset, :propix, "noimage.png")
+      else
+        put_change(changeset, :propix, pr.propix)
+      end
+    end
+  end
+
+  def default_pic(changeset) do
+    put_change(changeset, :propix, "noimage.png")
+  end
+
 
 
 end

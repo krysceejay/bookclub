@@ -49,7 +49,10 @@ defmodule BookclubWeb.Router do
     put "/updatebook/:slug", UserController, :updatebook
     get "/book-readers/:slug", UserController, :bookreaders
     get "/join-readers/:slug", UserController, :joinreaders
-    get "/profile", UserController, :profile
+    get "/profile/:name", UserController, :profile
+    get "/editprofile", UserController, :editprofile
+    put "/updateprofile", UserController, :updateprofile
+
 
   end
 
@@ -70,6 +73,8 @@ defmodule BookclubWeb.Router do
     get "/contact", HomeController, :contact
     post "/rate-book", HomeController, :createrating
     get "/reviews/:slug", HomeController, :reviews
+
+    get "/not-found", HomeController, :notfound
 
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete

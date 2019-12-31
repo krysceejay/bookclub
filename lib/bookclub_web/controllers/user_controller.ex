@@ -1,6 +1,7 @@
 defmodule BookclubWeb.UserController do
   use BookclubWeb, :controller
 
+  alias Bookclub.Accounts
   alias Bookclub.Content
   alias Bookclub.Content.Book
   alias BookclubWeb.Pagination
@@ -69,8 +70,8 @@ defmodule BookclubWeb.UserController do
     end
   end
 
-  def bookreaders(conn, params) do
-    %{"slug" => slug} = params
+  def bookreaders(conn, %{"slug" => slug}) do
+    # %{"slug" => slug} = params
     book = Content.get_book_by_slug!(slug)
     readers_count = Content.get_readers_by_book(book.id) |> Pagination.count_query
 
@@ -106,9 +107,36 @@ defmodule BookclubWeb.UserController do
   end
 
 
-  def profile(conn, _params) do
+  def profile(conn, %{"name" => name}) do
 
-    render(conn, "profile.html")
+    userprof = Accounts.get_user_by_username(name)
+      case userprof do
+        nil -> render(conn, BookclubWeb.HomeView, "notfound.html")
+        _ -> render(conn, "profile.html", userprof: userprof)
+      end
+
+  end
+
+  def editprofile(conn, _params) do
+
+    changeset = Accounts.change_user(conn.assigns.user)
+    render(conn, "editprofile.html", changeset: changeset)
+
+  end
+
+  def updateprofile(conn, %{"user" => user_params}) do
+
+      case Accounts.update_user_slim(conn.assigns.user, user_params) do
+        {:ok, _user} ->
+          conn
+          |> put_flash(:info, "Profile updated successfully.")
+          |> redirect(to: Routes.user_path(conn, :profile, conn.assigns.user.username))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "editprofile.html", changeset: changeset)
+      end
+
+
   end
 
 end

@@ -276,5 +276,39 @@
         }
       }
     }
+
+    //edit profile
+    .dashboard-editprofile {
+      .field {
+        &-form {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 2rem;
+          //background: $main-color;
+          .form-group {
+            margin-bottom: 10px;
+            display: inline-block;
+            input,
+            textarea,
+            select {
+              width: 100%;
+            }
+
+            input[type="radio"] {
+              padding: 1rem;
+              width: 20px;
+              border: 1px $light-color solid;
+              font-size: 0.5rem;
+              height: 20px;
+              margin: 0.6rem;
+            }
+          }
+        }
+      }
+      .btn {
+        width: 25%;
+        text-align: center;
+      }
+    }
   }
 }

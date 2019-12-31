@@ -57,7 +57,7 @@
           </li>
 
           <li class="main-aside-li">
-            <%= link to: Routes.user_path(@conn, :profile) do %>
+            <%= link to: Routes.user_path(@conn, :profile, @conn.assigns.user.username) do %>
             <i class="fa fa-user"></i>Profile
             <% end %>
           </li>
@@ -82,7 +82,7 @@
 
             <div class="top_left">
               <div class="nav-img">
-                <img src="<%= Routes.static_path(@conn, "/home/img/the-way.jpg") %>" alt="proimage" />
+                <img src="<%= Routes.static_path(@conn,"/images/profiles/" <> @user.propix) %>" alt="proimage" />
               </div>
               <!-- <form action="">
                 <button type="submit" class="">Log Out</button>

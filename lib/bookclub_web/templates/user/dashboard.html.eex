@@ -1,5 +1,5 @@
 <div class="dashboard-main-section-content">
-  <p>Welcome <%= @conn.assigns[:user].first_name %></p>
+  <p>Welcome <%= @user.first_name %></p>
   <div></div>
   <div></div>
   <div></div>
