@@ -112,9 +112,9 @@ defmodule Bookclub.Content do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_book(%Book{} = book, attrs, id) do
+  def update_book(%Book{} = book, attrs) do
     book
-    |> Book.changeset(attrs, get_only_book!(id))
+    |> Book.changeset(attrs)
     |> Repo.update()
   end
 
@@ -354,7 +354,25 @@ defmodule Bookclub.Content do
     query
   end
 
+  def get_reader_joined_list(user_id) do
+    query =
+      from r in Reader,
+        where: r.user_id == ^user_id,
+        order_by: [desc: r.id],
+        preload: [book: :user]
 
+    query
+  end
+
+  def get_reader_by_book_user(userid, bookid) do
+    query =
+      from r in Reader,
+        where: r.user_id == ^userid,
+        where: r.book_id == ^bookid
+
+    Repo.one(query)
+
+  end
 
 
   @doc """

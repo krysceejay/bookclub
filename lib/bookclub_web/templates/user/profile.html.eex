@@ -9,8 +9,10 @@
         <span class="user-name">Member Since: <%= NaiveDateTime.to_date(@userprof.inserted_at) %></span>
       </div>
 
+      <%= if @userprof.email == @user.email do %>
+        <%= link "Edit Profile", to: Routes.user_path(@conn, :editprofile), class: "btn btn-profile" %>
+      <% end %>
 
-      <%= link "Edit Profile", to: Routes.user_path(@conn, :editprofile), class: "btn btn-profile" %>
     </div>
 
     <div class="dash-user-profile-pic">

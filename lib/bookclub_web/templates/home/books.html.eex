@@ -59,7 +59,14 @@
 
               </div>
               <div class="booktext-author"><%= book.author %></div>
-              <div class="added_by">Added By <span class="booktext-user"> <%= book.user.first_name %></span></div>
+              <div class="added_by">Added By
+                <span class="booktext-user">
+                  <%= link to: Routes.user_path(@conn, :profile, book.user.username) do %>
+                    <%= book.user.first_name %>
+                  <% end %>
+                  
+                </span>
+              </div>
               <!-- <p>56| 78</p> -->
               <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
               <!-- <p class="all-books-desc">

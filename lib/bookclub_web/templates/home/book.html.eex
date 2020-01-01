@@ -94,7 +94,7 @@
 
                   <%= else %>
 
-                  <%= link to: Routes.user_path(@conn, :joinreaders, @book) do %>
+                  <%= link to: Routes.user_path(@conn, :joinreaders, @book), onclick: "return confirm('Are you sure you want to join this book club?');" do %>
                   <span class="join-chat-icon"
                     ><i class="fa fa-handshake-o" aria-hidden="true"></i>
                     Join</span>

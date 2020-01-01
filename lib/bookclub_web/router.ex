@@ -52,6 +52,8 @@ defmodule BookclubWeb.Router do
     get "/profile/:name", UserController, :profile
     get "/editprofile", UserController, :editprofile
     put "/updateprofile", UserController, :updateprofile
+    get "/joinedlist", UserController, :joinedlist
+    get "/undojoin/:slug", UserController, :undojoin
 
 
   end

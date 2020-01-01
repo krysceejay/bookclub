@@ -46,6 +46,15 @@
     border: 1px solid $main-color;
   }
 
+  &-join {
+    @extend %btn-shared;
+    border-radius: 5px;
+    padding: 0.1rem 0.3rem;
+    border: 1px solid $main-color;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
   &:focus {
     box-shadow: none;
     outline: none;

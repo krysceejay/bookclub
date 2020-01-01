@@ -121,6 +121,13 @@
               font-size: 0.9rem;
               color: #444444;
             }
+            &-user {
+              a {
+                text-transform: capitalize;
+                font-size: 0.9rem;
+                color: #7a7a7a;
+              }
+            }
           }
 
           .users-and-rating {
@@ -131,6 +138,7 @@
             }
           }
           .dash-link-btn {
+            margin-top: 1rem;
             .fa {
               margin-right: 1rem;
               border: 2px $main-color solid;

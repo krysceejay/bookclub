@@ -53,6 +53,10 @@
                 <%= link "Add Book", to: Routes.user_path(@conn, :addbook) %>
               </li>
 
+              <li>
+                <%= link "Joined List", to: Routes.user_path(@conn, :joinedlist) %>
+              </li>
+
             </ul>
           </li>
 

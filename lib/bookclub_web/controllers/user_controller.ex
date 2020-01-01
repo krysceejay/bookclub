@@ -59,7 +59,7 @@ defmodule BookclubWeb.UserController do
     book = Content.get_book_by_slug!(slug)
     genre = Content.list_genres()
 
-    case Content.update_book(book, book_params, book.id) do
+    case Content.update_book(book, book_params) do
       {:ok, _book} ->
         conn
         |> put_flash(:info, "Book updated successfully.")
@@ -136,6 +136,26 @@ defmodule BookclubWeb.UserController do
           render(conn, "editprofile.html", changeset: changeset)
       end
 
+
+  end
+
+  def joinedlist(conn, _params) do
+    book_count = Content.get_reader_joined_list(conn.assigns.user.id) |> Pagination.count_query
+
+    {readers, num_links} =
+      Content.get_reader_joined_list(conn.assigns.user.id)
+      |> Pagination.paginate(30, conn)
+
+     render(conn, "joinedlist.html", readers: readers, book_count: book_count, num_links: num_links)
+  end
+
+  def undojoin(conn, %{"slug" => slug}) do
+    book = Content.get_book_by_slug!(slug)
+    Content.get_reader_by_book_user(conn.assigns.user.id, book.id) |> Content.delete_reader
+    
+    conn
+    |> put_flash(:info, "Undo join successful")
+    |> redirect(to: Routes.user_path(conn, :joinedlist))
 
   end
 

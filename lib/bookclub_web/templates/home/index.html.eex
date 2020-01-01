@@ -156,7 +156,14 @@
             <%= if String.length(book.title) <= 16, do: book.title, else: String.slice(book.title, 0..15)<>"..." %>
           </div>
           <div class="toprated-author"><%= book.author %></div>
-          <div class="added_by">Added By <span class="toprated-user"> <%= book.user.first_name %></span></div>
+          <div class="added_by">Added By
+            <span class="toprated-user">
+              <%= link to: Routes.user_path(@conn, :profile, book.user.username) do %>
+                <%= book.user.first_name %>
+              <% end %>
+
+            </span>
+          </div>
 
           <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
           <!-- <p class="top-rated-desc">
