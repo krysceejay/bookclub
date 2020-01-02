@@ -10,6 +10,7 @@ defmodule Bookclub.Content.Book do
     field :description, :string
     field :genre, {:array, :string}
     field :published, :boolean, default: false
+    field :public, :boolean, default: true
     field :title, :string
     field :slug, :string
     field :meeting_date, :string
@@ -34,6 +35,7 @@ defmodule Bookclub.Content.Book do
       :genre,
       :description,
       :published,
+      :public,
       :user_id,
       :meeting_date,
       :meeting_time
@@ -44,6 +46,7 @@ defmodule Bookclub.Content.Book do
       :genre,
       :description,
       :published,
+      :public,
       :user_id,
       :meeting_date,
       :meeting_time

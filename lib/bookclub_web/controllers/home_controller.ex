@@ -49,8 +49,14 @@ defmodule BookclubWeb.HomeController do
         _ -> Content.check_if_reader_exist(conn.assigns.user.id, book.id)
       end
 
+    status =
+      case conn.assigns[:user] do
+        nil -> false
+        _ -> Content.check_reader_status(conn.assigns.user.id, book.id)
+      end
+
     render(conn, "book.html", book: book, reader: reader, changeset: changeset,
-    recommended_books: recommended_books, genre_sort: genre_sort)
+    recommended_books: recommended_books, genre_sort: genre_sort, status: status)
 
   end
 
@@ -102,6 +108,7 @@ defmodule BookclubWeb.HomeController do
 
     book = Content.get_only_book!(book_id)
     reader = Content.check_if_reader_exist(conn.assigns.user.id, book.id)
+    status = Content.check_reader_status(conn.assigns.user.id, book.id)
     recommended_books = Content.recommended_books(book.id)
 
     genre_sort = Functions.top_five_genres
@@ -114,7 +121,7 @@ defmodule BookclubWeb.HomeController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "book.html", changeset: changeset, book: book, reader: reader,
-        recommended_books: recommended_books, genre_sort: genre_sort)
+        recommended_books: recommended_books, genre_sort: genre_sort, status: status)
     end
   end
 

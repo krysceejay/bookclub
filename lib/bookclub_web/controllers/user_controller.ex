@@ -91,17 +91,32 @@ defmodule BookclubWeb.UserController do
       |> redirect(to: Routes.home_path(conn, :book, book))
 
     else
-      case Content.create_reader(conn.assigns.user, book) do
-        {:ok, _reader} ->
-          conn
-          |> put_flash(:info, "Joined successfully.")
-          |> redirect(to: Routes.home_path(conn, :book, book))
+      if book.public == true do
+        case Content.create_reader(conn.assigns.user, book) do
+          {:ok, _reader} ->
+            conn
+            |> put_flash(:info, "Joined successfully.")
+            |> redirect(to: Routes.home_path(conn, :book, book))
 
-        {:error, _reason} ->
-          conn
-          |> put_flash(:info, "Join not successfull.")
-          |> redirect(to: Routes.home_path(conn, :book, book))
+          {:error, _reason} ->
+            conn
+            |> put_flash(:info, "Join not successful.")
+            |> redirect(to: Routes.home_path(conn, :book, book))
+        end
+      else
+        case Content.create_readerp(conn.assigns.user, book) do
+          {:ok, _reader} ->
+            conn
+            |> put_flash(:info, "The owner of this private book club has been notified. Please wait for approval. Thanks.")
+            |> redirect(to: Routes.home_path(conn, :book, book))
+
+          {:error, _reason} ->
+            conn
+            |> put_flash(:info, "Action not successful. Please check your connection.")
+            |> redirect(to: Routes.home_path(conn, :book, book))
+        end
       end
+
     end
 
   end
@@ -152,7 +167,7 @@ defmodule BookclubWeb.UserController do
   def undojoin(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
     Content.get_reader_by_book_user(conn.assigns.user.id, book.id) |> Content.delete_reader
-    
+
     conn
     |> put_flash(:info, "Undo join successful")
     |> redirect(to: Routes.user_path(conn, :joinedlist))

@@ -90,7 +90,7 @@ defmodule Bookclub.Accounts.User do
     end
   end
 
-  def default_pic(changeset) do
+  defp default_pic(changeset) do
     put_change(changeset, :propix, "noimage.png")
   end
 

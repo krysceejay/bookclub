@@ -234,7 +234,31 @@ select:focus {
     background-color: #f8d7da;
   }
 }
-//.pop pop-info
+
+//Badge
+
+%badge-shared {
+  //width: 20px;
+  //height: 5px;
+  padding: 0.06rem 0.5rem;
+  border-radius: 5px;
+  margin: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 100;
+}
+
+.badge {
+  &-public {
+    @extend %badge-shared;
+    color: #155724;
+    background-color: #d4edda;
+  }
+  &-private {
+    @extend %badge-shared;
+    color: #721c24;
+    background-color: #f8d7da;
+  }
+}
 
 .sidebar-cat-text {
   font-weight: 700;
@@ -509,11 +533,15 @@ tr:nth-child(even) {
 .stats {
   &-active {
     @extend %stats-shared;
-    background-color: #80c080;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
   }
   &-not-active {
     @extend %stats-shared;
-    background-color: #ffb3b3;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
   }
 }
 .flash-msg {
@@ -826,4 +854,11 @@ tr:nth-child(even) {
     font-size: 1.3rem;
     margin: 2rem;
   }
+}
+
+.waiting-list {
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  color: #721c24;
 }

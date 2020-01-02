@@ -7,10 +7,18 @@ defmodule BookclubWeb.ChatController do
   def index(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
 
-    Phoenix.LiveView.Controller.live_render(
-    conn,
-    BookclubWeb.Live.Index,
-    session: %{book: book, current_user: conn.assigns.user}
-    )
+    if Content.check_reader_status(conn.assigns.user.id, book.id) do
+      Phoenix.LiveView.Controller.live_render(
+      conn,
+      BookclubWeb.Live.Index,
+      session: %{book: book, current_user: conn.assigns.user}
+      )
+    else
+      conn
+      |> put_flash(:info, "You have to join discussion.")
+      |> redirect(to: Routes.home_path(conn, :book, book))
+    end
+
+
   end
 end

@@ -23,6 +23,7 @@
                 <h2>
                   <%= @book.title %>
                 </h2>
+
                 <p class="author text-trans-cap">
                   <%= @book.author %>
                 </p>
@@ -70,6 +71,13 @@
                 <div class="details-meetings">
                   <p class="details-meetings-head">
                     Meeting Details
+                    <%= if @book.public == true do %>
+                      <span class="badge badge-public">public</span>
+                    <% else %>
+                      <span class="badge badge-private">private</span>
+                    <% end %>
+
+
                   </p>
                   <p>
                     <span class="meet-icon"
@@ -84,23 +92,41 @@
                 <div class="join-chat">
                   <p class="join-chat-head">Join The Discussion</p>
 
-                  <%= if @reader do %>
+                  <%= cond do %>
+                    <% @status -> %>
+                      <%= link to: Routes.chat_path(@conn, :index, @book) do %>
+                      <span class="join-chat-icon"
+                        ><i class="fa fa-comment-o" aria-hidden="true"></i>
+                        Chat</span>
+                      <% end %>
+                    <% @reader -> %>
+                      <span class="waiting-list">Waiting for approval...</span>  
+                    <% true -> %>
+                      <%= link to: Routes.user_path(@conn, :joinreaders, @book), onclick: "return confirm('Are you sure you want to join this book club?');" do %>
+                      <span class="join-chat-icon"
+                        ><i class="fa fa-handshake-o" aria-hidden="true"></i>
+                        Join</span>
+                      <% end %>
+                  <% end %>
 
-                    <%= link to: Routes.chat_path(@conn, :index, @book) do %>
+                    <!-- <%= if @status do %>
+
+                      <%= link to: Routes.chat_path(@conn, :index, @book) do %>
+                      <span class="join-chat-icon"
+                        ><i class="fa fa-comment-o" aria-hidden="true"></i>
+                        Chat</span>
+                      <% end %>
+
+
+                    <% else %>
+
+                    <%= link to: Routes.user_path(@conn, :joinreaders, @book), onclick: "return confirm('Are you sure you want to join this book club?');" do %>
                     <span class="join-chat-icon"
-                      ><i class="fa fa-comment-o" aria-hidden="true"></i>
-                      Chat</span>
+                      ><i class="fa fa-handshake-o" aria-hidden="true"></i>
+                      Join</span>
                     <% end %>
 
-                  <%= else %>
-
-                  <%= link to: Routes.user_path(@conn, :joinreaders, @book), onclick: "return confirm('Are you sure you want to join this book club?');" do %>
-                  <span class="join-chat-icon"
-                    ><i class="fa fa-handshake-o" aria-hidden="true"></i>
-                    Join</span>
-                  <% end %>
-
-                  <% end %>
+                  <% end %> -->
 
 
 

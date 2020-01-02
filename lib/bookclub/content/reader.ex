@@ -17,4 +17,16 @@ defmodule Bookclub.Content.Reader do
     |> cast(attrs, [:user_id, :book_id, :status])
     |> validate_required([:user_id, :book_id])
   end
+
+  def changesetp(reader, attrs) do
+    reader
+    |> cast(attrs, [:user_id, :book_id, :status])
+    |> validate_required([:user_id, :book_id])
+    |> status
+  end
+
+  defp status(changeset) do
+    put_change(changeset, :status, false)
+  end
+
 end

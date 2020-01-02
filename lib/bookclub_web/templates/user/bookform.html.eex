@@ -39,17 +39,22 @@
                     <%= time_input f, :meeting_time %>
                     <%= error_tag f, :meeting_time %>
                   </div>
-
-                  <div class="form-group">
-                    <%= label f, :description %>
-                    <%= textarea f, :description, placeholder: "Enter Description" %>
-                    <%= error_tag f, :description %>
-                  </div>
                   <div class="form-group">
                     <%= label f, :published %>
                     <%= radio_button f, :published, "1", checked: @book.published == true %> Yes
                     <%= radio_button f, :published, "0", checked: @book.published == false %> No
                     <%= error_tag f, :published %>
+                  </div>
+                  <div class="form-group">
+                    <%= label f, :public, "Join Status" %>
+                    <%= radio_button f, :public, "1", checked: @book.public == true %> Public
+                    <%= radio_button f, :public, "0", checked: @book.public == false %> Private
+                    <%= error_tag f, :public %>
+                  </div>
+                  <div class="form-group">
+                    <%= label f, :description %>
+                    <%= textarea f, :description, placeholder: "Enter Description" %>
+                    <%= error_tag f, :description %>
                   </div>
                 </div>
                 <div class="form-group">

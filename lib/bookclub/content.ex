@@ -51,6 +51,7 @@ defmodule Bookclub.Content do
 
   def all_books do
     Book
+    |> where(published: true)
     |> order_by(desc: :id)
     |> preload(:user)
   end
@@ -344,6 +345,17 @@ defmodule Bookclub.Content do
 
   end
 
+  def check_reader_status(user_id, book_id) do
+    query =
+      from r in Reader,
+        where: r.user_id == ^user_id,
+        where: r.book_id == ^book_id,
+        where: r.status == true
+
+    Repo.exists?(query)
+
+  end
+
   def get_readers_by_book(book_id) do
     query =
       from r in Reader,
@@ -397,6 +409,13 @@ defmodule Bookclub.Content do
     user
     |> Ecto.build_assoc(:readers, book_id: bookid)
     |> Reader.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_readerp(user, %{id: bookid}, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:readers, book_id: bookid)
+    |> Reader.changesetp(attrs)
     |> Repo.insert()
   end
 

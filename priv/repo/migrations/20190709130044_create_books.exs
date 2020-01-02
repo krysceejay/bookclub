@@ -12,6 +12,7 @@ defmodule Bookclub.Repo.Migrations.CreateBooks do
       add :meeting_time, :time
       add :slug, :string
       add :published, :boolean, default: false, null: false
+      add :public, :boolean, default: true, null: false
       add :user_id, references(:users, on_delete: :delete_all)
 
       timestamps()
