@@ -77,8 +77,6 @@ defmodule BookclubWeb.Router do
     post "/rate-book", HomeController, :createrating
     get "/reviews/:slug", HomeController, :reviews
 
-    get "/not-found", HomeController, :notfound
-
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete
     get "/login", AuthController, :loginform

@@ -139,8 +139,4 @@ defmodule BookclubWeb.HomeController do
     IO.inspect slug
   end
 
-  def notfound(conn, _params) do
-    render(conn, "notfound.html")
-  end
-
 end

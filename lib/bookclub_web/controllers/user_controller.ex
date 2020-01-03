@@ -8,6 +8,8 @@ defmodule BookclubWeb.UserController do
 
   plug BookclubWeb.Plugs.RequireAuth
 
+  action_fallback BookclubWeb.ErrorController
+
   def index(conn, _params) do
     render(conn, "dashboard.html")
   end
@@ -126,7 +128,12 @@ defmodule BookclubWeb.UserController do
 
     userprof = Accounts.get_user_by_username(name)
       case userprof do
-        nil -> render(conn, BookclubWeb.HomeView, "notfound.html")
+        nil ->
+          conn
+          |> put_status(:not_found)
+          |> put_view(BookclubWeb.ErrorView)
+          |> render("404.html")
+
         _ -> render(conn, "profile.html", userprof: userprof)
       end
 
@@ -177,7 +184,7 @@ defmodule BookclubWeb.UserController do
   def readerstatus(conn, %{"name" => name}) do
     {:ok, decode} = Base.decode64(name)
     reader = Content.get_reader_with_book!(decode)
-    
+
     attr =
       case reader.status do
         false -> %{status: true}
