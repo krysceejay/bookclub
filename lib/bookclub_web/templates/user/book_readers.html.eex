@@ -21,9 +21,14 @@
         <div class="read-title">Status: </div>
         <div class="reader-name">
         <%= if reader.status == true do %>
+          <%= link to: Routes.user_path(@conn, :readerstatus, Base.encode64(to_string(reader.id))), onclick: "return confirm('Are you sure you want to deactivate this user?');" do %>
           <span class="stats-active">Active</span>
+          <% end %>
         <% else %>
-        <span class="stats-not-active">Not Active</span>
+
+          <%= link to: Routes.user_path(@conn, :readerstatus, Base.encode64(to_string(reader.id))), onclick: "return confirm('Are you sure you want to activate this user?');" do %>
+          <span class="stats-not-active">Not Active</span>
+          <% end %>
         <% end %>
       </div>
 

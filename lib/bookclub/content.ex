@@ -335,6 +335,8 @@ defmodule Bookclub.Content do
   """
   def get_reader!(id), do: Repo.get!(Reader, id)
 
+  def get_reader_with_book!(id), do: Repo.get!(Reader, id) |> Repo.preload(:book)
+
   def check_if_reader_exist(user_id, book_id) do
     query =
       from r in Reader,
@@ -434,6 +436,12 @@ defmodule Bookclub.Content do
   def update_reader(%Reader{} = reader, attrs) do
     reader
     |> Reader.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def update_reader_status(%Reader{} = reader, attrs) do
+    reader
+    |> Reader.set_status(attrs)
     |> Repo.update()
   end
 

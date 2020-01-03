@@ -174,4 +174,28 @@ defmodule BookclubWeb.UserController do
 
   end
 
+  def readerstatus(conn, %{"name" => name}) do
+    {:ok, decode} = Base.decode64(name)
+    reader = Content.get_reader_with_book!(decode)
+    
+    attr =
+      case reader.status do
+        false -> %{status: true}
+        true -> %{status: false}
+      end
+
+    case Content.update_reader_status(reader, attr) do
+      {:ok, _reader} ->
+        conn
+        |> put_flash(:info, "Status updated successfully.")
+        |> redirect(to: Routes.user_path(conn, :bookreaders, reader.book))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_flash(:info, "Status update not successful.")
+        |> redirect(to: Routes.user_path(conn, :bookreaders, reader.book))
+    end
+
+  end
+
 end

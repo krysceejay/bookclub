@@ -25,8 +25,21 @@ defmodule Bookclub.Content.Reader do
     |> status
   end
 
+  def set_status(reader, attrs) do
+    reader
+    |> cast(attrs, [:status])
+  end
+
   defp status(changeset) do
     put_change(changeset, :status, false)
+  end
+
+  defp status_set(changeset, rd) do
+    if rd.status == true do
+      put_change(changeset, :status, false)
+    else
+      put_change(changeset, :status, true)
+    end
   end
 
 end
