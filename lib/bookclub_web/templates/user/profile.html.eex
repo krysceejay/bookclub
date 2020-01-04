@@ -10,7 +10,9 @@
       </div>
 
       <%= if @userprof.email == @user.email do %>
-        <%= link "Edit Profile", to: Routes.user_path(@conn, :editprofile), class: "btn btn-profile" %>
+        <%= link to: Routes.user_path(@conn, :editprofile), class: "btn btn-profile" do %>
+        <i class="fa fa-pencil"></i>
+        <% end %>
       <% end %>
 
     </div>

@@ -18,28 +18,9 @@
             <%= if String.length(book.title) < 16, do: book.title, else: String.slice(book.title, 0..15)<>"..." %>
           </div>
           <div class="booktext-author"><%= book.author %></div>
-          <!-- <p class="users-and-rating">
 
-
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="nofill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-          </p> -->
-          <div>
-            <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
-          </div>
+          <!-- <div>
+          </div> -->
 
           <div class="dash-link-btn">
             <%# <a href="book.html"><i class="fa fa-eye"></i></a> %>

@@ -197,7 +197,7 @@ defmodule BookclubWeb.UserController do
         |> put_flash(:info, "Status updated successfully.")
         |> redirect(to: Routes.user_path(conn, :bookreaders, reader.book))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, %Ecto.Changeset{} = _changeset} ->
         conn
         |> put_flash(:info, "Status update not successful.")
         |> redirect(to: Routes.user_path(conn, :bookreaders, reader.book))

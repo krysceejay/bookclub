@@ -165,7 +165,7 @@
             </span>
           </div>
 
-          <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
+          
           <!-- <p class="top-rated-desc">
             <%= book.description |> String.slice(0..60) %>...
           </p>

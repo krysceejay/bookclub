@@ -7,10 +7,11 @@
   </div>
   <div class="book-chat-anchor">
     <div class="book-chat-anchor-img">
-      <img src="<%= Routes.static_path(@socket, "/home/img/the-way.jpg") %>" alt="" />
+      <img src="<%= Routes.static_path(@socket,"/images/profiles/" <> @book.user.propix) %>" alt="" />
     </div>
     <div class="book-chat-anchor-det">
-      <span class="text-primary">Anchor:</span> Krys Baba
+      <span class="text-primary">Anchor:</span>
+      <%= @book.user.username |> String.capitalize() %>
     </div>
   </div>
   <div class="book-chat-topics">

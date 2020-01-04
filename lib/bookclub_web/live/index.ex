@@ -78,10 +78,6 @@ defmodule BookclubWeb.Live.Index do
  end
 
  def handle_event("show-users", _value, socket) do
-   # value = 1
-   # IO.puts "++++++++++++++"
-   # IO.puts value
-   # IO.puts "++++++++++++++"
    {:noreply, assign(socket, show_users: 1)}
  end
 
@@ -148,7 +144,8 @@ end
      email: current_user.email,
      user_id: current_user.id,
      user_name: current_user.username,
-     typing: false
+     typing: false,
+     propix: current_user.propix
    }
  end
 

@@ -64,11 +64,11 @@
                   <%= link to: Routes.user_path(@conn, :profile, book.user.username) do %>
                     <%= book.user.first_name %>
                   <% end %>
-                  
+
                 </span>
               </div>
               <!-- <p>56| 78</p> -->
-              <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: book.id %>
+              
               <!-- <p class="all-books-desc">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit...
               </p> -->

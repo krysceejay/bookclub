@@ -22,6 +22,7 @@ defmodule Bookclub.Content.Book do
     has_many :chats, Bookclub.Messages.Chat
     has_many :readers, Bookclub.Content.Reader
     has_many :ratings, Bookclub.Content.Rating
+    has_many :topics, Bookclub.Content.Topic
 
     timestamps()
   end

@@ -44,10 +44,10 @@ hr {
   &-profile {
     @extend %btn-shared;
     //color: black
-    border-radius: 50px;
+    border-radius: 50%;
     //background-color: #f4f4f4;
-    padding: 0.3rem 1rem;
-    border: 1px solid $main-color;
+    padding: 0.5rem 1rem;
+    border: 2px solid $main-color;
   }
 
   &-join {
@@ -843,10 +843,28 @@ tr:nth-child(even) {
 }
 
 .not-found {
-  margin: 3rem;
+  margin: 4rem;
   svg {
     width: 100%;
-    height: 45vh;
+    height: 60vh;
+    //stroke: #fff;
+    path {
+      //fill: $main-color;
+      stroke: none;
+    }
+  }
+  &-text {
+    text-align: center;
+    font-size: 1.3rem;
+    margin: 2rem;
+  }
+}
+
+.server-error {
+  margin: 4rem;
+  svg {
+    width: 100%;
+    height: 60vh;
     //stroke: #fff;
     path {
       //fill: $main-color;
