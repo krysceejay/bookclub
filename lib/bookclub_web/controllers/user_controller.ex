@@ -3,7 +3,7 @@ defmodule BookclubWeb.UserController do
 
   alias Bookclub.Accounts
   alias Bookclub.Content
-  alias Bookclub.Content.Book
+  alias Bookclub.Content.{Book, Topic}
   alias BookclubWeb.Pagination
 
   plug BookclubWeb.Plugs.RequireAuth
@@ -203,6 +203,38 @@ defmodule BookclubWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :bookreaders, reader.book))
     end
 
+  end
+
+  def booktopic(conn, %{"slug" => slug}) do
+    book = Content.get_book_by_slug!(slug)
+    # readers_count = Content.get_topics_by_book(book.id) |> Pagination.count_query
+
+    {topics, num_links} =
+      Content.get_topics_by_book(book.id)
+      |> Pagination.paginate(30, conn)
+
+    render(conn, "topics.html", topics: topics, num_links: num_links, slug: slug)
+  end
+
+  def addtopic(conn, %{"slug" => slug}) do
+    # book = Content.get_book_by_slug!(slug)
+    topic = %Topic{}
+    changeset = Content.change_topic(topic)
+    render(conn, "addtopic.html", changeset: changeset, topic: topic, slug: slug)
+  end
+
+  def createtopic(conn, %{"slug" => slug, "topic" => topic_params}) do
+    book = Content.get_book_by_slug!(slug)
+    topic = %Topic{}
+    case Content.create_topic(book, topic_params) do
+      {:ok, _topic} ->
+        conn
+        |> put_flash(:info, "Topic added successfully.")
+        |> redirect(to: Routes.user_path(conn, :booktopic, slug))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "addtopic.html", changeset: changeset, topic: topic, slug: slug)
+    end
   end
 
 end

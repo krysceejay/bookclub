@@ -614,6 +614,15 @@ defmodule Bookclub.Content do
   """
   def get_topic!(id), do: Repo.get!(Topic, id)
 
+  def get_topics_by_book(book_id) do
+    query =
+      from t in Topic,
+        where: t.book_id == ^book_id,
+        order_by: [desc: t.id]
+
+    query
+  end
+
   @doc """
   Creates a topic.
 
@@ -626,8 +635,9 @@ defmodule Bookclub.Content do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_topic(attrs \\ %{}) do
-    %Topic{}
+  def create_topic(book, attrs \\ %{}) do
+    book
+    |> Ecto.build_assoc(:topics)
     |> Topic.changeset(attrs)
     |> Repo.insert()
   end

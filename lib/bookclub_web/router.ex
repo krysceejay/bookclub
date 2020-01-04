@@ -56,6 +56,10 @@ defmodule BookclubWeb.Router do
     get "/undojoin/:slug", UserController, :undojoin
     get "/reader-status/:name", UserController, :readerstatus
 
+    get "/book-topic/:slug", UserController, :booktopic
+    get "/addtopic/:slug", UserController, :addtopic
+    post "/createtopic/:slug", UserController, :createtopic
+
 
   end
 

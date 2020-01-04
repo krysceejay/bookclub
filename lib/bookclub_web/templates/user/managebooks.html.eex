@@ -1,7 +1,11 @@
 
 <div class="dashboard-main-section-content">
   <%= if @books != [] do %>
-  <h3 class="dashboard-content-header">Manage Books (<%= @book_count %>)</h3>
+  <div class="dashboard-content-hr-grp">
+    <h3 class="dashboard-content-header">Manage Books (<%= @book_count %>)</h3>
+    <%= link "Add Book", to: Routes.user_path(@conn, :addbook), class: "btn btn-small" %>
+  </div>
+
 
   <div class="dash-book-list">
 
@@ -24,11 +28,14 @@
 
           <div class="dash-link-btn">
             <%# <a href="book.html"><i class="fa fa-eye"></i></a> %>
+            <%= link to: Routes.user_path(@conn, :booktopic, book) do %>
+            <i class="fa fa-book"></i>
+            <% end %>
             <%= link to: Routes.user_path(@conn, :editbook, book) do %>
             <i class="fa fa-pencil"></i>
             <% end %>
             <%= link to: Routes.user_path(@conn, :bookreaders, book) do %>
-            <i class="fa fa-users users"></i>
+            <i class="fa fa-users"></i>
             <% end %>
 
         </div>

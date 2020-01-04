@@ -4,7 +4,7 @@ defmodule Bookclub.Repo.Migrations.CreateTopics do
   def change do
     create table(:topics) do
       add :topic_text, :text
-      add :topic_status, :boolean, default: false, null: false
+      add :topic_status, :integer, default: 0
       add :book_id, references(:books, on_delete: :delete_all)
 
       timestamps()
