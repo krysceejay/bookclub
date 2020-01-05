@@ -2,8 +2,7 @@
           <h3 class="dashboard-content-header">Edit Book</h3>
           <div class="dashboard-addbook">
             <div class="field">
-<%= render "bookform.html", Map.put(assigns, :action, Routes.user_path(@conn, :updatebook, @book)) %>
+              <%= render "bookform.html", Map.put(assigns, :action, Routes.user_path(@conn, :updatebook, @book)) %>
+            </div>
+          </div>
 </div>
-</div>
-</div>
-

@@ -50,38 +50,63 @@ defmodule BookclubWeb.UserController do
   end
 
   def editbook(conn, %{"slug" => slug}) do
-    genre = Content.list_genres()
     book = Content.get_book_by_slug!(slug)
-    changeset = Content.change_book(book)
+    with true <- Content.check_if_user_owns_book(conn.assigns.user.id, book.id) do
+      genre = Content.list_genres()
 
-    render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
+      changeset = Content.change_book(book)
+
+      render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
+    else
+      false ->
+        conn
+        |> put_status(403)
+        |> put_view(BookclubWeb.ErrorView)
+        |> render("403.html")
+    end
   end
 
   def updatebook(conn, %{"slug" => slug, "book" => book_params}) do
     book = Content.get_book_by_slug!(slug)
-    genre = Content.list_genres()
+    with true <- Content.check_if_user_owns_book(conn.assigns.user.id, book.id) do
+      genre = Content.list_genres()
 
-    case Content.update_book(book, book_params) do
-      {:ok, _book} ->
+      case Content.update_book(book, book_params) do
+        {:ok, _book} ->
+          conn
+          |> put_flash(:info, "Book updated successfully.")
+          |> redirect(to: Routes.user_path(conn, :managebooks))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
+      end
+    else
+      false ->
         conn
-        |> put_flash(:info, "Book updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :managebooks))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "editbook.html", book: book, changeset: changeset, genre: genre)
+        |> put_status(403)
+        |> put_view(BookclubWeb.ErrorView)
+        |> render("403.html")
     end
   end
 
   def bookreaders(conn, %{"slug" => slug}) do
     # %{"slug" => slug} = params
     book = Content.get_book_by_slug!(slug)
-    readers_count = Content.get_readers_by_book(book.id) |> Pagination.count_query
+    with true <- Content.check_if_user_owns_book(conn.assigns.user.id, book.id) do
+      readers_count = Content.get_readers_by_book(book.id) |> Pagination.count_query
 
-    {readers, num_links} =
-      Content.get_readers_by_book(book.id)
-      |> Pagination.paginate(30, conn)
+      {readers, num_links} =
+        Content.get_readers_by_book(book.id)
+        |> Pagination.paginate(30, conn)
 
-    render(conn, "book_readers.html", readers: readers, num_links: num_links, readers_count: readers_count)
+      render(conn, "book_readers.html", readers: readers, num_links: num_links, readers_count: readers_count)
+    else
+      false ->
+        conn
+        |> put_status(403)
+        |> put_view(BookclubWeb.ErrorView)
+        |> render("403.html")
+    end
   end
 
   def joinreaders(conn, %{"slug" => slug}) do
@@ -207,13 +232,22 @@ defmodule BookclubWeb.UserController do
 
   def booktopic(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
-    # readers_count = Content.get_topics_by_book(book.id) |> Pagination.count_query
 
-    {topics, num_links} =
-      Content.get_topics_by_book(book.id)
-      |> Pagination.paginate(30, conn)
+    with true <- Content.check_if_user_owns_book(conn.assigns.user.id, book.id) do
+        {topics, num_links} =
+          Content.get_topics_by_book(book.id)
+          |> Pagination.paginate(30, conn)
 
-    render(conn, "topics.html", topics: topics, num_links: num_links, slug: slug)
+        render(conn, "topics.html", topics: topics, num_links: num_links, slug: slug)
+
+      else
+          false ->
+            conn
+            |> put_status(403)
+            |> put_view(BookclubWeb.ErrorView)
+            |> render("403.html")
+    end
+
   end
 
   def addtopic(conn, %{"slug" => slug}) do
@@ -225,16 +259,55 @@ defmodule BookclubWeb.UserController do
 
   def createtopic(conn, %{"slug" => slug, "topic" => topic_params}) do
     book = Content.get_book_by_slug!(slug)
-    topic = %Topic{}
-    case Content.create_topic(book, topic_params) do
-      {:ok, _topic} ->
-        conn
-        |> put_flash(:info, "Topic added successfully.")
-        |> redirect(to: Routes.user_path(conn, :booktopic, slug))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "addtopic.html", changeset: changeset, topic: topic, slug: slug)
+    with true <- Content.check_if_user_owns_book(conn.assigns.user.id, book.id) do
+      topic = %Topic{}
+      case Content.create_topic(book, topic_params) do
+        {:ok, _topic} ->
+          conn
+          |> put_flash(:info, "Topic added successfully.")
+          |> redirect(to: Routes.user_path(conn, :booktopic, slug))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "addtopic.html", changeset: changeset, topic: topic, slug: slug)
+      end
+    else
+        false ->
+          conn
+          |> put_status(403)
+          |> put_view(BookclubWeb.ErrorView)
+          |> render("403.html")
     end
+
+  end
+
+  def edittopic(conn, %{"slug" => slug}) do
+
+    with {:ok, decode} <- Base.decode64(slug),
+      topic <- Content.get_topic!(decode),
+      true <- Content.check_if_user_owns_book(conn.assigns.user.id, topic.book_id) do
+
+        changeset = Content.change_topic(topic)
+        render(conn, "edittopic.html", changeset: changeset, topic: topic, slug: slug)
+    end
+
+  end
+
+  def updatetopic(conn, %{"slug" => slug, "topic" => topic_params}) do
+    with {:ok, decode} <- Base.decode64(slug),
+        topic <- Content.get_topic_with_book!(decode),
+        true <- Content.check_if_user_owns_book(conn.assigns.user.id, topic.book_id) do
+
+          case Content.update_topic(topic, topic_params) do
+            {:ok, _topic} ->
+              conn
+              |> put_flash(:info, "Topic updated successfully.")
+              |> redirect(to: Routes.user_path(conn, :booktopic, topic.book.slug))
+
+            {:error, %Ecto.Changeset{} = changeset} ->
+              render(conn, "edittopic.html", changeset: changeset, topic: topic, slug: slug)
+          end
+      end
   end
 
 end

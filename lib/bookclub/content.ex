@@ -208,6 +208,16 @@ defmodule Bookclub.Content do
     query
   end
 
+  def check_if_user_owns_book(user_id, book_id) do
+    query =
+      from b in Book,
+        where: b.user_id == ^user_id,
+        where: b.id == ^book_id
+
+    Repo.exists?(query)
+
+  end
+
   alias Bookclub.Content.Genre
 
   @doc """
@@ -613,6 +623,8 @@ defmodule Bookclub.Content do
 
   """
   def get_topic!(id), do: Repo.get!(Topic, id)
+
+  def get_topic_with_book!(id), do: Repo.get!(Topic, id) |> Repo.preload(:book)
 
   def get_topics_by_book(book_id) do
     query =
