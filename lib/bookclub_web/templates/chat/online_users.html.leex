@@ -21,8 +21,10 @@
         <img src="<%= Routes.static_path(@socket, "/images/profiles/" <> user.propix) %>" alt="" />
       </div>
       <div class="user-details-text">
-        <span><%= user.user_name |> String.capitalize() %></span>
-        <span><%= if user.typing, do: "is typing..." %></span>
+      <span>
+      <%= link user.user_name |> String.capitalize(), to: Routes.user_path(@socket, :profile, user.user_name) %>
+      </span>
+      <span><%= if user.typing, do: "is typing..." %></span>
       </div>
     </div>
   <% end %>

@@ -6,7 +6,7 @@ defmodule Bookclub.Content do
   import Ecto.Query, warn: false
   alias Bookclub.Repo
 
-  alias Bookclub.Content.Book
+  alias Bookclub.Content.{Book, Topic}
 
   def data() do
     Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
@@ -77,6 +77,9 @@ defmodule Bookclub.Content do
   def get_book!(id), do: Repo.get!(Book, id) |> Repo.preload(:user)
 
   def get_book_by_slug!(slug), do: Repo.get_by!(Book, slug: slug) |> Repo.preload(:user)
+
+  def get_book_by_slug_with_t!(slug),
+        do: Repo.get_by!(Book, slug: slug) |> Repo.preload(:user) |> Repo.preload(topics: from(t in Topic, order_by: [desc: t.id]))
 
   def get_only_book!(id), do: Repo.get!(Book, id)
 
@@ -592,8 +595,6 @@ defmodule Bookclub.Content do
     query
   end
 
-
-  alias Bookclub.Content.Topic
 
   @doc """
   Returns the list of topics.

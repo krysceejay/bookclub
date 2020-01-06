@@ -5,7 +5,11 @@ defmodule BookclubWeb.ChatController do
   plug BookclubWeb.Plugs.RequireAuth
 
   def index(conn, %{"slug" => slug}) do
-    book = Content.get_book_by_slug!(slug)
+    book = Content.get_book_by_slug_with_t!(slug)
+
+    # IO.puts "+++++++++++++++"
+    # IO.inspect book
+    # IO.puts "+++++++++++++++"
 
     if Content.check_reader_status(conn.assigns.user.id, book.id) do
       Phoenix.LiveView.Controller.live_render(

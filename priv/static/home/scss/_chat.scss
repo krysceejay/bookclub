@@ -304,9 +304,18 @@
                 border-bottom: 0;
               }
             }
-            .list-active {
-              border-left: 4px $main-color solid;
-              background: $border-bottom;
+            .list-0 {
+              color: #818182;
+              background-color: #fefefe;
+            }
+            .list-1 {
+              color: #155724;
+              background-color: #d4edda;
+              border-left: 2px $main-color solid;
+            }
+            .list-2 {
+              color: #721c24;
+              background-color: #f8d7da;
             }
           }
         }

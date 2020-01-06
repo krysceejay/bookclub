@@ -42,6 +42,11 @@
     <ul class="chat-nav-menu">
       <div class="chat-nav-menu-up">
         <li>
+          <%= link to: Routes.user_path(@conn, :index) do %>
+          <i class="fa fa-dashboard"></i>
+          <% end %>
+        </li>
+        <li>
           <a id="online-users-show" class="current"
             ><i class="fa fa-users"></i
           ></a>
@@ -51,21 +56,17 @@
             ><i class="fa fa-book"></i
           ></a>
         </li>
-        <li>
-          <a href="index.html" class="current"
-            ><i class="fa fa-star-o"></i
-          ></a>
-        </li>
+
       </div>
 
       <div class="chat-nav-menu-down">
         <li>
-          <a href="index.html" class="current"
+          <a href="#" class="current"
             ><i class="fa fa-pencil"></i
           ></a>
         </li>
         <li>
-          <a href="index.html" class="current"
+          <a href="#" class="current"
             ><i class="fa fa-gears"></i
           ></a>
         </li>

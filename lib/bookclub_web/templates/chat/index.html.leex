@@ -24,7 +24,10 @@
 
             </div>
             <div class="user-details-text">
-              <span><%= user.user_name |> String.capitalize() %></span>
+              <span>
+              <%= link user.user_name |> String.capitalize(), to: Routes.user_path(@socket, :profile, user.user_name) %>
+            
+              </span>
               <span><%= if user.typing, do: "is typing..." %></span>
             </div>
           </div>
@@ -99,64 +102,11 @@
 
         </div>
 
-        <!-- <div class="dropdown-content">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </div> -->
-
         <%= render "online_users.html", socket: @socket, users: @users, show_users: @show_users %>
 
         <%= render "bookdetails.html", socket: @socket, show_bookdetails: @show_bookdetails, book: @book %>
 
       </div>
-      <div class="chat-container-bookdetails">
-        <div class="chat-head-section">
-          <h2>Details</h2>
-          <div id="detail-close-btn" class="details-close-btn">
-            <i class="fa fa-close"></i>
-          </div>
-        </div>
-        <div class="book-chat-anchor">
-          <div class="book-chat-anchor-img">
-            <img src="<%= Routes.static_path(@socket,"/images/profiles/" <> @book.user.propix) %>" alt="" />
-          </div>
-          <div class="book-chat-anchor-det">
-            <span class="text-primary">Anchor:</span>
-            <%= @book.user.username |> String.capitalize() %>
-          </div>
-        </div>
-        <div class="book-chat-topics">
-          <div class="book-chat-topics-head">
-            Topics
-          </div>
-          <ul class="book-chat-topics-list">
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Fugiat, maxime!
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Fugiat, maxime!
-            </li>
-            <li class="list-active">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Fugiat, maxime!
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Fugiat, maxime!
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Fugiat, maxime!
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Fugiat, form
-            </li>
-          </ul>
-        </div>
-      </div>
+        <%= render "bookdetails-lg.html", socket: @socket, book: @book %>
     </div>
   </section>
