@@ -118,7 +118,7 @@ defmodule Bookclub.Content do
   """
   def update_book(%Book{} = book, attrs) do
     book
-    |> Book.changeset(attrs)
+    |> Book.changeset(attrs, book)
     |> Repo.update()
   end
 

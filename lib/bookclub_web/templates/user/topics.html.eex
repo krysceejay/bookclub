@@ -19,11 +19,11 @@
     </td>
     <td>
       <%= case topic.topic_status do %>
-        <%= 0 -> %>
+        <% 0 -> %>
           Not Active
-        <%= 1 -> %>
+        <% 1 -> %>
           Active
-        <%= 2 -> %>
+        <% 2 -> %>
           Done
       <% end  %>
 
@@ -46,7 +46,7 @@
 
 </div>
 <div class="empty-book-text">
-  Looks like you've not added a topic. Kindly 
+  Looks like you've not added a topic. Kindly
   <%= link "Add Topic", to: Routes.user_path(@conn, :addtopic, @slug), class: "btn btn-main" %>
 </div>
 <% end %>

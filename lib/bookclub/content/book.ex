@@ -28,7 +28,7 @@ defmodule Bookclub.Content.Book do
   end
 
   @doc false
-  def changeset(book, attrs) do
+  def changeset(book, attrs, bk \\ %{}) do
     book
     |> cast(attrs, [
       :title,
@@ -52,8 +52,8 @@ defmodule Bookclub.Content.Book do
       :meeting_date,
       :meeting_time
     ])
-    |> uploadfile(attrs, book)
-    |> slug_map(attrs, book)
+    |> uploadfile(attrs, bk)
+    |> slug_map(attrs, bk)
   end
 
   defp uploadfile(changeset, attrs, bk) do
@@ -82,6 +82,7 @@ defmodule Bookclub.Content.Book do
 
   defp slug_map(changeset, attrs, bk) do
     # %{"slug" => slug}
+
     if title = attrs["title"] do
       if bk != %{} do
         put_change(changeset, :slug, bk.slug)
