@@ -67,6 +67,8 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+config :bookclub, uploads_directory: "/Users/chrischijioke/Desktop/ElixirGraphQLApi/uploads"
+
 # Configure your database
 config :bookclub, Bookclub.Repo,
   username: "postgres",

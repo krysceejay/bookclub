@@ -3,6 +3,7 @@ defmodule Bookclub.Accounts.User do
   import Ecto.Changeset
 
   alias Bookclub.Accounts.Encryption
+  alias Bookclub.Upload
 
   schema "users" do
     field :email, :string
@@ -68,19 +69,15 @@ defmodule Bookclub.Accounts.User do
   defp uploadfile(changeset, attrs, pr) do
 
     if upload = attrs["propix_field"] do
-      extension = Path.extname(upload.filename)
-      time = DateTime.utc_now() |> DateTime.to_unix()
-      filename = Path.basename(upload.filename, extension)
-      newFilename = "#{filename}_#{time}#{extension}"
-      File.cp!(upload.path, "priv/static/images/profiles/#{newFilename}")
 
-      if pr != %{} do
-        if pr.propix != "noimage.png" do
-          File.rm("priv/static/images/profiles/#{pr.propix}")
-        end
+      uploadFileName =
+        Upload.create_upload_from_plug_upload(attrs["propix_field"], "profiles", "noimage.png")
+
+      if pr.propix != "noimage.png" do
+        Upload.local_path("profiles", pr.propix) |> File.rm()
       end
 
-      put_change(changeset, :propix, newFilename)
+      put_change(changeset, :propix, uploadFileName)
     else
       if pr == %{} do
         put_change(changeset, :propix, "noimage.png")

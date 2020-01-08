@@ -100,7 +100,7 @@ defmodule Bookclub.Content do
   def create_book(user, attrs \\ %{}) do
     user
     |> Ecto.build_assoc(:books)
-    |> Book.changeset(attrs)
+    |> Book.changeset_c(attrs)
     |> Repo.insert()
   end
 

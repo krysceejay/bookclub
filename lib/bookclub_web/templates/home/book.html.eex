@@ -100,7 +100,7 @@
                         Chat</span>
                       <% end %>
                     <% @reader -> %>
-                      <span class="waiting-list">Waiting for approval...</span>  
+                      <span class="waiting-list">Waiting for approval...</span>
                     <% true -> %>
                       <%= link to: Routes.user_path(@conn, :joinreaders, @book), onclick: "return confirm('Are you sure you want to join this book club?');" do %>
                       <span class="join-chat-icon"
