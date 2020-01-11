@@ -55,7 +55,8 @@ defmodule Bookclub.MixProject do
       {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
       {:edeliver, "~> 1.7"},
       {:distillery, "~> 2.0", warn_missing: false},
-      {:kerosene, "~> 0.9.0"}
+      {:kerosene, "~> 0.9.0"},
+      {:bamboo, "~> 1.3"}
     ]
   end
 

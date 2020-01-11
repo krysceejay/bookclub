@@ -10,6 +10,8 @@ defmodule BookclubWeb.HomeController do
   def index(conn, _params) do
     top_rated = Content.top_books(5)
 
+    # Bookclub.Email.welcome_text_email("chrysclass16@gmail.com") |> Bookclub.Mailer.deliver_now
+
     render(conn, "index.html", top_rated: top_rated)
   end
 

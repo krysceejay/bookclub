@@ -67,7 +67,17 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+# Upload directory
 config :bookclub, uploads_directory: "/Users/chrischijioke/Desktop/ElixirGraphQLApi/uploads"
+
+# Mailgun email config
+config :bookclub, Bookclub.Mailer,
+  adapter: Bamboo.MailgunAdapter,
+  # or {:system, "MAILGUN_API_KEY"},
+  api_key: "fa4fab26993f78c4f76fc740e8bf6ad3-770f03c4-892f5e84",
+  # or {:system, "MAILGUN_DOMAIN"}
+  domain: "sandbox67f995a22a58459fa0e6e46637de79c0.mailgun.org",
+  base_uri: "https://api.mailgun.net/v3"
 
 # Configure your database
 config :bookclub, Bookclub.Repo,

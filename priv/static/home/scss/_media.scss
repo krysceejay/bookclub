@@ -796,6 +796,26 @@
 }
 
 @media (max-width: 570px) {
+  //Confirm Sections
+  #confirm {
+    //confirm email
+    &-email {
+      .confirm-email-box {
+        height: 100%;
+        width: 100%;
+        //margin: auto;
+        padding: 1.5rem;
+
+        &-image {
+          svg {
+            width: 90%;
+            height: 90%;
+          }
+        }
+      }
+    }
+  }
+
   #dashboard-main {
     &-section {
       //Manage Books

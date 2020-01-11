@@ -23,10 +23,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-#Guardian config
+# Guardian config
 config :bookclub, Bookclub.Guardian,
-       issuer: "bookclub",
-       secret_key: "nVDzWwhYQRf3K8ZxY+OLv+Ogo4503s6hw9bzonRhafzDiVPhnOc/ON2nRboGwtWs"
+  issuer: "bookclub",
+  secret_key: "nVDzWwhYQRf3K8ZxY+OLv+Ogo4503s6hw9bzonRhafzDiVPhnOc/ON2nRboGwtWs"
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

@@ -31,4 +31,11 @@ defmodule Bookclub.Functions do
     genre_sort
   end
 
+  def rand_string(length) do
+    length
+    |> :crypto.strong_rand_bytes
+    |> Base.encode64
+    |> binary_part(0, length)
+  end
+
 end

@@ -213,5 +213,4 @@
   crossorigin="anonymous"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/script.js") %>"></script>
   </body>
-  </body>
 </html>

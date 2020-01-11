@@ -1,4 +1,5 @@
 defmodule Bookclub.Accounts.Auth do
+  import Ecto.Query, warn: false
   alias Bookclub.Accounts.{Encryption, User}
 
   def login(params, repo) do
@@ -22,5 +23,14 @@ defmodule Bookclub.Accounts.Auth do
   end
 
   def logged_in?(conn), do: !!current_user(conn)
+
+  def check_if_user_verify(email, repo) do
+    query =
+      from u in User,
+        where: u.email == ^email,
+        where: u.status == 1
+
+    repo.exists?(query)
+  end
 
 end

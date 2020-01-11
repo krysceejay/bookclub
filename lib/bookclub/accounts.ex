@@ -144,6 +144,8 @@ defmodule Bookclub.Accounts do
 
   def get_user_by_username(name), do: Repo.get_by(User, username: name)
 
+  def get_user_by_email(email), do: Repo.get_by(User, email: email)
+
   @doc """
   Creates a user.
 
@@ -215,4 +217,101 @@ defmodule Bookclub.Accounts do
     User.changeset(user, %{})
   end
 
- end
+
+  alias Bookclub.Accounts.Verify
+
+  @doc """
+  Returns the list of verify_users.
+
+  ## Examples
+
+      iex> list_verify_users()
+      [%Verify{}, ...]
+
+  """
+  def list_verify_users do
+    Repo.all(Verify)
+  end
+
+  @doc """
+  Gets a single verify.
+
+  Raises `Ecto.NoResultsError` if the Verify does not exist.
+
+  ## Examples
+
+      iex> get_verify!(123)
+      %Verify{}
+
+      iex> get_verify!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_verify!(id), do: Repo.get!(Verify, id)
+
+  @doc """
+  Creates a verify.
+
+  ## Examples
+
+      iex> create_verify(%{field: value})
+      {:ok, %Verify{}}
+
+      iex> create_verify(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_verify(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:verify)
+    |> Verify.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a verify.
+
+  ## Examples
+
+      iex> update_verify(verify, %{field: new_value})
+      {:ok, %Verify{}}
+
+      iex> update_verify(verify, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_verify(%Verify{} = verify, attrs) do
+    verify
+    |> Verify.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Verify.
+
+  ## Examples
+
+      iex> delete_verify(verify)
+      {:ok, %Verify{}}
+
+      iex> delete_verify(verify)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_verify(%Verify{} = verify) do
+    Repo.delete(verify)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking verify changes.
+
+  ## Examples
+
+      iex> change_verify(verify)
+      %Ecto.Changeset{source: %Verify{}}
+
+  """
+  def change_verify(%Verify{} = verify) do
+    Verify.changeset(verify, %{})
+  end
+end

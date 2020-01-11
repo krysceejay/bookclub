@@ -193,4 +193,65 @@ defmodule Bookclub.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_profile(profile)
     end
   end
+
+  describe "verify_users" do
+    alias Bookclub.Accounts.Verify
+
+    @valid_attrs %{token: "some token", user_id: "some user_id"}
+    @update_attrs %{token: "some updated token", user_id: "some updated user_id"}
+    @invalid_attrs %{token: nil, user_id: nil}
+
+    def verify_fixture(attrs \\ %{}) do
+      {:ok, verify} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_verify()
+
+      verify
+    end
+
+    test "list_verify_users/0 returns all verify_users" do
+      verify = verify_fixture()
+      assert Accounts.list_verify_users() == [verify]
+    end
+
+    test "get_verify!/1 returns the verify with given id" do
+      verify = verify_fixture()
+      assert Accounts.get_verify!(verify.id) == verify
+    end
+
+    test "create_verify/1 with valid data creates a verify" do
+      assert {:ok, %Verify{} = verify} = Accounts.create_verify(@valid_attrs)
+      assert verify.token == "some token"
+      assert verify.user_id == "some user_id"
+    end
+
+    test "create_verify/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_verify(@invalid_attrs)
+    end
+
+    test "update_verify/2 with valid data updates the verify" do
+      verify = verify_fixture()
+      assert {:ok, %Verify{} = verify} = Accounts.update_verify(verify, @update_attrs)
+      assert verify.token == "some updated token"
+      assert verify.user_id == "some updated user_id"
+    end
+
+    test "update_verify/2 with invalid data returns error changeset" do
+      verify = verify_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_verify(verify, @invalid_attrs)
+      assert verify == Accounts.get_verify!(verify.id)
+    end
+
+    test "delete_verify/1 deletes the verify" do
+      verify = verify_fixture()
+      assert {:ok, %Verify{}} = Accounts.delete_verify(verify)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_verify!(verify.id) end
+    end
+
+    test "change_verify/1 returns a verify changeset" do
+      verify = verify_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_verify(verify)
+    end
+  end
 end

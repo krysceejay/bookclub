@@ -28,6 +28,10 @@ defmodule BookclubWeb.Router do
     plug :put_layout, {BookclubWeb.LayoutView, :chat}
   end
 
+  pipeline :nolayout_layout do
+    plug :put_layout, {BookclubWeb.LayoutView, :nolayout}
+  end
+
   scope "/bkadmin", BookclubWeb do
     pipe_through [:browser, :admin_dashboard]
 
@@ -69,6 +73,12 @@ defmodule BookclubWeb.Router do
     pipe_through [:browser, :chat_layout]
 
     get "/:slug", ChatController, :index
+  end
+
+  scope "/confirm", BookclubWeb do
+    pipe_through [:browser, :nolayout_layout]
+
+    get "/email/:slug", AuthController, :confirmemail
   end
 
   scope "/", BookclubWeb do

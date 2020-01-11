@@ -425,6 +425,53 @@ div[class^="btn-"],
   }
 }
 
+//Confirm Sections
+#confirm {
+  //confirm email
+  &-email {
+    .confirm-email-box {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-content: center;
+      //align-content: center;
+      text-align: center;
+      background: $undernav-color;
+      height: 500px;
+      width: 500px;
+      margin: 2rem auto;
+      border-radius: 5px;
+
+      // height: 80%;
+      // width: 50%;
+      // margin: auto;
+
+      &-image {
+        //background: $main-color;
+        svg {
+          width: 70%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+      &-text {
+        .text-head {
+          font-size: 1.8rem;
+        }
+        a {
+          margin-top: 1.5rem;
+          background-color: $main-color;
+          color: #fff;
+        }
+        //background: $secondary-color;
+        .text-email {
+          color: $main-color;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
 //Book Sections
 #book {
   &-cat {
