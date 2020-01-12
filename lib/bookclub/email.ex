@@ -10,4 +10,13 @@ defmodule Bookclub.Email do
     |> text_body("Welcome to MyApp!")
   end
 
+  def confirm_email(user, email, token) do
+    new_email
+      |> to(email)
+      |> from("info@pagetalk.club")
+      |> subject("Confirm Email")
+      |> put_html_layout({BookclubWeb.LayoutView, "email.html"})
+      |> render("confirm_email.html", user: user, token: token)
+    end
+
 end

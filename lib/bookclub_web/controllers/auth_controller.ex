@@ -53,6 +53,7 @@ defmodule BookclubWeb.AuthController do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         with true <- verifyemail(user) do
+          Bookclub.Email.confirm_email(user, user.email, get_user_token(user.id)) |> Bookclub.Mailer.deliver_now
           conn
           |> redirect(to: Routes.auth_path(conn, :confirmemail, user.email))
         else
@@ -75,6 +76,12 @@ defmodule BookclubWeb.AuthController do
     end
   end
 
+  defp get_user_token(userid) do
+    with verify <- Accounts.get_verify_userid(userid) do
+      verify.token
+    end
+  end
+
   def delete(conn, _) do
     conn
     |> configure_session(drop: true)
@@ -94,6 +101,16 @@ defmodule BookclubWeb.AuthController do
         _ -> render(conn, "confirm_email.html", slug: slug)
       end
 
+  end
+
+  def verifytoken(conn, %{"token" => token}) do
+    with verified_user <- Accounts.get_verify_by_token(token),
+          getuser <- Accounts.get_user!(verified_user.user_id),
+          {:ok, _user} <- Accounts.update_user_status(getuser, %{status: 1}) do
+            conn
+            |> put_flash(:info, "Email verified, you can now login.")
+            |> redirect(to: Routes.auth_path(conn, :login))
+    end
   end
 
 

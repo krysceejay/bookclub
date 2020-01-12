@@ -99,6 +99,8 @@ defmodule BookclubWeb.Router do
     post "/login", AuthController, :login
     get "/register", AuthController, :registerform
     post "/register", AuthController, :register
+
+    get "/email-verify/:token", AuthController, :verifytoken
   end
 
   # Other scopes may use custom stacks.

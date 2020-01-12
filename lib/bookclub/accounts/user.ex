@@ -53,6 +53,12 @@ defmodule Bookclub.Accounts.User do
     |> uploadfile(attrs, user)
   end
 
+  def changeset_for_status(user, attrs) do
+    user
+    |> cast(attrs, [:status])
+    |> validate_required([:status])
+  end
+
   defp encrypt_password(changeset) do
     password = get_change(changeset, :passwordfield)
 

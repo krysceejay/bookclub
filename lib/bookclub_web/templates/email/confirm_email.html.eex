@@ -1,0 +1,8 @@
+<div class="">
+  <p>Hello <%= @user.first_name %></p>
+  <p>please confirm your email <%= @user.email %> with the link below</p>
+
+  <%= link "Confirm your Email",
+  to: Routes.auth_path(BookclubWeb.Endpoint, :verifytoken, @token) %>
+
+</div>

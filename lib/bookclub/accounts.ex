@@ -188,6 +188,12 @@ defmodule Bookclub.Accounts do
     |> Repo.update()
   end
 
+  def update_user_status(%User{} = user, attrs) do
+    user
+    |> User.changeset_for_status(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a User.
 
@@ -248,6 +254,10 @@ defmodule Bookclub.Accounts do
 
   """
   def get_verify!(id), do: Repo.get!(Verify, id)
+
+  def get_verify_userid(userid), do: Repo.get_by(Verify, user_id: userid)
+
+  def get_verify_by_token(token), do: Repo.get_by(Verify, token: token)
 
   @doc """
   Creates a verify.
