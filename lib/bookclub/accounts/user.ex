@@ -75,7 +75,7 @@ defmodule Bookclub.Accounts.User do
 
   defp uploadfile(changeset, attrs, pr) do
 
-    if upload = attrs["propix_field"] do
+    if attrs["propix_field"] do
 
       uploadFileName =
         Upload.create_upload_from_plug_upload(attrs["propix_field"], "profiles", "noimage.png")

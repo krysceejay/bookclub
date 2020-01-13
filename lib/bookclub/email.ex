@@ -3,7 +3,7 @@ defmodule Bookclub.Email do
 
 
   def welcome_text_email(email_address) do
-    new_email
+    new_email()
     |> to(email_address)
     |> from("us@example.com")
     |> subject("Welcome!")
@@ -11,7 +11,7 @@ defmodule Bookclub.Email do
   end
 
   def confirm_email(user, email, token) do
-    new_email
+    new_email()
       |> to(email)
       |> from("info@pagetalk.club")
       |> subject("Confirm Email")

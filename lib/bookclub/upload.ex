@@ -13,7 +13,7 @@ defmodule Bookclub.Upload do
   def create_upload_from_plug_upload(%Plug.Upload{
     filename: filename,
     path: tmp_path,
-    content_type: content_type
+    content_type: _content_type
   }, folder, default_img) do
 
     extension = Path.extname(filename)

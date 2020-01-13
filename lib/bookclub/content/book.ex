@@ -5,8 +5,6 @@ defmodule Bookclub.Content.Book do
 
   @derive {Phoenix.Param, key: :slug}
 
-  @upload_directory Application.get_env(:bookclub, :uploads_directory)
-
   schema "books" do
     field :author, :string
     field :bookcover, :string
