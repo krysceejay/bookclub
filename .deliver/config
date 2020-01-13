@@ -1,10 +1,10 @@
 APP="bookclub"
 
-BUILD_HOST="142.93.6.157"
+BUILD_HOST="pagetalk.club"
 BUILD_USER="chrisusr"
 BUILD_AT="/home/chrisusr/app_build"
 
-PRODUCTION_HOSTS="142.93.6.157"
+PRODUCTION_HOSTS="pagetalk.club"
 PRODUCTION_USER="chrisusr"
 DELIVER_TO="/home/chrisusr/app_release"
 

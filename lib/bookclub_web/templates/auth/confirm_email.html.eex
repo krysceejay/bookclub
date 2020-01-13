@@ -8,7 +8,9 @@
         <p class="text-head">Sign-up Successful</p>
         <p>Kindly go to <span class="text-email"><%= @slug %></span> to verify your account</p>
         <p>
-          <%= link "Back To Home", to: Routes.home_path(@conn, :index), class: "btn btn-small" %>
+          <%= link to: Routes.home_path(@conn, :index), class: "btn btn-small" do %>
+          Home <i class="fa fa-home"></i>
+          <% end %>
         </p>
       </div>
 
