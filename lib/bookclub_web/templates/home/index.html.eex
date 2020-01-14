@@ -1,7 +1,7 @@
 <header id="header-home">
   <div class="container">
     <div class="header-content">
-      <h1>Welcome To Bookclub</h1>
+      <h1>Welcome To PageTalk</h1>
       <p class="lead">
         Let's build a community of people that love to read!!
       </p>
@@ -165,7 +165,7 @@
             </span>
           </div>
 
-          
+
           <!-- <p class="top-rated-desc">
             <%= book.description |> String.slice(0..60) %>...
           </p>
@@ -191,7 +191,7 @@
         Start A Book Club
       </h2>
       <p>
-        Join thousand of anchors and earn money hassle free!
+        Join thousands of anchors and earn money hassle free!
       </p>
     </div>
     <div>

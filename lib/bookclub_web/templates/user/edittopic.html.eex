@@ -1,8 +1,7 @@
-<div class="dashboard-main-section-content">
+
           <h3 class="dashboard-content-header">Edit Topic</h3>
           <div class="dashboard-addbook">
             <div class="field">
               <%= render "topicform.html", Map.put(assigns, :action, Routes.user_path(@conn, :updatetopic, @slug)) %>
           </div>
         </div>
-</div>

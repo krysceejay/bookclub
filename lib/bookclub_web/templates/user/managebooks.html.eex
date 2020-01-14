@@ -1,6 +1,4 @@
 
-<div class="dashboard-main-section-content">
-
   <%= if @books != [] do %>
   <div class="dashboard-content-hr-grp">
     <h3 class="dashboard-content-header">Manage Books (<%= @book_count %>)</h3>
@@ -62,4 +60,3 @@
         <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
     <% end %>
   </div>
-</div>

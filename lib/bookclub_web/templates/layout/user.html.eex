@@ -112,8 +112,10 @@
 
           </div>
         </nav>
-        <%= render BookclubWeb.MsgView, "msg.html", conn: @conn %>
-      <%= render @view_module, @view_template, assigns %>
+        <div class="dashboard-main-section-content">
+          <%= render BookclubWeb.MsgView, "msg.html", conn: @conn %>
+          <%= render @view_module, @view_template, assigns %>
+        </div>
       </section>
     </main>
     <!-- / End Section A -->

@@ -1,5 +1,4 @@
 
-<div class="dashboard-main-section-content">
   <%= if @readers != [] do %>
   <h3 class="dashboard-content-header">Joined List </h3>
 
@@ -55,4 +54,3 @@
         <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
     <% end %>
   </div>
-</div>

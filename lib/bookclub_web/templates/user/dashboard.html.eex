@@ -1,6 +1,4 @@
-<div class="dashboard-main-section-content">
   <p>Welcome <%= @user.first_name %></p>
   <div></div>
   <div></div>
   <div></div>
-</div>
