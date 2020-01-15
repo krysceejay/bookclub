@@ -11,10 +11,10 @@ defmodule Bookclub.Email do
   end
 
   def confirm_email(user, email, token) do
-      base_email()
-        |> to(email)
-        |> subject("Confirm Email")
-        |> render("confirm_email.html", user: user, token: token)
+    base_email()
+      |> to(email)
+      |> subject("Confirm Email")
+      |> render("confirm_email.html", user: user, token: token)
   end
 
   defp base_email() do

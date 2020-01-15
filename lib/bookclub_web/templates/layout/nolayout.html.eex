@@ -19,7 +19,7 @@
     <!-- /End Google Font -->
 
     <!-- Style CSS -->
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
+     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" /> 
     <title>Bookclub</title>
   </head>
   <body>

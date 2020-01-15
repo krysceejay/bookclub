@@ -79,6 +79,7 @@ defmodule BookclubWeb.Router do
     pipe_through [:browser, :nolayout_layout]
 
     get "/email/:slug", AuthController, :confirmemail
+    get "/welcome", AuthController, :welcome
   end
 
   scope "/", BookclubWeb do
@@ -101,6 +102,7 @@ defmodule BookclubWeb.Router do
     post "/register", AuthController, :register
 
     get "/email-verify/:token", AuthController, :verifytoken
+
   end
 
   # Other scopes may use custom stacks.

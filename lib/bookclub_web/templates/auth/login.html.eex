@@ -1,5 +1,5 @@
     <!-- Section A: Contact -->
-    <section id="contact-a" class="text-center py-4">
+    <section id="login-a" class="text-center py-4">
       <div class="container">
         <h2 class="section-title"><span class="text-primary">Sign</span> In</h2>
         <p class="lead">
@@ -21,8 +21,10 @@
 
               </div>
 
-              <!-- <input type="submit" value="Send" class="btn btn-dark" /> -->
-              <%= submit "Sign In", class: "btn btn-dark" %>
+              <div class="form-group">
+                <%= submit "Sign In", class: "btn btn-dark" %>
+              </div>
+
             <% end %>
           </div>
         </div>

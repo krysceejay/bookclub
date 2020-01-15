@@ -71,7 +71,7 @@ defmodule BookclubWeb.AuthController do
   end
 
   defp verifyemail(user) do
-    case Accounts.create_verify(user, %{token: Functions.rand_string(40)}) do
+    case Accounts.create_verify(user, %{token: Functions.rand_string(20)}) do
       {:ok, _verify} -> true
       {:error, _changeset} -> false
     end
@@ -104,14 +104,19 @@ defmodule BookclubWeb.AuthController do
 
   end
 
-  def verifytoken(conn, %{"token" => token}) do
-    with verified_user <- Accounts.get_verify_by_token(token),
+  def verifytoken(conn, %{"token" => dtoken}) do
+    with {:ok, token} <- Base.decode64(dtoken),
+          verified_user <- Accounts.get_verify_by_token(token),
           getuser <- Accounts.get_user!(verified_user.user_id),
           {:ok, _user} <- Accounts.update_user_status(getuser, %{status: 1}) do
             conn
             |> put_flash(:info, "Email verified, you can now login.")
             |> redirect(to: Routes.auth_path(conn, :login))
-    end
+          end
+  end
+
+  def welcome(conn, _) do
+    render(conn, "welcome.html")
   end
 
 

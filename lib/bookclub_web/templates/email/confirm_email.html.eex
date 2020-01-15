@@ -1,7 +1,22 @@
-<div class="">
-  <p>Hello <%= @user.first_name %></p>
-  <p>please confirm your email <%= @user.email %> with the link below</p>
+<tr>
+  <td style="background-color:#fff; font-family: 'Poppins', sans-serif; ">
+    <div style="display: block; margin: 0px; padding:40px; background-color:#fff; font-family: 'Poppins', sans-serif; ">
+      <div style="text-align: center; margin-bottom: 50px;">
+          <img src="https://pagetalk.club/home/img/celebration.png" width="80%" alt="" srcset="">
+      </div>
+      <h2 style="color:#242c42; margin-bottom:30px">Hi <%= @user.first_name %>,</h2> <h3 style="">Welcome to WittyReviews!</h3>
+      <p style="line-height: 1.8">We are pleased to have you join our community of readers. It’s time to get started. We’ve created a personal account for you, please confirm your email address and use our services to the maximum</p>
 
-  <a href="http://localhost:4000/email-verify/<%= @token %>">Confirm your Email</a>
+      <a href="http://localhost:4000/email-verify/<%= Base.encode64(@token) %>" style="background: #f53ba3; padding:16px 32px; border-radius:5px; font-size:16px; text-decoration: none; color:#fff; display: inline-block; margin:20px 0px;">Confirm your Email</a>
 
-</div>
+      <p style="line-height: 1.8">You can also click the link below: <br><br>
+        <a href="http://localhost:4000/email-verify/<%= Base.encode64(@token) %>" style="color: #f53ba3; text-decoration:none;">http://localhost:4000/email-verify/<%= Base.encode64(@token) %>
+        </a>
+      </p>
+
+      <p style="line-height: 1.8">We're glad you're here.</p>
+      <p><br>Our Best!<br>The WittyReviews Team</span><br></p>
+
+    </div>
+  </td>
+</tr>
