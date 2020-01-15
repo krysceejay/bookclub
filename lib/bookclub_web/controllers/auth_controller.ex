@@ -53,7 +53,8 @@ defmodule BookclubWeb.AuthController do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         with true <- verifyemail(user) do
-          Bookclub.Email.confirm_email(user, user.email, get_user_token(user.id)) |> Bookclub.Mailer.deliver_now
+            Bookclub.Email.confirm_email(user, user.email, get_user_token(user.id))
+            |> Bookclub.Mailer.deliver_now
           conn
           |> redirect(to: Routes.auth_path(conn, :confirmemail, user.email))
         else

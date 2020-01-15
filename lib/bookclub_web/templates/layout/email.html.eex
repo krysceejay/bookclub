@@ -1,5 +1,6 @@
 <html>
   <head>
+    <link rel="stylesheet" href="<%= Routes.static_path(BookclubWeb.Endpoint, "/home/css/main.min.css") %>" />
     <title>Email temp</title>
   </head>
   <body>

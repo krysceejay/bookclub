@@ -11,12 +11,16 @@ defmodule Bookclub.Email do
   end
 
   def confirm_email(user, email, token) do
+      base_email()
+        |> to(email)
+        |> subject("Confirm Email")
+        |> render("confirm_email.html", user: user, token: token)
+  end
+
+  defp base_email() do
     new_email()
-      |> to(email)
       |> from("info@pagetalk.club")
-      |> subject("Confirm Email")
       |> put_html_layout({BookclubWeb.LayoutView, "email.html"})
-      |> render("confirm_email.html", user: user, token: token)
-    end
+  end
 
 end
