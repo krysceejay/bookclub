@@ -254,4 +254,69 @@ defmodule Bookclub.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_verify(verify)
     end
   end
+
+  describe "password_reset" do
+    alias Bookclub.Accounts.ResetPassword
+
+    @valid_attrs %{email: "some email", first_name: "some first_name", last_name: "some last_name", username: "some username"}
+    @update_attrs %{email: "some updated email", first_name: "some updated first_name", last_name: "some updated last_name", username: "some updated username"}
+    @invalid_attrs %{email: nil, first_name: nil, last_name: nil, username: nil}
+
+    def reset_password_fixture(attrs \\ %{}) do
+      {:ok, reset_password} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_reset_password()
+
+      reset_password
+    end
+
+    test "list_password_reset/0 returns all password_reset" do
+      reset_password = reset_password_fixture()
+      assert Accounts.list_password_reset() == [reset_password]
+    end
+
+    test "get_reset_password!/1 returns the reset_password with given id" do
+      reset_password = reset_password_fixture()
+      assert Accounts.get_reset_password!(reset_password.id) == reset_password
+    end
+
+    test "create_reset_password/1 with valid data creates a reset_password" do
+      assert {:ok, %ResetPassword{} = reset_password} = Accounts.create_reset_password(@valid_attrs)
+      assert reset_password.email == "some email"
+      assert reset_password.first_name == "some first_name"
+      assert reset_password.last_name == "some last_name"
+      assert reset_password.username == "some username"
+    end
+
+    test "create_reset_password/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_reset_password(@invalid_attrs)
+    end
+
+    test "update_reset_password/2 with valid data updates the reset_password" do
+      reset_password = reset_password_fixture()
+      assert {:ok, %ResetPassword{} = reset_password} = Accounts.update_reset_password(reset_password, @update_attrs)
+      assert reset_password.email == "some updated email"
+      assert reset_password.first_name == "some updated first_name"
+      assert reset_password.last_name == "some updated last_name"
+      assert reset_password.username == "some updated username"
+    end
+
+    test "update_reset_password/2 with invalid data returns error changeset" do
+      reset_password = reset_password_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_reset_password(reset_password, @invalid_attrs)
+      assert reset_password == Accounts.get_reset_password!(reset_password.id)
+    end
+
+    test "delete_reset_password/1 deletes the reset_password" do
+      reset_password = reset_password_fixture()
+      assert {:ok, %ResetPassword{}} = Accounts.delete_reset_password(reset_password)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_reset_password!(reset_password.id) end
+    end
+
+    test "change_reset_password/1 returns a reset_password changeset" do
+      reset_password = reset_password_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_reset_password(reset_password)
+    end
+  end
 end

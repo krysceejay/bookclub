@@ -1,0 +1,29 @@
+<!-- Section A: Contact -->
+<section id="login-a" class="text-center py-4">
+  <div class="container">
+    <h2 class="section-title"><span class="text-primary">Reset</span> Password</h2>
+    <p class="lead">
+      Please enter your email
+    </p>
+
+    <%= render BookclubWeb.MsgView, "msg.html", conn: @conn %>
+
+    <div class="field">
+      <div class="field-form">
+        <%= form_for @conn, Routes.auth_path(@conn, :reset), fn f -> %>
+          <div class="form-group">
+            <%= email_input f, :email, placeholder: "Enter email", required: "required", autofocus: "on" %>
+
+          </div>
+
+          <div class="form-group">
+            <%= submit "Sign In", class: "btn btn-dark" %>
+          </div>
+
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / End Section A -->

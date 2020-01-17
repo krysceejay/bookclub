@@ -1,9 +1,10 @@
 <header id="header-home">
   <div class="container">
     <div class="header-content">
-      <h1>Welcome To PageTalk</h1>
+      <h2>Welcome To </h2><br><h1>WittyReviews</h1>
       <p class="lead">
-        Let's build a community of people that love to read!!
+        Talk about it if it's so interesting!!
+        <!-- Let's build a community of people that love to read!! -->
       </p>
       <%= link "Get Started", to: Routes.home_path(@conn, :books), class: "btn btn-main" %>
     </div>

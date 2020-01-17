@@ -39,7 +39,7 @@
       <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
       <h1 class="logo">
         <%= link to: Routes.home_path(@conn, :index) do %>
-          <span class="text-primary">My</span>Logo
+          <span class="text-primary">Witty</span>Reviews
         <% end %>
       </h1>
       <ul class="main-nav-menu">

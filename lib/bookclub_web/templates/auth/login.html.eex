@@ -25,6 +25,8 @@
                 <%= submit "Sign In", class: "btn btn-dark" %>
               </div>
 
+              <%= link "Forgot your password?", to: Routes.auth_path(@conn, :resetform) %>
+
             <% end %>
           </div>
         </div>

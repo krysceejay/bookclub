@@ -324,4 +324,111 @@ defmodule Bookclub.Accounts do
   def change_verify(%Verify{} = verify) do
     Verify.changeset(verify, %{})
   end
+
+  alias Bookclub.Accounts.ResetPassword
+
+  @doc """
+  Returns the list of password_reset.
+
+  ## Examples
+
+      iex> list_password_reset()
+      [%ResetPassword{}, ...]
+
+  """
+  def list_password_reset do
+    Repo.all(ResetPassword)
+  end
+
+  @doc """
+  Gets a single reset_password.
+
+  Raises `Ecto.NoResultsError` if the Reset password does not exist.
+
+  ## Examples
+
+      iex> get_reset_password!(123)
+      %ResetPassword{}
+
+      iex> get_reset_password!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_reset_password!(id), do: Repo.get!(ResetPassword, id)
+
+  def get_reset_password_by_email(email), do: Repo.get_by!(ResetPassword, email: email)
+
+  def check_if_email_exist(email) do
+    query =
+      from r in ResetPassword,
+        where: r.email == ^email
+
+    Repo.exists?(query)
+
+  end
+
+  @doc """
+  Creates a reset_password.
+
+  ## Examples
+
+      iex> create_reset_password(%{field: value})
+      {:ok, %ResetPassword{}}
+
+      iex> create_reset_password(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_reset_password(attrs \\ %{}) do
+    %ResetPassword{}
+    |> ResetPassword.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a reset_password.
+
+  ## Examples
+
+      iex> update_reset_password(reset_password, %{field: new_value})
+      {:ok, %ResetPassword{}}
+
+      iex> update_reset_password(reset_password, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_reset_password(%ResetPassword{} = reset_password, attrs) do
+    reset_password
+    |> ResetPassword.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a ResetPassword.
+
+  ## Examples
+
+      iex> delete_reset_password(reset_password)
+      {:ok, %ResetPassword{}}
+
+      iex> delete_reset_password(reset_password)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_reset_password(%ResetPassword{} = reset_password) do
+    Repo.delete(reset_password)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking reset_password changes.
+
+  ## Examples
+
+      iex> change_reset_password(reset_password)
+      %Ecto.Changeset{source: %ResetPassword{}}
+
+  """
+  def change_reset_password(%ResetPassword{} = reset_password) do
+    ResetPassword.changeset(reset_password, %{})
+  end
 end

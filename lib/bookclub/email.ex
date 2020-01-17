@@ -17,6 +17,13 @@ defmodule Bookclub.Email do
       |> render("confirm_email.html", user: user, token: token)
   end
 
+  def reset_password_email(name, email, token) do
+    base_email()
+      |> to(email)
+      |> subject("Reset Password")
+      |> render("reset_password.html", name: name, token: token)
+  end
+
   defp base_email() do
     new_email()
       |> from("info@pagetalk.club")

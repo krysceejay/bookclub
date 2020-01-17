@@ -79,6 +79,7 @@ defmodule BookclubWeb.Router do
     pipe_through [:browser, :nolayout_layout]
 
     get "/email/:slug", AuthController, :confirmemail
+    get "/reset/:slug", AuthController, :resetpassemail
     get "/welcome", AuthController, :welcome
   end
 
@@ -100,8 +101,11 @@ defmodule BookclubWeb.Router do
     post "/login", AuthController, :login
     get "/register", AuthController, :registerform
     post "/register", AuthController, :register
+    get "/reset-password", AuthController, :resetform
+    post "/reset", AuthController, :reset
 
     get "/email-verify/:token", AuthController, :verifytoken
+    get "/reset-password/:token", AuthController, :resetpassword
 
   end
 

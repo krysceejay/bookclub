@@ -150,8 +150,8 @@ defmodule BookclubWeb.UserController do
 
 
   def profile(conn, %{"name" => name}) do
-
-    userprof = Accounts.get_user_by_username(name)
+    with {:ok, uemail} <- Base.decode64(name),
+      userprof <- Accounts.get_user_by_email(uemail) do
       case userprof do
         nil ->
           conn
@@ -161,6 +161,13 @@ defmodule BookclubWeb.UserController do
 
         _ -> render(conn, "profile.html", userprof: userprof)
       end
+    else
+      :error ->
+        conn
+        |> put_status(:not_found)
+        |> put_view(BookclubWeb.ErrorView)
+        |> render("404.html")
+    end
 
   end
 
@@ -177,7 +184,7 @@ defmodule BookclubWeb.UserController do
         {:ok, _user} ->
           conn
           |> put_flash(:info, "Profile updated successfully.")
-          |> redirect(to: Routes.user_path(conn, :profile, conn.assigns.user.username))
+          |> redirect(to: Routes.user_path(conn, :profile, conn.assigns.user.email |> Base.encode64()))
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "editprofile.html", changeset: changeset)
