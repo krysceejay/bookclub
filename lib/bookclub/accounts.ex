@@ -194,6 +194,12 @@ defmodule Bookclub.Accounts do
     |> Repo.update()
   end
 
+  def update_user_password(%User{} = user, attrs) do
+    user
+    |> User.changeset_password_reset(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a User.
 
@@ -357,6 +363,8 @@ defmodule Bookclub.Accounts do
   def get_reset_password!(id), do: Repo.get!(ResetPassword, id)
 
   def get_reset_password_by_email(email), do: Repo.get_by!(ResetPassword, email: email)
+
+  def get_reset_password_by_token(token), do: Repo.get_by!(ResetPassword, token: token)
 
   def check_if_email_exist(email) do
     query =

@@ -59,6 +59,15 @@ defmodule Bookclub.Accounts.User do
     |> validate_required([:status])
   end
 
+  def changeset_password_reset(user, attrs) do
+    user
+    |> cast(attrs, [:passwordfield])
+    |> validate_required([:passwordfield])
+    |> validate_length(:passwordfield, min: 6, max: 100)
+    |> validate_confirmation(:passwordfield)
+    |> encrypt_password
+  end
+
   defp encrypt_password(changeset) do
     password = get_change(changeset, :passwordfield)
 

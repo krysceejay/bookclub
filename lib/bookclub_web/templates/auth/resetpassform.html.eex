@@ -1,0 +1,35 @@
+<!-- Section A: Contact -->
+<section id="login-a" class="text-center py-4">
+  <div class="container">
+    <h2 class="section-title"><span class="text-primary">Reset</span> Password</h2>
+    <p class="lead">
+      Please enter your new password
+    </p>
+
+    <%= render BookclubWeb.MsgView, "msg.html", conn: @conn %>
+
+    <div class="field">
+      <div class="field-form">
+        <%= form_for @changeset, Routes.auth_path(@conn, :resetpass, @dtoken), fn f -> %>
+
+          <div class="form-group">
+            <%= password_input f, :passwordfield, placeholder: "Enter new password", required: "required" %>
+            <%= error_tag f, :passwordfield %>
+          </div>
+
+          <div class="form-group">
+            <%= password_input f, :passwordfield_confirmation, placeholder: "Confirm new password" %>
+            <%= error_tag f, :passwordfield_confirmation %>
+          </div>
+
+          <div class="form-group">
+            <%= submit "Sign In", class: "btn btn-dark" %>
+          </div>
+
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / End Section A -->

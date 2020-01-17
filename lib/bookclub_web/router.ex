@@ -105,7 +105,9 @@ defmodule BookclubWeb.Router do
     post "/reset", AuthController, :reset
 
     get "/email-verify/:token", AuthController, :verifytoken
-    get "/reset-password/:token", AuthController, :resetpassword
+    get "/reset-password/:token", AuthController, :resetpasswordform
+    put "/reset-password/:slug", AuthController, :resetpass
+    post "/reset-password/:slug", AuthController, :resetpass
 
   end
 

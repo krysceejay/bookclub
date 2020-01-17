@@ -143,6 +143,30 @@ defmodule BookclubWeb.AuthController do
     render(conn, "reset_password.html", slug: slug)
   end
 
+  def resetpasswordform(conn, %{"token" => dtoken}) do
+    with {:ok, token} <- Base.decode64(dtoken),
+          reset_user <- Accounts.get_reset_password_by_token(token) do
+            changeset = Accounts.change_user(%User{})
+            render(conn, "resetpassform.html", dtoken: dtoken, changeset: changeset)
+    end
+  end
+
+  def resetpass(conn, %{"slug" => dtoken, "user" => user_params}) do
+    with {:ok, token} <- Base.decode64(dtoken),
+          reset_user <- Accounts.get_reset_password_by_token(token),
+          user <- Accounts.get_user_by_email(reset_user.email) do
+            case Accounts.update_user_password(user, user_params) do
+              {:ok, _user} ->
+                conn
+                |> put_flash(:info, "Password changed successfully.")
+                |> redirect(to: Routes.auth_path(conn, :loginform))
+
+              {:error, %Ecto.Changeset{} = changeset} ->
+                render(conn, "resetpassform.html", dtoken: dtoken, changeset: changeset)
+            end
+    end
+  end
+
   def verifytoken(conn, %{"token" => dtoken}) do
     with {:ok, token} <- Base.decode64(dtoken),
           verified_user <- Accounts.get_verify_by_token(token),
