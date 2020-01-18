@@ -16,7 +16,7 @@
       <%= topic.topic_text %>
     </td>
     <td>
-      <% case topic.topic_status do %>
+      <%= case topic.topic_status do %>
         <% 0 -> %>
           Not Active
         <% 1 -> %>

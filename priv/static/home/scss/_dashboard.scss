@@ -88,6 +88,34 @@
       }
     }
 
+    //Dashboard home
+    .dashboard-home {
+      &-welcome {
+        margin-bottom: 2rem;
+      }
+      &-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 3rem;
+        margin-bottom: 4rem;
+      }
+      &-charts {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .chart {
+          &-bar {
+            flex: 3;
+            margin-right: 3rem;
+            //padding: 3rem 3rem 3rem 0;
+          }
+          &-pie {
+            flex: 2;
+          }
+        }
+      }
+    }
+
     //Manage Books
     .dash-book-list {
       display: grid;

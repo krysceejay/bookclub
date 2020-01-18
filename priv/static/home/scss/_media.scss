@@ -717,6 +717,25 @@
       .dash-reader-list {
         grid-template-columns: repeat(3, 1fr);
       }
+      //Dashboard home
+      .dashboard-home {
+        &-charts {
+          display: block;
+          .chart {
+            &-bar {
+              display: block;
+              width: 100%;
+              margin: 2rem auto;
+              //padding: 3rem 3rem 3rem 0;
+            }
+            &-pie {
+              display: block;
+              width: 60%;
+              margin: auto;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -779,6 +798,9 @@
               height: auto;
               width: auto;
               display: block;
+              h2 {
+                padding-top: 1.5rem;
+              }
               .join-chat {
                 width: auto;
                 height: auto;
@@ -847,6 +869,23 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  #dashboard-main {
+    &-section {
+      //Dashboard home
+      .dashboard-home {
+        &-stats {
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-gap: 2rem;
+          //margin-bottom: 4rem;
+        }
+      }
+    }
+  }
+}
+
 //Smartphones
 @media (max-width: 450px) {
   //Home Sections

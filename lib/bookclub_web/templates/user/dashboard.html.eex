@@ -1,4 +1,36 @@
-  <p>Welcome <%= @user.first_name %></p>
-  <div></div>
-  <div></div>
-  <div></div>
+  <div class="dashboard-home">
+    <div class="dashboard-home-welcome">
+      <h1>Welcome <%= @user.first_name %></h1>
+    </div>
+    <div class="dashboard-home-stats">
+
+      <div class="dashboard-cards-books">
+        <div class="styles-number">70</div>
+        <hr>
+        <div class="styles-text">Added Books</div>
+        <i class="fa fa-book"></i>
+      </div>
+
+      <div class="dashboard-cards-joined">
+        <div class="styles-number">70</div>
+        <hr>
+        <div class="styles-text">Joined</div>
+        <i class="fa fa-handshake-o"></i>
+      </div>
+
+      <div class="dashboard-cards-readers">
+        <div class="styles-number">70</div>
+        <hr>
+        <div class="styles-text">Readers</div>
+        <i class="fa fa-group"></i>
+      </div>
+
+    </div>
+
+    <div class="dashboard-home-charts">
+      <div id="chart-books" class="chart-bar"></div>
+      <div id="chart-readers" class="chart-pie"></div>
+    </div>
+
+
+  </div>

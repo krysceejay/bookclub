@@ -28,9 +28,7 @@
             <%= link to: Routes.user_path(@conn, :booktopic, book) do %>
             <i class="fa fa-book"></i>
             <% end %>
-            <%= link to: Routes.user_path(@conn, :editbook, book) do %>
-            <i class="fa fa-pencil"></i>
-            <% end %>
+    
             <%= link to: Routes.user_path(@conn, :bookreaders, book) do %>
             <i class="fa fa-users"></i>
             <% end %>

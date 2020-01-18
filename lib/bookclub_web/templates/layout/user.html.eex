@@ -23,6 +23,9 @@
     />
     <!-- /End Google Font -->
 
+    <!-- Apex css -->
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/apexcharts.css") %>" />
+
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
     <title>Bookclub: Dashboard</title>
@@ -125,6 +128,7 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/apex.js") %>"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/script.js") %>"></script>
   </body>
 </html>

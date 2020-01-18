@@ -17,7 +17,19 @@
           <div class="bdetails-main">
             <div class="bdetails-main-top">
               <div class="bdetails-img">
+
+                <%= if @conn.assigns[:user] do %>
+                  <%= if @book.user.email == @conn.assigns[:user].email do %>
+                    <%= link to: Routes.user_path(@conn, :editbook, @book), onclick: "return confirm('Are you sure you want to edit this book club?');" do %>
+                    <span class="bdetails-img-icon"
+                      ><i class="fa fa-pencil" aria-hidden="true"></i>
+                      Edit</span>
+                    <% end %>
+                  <% end %>
+                <% end %>
+
                 <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> @book.bookcover) %>" alt="" />
+
               </div>
               <div class="bdetails-beside-img">
                 <h2>
@@ -152,7 +164,12 @@
               </p>
             </div>
             <div class="bdetails-rate py-3">
-              <h3>Rate This Book</h3>
+              <h3>Rate This Book
+                <%= if !@conn.assigns[:user] do %>
+                  <span class="waiting-list">(login required)</span>
+                <% end %>
+
+              </h3>
               <%= render "rating_form.html", Map.put(assigns, :action, Routes.home_path(@conn, :createrating)) %>
             </div>
           </div>
