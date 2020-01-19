@@ -40,6 +40,7 @@ $(document).ready(function() {
        }],
          chart: {
          height: 350,
+         width: '100%',
          type: 'bar',
        },
        plotOptions: {
@@ -66,6 +67,9 @@ $(document).ready(function() {
          position: 'top',
          labels: {
            offsetY: -18,
+           style: {
+                fontSize: '16px'
+            },
 
          },
          axisBorder: {
@@ -117,7 +121,10 @@ $(document).ready(function() {
            show: true,
            formatter: function (val) {
              return val + "%";
-           }
+           },
+           style: {
+                fontSize: '13px'
+            }
          }
 
        },
@@ -127,7 +134,8 @@ $(document).ready(function() {
          offsetY: 320,
          align: 'center',
          style: {
-           color: '#444'
+           color: '#444',
+           fontSize: '14px',
          }
        }
        };
