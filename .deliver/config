@@ -1,10 +1,10 @@
 APP="bookclub"
 
-BUILD_HOST="pagetalk.club"
+BUILD_HOST="wittyreviews.club"
 BUILD_USER="chrisusr"
 BUILD_AT="/home/chrisusr/app_build"
 
-PRODUCTION_HOSTS="pagetalk.club"
+PRODUCTION_HOSTS="wittyreviews.club"
 PRODUCTION_USER="chrisusr"
 DELIVER_TO="/home/chrisusr/app_release"
 
