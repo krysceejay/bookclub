@@ -93,7 +93,7 @@ defmodule BookclubWeb.Router do
     get "/searchbooks", HomeController, :searchbooks
     get "/contact", HomeController, :contact
     post "/rate-book", HomeController, :createrating
-    get "/reviews/:slug", HomeController, :reviews
+    get "/ratings/:slug", HomeController, :ratings
 
     get "/logout", AuthController, :delete
     delete "/logout", AuthController, :delete

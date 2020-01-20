@@ -46,9 +46,9 @@ padding: 0; font-family: 'Poppins',sans-serif; line-height: 160%; font-size: .9e
                 <p style="font-size:0.8em;line-height:140%;"><strong>Contact: </strong><br> info@wittyreviews.club </p>
             </div>
             <div style="display:block; margin-bottom:20px;">
-                <a href="https://www.facebook.com/wittyreviews/"><img src="https://pagetalk.club/home/img/fbook.png" style="width:30px; height:30px;" alt="Facebook"></a>
-                <a href="https://www.twitter.com/wittyreviews/"><img src="https://pagetalk.club/home/img/twttr.png" style="width:30px; height:30px;" alt="Twitter"></a>
-                <a href="https://www.instagram.com/wittyreviews/"><img src="https://pagetalk.club/home/img/insta.png" style="width:30px; height:30px;" alt="Instagram"></a>
+                <a href="https://www.facebook.com/wittyreviews/"><img src="http://wittyreviews.club/home/img/fbook.png" style="width:30px; height:30px;" alt="Facebook"></a>
+                <a href="https://www.twitter.com/wittyreviews/"><img src="http://wittyreviews.club/home/img/twttr.png" style="width:30px; height:30px;" alt="Twitter"></a>
+                <a href="https://www.instagram.com/wittyreviews/"><img src="http://wittyreviews.club/home/img/insta.png" style="width:30px; height:30px;" alt="Instagram"></a>
             </div>
 
         </td>

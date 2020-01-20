@@ -19,8 +19,8 @@
     <!-- /End Google Font -->
 
     <!-- Style CSS -->
-     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" /> 
-    <title>Bookclub</title>
+     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
+    <title>WittyReviews</title>
   </head>
   <body>
     <%= render @view_module, @view_template, assigns %>

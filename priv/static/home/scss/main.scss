@@ -878,6 +878,144 @@ div[class^="btn-"],
   }
 }
 
+//Book Rating Sections
+#bratings {
+  //Book Section A
+  &-a {
+    .bratings-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "main main popular"
+        "main main top-cat";
+
+      grid-gap: 3rem;
+      .bratings-main {
+        grid-area: main;
+        //background: $light-color;
+        min-height: 660px;
+        width: auto;
+        &-stats {
+          display: flex;
+          //justify-content: space-between;
+          //background: $main-color;
+          padding: 1rem 2rem;
+          height: 200px;
+          &-cal {
+            flex: 1;
+            background: $light-color;
+            margin-right: 2rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            .rating-number {
+              font-size: 3rem;
+            }
+            .stars {
+              font-size: 1.5rem;
+            }
+            .total-num-rating {
+              font-size: 0.9rem;
+              margin-top: 0.9rem;
+            }
+          }
+          &-progress {
+            flex: 3;
+            //background: green;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 0.7rem;
+            .progress-d {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              &-numberr {
+                //background: red;
+              }
+              &-onestar {
+                margin-left: 0.5rem;
+                &:before {
+                  content: "★ ";
+                  color: $star-color;
+                }
+              }
+              &-onerating {
+                color: $medium-color;
+                margin-left: 0.5rem;
+              }
+              &-ratingprog {
+                flex: 2;
+                background: $star-background;
+                margin-left: 1.5rem;
+                height: 10px;
+                overflow: hidden;
+                border-radius: 5px;
+                //margin-bottom: 0.3rem;
+                div {
+                  height: 100%;
+                  color: #fff;
+                  background: $star-color;
+                }
+              }
+            }
+          }
+        }
+      }
+      .bdetails-popular {
+        grid-area: popular;
+        .toprated-sidebar {
+          &-single {
+            display: flex;
+            //justify-content: center;
+            border-bottom: $medium-color 0.5px dotted;
+            padding: 0.5rem 0;
+            &:last-child {
+              border-bottom: 0;
+            }
+            .pop-img {
+              img {
+                width: 80px;
+                height: 122px;
+                object-fit: contain;
+                margin-right: 1rem;
+              }
+            }
+            .pop-content {
+              text-align: left;
+              &-title {
+                font-size: 1.1rem;
+                text-transform: capitalize;
+              }
+              &-author {
+                //font-size: 1.1rem;
+                color: $text-color;
+                font-size: 0.9rem;
+                text-transform: capitalize;
+              }
+            }
+          }
+        }
+      }
+      .top-cat {
+        grid-area: top-cat;
+        &-list {
+          li {
+            border-bottom: $medium-color 0.5px dotted;
+            padding: 0.9rem 0;
+            font-size: 1.1rem;
+            &:last-child {
+              border-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 //Import Chat
 @import "chat";
 

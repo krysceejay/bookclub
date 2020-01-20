@@ -9,10 +9,9 @@ defmodule BookclubWeb.HomeController do
 
   def index(conn, _params) do
     top_rated = Content.top_books(5)
+    pagetitle = "Home"
 
-    # Bookclub.Email.welcome_text_email("chrysclass16@gmail.com") |> Bookclub.Mailer.deliver_now
-
-    render(conn, "index.html", top_rated: top_rated)
+    render(conn, "index.html", top_rated: top_rated, pagetitle: pagetitle)
   end
 
   def books(conn, _params) do
@@ -137,8 +136,18 @@ defmodule BookclubWeb.HomeController do
     render(conn, "books.html", books: books, num_links: num_links, genres: genres)
   end
 
-  def reviews(conn, %{"slug" => slug}) do
-    IO.inspect slug
+  def ratings(conn, %{"slug" => slug}) do
+    #
+    # IO.puts "++++++++++++++"
+    # IO.puts slug
+    # IO.puts "++++++++++++++"
+    with {:ok, book_id} <- Base.decode64(slug),
+          book <- Content.get_only_book!(book_id),
+          {bk_ratings, num_links} <- Content.get_ratings_by_book_user(book_id)|> Pagination.paginate(30, conn) do
+            recommended_books = Content.recommended_books(book_id)
+            render(conn, "ratings.html", bk_ratings: bk_ratings,
+            num_links: num_links, book: book, recommended_books: recommended_books)
+    end
   end
 
 end

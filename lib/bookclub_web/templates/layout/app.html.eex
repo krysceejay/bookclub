@@ -30,7 +30,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>Bookclub</title>
+    <title>WittyReviews: <%= if assigns[:pagetitle], do: @pagetitle, else: "" %></title>
   </head>
   <body>
 

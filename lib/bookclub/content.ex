@@ -595,6 +595,16 @@ defmodule Bookclub.Content do
     query
   end
 
+  def get_ratings_by_book_user(book_id) do
+    query =
+      from r in Rating,
+        where: r.book_id == ^book_id,
+        order_by: [desc: r.id],
+        preload: [:user]
+
+    query
+  end
+
 
   @doc """
   Returns the list of topics.

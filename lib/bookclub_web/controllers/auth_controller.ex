@@ -145,7 +145,7 @@ defmodule BookclubWeb.AuthController do
 
   def resetpasswordform(conn, %{"token" => dtoken}) do
     with {:ok, token} <- Base.decode64(dtoken),
-          reset_user <- Accounts.get_reset_password_by_token(token) do
+          _reset_user <- Accounts.get_reset_password_by_token(token) do
             changeset = Accounts.change_user(%User{})
             render(conn, "resetpassform.html", dtoken: dtoken, changeset: changeset)
     end

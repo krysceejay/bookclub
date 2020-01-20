@@ -26,7 +26,7 @@ defmodule Bookclub.Email do
 
   defp base_email() do
     new_email()
-      |> from("info@pagetalk.club")
+      |> from("mail@wittyreviews.club")
       |> put_html_layout({BookclubWeb.LayoutView, "email.html"})
   end
 
