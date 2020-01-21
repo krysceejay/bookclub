@@ -15,58 +15,52 @@
         <div class="bratings-content">
           <div class="bratings-main">
             <div class="bratings-main-stats">
-              <div class="bratings-main-stats-cal">
-                <div class="rating-number">4.4/5</div>
                 <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: @book.id %>
-                <div class="total-num-rating">265 ratings</div>
+              
+            </div>
+            <div class="bratings-main-reviews">
+              <div class="bratings-main-reviews-head">REVIEWS</div>
+              <div class="bratings-main-reviews-card">
+                <div class="bratings-main-reviews-card-top">
+                  <div class="reviews-stars"></div>
+                  <div class="reviews-date">27-11-2020</div>
+                </div>
+                <div class="bratings-main-reviews-card-body">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                  labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                  Excepteur sint occaecat cupidatat non proident,
+                  sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  <p class="reviewer">by Krys</p>
+                </div>
               </div>
-              <div class="bratings-main-stats-progress">
-                <div class="progress-d">
-                  <span class="progress-d-numberr">5</span>
-                  <span class="progress-d-onestar"></span>
-                  <span class="progress-d-onerating">(15)</span>
-                  <div class="progress-d-ratingprog">
-                    <div style="width:40%"></div>
-                  </div>
-                </div>
 
-                <div class="progress-d">
-                  <span class="progress-d-numberr">4</span>
-                  <span class="progress-d-onestar"></span>
-                  <span class="progress-d-onerating">(15)</span>
-                  <div class="progress-d-ratingprog">
-                    <div style="width:70%"></div>
-                  </div>
+              <div class="bratings-main-reviews-card">
+                <div class="bratings-main-reviews-card-top">
+                  <div class="reviews-stars"></div>
+                  <div class="reviews-date">27-11-2020</div>
                 </div>
-
-                <div class="progress-d">
-                  <span class="progress-d-numberr">3</span>
-                  <span class="progress-d-onestar"></span>
-                  <span class="progress-d-onerating">(15)</span>
-                  <div class="progress-d-ratingprog">
-                    <div style="width:90%"></div>
-                  </div>
+                <div class="bratings-main-reviews-card-body">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                  labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <p class="reviewer">by cosmas</p>
                 </div>
-
-                <div class="progress-d">
-                  <span class="progress-d-numberr">2</span>
-                  <span class="progress-d-onestar"></span>
-                  <span class="progress-d-onerating">(15)</span>
-                  <div class="progress-d-ratingprog">
-                    <div style="width:30%"></div>
-                  </div>
-                </div>
-
-                <div class="progress-d">
-                  <span class="progress-d-numberr">1</span>
-                  <span class="progress-d-onestar"></span>
-                  <span class="progress-d-onerating">(15)</span>
-                  <div class="progress-d-ratingprog">
-                    <div style="width:100%"></div>
-                  </div>
-                </div>
-
               </div>
+
+              <div class="bratings-main-reviews-card">
+                <div class="bratings-main-reviews-card-top">
+                  <div class="reviews-stars"></div>
+                  <div class="reviews-date">27-11-2020</div>
+                </div>
+                <div class="bratings-main-reviews-card-body">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                  labore et dolore magna aliqua. Ut enim ad minim veniam.
+                  <p class="reviewer">by Emmanuel</p>
+                </div>
+              </div>
+
             </div>
           </div>
             <%= render BookclubWeb.HomeView, "recommended.html", conn: @conn, recommended_books: @recommended_books %>

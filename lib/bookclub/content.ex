@@ -605,6 +605,16 @@ defmodule Bookclub.Content do
     query
   end
 
+  def get_rating_by_book_num(bookid, num) do
+    query =
+      from r in Rating,
+        where: r.book_id == ^bookid,
+        where: r.rating == ^num
+
+    query
+
+  end
+
 
   @doc """
   Returns the list of topics.

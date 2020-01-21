@@ -892,14 +892,15 @@ div[class^="btn-"],
       grid-gap: 3rem;
       .bratings-main {
         grid-area: main;
-        //background: $light-color;
+        //background: $main-color;
         min-height: 660px;
         width: auto;
+        padding: 1rem 2rem;
         &-stats {
           display: flex;
           //justify-content: space-between;
           //background: $main-color;
-          padding: 1rem 2rem;
+          //padding: 1rem 2rem;
           height: 200px;
           &-cal {
             flex: 1;
@@ -913,6 +914,9 @@ div[class^="btn-"],
             border-radius: 5px;
             .rating-number {
               font-size: 3rem;
+              .num-main {
+                font-weight: bold;
+              }
             }
             .stars {
               font-size: 1.5rem;
@@ -923,7 +927,7 @@ div[class^="btn-"],
             }
           }
           &-progress {
-            flex: 3;
+            flex: 2;
             //background: green;
             display: grid;
             grid-template-columns: 1fr;
@@ -937,28 +941,73 @@ div[class^="btn-"],
               }
               &-onestar {
                 margin-left: 0.5rem;
+                font-size: 0.7rem;
+
                 &:before {
                   content: "★ ";
                   color: $star-color;
                 }
               }
               &-onerating {
-                color: $medium-color;
+                color: $text-color;
                 margin-left: 0.5rem;
               }
               &-ratingprog {
                 flex: 2;
                 background: $star-background;
-                margin-left: 1.5rem;
-                height: 10px;
+                margin-left: 3rem;
+                height: 6px;
                 overflow: hidden;
                 border-radius: 5px;
                 //margin-bottom: 0.3rem;
                 div {
                   height: 100%;
+                  width: var(--progwidth);
                   color: #fff;
                   background: $star-color;
+                  transition: 2s;
+                  animation: animate 1s;
                 }
+              }
+            }
+          }
+        }
+        &-reviews {
+          margin-top: 1rem;
+          &-head {
+            margin: 1rem 0;
+            font-size: 1.3rem;
+            //background: blue;
+          }
+          &-card {
+            margin: 1rem 0;
+            background: #fafafa;
+            padding: 0.8rem;
+            border-radius: 5px;
+            &-top {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              .reviews-stars {
+                font-size: 0.8rem;
+                &:before {
+                  content: "★★★★★";
+                  color: $star-color;
+                }
+              }
+              .reviews-date {
+                font-size: 0.9rem;
+                color: $text-color;
+                font-style: italic;
+              }
+            }
+            &-body {
+              margin-top: 0.4rem;
+              margin-bottom: 0.5rem;
+              .reviewer {
+                font-style: italic;
+                font-size: 0.8rem;
+                text-align: right;
               }
             }
           }
@@ -1013,6 +1062,15 @@ div[class^="btn-"],
         }
       }
     }
+  }
+}
+
+@keyframes animate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: var(--progwidth);
   }
 }
 
