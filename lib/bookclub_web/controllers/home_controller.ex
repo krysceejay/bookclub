@@ -143,7 +143,7 @@ defmodule BookclubWeb.HomeController do
     # IO.puts "++++++++++++++"
     with {:ok, book_id} <- Base.decode64(slug),
           book <- Content.get_only_book!(book_id),
-          {bk_ratings, num_links} <- Content.get_ratings_by_book_user(book_id)|> Pagination.paginate(30, conn) do
+          {bk_ratings, num_links} <- Content.get_ratings_by_book_user(book_id)|> Pagination.paginate(10, conn) do
             recommended_books = Content.recommended_books(book_id)
             render(conn, "ratings.html", bk_ratings: bk_ratings,
             num_links: num_links, book: book, recommended_books: recommended_books)

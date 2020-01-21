@@ -9,59 +9,43 @@
 
     </section>
 
-    <!-- Section A: Book Details -->
+    <!-- Section A: Rating Details -->
     <section id="bratings-a" class="py-4">
       <div class="container">
         <div class="bratings-content">
           <div class="bratings-main">
             <div class="bratings-main-stats">
                 <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: @book.id %>
-              
+
             </div>
             <div class="bratings-main-reviews">
               <div class="bratings-main-reviews-head">REVIEWS</div>
-              <div class="bratings-main-reviews-card">
-                <div class="bratings-main-reviews-card-top">
-                  <div class="reviews-stars"></div>
-                  <div class="reviews-date">27-11-2020</div>
-                </div>
-                <div class="bratings-main-reviews-card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                  Excepteur sint occaecat cupidatat non proident,
-                  sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  <p class="reviewer">by Krys</p>
-                </div>
-              </div>
+              <%= if @bk_ratings != [] do %>
+                <%= for rating <- @bk_ratings do %>
+                  <div class="bratings-main-reviews-card">
+                    <div class="bratings-main-reviews-card-top">
+                      <div class="reviews-stars" style="--userrating: <%= rating.rating %>"></div>
+                      <div class="reviews-date"><%= rating.inserted_at |> NaiveDateTime.to_date() %></div>
+                    </div>
+                    <div class="bratings-main-reviews-card-body">
+                      <%= rating.comment %>
+                      <p class="reviewer">by <%= rating.user.username %></p>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="">No review for this book</div>
+              <% end %>
+            </div>
+            <!-- pagination -->
+            <div class="paginate-links my-4">
 
-              <div class="bratings-main-reviews-card">
-                <div class="bratings-main-reviews-card-top">
-                  <div class="reviews-stars"></div>
-                  <div class="reviews-date">27-11-2020</div>
-                </div>
-                <div class="bratings-main-reviews-card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  <p class="reviewer">by cosmas</p>
-                </div>
-              </div>
-
-              <div class="bratings-main-reviews-card">
-                <div class="bratings-main-reviews-card-top">
-                  <div class="reviews-stars"></div>
-                  <div class="reviews-date">27-11-2020</div>
-                </div>
-                <div class="bratings-main-reviews-card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua. Ut enim ad minim veniam.
-                  <p class="reviewer">by Emmanuel</p>
-                </div>
-              </div>
+                <%= if @num_links != 1 do %>
+                <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
+                <% end %>
 
             </div>
+            <!-- End pagination -->
           </div>
             <%= render BookclubWeb.HomeView, "recommended.html", conn: @conn, recommended_books: @recommended_books %>
             <div class="top-cat"></div>

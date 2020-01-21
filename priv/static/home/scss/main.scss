@@ -989,10 +989,18 @@ div[class^="btn-"],
               justify-content: space-between;
               align-items: center;
               .reviews-stars {
+                $percent: calc(var(--userrating) / 5 * 100%);
                 font-size: 0.8rem;
                 &:before {
                   content: "★★★★★";
-                  color: $star-color;
+                  //color: $star-color;
+                  background: linear-gradient(
+                    90deg,
+                    $star-color $percent,
+                    $star-background $percent
+                  );
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
                 }
               }
               .reviews-date {
@@ -1008,6 +1016,7 @@ div[class^="btn-"],
                 font-style: italic;
                 font-size: 0.8rem;
                 text-align: right;
+                text-transform: capitalize;
               }
             }
           }
