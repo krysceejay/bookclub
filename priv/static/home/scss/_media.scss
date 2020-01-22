@@ -441,6 +441,24 @@
     }
   }
 
+  //Rating Details Sections
+  #bratings {
+    //Rating Section A
+    &-a {
+      .bratings-content {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+          "main main"
+          "popular top-cat";
+        grid-gap: 2rem;
+        .bratings-main {
+          min-height: 450px;
+          padding: 0;
+        }
+      }
+    }
+  }
+
   #chat-page {
     #chat-section {
       //flex: 18;
@@ -884,6 +902,53 @@
       }
     }
   }
+  #bratings {
+    //Book Section A
+    &-a {
+      .bratings-content {
+        display: block;
+
+        .bratings-main {
+          min-height: 450px;
+          width: auto;
+          &-stats {
+            height: 150px;
+            &-cal {
+              margin-right: 1rem;
+
+              .rating-number {
+                font-size: 2rem;
+              }
+              .stars {
+                font-size: 1rem;
+              }
+            }
+            &-progress {
+              flex: 3;
+
+              grid-gap: 0.5rem;
+              .progress-d {
+                &-numberr {
+                  font-size: 0.8rem;
+                }
+
+                &-onerating {
+                  font-size: 0.8rem;
+                }
+                &-ratingprog {
+                  margin-left: 2rem;
+                }
+              }
+            }
+          }
+        }
+
+        .bdetails-popular {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+  }
 }
 
 //Smartphones
@@ -992,6 +1057,51 @@
             .bdetails-img {
               margin: auto;
               margin-bottom: 2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  #bratings {
+    //Book Section A
+    &-a {
+      .bratings-content {
+        .bratings-main {
+          // min-height: 450px;
+          // width: auto;
+          &-stats {
+            height: 120px;
+            &-cal {
+              margin-right: 0.8rem;
+
+              .rating-number {
+                font-size: 1.5rem;
+              }
+              .stars {
+                font-size: 0.9rem;
+              }
+              .total-num-rating {
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
+              }
+            }
+            &-progress {
+              flex: 3;
+
+              grid-gap: 0.4rem;
+              .progress-d {
+                &-numberr {
+                  font-size: 0.7rem;
+                }
+
+                &-onerating {
+                  font-size: 0.7rem;
+                }
+                &-ratingprog {
+                  margin-left: 1.5rem;
+                }
+              }
             }
           }
         }
