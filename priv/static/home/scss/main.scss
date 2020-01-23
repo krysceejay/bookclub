@@ -147,7 +147,7 @@ div[class^="btn-"],
       justify-content: center;
       align-items: center;
       height: 100%;
-      padding: 0 2rem;
+      padding: 0 1rem;
 
       /* Overlay */
       @extend %overlay;
@@ -666,12 +666,14 @@ div[class^="btn-"],
               display: inline-block;
               background: #ffffff;
               border: 1px solid #f53ba2;
-              border-radius: 3px;
+              font-size: 0.8rem;
+              border-radius: 14px;
               padding: 0.2rem 0.5rem;
               margin-bottom: 0.5rem;
               i {
                 color: #f53ba2;
-                margin-right: 0.3rem;
+                margin-right: 0.2rem;
+                font-size: 0.8rem;
               }
             }
           }
