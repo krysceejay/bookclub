@@ -518,6 +518,26 @@ defmodule Bookclub.Content do
   """
   def get_rating!(id), do: Repo.get!(Rating, id)
 
+  def check_if_user_rated(user_id, book_id) do
+    query =
+      from r in Rating,
+        where: r.user_id == ^user_id,
+        where: r.book_id == ^book_id
+
+    Repo.exists?(query)
+
+  end
+
+  def get_rating_by_book_user(userid, bookid) do
+    query =
+      from r in Rating,
+        where: r.user_id == ^userid,
+        where: r.book_id == ^bookid
+
+    Repo.one(query)
+
+  end
+
   @doc """
   Creates a rating.
 

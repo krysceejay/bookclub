@@ -1,7 +1,9 @@
 <%= if @topics != [] do %>
 <div class="dashboard-content-hr-grp">
   <h3 class="dashboard-content-header">Topics </h3>
-  <%= link "Add Topic", to: Routes.user_path(@conn, :addtopic, @slug), class: "btn btn-small" %>
+  <%= link to: Routes.user_path(@conn, :addtopic, @slug), class: "pills" do %>
+    <i class="fa fa-plus"></i> Add Topic
+  <% end %>
 </div>
 <table>
   <tr>

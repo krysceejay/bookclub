@@ -965,3 +965,18 @@ tr:nth-child(even) {
   background-color: #cce5ff;
   color: #004085;
 }
+
+.pills {
+  display: inline-block;
+  background: #ffffff;
+  border: 1px solid #f53ba2;
+  font-size: 0.8rem;
+  border-radius: 14px;
+  padding: 0.2rem 0.5rem;
+  margin-bottom: 0.5rem;
+  i {
+    color: #f53ba2;
+    margin-right: 0.2rem;
+    font-size: 0.8rem;
+  }
+}

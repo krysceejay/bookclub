@@ -10,22 +10,20 @@ defmodule BookclubWeb.StarView do
 
     rating_sum =
           case column_sum do
-            nil -> 5
-            _ -> 5 + column_sum
-          end
-    rating_count =
-          case column_count do
-            0 -> 1
-            _ -> 1 + column_count
+            nil -> 0
+            _ -> column_sum
           end
 
     star_rating =
-      rating_sum / rating_count
-          |> Decimal.from_float
-          |> Decimal.round(1)
-
+        case column_count do
+          0 -> 0.0
+          _ ->
+              rating_sum / column_count
+              |> Decimal.from_float
+              |> Decimal.round(1)
+        end
     {
-      rating_count,
+      column_count,
       star_rating
     }
 
@@ -35,8 +33,8 @@ defmodule BookclubWeb.StarView do
     column_count = Content.get_ratings_by_book(book_id) |> Functions.count_column(:rating)
     rating_count =
           case column_count do
-            0 -> 1
-            _ -> 1 + column_count
+            0 -> 0
+            _ -> column_count
           end
   end
 

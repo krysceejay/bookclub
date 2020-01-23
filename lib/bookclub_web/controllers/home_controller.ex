@@ -114,15 +114,32 @@ defmodule BookclubWeb.HomeController do
 
     genre_sort = Functions.top_five_genres
 
-    case Content.create_rating(conn.assigns.user, rating_params) do
-      {:ok, _rating} ->
-        conn
-        |> put_flash(:info, "Book rated Successfully.")
-        |> redirect(to: Routes.home_path(conn, :book, book))
+    rating = Content.get_rating_by_book_user(conn.assigns.user.id, book.id)
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "book.html", changeset: changeset, book: book, reader: reader,
-        recommended_books: recommended_books, genre_sort: genre_sort, status: status)
+    with true <- Content.check_if_user_rated(conn.assigns.user.id, book.id) do
+
+      case Content.update_rating(rating, rating_params) do
+        {:ok, _rating} ->
+          conn
+          |> put_flash(:info, "Book rated Successfully.")
+          |> redirect(to: Routes.home_path(conn, :book, book))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "book.html", changeset: changeset, book: book, reader: reader,
+          recommended_books: recommended_books, genre_sort: genre_sort, status: status)
+      end
+    else
+      false ->
+        case Content.create_rating(conn.assigns.user, rating_params) do
+          {:ok, _rating} ->
+            conn
+            |> put_flash(:info, "Book rated Successfully.")
+            |> redirect(to: Routes.home_path(conn, :book, book))
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            render(conn, "book.html", changeset: changeset, book: book, reader: reader,
+            recommended_books: recommended_books, genre_sort: genre_sort, status: status)
+        end
     end
   end
 
