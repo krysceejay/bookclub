@@ -55,7 +55,7 @@
             <% end %>
             <div class="all-books-text">
               <div class="booktext-title">
-                <%= if String.length(book.title) < 16, do: book.title, else: String.slice(book.title, 0..15)<>"..." %>
+                <%= if String.length(book.title) < 12, do: book.title, else: String.slice(book.title, 0..11)<>"..." %>
 
               </div>
               <div class="booktext-author"><%= book.author %></div>
@@ -68,7 +68,7 @@
                 </span>
               </div>
               <!-- <p>56| 78</p> -->
-              
+
               <!-- <p class="all-books-desc">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit...
               </p> -->

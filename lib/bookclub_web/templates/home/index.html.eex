@@ -154,7 +154,7 @@
         <% end %>
         <div class="top-rated-text">
           <div class="toprated-title">
-            <%= if String.length(book.title) <= 16, do: book.title, else: String.slice(book.title, 0..15)<>"..." %>
+            <%= if String.length(book.title) <= 12, do: book.title, else: String.slice(book.title, 0..11)<>"..." %>
           </div>
           <div class="toprated-author"><%= book.author %></div>
           <div class="added_by">Added By

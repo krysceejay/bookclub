@@ -4,7 +4,7 @@
     <div class="dash-user-profile-top">
       <div class="dash-user-profile-top-name">
         <span class="full-name"><%= @userprof.first_name <> " " <> @userprof.last_name %></span>
-        <span class="user-name"><%= @userprof.username <> " | " <> @userprof.email %></span>
+        <span class="user-name"><%= @userprof.username %></span>
         <span class="user-name">Member Since: <%= NaiveDateTime.to_date(@userprof.inserted_at) %></span>
       </div>
 

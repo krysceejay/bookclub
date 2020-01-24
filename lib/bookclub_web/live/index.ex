@@ -113,6 +113,12 @@ end
    get_show_users(socket), get_show_bookdetails(socket), get_show_othermenu(socket))}
  end
 
+ def handle_event("keyup_event", value, socket) do
+   IO.puts "+++++++++++++++"
+   IO.inspect value
+   IO.puts "+++++++++++++++"
+end
+
  defp get_current_user(socket) do
    socket.assigns
    |> Map.get(:current_user)

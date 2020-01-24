@@ -59,6 +59,13 @@ $(document).ready(function() {
     $(".chat-container-menu-ellipsis").removeClass("display-element");
   });
 
+ //  $('#chat-area-input').keyup(function (event) {
+ //     if (event.keyCode == 13 && event.shiftKey){
+ //
+ //       alert('me');
+ //    }
+ // });
+
   //let display = "none";
   // sessionStorage.setItem("onlineUsers", "onlineusers");
   // if (sessionStorage.onlineUsers == "onlineusers") {

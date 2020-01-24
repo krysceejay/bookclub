@@ -31,11 +31,7 @@ defmodule BookclubWeb.StarView do
 
   def total_reviewers(book_id) do
     column_count = Content.get_ratings_by_book(book_id) |> Functions.count_column(:rating)
-    rating_count =
-          case column_count do
-            0 -> 0
-            _ -> column_count
-          end
+        
   end
 
   def total_reviewers_num(book_id, num) do

@@ -1,6 +1,6 @@
 <%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :send_message, autocomplete: :off, id: :chatareaform] %>
   <%= textarea f, :message, placeholder: "Enter message", id: "chat-area-input", autofocus: "",
-  spellcheck: "true", aria_autocomplete: "both", aria_label: "Message" %>
+  spellcheck: "true", aria_autocomplete: "both", aria_label: "Message", phx_window_keyup: "keyup_event" %>
 
   <%= submit phx_disable_with: "Loading...", class: "send-btn" do %>
     <i class="fa fa-send"></i>
