@@ -397,11 +397,21 @@ div[class^="btn-"],
 #register {
   //contact Section A
   &-a {
-    .field {
-      &-form {
-        form {
+    .register-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+      &-svg {
+        text-align: right;
+        svg {
+          width: 80%;
+          height: 85vh;
+        }
+      }
+      .field {
+        &-form {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
           grid-gap: 2rem;
 
           // background-color: rgba(36, 44, 66, 0.1);
@@ -442,9 +452,10 @@ div[class^="btn-"],
               z-index: 3;
             }
           }
-          .btn-dark {
-            width: 100%;
-          }
+        }
+        .btn-dark {
+          width: 100%;
+          font-size: 1rem;
         }
       }
     }
@@ -454,18 +465,28 @@ div[class^="btn-"],
 #login {
   //contact Section A
   &-a {
-    .field {
-      &-form {
-        form {
+    .login-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+      &-svg {
+        text-align: right;
+        svg {
+          width: 60%;
+          height: 50vh;
+        }
+      }
+      .field {
+        &-form {
           display: grid;
           grid-template-columns: 1fr;
-          grid-gap: 2rem;
+          grid-gap: 1rem;
 
           // background-color: rgba(36, 44, 66, 0.1);
           .form-group {
             margin-bottom: 20px;
             input {
-              width: 80%;
+              width: 100%;
               padding: 12px;
               border: 1px #ddd solid;
             }
@@ -474,9 +495,14 @@ div[class^="btn-"],
               border-color: $main-color;
             }
           }
-          .btn-dark {
-            width: 80%;
-          }
+        }
+        .btn-dark {
+          width: 100%;
+          font-size: 1rem;
+        }
+        .forgot-pass {
+          display: inline-block;
+          margin-top: 2rem;
         }
       }
     }

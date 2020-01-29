@@ -397,6 +397,48 @@
     }
   }
 
+  //Register Sections
+  #register {
+    //contact Section A
+
+    &-a {
+      .register-container {
+        display: block;
+        &-svg {
+          display: none;
+        }
+        .field {
+          &-form {
+            form {
+              grid-template-columns: 1fr;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //Login Sections
+  #login {
+    //contact Section A
+
+    &-a {
+      .login-container {
+        display: block;
+        &-svg {
+          display: none;
+        }
+        .field {
+          &-form {
+            form {
+              grid-template-columns: 1fr;
+            }
+          }
+        }
+      }
+    }
+  }
+
   //Book Sections
   #book {
     //Book Section A
@@ -1086,43 +1128,6 @@
     &-c {
       .top-rated {
         grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  }
-
-  //Register Sections
-  #register,
-  #login {
-    //contact Section A
-    &-a {
-      .field {
-        &-form {
-          form {
-            grid-template-columns: 1fr;
-          }
-        }
-      }
-    }
-  }
-
-  //Login Sections
-  #login {
-    //contact Section A
-    &-a {
-      .field {
-        &-form {
-          form {
-            grid-template-columns: 1fr;
-            .form-group {
-              input {
-                width: 100%;
-              }
-            }
-            .btn-dark {
-              width: 100%;
-            }
-          }
-        }
       }
     }
   }

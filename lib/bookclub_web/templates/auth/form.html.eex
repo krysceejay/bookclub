@@ -1,6 +1,11 @@
 <div class="field">
+  <h2 class="section-title"><span class="text-primary">Sign</span> Up</h2>
+  <p class="lead">
+    Create a free account
+  </p>
+  <%= form_for @changeset, @action, fn f -> %>
   <div class="field-form">
-    <%= form_for @changeset, @action, fn f -> %>
+
       <div class="form-group">
         <%= text_input f, :first_name, placeholder: "Enter first name", required: "required" %>
         <%= error_tag f, :first_name %>
@@ -24,12 +29,11 @@
           <i class="fa fa-eye-slash" id="eye-icon"></i>
         </span>
         <input id="show-pass" type="checkbox">
-
-
         <%= error_tag f, :passwordfield %>
       </div>
 
-      <%= submit "Submit", class: "btn btn-dark" %>
-    <% end %>
+
   </div>
+  <%= submit "Submit", class: "btn btn-dark" %>
+<% end %>
 </div>
