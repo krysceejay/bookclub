@@ -4,6 +4,17 @@ $(document).ready(function() {
     $(".top_right-menu-icon").toggleClass("toggle");
   });
 
+  $("#show-pass").click(function() {
+    if($(this). is(":checked")){
+      //$("#user_passwordfield").attr('type') = "text";
+      $("#user_passwordfield").prop('type', 'text');
+      $("#eye-icon").removeClass("fa fa-eye-slash").addClass("fa fa-eye");
+    }else{
+      $("#user_passwordfield").prop('type', 'password');
+      $("#eye-icon").removeClass("fa fa-eye").addClass("fa fa-eye-slash");
+    }
+  });
+
   // $('*[id^="rt-"]').click(function() {
   //   let strnum = $(this).attr('num');
   //   //let strid = $(this).attr('id');

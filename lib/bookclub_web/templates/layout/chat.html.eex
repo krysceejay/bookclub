@@ -26,7 +26,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>WittyReviews: Chat</title>
+    <title>Weetyview: Chat</title>
   </head>
   <body>
 <main id="chat-page">
@@ -35,7 +35,7 @@
     <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
     <div class="chat-nav-logo">
       <h1 class="logo">
-        <%= link "WR", to: Routes.home_path(@conn, :index) %>
+        <%= link "WV", to: Routes.home_path(@conn, :index) %>
       </h1>
     </div>
 

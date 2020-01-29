@@ -24,7 +24,6 @@ defmodule Bookclub.Accounts.User do
 
     ##Virtual Fields ##
     field :passwordfield, :string, virtual: true
-    field :passwordfield_confirmation, :string, virtual: true
     field :propix_field, :string, virtual: true
 
     timestamps()
@@ -38,7 +37,6 @@ defmodule Bookclub.Accounts.User do
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, &String.downcase(&1))
     |> validate_length(:passwordfield, min: 6, max: 100)
-    |> validate_confirmation(:passwordfield)
     |> unique_constraint(:email)
     |> unique_constraint(:username)
     |> encrypt_password

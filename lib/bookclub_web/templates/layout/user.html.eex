@@ -28,7 +28,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>WittyReviews: Dashboard</title>
+    <title>Weetyview: Dashboard</title>
   </head>
   <body>
     <main id="dashboard-main">

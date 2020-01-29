@@ -53,7 +53,7 @@
               <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="image" />
             </div>
             <% end %>
-            <div class="all-books-text">
+            <div class="all-books-text" style="text-align: center;">
               <div class="booktext-title">
                 <%= if String.length(book.title) < 12, do: book.title, else: String.slice(book.title, 0..11)<>"..." %>
 

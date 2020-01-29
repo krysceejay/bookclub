@@ -18,13 +18,15 @@
         <%= text_input f, :username, placeholder: "Enter user name", required: "required" %>
         <%= error_tag f, :username %>
       </div>
-      <div class="form-group">
+      <div class="form-group password-vis">
         <%= password_input f, :passwordfield, placeholder: "Enter password", required: "required" %>
+        <span class="show-pass">
+          <i class="fa fa-eye-slash" id="eye-icon"></i>
+        </span>
+        <input id="show-pass" type="checkbox">
+
+
         <%= error_tag f, :passwordfield %>
-      </div>
-      <div class="form-group">
-        <%= password_input f, :passwordfield_confirmation, placeholder: "Confirm password" %>
-        <%= error_tag f, :passwordfield_confirmation %>
       </div>
 
       <%= submit "Submit", class: "btn btn-dark" %>
