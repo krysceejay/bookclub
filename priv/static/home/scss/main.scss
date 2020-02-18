@@ -509,6 +509,64 @@ div[class^="btn-"],
   }
 }
 
+#reset {
+  //contact Section A
+  &-a {
+    .field {
+      display: block;
+      width: 50%;
+      height: 250px;
+      margin: auto;
+      &-form {
+        display: block;
+
+        // background-color: rgba(36, 44, 66, 0.1);
+        .form-group {
+          margin-bottom: 20px;
+          input {
+            width: 100%;
+            padding: 12px;
+            border: 1px #ddd solid;
+          }
+          input:focus {
+            outline: none;
+            border-color: $main-color;
+          }
+        }
+        .password-vis {
+          position: relative;
+          .show-pass {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            right: 0;
+            width: 10%;
+            height: 50px;
+            background: $medium-color;
+            text-align: center;
+            i {
+              z-index: 0;
+              margin: 1rem auto;
+            }
+          }
+          input[type="checkbox"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 10%;
+            opacity: 0;
+            z-index: 3;
+          }
+        }
+      }
+      .btn-dark {
+        width: 100%;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
 //Confirm Sections
 #confirm {
   //confirm email

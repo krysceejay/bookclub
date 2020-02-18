@@ -34,7 +34,6 @@ defmodule BookclubWeb.HomeController do
 
   def book(conn, %{"slug" => slug}) do
     book = Content.get_book_by_slug!(slug)
-
     # IO.puts "++++++++++++++"
     # IO.puts NaiveDateTime.to_time(book.updated_at)
     # IO.puts "++++++++++++++"

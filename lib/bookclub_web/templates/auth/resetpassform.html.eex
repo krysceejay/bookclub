@@ -1,5 +1,5 @@
 <!-- Section A: Contact -->
-<section id="login-a" class="text-center py-4">
+<section id="reset-a" class="text-center py-4">
   <div class="container">
     <h2 class="section-title"><span class="text-primary">Reset</span> Password</h2>
     <p class="lead">
@@ -12,18 +12,22 @@
       <div class="field-form">
         <%= form_for @changeset, Routes.auth_path(@conn, :resetpass, @dtoken), fn f -> %>
 
-          <div class="form-group">
+          <div class="form-group password-vis">
             <%= password_input f, :passwordfield, placeholder: "Enter new password", required: "required" %>
+            <span class="show-pass">
+              <i class="fa fa-eye-slash" id="eye-icon"></i>
+            </span>
+            <input id="show-pass" type="checkbox">
             <%= error_tag f, :passwordfield %>
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <%= password_input f, :passwordfield_confirmation, placeholder: "Confirm new password" %>
             <%= error_tag f, :passwordfield_confirmation %>
-          </div>
+          </div> -->
 
           <div class="form-group">
-            <%= submit "Sign In", class: "btn btn-dark" %>
+            <%= submit "Submit", class: "btn btn-dark" %>
           </div>
 
 

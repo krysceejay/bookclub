@@ -24,7 +24,7 @@ defmodule BookclubWeb.Live.Index do
 
   def fetch(socket, book, current_user, show_users, bookdetails, othermenu) do
     assign(socket, %{
-      chats: Messages.list_chats_by_bookid(book.id),
+      chats: Enum.with_index(Messages.list_chats_by_bookid(book.id)),
       changeset: Messages.change_chat(%Chat{}),
       book: book,
       current_user: current_user,

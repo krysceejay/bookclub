@@ -62,7 +62,6 @@ defmodule Bookclub.Accounts.User do
     |> cast(attrs, [:passwordfield])
     |> validate_required([:passwordfield])
     |> validate_length(:passwordfield, min: 6, max: 100)
-    |> validate_confirmation(:passwordfield)
     |> encrypt_password
   end
 

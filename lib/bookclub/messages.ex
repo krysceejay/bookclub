@@ -49,6 +49,19 @@ defmodule Bookclub.Messages do
 
   end
 
+  # def list_chats_by_bookid_g(bookid) do
+  #
+  #   query =
+  #     from c in Chat,
+  #       where: c.book_id == ^bookid,
+  #       group_by: c.inserted_at,
+  #       select: {c.inserted_at, count(c.id)},
+  #       order_by: [asc: c.id]
+  #
+  #   Repo.all(query)
+  #
+  # end
+
   @doc """
   Gets a single chat.
 

@@ -26,7 +26,7 @@
             <div class="user-details-text">
               <span>
               <%= link user.user_name |> String.capitalize(), to: Routes.user_path(@socket, :profile, user.user_name) %>
-            
+
               </span>
               <span><%= if user.typing, do: "is typing..." %></span>
             </div>
@@ -60,28 +60,37 @@
         <%= if @chats != [] do %>
 
             <%= for chat <- @chats do %>
-
-            <%= if @current_user.username == chat.user.username do %>
-              <div class="chat-area-body-sender">
-                <div class="msg-sender">
-                  <div class="msg-sender-text"><%= chat.message %></div>
-                  <div class="msg-chat-time">10.59 am</div>
+              <%= if (elem(Enum.at(@chats, (elem(chat, 1) - 1)), 0).inserted_at |> NaiveDateTime.to_date())
+              != (elem(chat, 0).inserted_at |> NaiveDateTime.to_date())
+              do %>
+                <div class="chat-fulldate">
+                  <span class="chat-fulldate-text">
+                    <%= elem(elem(chat, 0).inserted_at |> Timex.format("{D} {0Mfull} {YYYY}"), 1) %>
+                  </span>
                 </div>
-              </div>
-              <div class="clear-flt"></div>
+              <% end %>
 
-            <% else %>
-
-              <div class="chat-area-body-receiver">
-                <div class="msg-receiver">
-                  <div class="msg-receiver-name"><%= chat.user.username |> String.capitalize() %></div>
-                  <div class="msg-receiver-text"><%= chat.message %></div>
-                  <div class="msg-chat-time">10.59 am</div>
+              <%= if @current_user.username == elem(chat, 0).user.username do %>
+                <div class="chat-area-body-sender">
+                  <div class="msg-sender">
+                    <div class="msg-sender-text"><%= elem(chat, 0).message %></div>
+                    <div class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></div>
+                  </div>
                 </div>
-              </div>
-              <div class="clear-flt"></div>
+                <div class="clear-flt"></div>
 
-            <% end %>
+              <% else %>
+
+                <div class="chat-area-body-receiver">
+                  <div class="msg-receiver">
+                    <div class="msg-receiver-name"><%= elem(chat, 0).user.username |> String.capitalize() %></div>
+                    <div class="msg-receiver-text"><%= elem(chat, 0).message %></div>
+                    <div class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></div>
+                  </div>
+                </div>
+                <div class="clear-flt"></div>
+
+              <% end %>
             <% end %>
 
             <% else %>
