@@ -464,11 +464,13 @@ tr:nth-child(even) {
 }
 
 .msg-chat-time {
-  font-size: 0.7rem;
-  text-align: right;
+  font-size: 0.65rem;
+  display: inline-block;
+  margin-left: 0.5rem;
 }
 .msg-receiver-name {
   font-size: 0.8rem;
+  text-align: left;
 }
 
 .clear-flt {

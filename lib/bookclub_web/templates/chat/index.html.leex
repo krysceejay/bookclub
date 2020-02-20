@@ -73,8 +73,11 @@
               <%= if @current_user.username == elem(chat, 0).user.username do %>
                 <div class="chat-area-body-sender">
                   <div class="msg-sender">
-                    <div class="msg-sender-text"><%= elem(chat, 0).message %></div>
-                    <div class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></div>
+                    <div class="msg-sender-text">
+                    <%= elem(chat, 0).message %>
+                      <sub class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></sub>
+                    </div>
+
                   </div>
                 </div>
                 <div class="clear-flt"></div>
@@ -84,8 +87,12 @@
                 <div class="chat-area-body-receiver">
                   <div class="msg-receiver">
                     <div class="msg-receiver-name"><%= elem(chat, 0).user.username |> String.capitalize() %></div>
-                    <div class="msg-receiver-text"><%= elem(chat, 0).message %></div>
-                    <div class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></div>
+
+                    <div class="msg-receiver-text">
+                    <%= elem(chat, 0).message %>
+                    <sub class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></sub>
+                  </div>
+
                   </div>
                 </div>
                 <div class="clear-flt"></div>

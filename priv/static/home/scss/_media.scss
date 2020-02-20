@@ -239,16 +239,37 @@
 
                 .list-0 {
                   color: #818182;
-                  background-color: #fefefe;
                 }
                 .list-1 {
                   color: #155724;
-                  background-color: #d4edda;
                   border-left: 2px $main-color solid;
                 }
                 .list-2 {
                   color: #721c24;
-                  background-color: #f8d7da;
+                }
+                .list-0:after {
+                  content: "coming soon";
+                  color: orange;
+                  font-size: 0.8rem;
+                  display: block;
+                  text-align: right;
+                  font-weight: bolder;
+                }
+                .list-1:after {
+                  content: "on-going";
+                  color: green;
+                  font-size: 0.8rem;
+                  display: block;
+                  text-align: right;
+                  font-weight: bolder;
+                }
+                .list-2:after {
+                  content: "done";
+                  color: red;
+                  font-size: 0.8rem;
+                  display: block;
+                  text-align: right;
+                  font-weight: bolder;
                 }
               }
             }
