@@ -61,7 +61,7 @@
 
             <%= for chat <- @chats do %>
               <%= if (elem(Enum.at(@chats, (elem(chat, 1) - 1)), 0).inserted_at |> NaiveDateTime.to_date())
-              != (elem(chat, 0).inserted_at |> NaiveDateTime.to_date())
+              != (elem(chat, 0).inserted_at |> NaiveDateTime.to_date()) or elem(chat, 1) == 0
               do %>
                 <div class="chat-fulldate">
                   <span class="chat-fulldate-text">

@@ -30,7 +30,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>Weetyview: <%= if assigns[:pagetitle], do: @pagetitle, else: "" %></title>
+    <title>WittyReview: <%= if assigns[:pagetitle], do: @pagetitle, else: "" %></title>
   </head>
   <body>
 
@@ -39,7 +39,7 @@
       <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
       <h1 class="logo">
         <%= link to: Routes.home_path(@conn, :index) do %>
-          <span class="text-primary">Weety</span>view
+          <span class="text-primary">Witty</span>Review
         <% end %>
       </h1>
       <ul class="main-nav-menu">
@@ -130,7 +130,7 @@
     <footer id="main-footer" class="py-4">
       <div class="footer-content container">
         <div>
-          <h2>Weetyview</h2>
+          <h2>WittyReview</h2>
           <a href="www.twitter.com">
             <i class="fa fa-twitter fa-2x"></i>
           </a>

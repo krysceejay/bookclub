@@ -921,7 +921,9 @@ tr:nth-child(even) {
 //Dashboard home Stats cards
 %cards-shared {
   flex: 1;
-  height: 200px;
+  height: 150px;
+  width: 200px;
+  margin: auto;
 
   border-radius: 5px;
   display: flex;
@@ -929,41 +931,40 @@ tr:nth-child(even) {
   text-align: center;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
-  position: relative;
-  hr {
-    width: 60%;
-    margin: 0.5rem 0;
-  }
+  font-size: 1.2rem;
+  color: $light-color;
+
   i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    //background: rgba(255, 255, 255, 0.15);
     padding: 1rem;
-    //color: $main-color;
     border-radius: 50%;
-    text-align: right;
-    // height: 70px;
-    // width: 70px;
-    //line-height: 60px;
+    font-size: 2rem;
   }
 }
 
 .dashboard-cards-books {
   @extend %cards-shared;
-  background-color: #d1ecf1;
-  color: #0c5460;
+  background-color: #6ad83c;
 }
 .dashboard-cards-joined {
   @extend %cards-shared;
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #00bcae;
 }
+.dashboard-cards-addbook {
+  @extend %cards-shared;
+  background-color: #27c2ff;
+}
+.dashboard-cards-profile {
+  @extend %cards-shared;
+  background-color: #ffbb43;
+}
+
 .dashboard-cards-readers {
   @extend %cards-shared;
-  background-color: #cce5ff;
-  color: #004085;
+  background-color: #8150e4;
+}
+.dashboard-cards-another {
+  @extend %cards-shared;
+  background-color: #fe586c;
 }
 
 .pills {

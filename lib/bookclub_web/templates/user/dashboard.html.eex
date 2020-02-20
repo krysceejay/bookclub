@@ -1,36 +1,78 @@
   <div class="dashboard-home">
-    <div class="dashboard-home-welcome">
+    <div class="dashboard-home-welcome section-title">
       <h1>Welcome <%= @user.first_name %></h1>
     </div>
-    <div class="dashboard-home-stats">
+    <!-- <div class="dashboard-home-search section-title">
+      <form class="" action="index.html" method="post">
+        <div class="form-group">
+          <input type="text" name="" value="" placeholder="Search your dashboad...">
 
+          <%= submit class: "btn-lighten" do %>
+            <i class="fa fa-search fa-3x"></i>
+          <% end %>
+        </div>
+
+      </form>
+    </div> -->
+    <div class="dashboard-home-container">
+
+
+    <div class="dashboard-home-container-stats">
+
+
+      <%= link to: Routes.user_path(@conn, :managebooks) do %>
       <div class="dashboard-cards-books">
-        <div class="styles-number">70</div>
-        <hr>
-        <div class="styles-text">Added Books</div>
         <i class="fa fa-book"></i>
+        <div class="styles-text">Collections</div>
       </div>
+      <% end %>
+      <%= link to: Routes.user_path(@conn, :joinedlist) do %>
+        <div class="dashboard-cards-joined">
+          <i class="fa fa-handshake-o"></i>
+          <div class="styles-text">Joined List</div>
 
-      <div class="dashboard-cards-joined">
-        <div class="styles-number">70</div>
-        <hr>
-        <div class="styles-text">Joined</div>
-        <i class="fa fa-handshake-o"></i>
-      </div>
+        </div>
+      <% end %>
 
-      <div class="dashboard-cards-readers">
-        <div class="styles-number">70</div>
-        <hr>
-        <div class="styles-text">Readers</div>
-        <i class="fa fa-group"></i>
-      </div>
+      <%= link to: Routes.user_path(@conn, :addbook) do %>
+        <div class="dashboard-cards-addbook">
+          <i class="fa fa-plus-square-o"></i>
+          <div class="styles-text">Add Collection</div>
+        </div>
+      <% end %>
 
+      <%= link to: Routes.user_path(@conn, :profile, @conn.assigns.user.email |> Base.encode64()) do %>
+        <div class="dashboard-cards-profile">
+          <i class="fa fa-book"></i>
+          <div class="styles-text">Profile</div>
+
+        </div>
+      <% end %>
+
+      <%= link to: Routes.user_path(@conn, :editprofile) do %>
+        <div class="dashboard-cards-another">
+          <i class="fa fa-upload"></i>
+          <div class="styles-text">Upload Picture</div>
+
+        </div>
+      <% end %>
+
+      <%= link to: Routes.home_path(@conn, :contact) do %>
+        <div class="dashboard-cards-readers">
+        <i class="fa fa-user-circle-o"></i>
+          <div class="styles-text">Contact Admin</div>
+        </div>
+      <% end %>
+    </div>
+    <!-- <div class="dashboard-home-container-tips">
+      <h2>Tips</h2>
+    </div> -->
     </div>
 
-    <div class="dashboard-home-charts">
+    <!-- <div class="dashboard-home-charts">
       <div id="chart-books" class="chart-bar"></div>
       <div id="chart-readers" class="chart-pie"></div>
-    </div>
+    </div> -->
 
 
   </div>

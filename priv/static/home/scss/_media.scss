@@ -746,6 +746,26 @@
           width: 100%;
         }
       }
+      //Dashboard home
+      .dashboard-home {
+        &-search {
+          form {
+            .form-group {
+              width: 80%;
+            }
+          }
+        }
+        &-container {
+          flex-direction: column-reverse;
+          &-stats {
+            margin: auto;
+          }
+          &-tips {
+            margin: auto;
+            margin-bottom: 3rem;
+          }
+        }
+      }
     }
   }
 
@@ -777,22 +797,27 @@
       .dash-reader-list {
         grid-template-columns: repeat(3, 1fr);
       }
+    }
+  }
+}
+
+@media (max-width: 670px) {
+  #dashboard-main {
+    &-section {
       //Dashboard home
       .dashboard-home {
-        &-charts {
-          display: block;
-          .chart {
-            &-bar {
-              display: block;
+        &-container {
+          &-stats {
+            grid-template-columns: repeat(3, 1fr);
+            div[class^="dashboard-cards"] {
               width: 100%;
-              margin: 2rem auto;
-              //padding: 3rem 3rem 3rem 0;
+              height: 120px;
+              padding: 0.6rem;
+              font-size: 0.9rem;
             }
-            &-pie {
-              display: block;
-              width: 60%;
-              margin: auto;
-            }
+          }
+          &-tips {
+            margin-bottom: 3rem;
           }
         }
       }
@@ -956,19 +981,6 @@
 }
 
 @media (max-width: 500px) {
-  #dashboard-main {
-    &-section {
-      //Dashboard home
-      .dashboard-home {
-        &-stats {
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 2rem;
-          //margin-bottom: 4rem;
-        }
-      }
-    }
-  }
   #bratings {
     //Book Section A
     &-a {
@@ -1119,6 +1131,34 @@
 
         .bdetails-popular {
           margin-bottom: 1.5rem;
+        }
+      }
+    }
+  }
+  #dashboard-main {
+    &-section {
+      //Dashboard home
+      .dashboard-home {
+        &-search {
+          form {
+            .form-group {
+              width: 100%;
+            }
+          }
+        }
+        &-container {
+          &-stats {
+            grid-template-columns: repeat(2, 1fr);
+            div[class^="dashboard-cards"] {
+              width: 100%;
+              height: 120px;
+              padding: 0.5rem;
+              font-size: 1rem;
+            }
+          }
+          &-tips {
+            margin-bottom: 3rem;
+          }
         }
       }
     }
