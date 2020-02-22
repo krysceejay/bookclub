@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+
     <!-- Fontawesome -->
     <link
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -26,6 +27,8 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
+    <!-- CSRF Token -->
+    <%= csrf_meta_tag() %>
     <title>Weetyview: Chat</title>
   </head>
   <body>

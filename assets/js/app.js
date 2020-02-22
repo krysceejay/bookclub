@@ -10,13 +10,28 @@
 // Import dependencies
 //
 import "phoenix_html"
+
+import {Socket} from "phoenix"
 import LiveSocket from "phoenix_live_view"
+
+let Hooks = {}
+Hooks.NewMessage = {
+  mounted() {
+    this.el.scrollTop = this.el.scrollHeight
+  },
+  updated() {
+    this.el.scrollTop = this.el.scrollHeight
+  }
+}
+
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
+liveSocket.connect()
 
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
 //import socket from "./socket"
-let ls = new LiveSocket("/live")
-ls.connect()
 
-import socket from "./chat"
+//import socket from "./chat"

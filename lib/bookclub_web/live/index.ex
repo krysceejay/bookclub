@@ -5,7 +5,7 @@ defmodule BookclubWeb.Live.Index do
   alias Bookclub.Messages.Chat
   alias BookclubWeb.Presence
 
-  def mount(%{book: book, current_user: current_user}, socket) do
+  def mount(_params, %{"book" => book, "current_user" => current_user}, socket) do
     if connected?(socket), do: Messages.subscribe(book.id)
 
     Presence.track(
@@ -113,11 +113,11 @@ end
    get_show_users(socket), get_show_bookdetails(socket), get_show_othermenu(socket))}
  end
 
- def handle_event("keyup_event", value, socket) do
-   IO.puts "+++++++++++++++"
-   IO.inspect value
-   IO.puts "+++++++++++++++"
-end
+#  def handle_event("keyup_event", value, _socket) do
+#    IO.puts "+++++++++++++++"
+#    IO.inspect value
+#    IO.puts "+++++++++++++++"
+# end
 
  defp get_current_user(socket) do
    socket.assigns

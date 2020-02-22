@@ -33,12 +33,12 @@ defmodule Bookclub.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0"},
+      {:phoenix, "~> 1.4.13"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix_html, "~> 2.14"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
@@ -52,7 +52,7 @@ defmodule Bookclub.MixProject do
       {:dataloader, "~> 1.0"},
       {:guardian, "~> 1.0"},
       {:absinthe_phoenix, "~> 1.4"},
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+      {:phoenix_live_view, "~> 0.7.1"},
       {:edeliver, "~> 1.7"},
       {:distillery, "~> 2.0", warn_missing: false},
       {:timex, "~> 3.6"},

@@ -2,7 +2,14 @@ defmodule BookclubWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :bookclub
   use Absinthe.Phoenix.Endpoint
 
-  socket "/live", Phoenix.LiveView.Socket
+  @session_options [
+    store: :cookie,
+    key: "_bookclub_key",
+    signing_salt: "G/6obKmY"
+  ]
+
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]]
 
   socket "/socket", BookclubWeb.UserSocket,
     websocket: true,
@@ -12,6 +19,8 @@ defmodule BookclubWeb.Endpoint do
   #
   # You should set gzip to true if you are running phx.digest
   # when deploying your static files in production.
+
+
   plug Plug.Static,
     at: "/",
     from: :bookclub,
@@ -40,10 +49,12 @@ defmodule BookclubWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_bookclub_key",
-    signing_salt: "G/6obKmY"
+  # plug Plug.Session,
+  #   store: :cookie,
+  #   key: "_bookclub_key",
+  #   signing_salt: "G/6obKmY"
+
+  plug Plug.Session, @session_options
 
   plug BookclubWeb.Router
 end
