@@ -15,8 +15,12 @@ import {Socket} from "phoenix"
 import LiveSocket from "phoenix_live_view"
 
 const inner = document.getElementById('chat-body-id');
+const chatForm = document.getElementById('chatareaform');
+const chatInput = document.getElementById('chat-area-input');
 const spinner = document.getElementById('show-ripple');
 let bottom;
+let onScroll;
+let scrollHeightBefore = 0;
 let Hooks = {}
 Hooks.NewMessage = {
   mounted() {
@@ -27,49 +31,44 @@ Hooks.NewMessage = {
           setTimeout(() => {
             this.pushEvent("load-more", {});
           }, 3000);
+          onScroll = true;
       }
-      //spinner.style.display = "none";
+    });
+    chatForm.addEventListener("submit", () => {
+      this.el.scrollTop = this.el.scrollHeight;
+    });
+
+    chatInput.addEventListener("focus", () => {
+      this.el.scrollTop = this.el.scrollHeight;
+    });
+
+    window.addEventListener("resize", () => {
+        this.el.scrollTop = this.el.scrollHeight;
     });
 
   },
   beforeUpdate(){
-    this.el.addEventListener('scroll', (e) => {
-      console.log(this.el.scrollTop);
-      console.log(this.el.scrollHeight - this.el.offsetHeight);
-      if(this.el.scrollTop === (this.el.scrollHeight - this.el.offsetHeight)){
-        // this.el.scrollTop += 1000;
+    scrollHeightBefore = this.el.scrollHeight;
+    if(this.el.scrollTop === (this.el.scrollHeight - this.el.offsetHeight)){
 
-        bottom = true;
-        console.log('yes');
-      }
-      else{
-        // this.el.scrollTop = 10;
-        bottom = false;
-        console.log('no');
-      }
-    });
-    // if(this.el.scrollTop === (this.el.scrollHeight - this.el.offsetHeight)){
-    //   // this.el.scrollTop += 1000;
-    //   // console.log(this.el.scrollTop);
-    //   // console.log(this.el.scrollHeight);
-    //   bottom = true;
-    //   //console.log('yes');
-    // }
-    // else{
-    //   // this.el.scrollTop = 10;
-    //   bottom = false;
-    //   //console.log('no');
-    // }
+      bottom = true;
+    }
+    else{
+      bottom = false;
+    }
 
-    console.log("from before "+bottom);
   },
   updated(){
-    console.log("from update "+bottom);
+
     if(bottom){
       this.el.scrollTop = this.el.scrollHeight;
-    }else{
-      this.el.scrollTop = 5;
     }
+
+    if(onScroll){
+      this.el.scrollTop = this.el.scrollHeight - scrollHeightBefore;
+    }
+
+    onScroll = false;
 
   }
 }

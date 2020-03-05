@@ -3,7 +3,7 @@
                 <ul class="below-nav-list">
                         <li><%= link "Home", to: Routes.home_path(@conn, :index) %> /</li>
                         <li class="last-breadcrumb">
-                          <a href="#">Books</a>
+                          <a href="#">Shelf</a>
                         </li>
                     </ul>
         </div>
@@ -20,7 +20,7 @@
 
               <% end %>
             </select>
-            <input class="search-books" type="text" name="searchbooks" placeholder="Search for books, authors, title e.t.c" />
+            <input class="search-books" type="text" name="searchbooks" placeholder="Search for books, movies, authors, title e.t.c" />
             <div class="sort-submit">
               <%= submit class: "btn-main" do %>
               <i class="fa fa-search fa-3x"></i>
@@ -37,7 +37,7 @@
 
       <div class="container">
         <h2 class="section-title">
-          <span class="text-primary">All </span>Books
+          <span class="text-primary">All </span>Collection
         </h2>
         <p class="lead">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.

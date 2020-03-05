@@ -2,7 +2,7 @@
         <div class="container">
                 <ul class="below-nav-list">
                         <li><%= link "Home", to: Routes.home_path(@conn, :index) %> /</li>
-                        <li><%= link "Books", to: Routes.home_path(@conn, :books) %> /</li>
+                        <li><%= link "Shelf", to: Routes.home_path(@conn, :books) %> /</li>
                         <li class="last-breadcrumb"><a href="#"><%= @book.title |> String.downcase() |> String.replace(" ", "-") %></a></li>
                     </ul>
         </div>

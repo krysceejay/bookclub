@@ -18,7 +18,7 @@ defmodule BookclubWeb.Live.Index do
 
   {:ok,
      socket
-     |> assign(page: 1, per_page: 10, book: book, current_user: current_user, show_users: 0, bookdetails: 0, othermenu: 0)
+     |> assign(page: 1, per_page: 50, book: book, current_user: current_user, show_users: 0, bookdetails: 0, othermenu: 0)
      |> fetch()}
 
   end
@@ -136,7 +136,7 @@ defmodule BookclubWeb.Live.Index do
 end
 
  def handle_info({Messages, [:chat, :inserted], chat}, socket) do
-   {:noreply, assign(socket, chats: Enum.reverse(Messages.list_last_ten_chats(chat.book_id, 1, 10)) |> Enum.with_index())}
+   {:noreply, assign(socket, chats: Enum.reverse(Messages.list_last_ten_chats(chat.book_id, 1, 50)) |> Enum.with_index())}
  end
 
 #  def handle_event("keyup_event", value, _socket) do
@@ -145,7 +145,7 @@ end
 #    IO.puts "+++++++++++++++"
 # end
 def handle_event("load-more", _value, %{assigns: assigns} = socket) do
-  {:noreply, socket |> assign(per_page: assigns.per_page + 5) |> fetch()}
+  {:noreply, socket |> assign(per_page: assigns.per_page + 50) |> fetch()}
 end
 
  defp get_current_user(socket) do

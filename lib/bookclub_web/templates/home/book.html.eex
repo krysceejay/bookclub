@@ -2,7 +2,7 @@
         <div class="container">
                 <ul class="below-nav-list">
                         <li><%= link "Home", to: Routes.home_path(@conn, :index) %> /</li>
-                        <li><%= link "Books", to: Routes.home_path(@conn, :books) %> /</li>
+                        <li><%= link "Shelf", to: Routes.home_path(@conn, :books) %> /</li>
                         <li class="last-breadcrumb"><a href="#"><%= @book.title |> String.downcase() |> String.replace(" ", "-") %></a></li>
                     </ul>
         </div>
@@ -157,14 +157,14 @@
             </div> -->
 
             <div class="bdetails-rest py-3">
-              <h3>Book Details</h3>
+              <h3>Description</h3>
 
               <p>
                 <%= @book.description %>
               </p>
             </div>
             <div class="bdetails-rate py-3">
-              <h3>Rate This Book
+              <h3>Rate This Piece
                 <%= if !@conn.assigns[:user] do %>
                   <span class="waiting-list">(login required)</span>
                 <% end %>

@@ -264,6 +264,11 @@
             }
           }
         }
+        .new-message-count {
+          position: absolute;
+          bottom: 10rem;
+          right: 5rem;
+        }
 
         .chat-container-online-users-sm {
           display: none;

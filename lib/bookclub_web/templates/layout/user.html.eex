@@ -44,16 +44,16 @@
             > -->
           <li class="main-aside-li drop-acc-li">
             <input type="checkbox" checked>
-            <i class="fa fa-book"></i>Books
+            <i class="fa fa-book"></i>My Shelf
             <!-- <i class="fa fa-angle-down"></i> -->
 
             <i class="angle-icon"></i>
             <ul>
               <li>
-                <%= link "Manage Books", to: Routes.user_path(@conn, :managebooks) %>
+                <%= link "Manage Shelf", to: Routes.user_path(@conn, :managebooks) %>
               </li>
               <li>
-                <%= link "Add Book", to: Routes.user_path(@conn, :addbook) %>
+                <%= link "Add To Shelf", to: Routes.user_path(@conn, :addbook) %>
               </li>
 
               <li>
@@ -103,7 +103,7 @@
                 </li>
                 |
                 <li>
-                  <%= link "Books", to: Routes.home_path(@conn, :books) %>
+                  <%= link "Shelf", to: Routes.home_path(@conn, :books) %>
                 </li>
                 |
                 <li>

@@ -20,7 +20,7 @@
                   </div>
 
                   <div class="form-group">
-                    <%= label f, :bookcover_field, "Book Cover" %>
+                    <%= label f, :bookcover_field, "Cover" %>
                     <%= file_input f, :bookcover_field %>
                     <%= error_tag f, :bookcover_field %>
                     <%= if @book.bookcover != nil do %>

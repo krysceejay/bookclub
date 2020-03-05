@@ -1,6 +1,6 @@
 <div class="bdetails-popular">
   <div class="book-sidebar-content toprated-sidebar">
-    <div class="book-sidebar-heading py-1"><h3>Recommended Books</h3></div>
+    <div class="book-sidebar-heading py-1"><h3>Recommended</h3></div>
 
     <%= for book <- @recommended_books do %>
     <div class="toprated-sidebar-single">

@@ -23,7 +23,7 @@
       <%= link to: Routes.user_path(@conn, :managebooks) do %>
       <div class="dashboard-cards-books">
         <i class="fa fa-book"></i>
-        <div class="styles-text">Collections</div>
+        <div class="styles-text">My Shelf</div>
       </div>
       <% end %>
       <%= link to: Routes.user_path(@conn, :joinedlist) do %>
@@ -37,13 +37,13 @@
       <%= link to: Routes.user_path(@conn, :addbook) do %>
         <div class="dashboard-cards-addbook">
           <i class="fa fa-plus-square-o"></i>
-          <div class="styles-text">Add Collection</div>
+          <div class="styles-text">Add To Shelf</div>
         </div>
       <% end %>
 
       <%= link to: Routes.user_path(@conn, :profile, @conn.assigns.user.email |> Base.encode64()) do %>
         <div class="dashboard-cards-profile">
-          <i class="fa fa-book"></i>
+          <i class="fa fa-id-card-o"></i>
           <div class="styles-text">Profile</div>
 
         </div>

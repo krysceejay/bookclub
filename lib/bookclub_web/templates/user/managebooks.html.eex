@@ -1,9 +1,9 @@
 
   <%= if @books != [] do %>
   <div class="dashboard-content-hr-grp">
-    <h3 class="dashboard-content-header">Manage Books (<%= @book_count %>)</h3>
+    <h3 class="dashboard-content-header">Manage Shelf (<%= @book_count %>)</h3>
       <%= link to: Routes.user_path(@conn, :addbook), class: "pills" do %>
-      <i class="fa fa-plus"></i> Add Book
+      <i class="fa fa-plus"></i> Add To Shelf
     <% end %>
   </div>
   <div class="dash-book-list">
