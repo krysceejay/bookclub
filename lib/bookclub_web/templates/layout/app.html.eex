@@ -47,7 +47,7 @@
           <%= link "Home", to: Routes.home_path(@conn, :index),  class: if @conn.request_path == "/", do: "current", else: "" %>
         </li>
         <li>
-          <%= link "Books", to: Routes.home_path(@conn, :books), class: if @conn.request_path == "/books" or @conn.request_path == "/book/:slug", do: "current", else: "" %>
+          <%= link "Shelf", to: Routes.home_path(@conn, :books), class: if @conn.request_path == "/shelf" or @conn.request_path == "/shelf/:slug", do: "current", else: "" %>
         </li>
         <li>
           <%= link "Contact", to: Routes.home_path(@conn, :contact), class: if @conn.request_path == "/contact", do: "current", else: "" %>
@@ -86,7 +86,7 @@
             <div>
               <ul>
                 <li><%= link "Home", to: Routes.home_path(@conn, :index), class: "current" %></li>
-                <li><%= link "Books", to: Routes.home_path(@conn, :books) %></li>
+                <li><%= link "Shelf", to: Routes.home_path(@conn, :books) %></li>
                 <li>
                   <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
                 </li>

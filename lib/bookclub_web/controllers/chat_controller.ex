@@ -15,7 +15,7 @@ defmodule BookclubWeb.ChatController do
       Phoenix.LiveView.Controller.live_render(
       conn,
       BookclubWeb.Live.Index,
-      session: %{"book" => book, "current_user" => conn.assigns.user}
+      session: %{"book" => slug, "current_user" => conn.assigns.user}
       )
     else
       conn

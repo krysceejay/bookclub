@@ -49,18 +49,28 @@ defmodule Bookclub.Messages do
 
   end
 
-  # def list_chats_by_bookid_g(bookid) do
-  #
-  #   query =
-  #     from c in Chat,
-  #       where: c.book_id == ^bookid,
-  #       group_by: c.inserted_at,
-  #       select: {c.inserted_at, count(c.id)},
-  #       order_by: [asc: c.id]
-  #
-  #   Repo.all(query)
-  #
-  # end
+  def get_last_chat_by_bookid(bookid) do
+    query =
+      from c in Chat,
+        where: c.book_id == ^bookid,
+        preload: [:user]
+
+    query |> last(:inserted_at) |> Repo.one
+  end
+
+  def list_last_ten_chats(bookid, current_page, per_page) do
+
+    query =
+      from c in Chat,
+        where: c.book_id == ^bookid,
+        order_by: [desc: c.id],
+        offset: ^((current_page - 1) * per_page),
+        limit: ^per_page,
+        preload: [:user]
+
+    Repo.all(query)
+
+  end
 
   @doc """
   Gets a single chat.
