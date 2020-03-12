@@ -2,7 +2,8 @@
   <%= textarea f, :message, placeholder: "Enter message", id: "chat-area-input", autofocus: "",
   spellcheck: "true", aria_autocomplete: "both", aria_label: "Message" %>
 
-  <%= submit phx_disable_with: "Loading...", class: "send-btn" do %>
+  <%= submit phx_disable_with: "...", class: "send-btn" do %>
     <i class="fa fa-send"></i>
+    <!--<div class="lds-ring"><div></div><div></div><div></div><div></div></div>-->
   <% end %>
 </form>

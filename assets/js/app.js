@@ -18,6 +18,7 @@ const inner = document.getElementById('chat-body-id');
 const chatForm = document.getElementById('chatareaform');
 const chatInput = document.getElementById('chat-area-input');
 const spinner = document.getElementById('show-ripple');
+const loadMore = document.getElementById('loadmoremsg');
 let bottom;
 let onScroll;
 let scrollHeightBefore = 0;
@@ -26,14 +27,22 @@ Hooks.NewMessage = {
   mounted() {
     this.el.scrollTop = this.el.scrollHeight;
     this.el.addEventListener('scroll', (e) => {
-      if(inner.scrollTop < 1){
-        spinner.style.display = "block";
-          setTimeout(() => {
-            this.pushEvent("load-more", {});
-          }, 3000);
+      if(inner.scrollTop < 3){
+        //spinner.style.display = "block";
+          // setTimeout(() => {
+          //   this.pushEvent("load-more", {});
+          // }, 3000);
           onScroll = true;
       }
     });
+    loadMore.addEventListener('click', (e) => {
+      loadMore.style.display = "none";
+      spinner.style.display = "block";
+      setTimeout(() => {
+        this.pushEvent("load-more", {});
+      }, 3000);
+    });
+
     chatForm.addEventListener("submit", () => {
       this.el.scrollTop = this.el.scrollHeight;
     });

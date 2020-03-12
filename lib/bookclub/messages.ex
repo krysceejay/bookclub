@@ -72,6 +72,16 @@ defmodule Bookclub.Messages do
 
   end
 
+  def count_chats(bookid) do
+
+    query =
+      from c in Chat,
+        where: c.book_id == ^bookid
+
+    Repo.aggregate(query, :count, :id)
+
+  end
+
   @doc """
   Gets a single chat.
 

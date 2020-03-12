@@ -58,8 +58,16 @@
         </div>
         <div id="chat-body-id" class="chat-area-body" phx-hook="NewMessage">
         <!-- <button phx-click="load-more">Load more</button> -->
-        <div class="lds-ripple" id="show-ripple"><div></div><div></div></div>
         <%= if @chats != [] do %>
+
+          <%= if Enum.count(@chats) < @all_chats do %>
+            <div id="loadmoremsg" class="load-more">
+              <!--<i class="fa fa-plus-circle fa-3x"></i>-->
+              <span class="pills">view previous</span>
+            </div>
+          <% end %>
+
+          <div class="lds-ripple" id="show-ripple"><div></div><div></div></div>
 
             <%= for chat <- @chats do %>
               <%= if (elem(Enum.at(@chats, (elem(chat, 1) - 1)), 0).inserted_at |> NaiveDateTime.to_date())

@@ -27,19 +27,6 @@ defmodule BookclubWeb.Live.Index do
     BookclubWeb.ChatView.render("index.html", assigns)
   end
 
-  # def fetch(socket, book, current_user, show_users, bookdetails, othermenu) do
-  #   assign(socket, %{
-  #     chats: Enum.with_index(Messages.list_last_ten_chats(book.id, 10))|> Enum.reverse(),
-  #     changeset: Messages.change_chat(%Chat{}),
-  #     book: book,
-  #     current_user: current_user,
-  #     users: Presence.list_presences(Messages.get_topic(book.id)),
-  #     show_users: show_users,
-  #     show_bookdetails: bookdetails,
-  #     show_othermenu: othermenu
-  #     })
-  # end
-
   defp fetch(%{assigns: %{page: page, per_page: per, book: book, current_user: current_user, show_users: show_users, bookdetails: bookdetails, othermenu: othermenu}} = socket) do
 
     assign(socket,
@@ -50,7 +37,8 @@ defmodule BookclubWeb.Live.Index do
       users: Presence.list_presences(Messages.get_topic(book.id)),
       show_users: show_users,
       show_bookdetails: bookdetails,
-      show_othermenu: othermenu
+      show_othermenu: othermenu,
+      all_chats: Messages.count_chats(book.id)
       )
   end
 
