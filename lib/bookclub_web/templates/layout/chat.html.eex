@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
     <!-- CSRF Token -->
     <%= csrf_meta_tag() %>
-    <title>Weetyview: Chat</title>
+    <title>Shelfvibe: Chat</title>
   </head>
   <body>
 <main id="chat-page">
@@ -38,7 +38,7 @@
     <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
     <div class="chat-nav-logo">
       <h1 class="logo">
-        <%= link "WV", to: Routes.home_path(@conn, :index) %>
+        <%= link "SV", to: Routes.home_path(@conn, :index) %>
       </h1>
     </div>
 
