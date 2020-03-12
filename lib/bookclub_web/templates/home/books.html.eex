@@ -46,37 +46,40 @@
         <div class="all-books">
 
           <%= for book <- @books do %>
+            <%= if book.bookcover !== "noimage.jpg" do %>
 
-          <div class="all-books-content">
-            <%= link to: Routes.home_path(@conn, :book, book) do %>
-            <div class="all-books-img">
-              <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="image" />
-            </div>
+              <div class="all-books-content">
+                <%= link to: Routes.home_path(@conn, :book, book) do %>
+                <div class="all-books-img">
+                  <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> book.bookcover) %>" alt="image" />
+                </div>
+                <% end %>
+                <div class="all-books-text" style="text-align: center;">
+                  <div class="booktext-title">
+                    <%= if String.length(book.title) < 12, do: book.title, else: String.slice(book.title, 0..11)<>"..." %>
+
+                  </div>
+                  <div class="booktext-author"><%= book.author %></div>
+                  <div class="added_by">Added By
+                    <span class="booktext-user">
+                      <%= link to: Routes.user_path(@conn, :profile, book.user.email |> Base.encode64()) do %>
+                        <%= book.user.first_name %>
+                      <% end %>
+
+                    </span>
+                  </div>
+                  <!-- <p>56| 78</p> -->
+
+                  <!-- <p class="all-books-desc">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit...
+                  </p> -->
+                </div>
+                <!-- <div class="link-btn">
+                  <%= link "View Details", to: Routes.home_path(@conn, :book, book), class: "btn-sec" %>
+                </div> -->
+              </div>
+
             <% end %>
-            <div class="all-books-text" style="text-align: center;">
-              <div class="booktext-title">
-                <%= if String.length(book.title) < 12, do: book.title, else: String.slice(book.title, 0..11)<>"..." %>
-
-              </div>
-              <div class="booktext-author"><%= book.author %></div>
-              <div class="added_by">Added By
-                <span class="booktext-user">
-                  <%= link to: Routes.user_path(@conn, :profile, book.user.username) do %>
-                    <%= book.user.first_name %>
-                  <% end %>
-
-                </span>
-              </div>
-              <!-- <p>56| 78</p> -->
-
-              <!-- <p class="all-books-desc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit...
-              </p> -->
-            </div>
-            <!-- <div class="link-btn">
-              <%= link "View Details", to: Routes.home_path(@conn, :book, book), class: "btn-sec" %>
-            </div> -->
-          </div>
 
           <% end %>
         </div>

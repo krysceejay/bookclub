@@ -141,7 +141,7 @@
             <i class="fa fa-youtube fa-2x"></i>
           </a>
         </div>
-        <div>
+        <!-- <div>
           <h3>Company Info</h3>
           <ul>
             <li>
@@ -157,8 +157,8 @@
               <a href="#"><i class="fa fa-angle-right"></i>Terms Of Service</a>
             </li>
           </ul>
-        </div>
-        <div>
+        </div> -->
+        <!-- <div>
           <h3>Blog Posts</h3>
           <ul>
             <li><a href="#">Lorem ipsum dolor sit.</a></li>
@@ -166,11 +166,11 @@
             <li><a href="#">Lorem ipsum dolor sit.</a></li>
             <li><a href="#">Lorem ipsum dolor sit.</a></li>
           </ul>
-        </div>
+        </div> -->
         <div>
           <h3>Subscribe</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Enter your email to subscribe to our newsletter
           </p>
           <form name="email-form" method="POST">
             <div class="email-form">

@@ -138,12 +138,9 @@
 <section id="home-c" class="text-center py-4">
   <div class="container">
     <h2 class="section-title">
-      <span class="text-primary">Top</span> Rated
+      <span class="text-primary">Latest</span> 
     </h2>
-    <p class="lead">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-      ducimus sapiente reiciendis. Nisi nulla sint ut perferendis.
-    </p>
+    <p class="lead"></p>
     <div class="top-rated">
       <%= for book <- @top_rated do %>
       <div class="top-rated-content">
@@ -159,7 +156,7 @@
           <div class="toprated-author"><%= book.author %></div>
           <div class="added_by">Added By
             <span class="toprated-user">
-              <%= link to: Routes.user_path(@conn, :profile, book.user.username) do %>
+              <%= link to: Routes.user_path(@conn, :profile, book.user.email |> Base.encode64()) do %>
                 <%= book.user.first_name %>
               <% end %>
 
