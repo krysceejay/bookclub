@@ -1151,4 +1151,10 @@ tr:nth-child(even) {
   cursor: pointer;
 
   margin: 1rem auto;
+  span {
+    border: $border-bottom 1.2px solid;
+    border-radius: 10px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
 }
