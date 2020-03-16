@@ -1,0 +1,11 @@
+<%= if @changeset.action do %>
+  <div>Oops, something went wrong! Please check the errors below.</div>
+<% end %>
+
+<%= form_for @changeset, @action, fn f -> %>
+  <%= label f, :name %>
+  <%= text_input f, :name, placeholder: "Enter name" %>
+  <%= error_tag f, :name %>
+
+  <%= submit "Submit" %>
+<% end %>

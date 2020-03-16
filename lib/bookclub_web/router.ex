@@ -39,6 +39,9 @@ defmodule BookclubWeb.Router do
     get "/user/:id", AdminController, :user
     get "/books", AdminController, :books
     get "/book/:id", AdminController, :book
+    get "/genres", AdminController, :genres
+    get "/addgenre", AdminController, :addgenre
+    post "/creategenre", AdminController, :creategenre
   end
 
   scope "/dashboard", BookclubWeb do

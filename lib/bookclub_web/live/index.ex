@@ -64,7 +64,7 @@ defmodule BookclubWeb.Live.Index do
 
  def handle_event(
         "stop_typing",
-        %{"value" => value},
+        _value,
         socket = %{assigns: %{book: book, current_user: user}}
       ) do
     #message = Messages.change_chat(change, %{message: value})
@@ -127,11 +127,6 @@ end
    {:noreply, assign(socket, chats: Enum.reverse(Messages.list_last_ten_chats(chat.book_id, 1, 50)) |> Enum.with_index())}
  end
 
-#  def handle_event("keyup_event", value, _socket) do
-#    IO.puts "+++++++++++++++"
-#    IO.inspect get_users(socket)
-#    IO.puts "+++++++++++++++"
-# end
 def handle_event("load-more", _value, %{assigns: assigns} = socket) do
   {:noreply, socket |> assign(per_page: assigns.per_page + 50) |> fetch()}
 end
@@ -146,10 +141,6 @@ end
    |> Map.get(:book)
  end
 
- defp get_users(socket) do
-   socket.assigns
-   |> Map.get(:users)
- end
 
  # defp get_show_users(socket) do
  #   socket.assigns
