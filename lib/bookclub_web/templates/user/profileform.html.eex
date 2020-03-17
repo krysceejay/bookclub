@@ -42,6 +42,11 @@
                     <%= error_tag f, :about %>
                   </div>
 
+                  <div class="form-group">
+                    <%= label f, :colour, "Colour(This colour will be applied to your name in the chat room)" %>
+                    <%= color_input f, :colour, placeholder: "Choose a color" %>
+                    <%= error_tag f, :colour %>
+                  </div>
 
 
 

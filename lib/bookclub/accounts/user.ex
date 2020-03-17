@@ -14,6 +14,7 @@ defmodule Bookclub.Accounts.User do
     field :username, :string
     field :about, :string
     field :propix, :string
+    field :colour, :string
     #field :role_id, :id
     belongs_to :role, Bookclub.Accounts.Role
     has_many :books, Bookclub.Content.Book
@@ -45,7 +46,7 @@ defmodule Bookclub.Accounts.User do
 
   def changeset_update(user, attrs) do
     user
-    |> cast(attrs, [:first_name, :last_name, :username, :about])
+    |> cast(attrs, [:first_name, :last_name, :username, :about, :colour])
     |> validate_required([:first_name, :last_name, :username])
     |> unique_constraint(:username)
     |> uploadfile(attrs, user)

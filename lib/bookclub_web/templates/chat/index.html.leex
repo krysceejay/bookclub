@@ -82,9 +82,10 @@
 
               <%= if @current_user.username == elem(chat, 0).user.username do %>
               <div id="<%= elem(chat, 0).id %>">
-                <div class="chat-area-body-sender" >
+                <div class="chat-area-body-sender">
                   <div class="msg-sender">
-                    <div class="msg-sender-text">
+                    <div class="msg-sender-text
+                      <%= if elem(Enum.at(@chats, (elem(chat, 1) - 1)), 0).user.username == elem(chat, 0).user.username, do: "noborder" %> ">
                     <%= elem(chat, 0).message %>
                       <sub class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></sub>
                     </div>
@@ -98,9 +99,9 @@
               <div id="<%= elem(chat, 0).id %>">
                 <div class="chat-area-body-receiver">
                   <div class="msg-receiver">
-                    <div class="msg-receiver-name"><%= elem(chat, 0).user.username |> String.capitalize() %></div>
 
                     <div class="msg-receiver-text">
+                    <div class="msg-receiver-name" style="color: <%= elem(chat, 0).user.colour %>"><%= elem(chat, 0).user.username |> String.capitalize() %></div>
                     <%= elem(chat, 0).message %>
                     <sub class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></sub>
                   </div>
