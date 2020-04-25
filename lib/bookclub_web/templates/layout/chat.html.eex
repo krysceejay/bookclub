@@ -37,9 +37,13 @@
   <nav id="chat-nav">
     <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
     <div class="chat-nav-logo">
-      <h1 class="logo">
-        <%= link "SV", to: Routes.home_path(@conn, :index) %>
-      </h1>
+
+        <div class="chat-nav-logo-container">
+          <%= link to: Routes.home_path(@conn, :index) do %>
+          <img src="<%= Routes.static_path(@conn, "/home/img/svwhite.png") %>" alt="logo">
+          <% end %>
+        </div>
+
     </div>
 
     <ul class="chat-nav-menu">

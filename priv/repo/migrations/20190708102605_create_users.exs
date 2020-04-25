@@ -11,7 +11,7 @@ defmodule Bookclub.Repo.Migrations.CreateUsers do
       add :status, :integer, default: 0
       add :about, :text, null: true
       add :propix, :string, null: true
-      add :colour, :text, default: "#000000"
+      add :colour, :string, default: "#000000"
       add :role_id, references(:roles, on_delete: :nothing), null: false, default: 1
 
       timestamps()

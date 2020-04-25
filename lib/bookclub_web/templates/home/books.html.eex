@@ -39,9 +39,9 @@
         <h2 class="section-title">
           <span class="text-primary">All </span>Collection
         </h2>
-        <p class="lead">
+        <!-- <p class="lead">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </p>
+        </p> -->
         <%= if @books != [] do %>
         <div class="all-books">
 

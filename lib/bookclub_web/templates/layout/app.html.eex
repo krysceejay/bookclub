@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+    <link rel="icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+
     <!-- Fontawesome -->
     <link
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -37,11 +41,14 @@
     <!-- Nav -->
     <nav id="main-nav">
       <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
-      <h1 class="logo">
+
         <%= link to: Routes.home_path(@conn, :index) do %>
-          <span class="text-primary">Shelf</span>vibe
+          <div class="logo">
+          <img src="<%= Routes.static_path(@conn, "/home/img/shelfvibeweblogo.png") %>" alt="logo">
+          </div>
+          <!-- <span class="text-primary">Shelf</span>vibe -->
         <% end %>
-      </h1>
+
       <ul class="main-nav-menu">
         <li>
           <%= link "Home", to: Routes.home_path(@conn, :index),  class: if @conn.request_path == "/", do: "current", else: "" %>
@@ -130,14 +137,16 @@
     <footer id="main-footer" class="py-4">
       <div class="footer-content container">
         <div>
-          <h2>WittyReview</h2>
-          <a href="www.twitter.com">
+          <div class="logo">
+          <img src="<%= Routes.static_path(@conn, "/home/img/logodark.png") %>" alt="logo">
+          </div>
+          <a href="#">
             <i class="fa fa-twitter fa-2x"></i>
           </a>
-          <a href="www.facebook.com">
+          <a href="#">
             <i class="fa fa-facebook fa-2x"></i>
           </a>
-          <a href="www.youtube.com">
+          <a href="#">
             <i class="fa fa-youtube fa-2x"></i>
           </a>
         </div>
