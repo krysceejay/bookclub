@@ -24,7 +24,7 @@
 
     <!-- Style CSS -->
      <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>WittyReviews</title>
+    <title>Shelfvibe</title>
   </head>
   <body>
     <%= render @view_module, @view_template, assigns %>
