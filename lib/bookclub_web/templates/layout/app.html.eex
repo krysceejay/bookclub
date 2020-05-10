@@ -44,7 +44,8 @@
 
         <%= link to: Routes.home_path(@conn, :index) do %>
           <div class="logo">
-          <img src="<%= Routes.static_path(@conn, "/home/img/shelfvibeweblogo.png") %>" alt="logo">
+          <!-- <img src="<%= Routes.static_path(@conn, "/home/img/shelfvibeweblogo.png") %>" alt="logo"> -->
+          <img src="<%= Routes.static_path(@conn, "/home/img/logodark.png") %>" alt="logo">
           </div>
           <!-- <span class="text-primary">Shelf</span>vibe -->
         <% end %>

@@ -30,7 +30,7 @@
 
         <div>
           <p>
-            <div class="what-content-head">Meat people of like interest</div>
+            <div class="what-content-head">Meet people of like interest</div>
             Seize the opportunity to connect with people that share your reading vibe and enthusiasm.
           </p>
         </div>
@@ -104,6 +104,7 @@
 
 <!-- Section B: How -->
 <section id="home-b" class="text-center py-4">
+  <div id="home-b-view">
   <div class="container">
     <h2 class="section-title">
       <span class="text-primary">How</span> To Start
@@ -149,6 +150,7 @@
         </p>
       </div>
     </div>
+  </div>
   </div>
 </section>
 <!-- / End Section B -->
