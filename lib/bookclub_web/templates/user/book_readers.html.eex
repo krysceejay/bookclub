@@ -1,4 +1,4 @@
-  <h3 class="dashboard-content-header">Readers (<%= @readers_count %>)</h3>
+  <h3 class="dashboard-content-header">Members (<%= @readers_count %>)</h3>
   <%= if @readers != [] do %>
     <div class="dash-reader-list">
       <%= for reader <- @readers do %>

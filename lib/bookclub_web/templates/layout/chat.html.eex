@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+    <link rel="icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
     <!-- Fontawesome -->
     <link
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -26,7 +29,9 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>Weetyview: Chat</title>
+    <!-- CSRF Token -->
+    <%= csrf_meta_tag() %>
+    <title>Shelfvibe: Chat</title>
   </head>
   <body>
 <main id="chat-page">
@@ -34,9 +39,13 @@
   <nav id="chat-nav">
     <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
     <div class="chat-nav-logo">
-      <h1 class="logo">
-        <%= link "WV", to: Routes.home_path(@conn, :index) %>
-      </h1>
+
+        <div class="chat-nav-logo-container">
+          <%= link to: Routes.home_path(@conn, :index) do %>
+          <img src="<%= Routes.static_path(@conn, "/home/img/svwhite.png") %>" alt="logo">
+          <% end %>
+        </div>
+
     </div>
 
     <ul class="chat-nav-menu">

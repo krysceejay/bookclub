@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>WittyReviews</title>
+    <title>Shelfvibe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
@@ -24,7 +24,7 @@ padding: 0; font-family: 'Poppins',sans-serif; line-height: 160%; font-size: .9e
                     <div style="display: block;	text-align:left; margin: 0px;  padding:30px 40px; color: #ffffff;">
 
                           <h1 style="font-size: 30px;">
-                            <span style="color: #f53ba3;">Witty</span>Reviews
+                            <span style="color: #f53ba3;">Shelf</span>vibe
                           </h1>
 
 
@@ -38,17 +38,17 @@ padding: 0; font-family: 'Poppins',sans-serif; line-height: 160%; font-size: .9e
 
             <div >
               <h1 style="font-size: 30px;">
-                <span style="color: #f53ba3;">Witty</span>Reviews
+                <span style="color: #f53ba3;">Shelf</span>vibe
               </h1>
             </div>
             <div>
                 <p style="font-size:0.7em;line-height:140%; margin-bottom:20px;">Talk about it if it's so interesting.</p>
-                <p style="font-size:0.8em;line-height:140%;"><strong>Contact: </strong><br> info@wittyreviews.club </p>
+                <p style="font-size:0.8em;line-height:140%;"><strong>Contact: </strong><br> info@shelfvibe.com </p>
             </div>
             <div style="display:block; margin-bottom:20px;">
-                <a href="https://www.facebook.com/wittyreviews/"><img src="http://wittyreviews.club/home/img/fbook.png" style="width:30px; height:30px;" alt="Facebook"></a>
-                <a href="https://www.twitter.com/wittyreviews/"><img src="http://wittyreviews.club/home/img/twttr.png" style="width:30px; height:30px;" alt="Twitter"></a>
-                <a href="https://www.instagram.com/wittyreviews/"><img src="http://wittyreviews.club/home/img/insta.png" style="width:30px; height:30px;" alt="Instagram"></a>
+                <a href="https://www.facebook.com/shelfvibe/"><img src="http://shelfvibe.com/home/img/fbook.png" style="width:30px; height:30px;" alt="Facebook"></a>
+                <a href="https://www.twitter.com/shelfvibe/"><img src="http://shelfvibe.com/home/img/twttr.png" style="width:30px; height:30px;" alt="Twitter"></a>
+                <a href="https://www.instagram.com/shelfvibe/"><img src="http://shelfvibe.com/home/img/insta.png" style="width:30px; height:30px;" alt="Instagram"></a>
             </div>
 
         </td>

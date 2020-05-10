@@ -4,11 +4,10 @@ defmodule BookclubWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug BookclubWeb.Plugs.AuthUser
-    plug Phoenix.LiveView.Flash
   end
 
   pipeline :api do
@@ -40,6 +39,9 @@ defmodule BookclubWeb.Router do
     get "/user/:id", AdminController, :user
     get "/books", AdminController, :books
     get "/book/:id", AdminController, :book
+    get "/genres", AdminController, :genres
+    get "/addgenre", AdminController, :addgenre
+    post "/creategenre", AdminController, :creategenre
   end
 
   scope "/dashboard", BookclubWeb do
@@ -73,6 +75,7 @@ defmodule BookclubWeb.Router do
     pipe_through [:browser, :chat_layout]
 
     get "/:slug", ChatController, :index
+
   end
 
   scope "/confirm", BookclubWeb do
@@ -87,8 +90,8 @@ defmodule BookclubWeb.Router do
     pipe_through :browser
 
     get "/", HomeController, :index
-    get "/books", HomeController, :books
-    get "/book/:slug", HomeController, :book
+    get "/shelf", HomeController, :books
+    get "/shelf/:slug", HomeController, :book
     get "/genre/:slug", HomeController, :genre
     get "/searchbooks", HomeController, :searchbooks
     get "/contact", HomeController, :contact

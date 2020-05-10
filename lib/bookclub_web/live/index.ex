@@ -1,11 +1,12 @@
 defmodule BookclubWeb.Live.Index do
   use Phoenix.LiveView
 
-  alias Bookclub.Messages
+  alias Bookclub.{Messages, Content}
   alias Bookclub.Messages.Chat
   alias BookclubWeb.Presence
 
-  def mount(%{book: book, current_user: current_user}, socket) do
+  def mount(_params, %{"book" => slug, "current_user" => current_user}, socket) do
+    book = Content.get_book_by_slug_with_t!(slug)
     if connected?(socket), do: Messages.subscribe(book.id)
 
     Presence.track(
@@ -15,64 +16,78 @@ defmodule BookclubWeb.Live.Index do
     default_user_presence_payload(current_user)
   )
 
-    {:ok, fetch(socket, book, current_user, 0, 0, 0)}
+  {:ok,
+     socket
+     |> assign(page: 1, per_page: 50, book: book, current_user: current_user, show_users: 0, bookdetails: 0, othermenu: 0)
+     |> fetch()}
+
   end
 
   def render(assigns) do
     BookclubWeb.ChatView.render("index.html", assigns)
   end
 
-  def fetch(socket, book, current_user, show_users, bookdetails, othermenu) do
-    assign(socket, %{
-      chats: Enum.with_index(Messages.list_chats_by_bookid(book.id)),
+  defp fetch(%{assigns: %{page: page, per_page: per, book: book, current_user: current_user, show_users: show_users, bookdetails: bookdetails, othermenu: othermenu}} = socket) do
+
+    assign(socket,
+      chats: Enum.reverse(Messages.list_last_ten_chats(book.id, page , per)) |> Enum.with_index(),
       changeset: Messages.change_chat(%Chat{}),
       book: book,
       current_user: current_user,
       users: Presence.list_presences(Messages.get_topic(book.id)),
       show_users: show_users,
       show_bookdetails: bookdetails,
-      show_othermenu: othermenu
-      })
+      show_othermenu: othermenu,
+      all_chats: Messages.count_chats(book.id)
+      )
   end
 
-  def handle_event("validate", %{"chat" => params}, socket = %{assigns: %{book: book, current_user: user}}) do
+  def handle_event("validate", %{"chat" => %{"message" => value}}, socket = %{assigns: %{book: book, current_user: user}}) do
 
-    %{"message" => value} = params
-
-      if value != "" do
+    cond do
+      value != "" ->
         Presence.update_presence(self(), Messages.get_topic(book.id), user.id, %{typing: true})
-
-      else
+      value == "" ->
         Presence.update_presence(self(), Messages.get_topic(book.id), user.id, %{typing: false})
-      end
+      true ->
+        IO.puts "false"
+    end
 
    changeset =
      %Chat{}
-     |> Messages.change_chat(params)
+     |> Messages.change_chat(%{"message" => value})
      |> Map.put(:action, :insert)
 
-   {:noreply, assign(socket, changeset: changeset)}
+   # {:noreply, assign(socket, changeset: changeset)}
+   {:noreply, assign(socket, changeset: changeset,users: Presence.list_presences(Messages.get_topic(book.id)))}
  end
 
  def handle_event(
         "stop_typing",
-        value,
-        socket = %{assigns: %{book: book, current_user: user, changeset: message}}
+        _value,
+        socket = %{assigns: %{book: book, current_user: user}}
       ) do
-    message = Messages.change_chat(message, %{message: value})
-    Presence.update_presence(self(), Messages.get_topic(book.id), user.id, %{typing: false})
-    {:noreply, assign(socket, message: message)}
+    #message = Messages.change_chat(change, %{message: value})
+        Presence.update_presence(self(), Messages.get_topic(book.id), user.id, %{typing: false})
+
+  {:noreply, assign(socket, users: Presence.list_presences(Messages.get_topic(book.id)))}
+
+
+  #{:noreply, socket}
   end
+
 
  def handle_event("send_message", %{"chat" => params}, socket) do
    case Messages.create_chat(get_current_user(socket), get_book(socket), params) do
      {:ok, chat} ->
        Presence.update_presence(self(), Messages.get_topic(chat.book_id), chat.user_id, %{typing: false})
 
-       {:noreply, fetch(socket, get_book(socket), get_current_user(socket),
-       get_show_users(socket), get_show_bookdetails(socket), get_show_othermenu(socket))}
+       # {:noreply, fetch(socket, get_book(socket), get_current_user(socket),
+       # get_show_users(socket), get_show_bookdetails(socket), get_show_othermenu(socket))}
+      {:noreply, assign(socket, changeset: Messages.change_chat(%Chat{}))}
 
      {:error, %Ecto.Changeset{} = changeset} ->
+
        {:noreply, assign(socket, changeset: changeset)}
    end
  end
@@ -108,15 +123,12 @@ defmodule BookclubWeb.Live.Index do
   {:noreply, assign(socket, users: Presence.list_presences(Messages.get_topic(book.id)))}
 end
 
- def handle_info({Messages, [:chat, :inserted], _chat}, socket) do
-   {:noreply, fetch(socket, get_book(socket), get_current_user(socket),
-   get_show_users(socket), get_show_bookdetails(socket), get_show_othermenu(socket))}
+ def handle_info({Messages, [:chat, :inserted], chat}, socket) do
+   {:noreply, assign(socket, chats: Enum.reverse(Messages.list_last_ten_chats(chat.book_id, 1, 50)) |> Enum.with_index())}
  end
 
- def handle_event("keyup_event", value, socket) do
-   IO.puts "+++++++++++++++"
-   IO.inspect value
-   IO.puts "+++++++++++++++"
+def handle_event("load-more", _value, %{assigns: assigns} = socket) do
+  {:noreply, socket |> assign(per_page: assigns.per_page + 50) |> fetch()}
 end
 
  defp get_current_user(socket) do
@@ -129,20 +141,21 @@ end
    |> Map.get(:book)
  end
 
- defp get_show_users(socket) do
-   socket.assigns
-   |> Map.get(:show_users)
- end
 
- defp get_show_bookdetails(socket) do
-   socket.assigns
-   |> Map.get(:show_bookdetails)
- end
-
- defp get_show_othermenu(socket) do
-   socket.assigns
-   |> Map.get(:show_othermenu)
- end
+ # defp get_show_users(socket) do
+ #   socket.assigns
+ #   |> Map.get(:show_users)
+ # end
+ #
+ # defp get_show_bookdetails(socket) do
+ #   socket.assigns
+ #   |> Map.get(:show_bookdetails)
+ # end
+ #
+ # defp get_show_othermenu(socket) do
+ #   socket.assigns
+ #   |> Map.get(:show_othermenu)
+ # end
 
  defp default_user_presence_payload(current_user) do
    %{

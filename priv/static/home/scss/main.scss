@@ -71,13 +71,24 @@ div[class^="btn-"],
   top: 0;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 2rem;
-  background: $secondary-color;
+  padding: 0.1rem 2rem;
+  background: $light-color;
   z-index: 1;
-  color: #fff;
+  //color: #fff;
   //min-height: 4rem;
   a {
-    color: #fff;
+    //color: #fff;
+    font-weight: 800;
+  }
+
+  .logo {
+    width: 180px;
+    height: 60px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 
   .main-nav-menu {
@@ -89,14 +100,14 @@ div[class^="btn-"],
 
     a {
       text-decoration: none !important;
-      color: #fff;
+      //color: #fff;
       text-transform: uppercase;
       border-bottom: 3px transparent solid;
       padding-bottom: 0.5rem;
       transition: border-color 0.5s;
 
       &:hover {
-        border-color: $medium-color;
+        border-color: $main-color;
       }
       &.current {
         border-color: $main-color;
@@ -105,7 +116,7 @@ div[class^="btn-"],
     .parent-sub-menu {
       &:hover ul {
         position: absolute;
-        top: 3rem;
+        top: 3.5rem;
       }
     }
   }
@@ -132,7 +143,7 @@ div[class^="btn-"],
   &-home {
     background: $bg-image no-repeat center center/cover;
     height: 100vh;
-    margin-top: -73px;
+    margin-top: -60px;
     color: #fff;
     position: relative;
 
@@ -165,7 +176,7 @@ div[class^="btn-"],
 
   //Header Inner
   &-inner {
-    background: $bg-image no-repeat 20% 30% / cover;
+    //background: $bg-image no-repeat 20% 30% / cover;
     height: 5.5rem;
     border-bottom: 3px solid $main-color;
   }
@@ -178,16 +189,29 @@ div[class^="btn-"],
     .what {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-gap: 2rem;
+      grid-gap: 3rem;
+      margin-top: 2rem;
       &-content {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: left;
-        img {
-          width: 60%;
-          padding: 1rem;
+        &-img {
+          height: 120px;
+          //width: 100%;
+          //background-color: red;
+          margin-bottom: 1rem;
+          img {
+            width: 80%;
+            height: 100%;
+            //padding: 1rem;
+          }
+        }
+        &-head {
+          font-weight: bold;
+          margin-bottom: 0.2rem;
+          font-size: 1.1rem;
         }
       }
     }
@@ -195,7 +219,21 @@ div[class^="btn-"],
 
   //Home Section B
   &-b {
-    background-color: rgba(36, 44, 66, 0.1);
+    //background-color: rgba(36, 44, 66, 0.1);
+    background: $bg-img-how no-repeat center center/cover;
+    //background-color: rgba(0, 0, 0, 0.7);
+
+    //background-color: $secondary-color;
+    color: #fff;
+    position: relative;
+    height: 30rem;
+
+    &-view {
+      @extend %overlay;
+      background-color: rgba(0, 0, 0, 0.3);
+      height: 100%;
+      padding-top: 2rem;
+    }
     .how {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -203,29 +241,22 @@ div[class^="btn-"],
       text-align: center;
 
       &-content {
-        display: grid;
-        grid-template-areas:
-          "icon head head"
-          "pr pr pr";
-        grid-gap: 0.5rem;
-        align-items: center;
-        justify-content: center;
+        color: #000;
+        &-top {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          h3 {
+            margin-left: 1rem;
+          }
+        }
         text-align: left;
-        // border: 3px solid $main-color;
+        // // border: 3px solid $main-color;
         background-color: #fdfdfd;
         padding: 1rem;
         border-radius: 5px;
-
-        //Grid Areas
-        & > div {
-          grid-area: icon;
-          text-align: center;
-        }
-        h3 {
-          grid-area: head;
-        }
         p {
-          grid-area: pr;
           text-align: center;
         }
       }
@@ -246,6 +277,7 @@ div[class^="btn-"],
         transition: all 1s;
 
         text-align: center;
+        font-family: "Nunito", sans-serif;
       }
 
       //how-icon
@@ -681,6 +713,7 @@ div[class^="btn-"],
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       grid-gap: 1rem;
+      margin-top: 2rem;
 
       &-content {
         //border: $light-color 1px solid;
@@ -1202,8 +1235,8 @@ div[class^="btn-"],
 
 //Footer
 #main-footer {
-  background: $secondary-color;
-  color: set-text-color($secondary-color);
+  background: $light-color;
+  color: set-text-color($light-color);
 
   .footer-content {
     display: grid;

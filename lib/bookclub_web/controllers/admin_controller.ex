@@ -2,6 +2,7 @@ defmodule BookclubWeb.AdminController do
   use BookclubWeb, :controller
 
   alias Bookclub.{Accounts, Content}
+  alias Bookclub.Content.Genre
 
   plug BookclubWeb.Plugs.RequireAuth
 
@@ -31,6 +32,29 @@ defmodule BookclubWeb.AdminController do
     book = Content.get_book!(id)
     render(conn, "user.html", book: book)
   end
+
+  def genres(conn, _params) do
+    genres = Content.list_genres()
+    render(conn, "genres.html", genres: genres)
+  end
+
+  def addgenre(conn, _params) do
+    changeset = Content.change_genre(%Genre{})
+    render(conn, "addgenre.html", changeset: changeset)
+  end
+
+  def creategenre(conn, %{"genre" => genre_params}) do
+      case Content.create_genre(genre_params) do
+        {:ok, _genre} ->
+          conn
+          |> put_flash(:info, "Genre created successfully.")
+          |> redirect(to: Routes.admin_path(conn, :genres))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "addgenre.html", changeset: changeset)
+      end
+  end
+
 
 
 

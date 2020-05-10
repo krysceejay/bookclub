@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+    <link rel="icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+
     <!-- Fontawesome -->
     <link
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -28,7 +32,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>Weetyview: Dashboard</title>
+    <title>Shelfvibe: Dashboard</title>
   </head>
   <body>
     <main id="dashboard-main">
@@ -44,16 +48,16 @@
             > -->
           <li class="main-aside-li drop-acc-li">
             <input type="checkbox" checked>
-            <i class="fa fa-book"></i>Books
+            <i class="fa fa-book"></i>My Shelf
             <!-- <i class="fa fa-angle-down"></i> -->
 
             <i class="angle-icon"></i>
             <ul>
               <li>
-                <%= link "Manage Books", to: Routes.user_path(@conn, :managebooks) %>
+                <%= link "Manage Shelf", to: Routes.user_path(@conn, :managebooks) %>
               </li>
               <li>
-                <%= link "Add Book", to: Routes.user_path(@conn, :addbook) %>
+                <%= link "Add To Shelf", to: Routes.user_path(@conn, :addbook) %>
               </li>
 
               <li>
@@ -103,7 +107,7 @@
                 </li>
                 |
                 <li>
-                  <%= link "Books", to: Routes.home_path(@conn, :books) %>
+                  <%= link "Shelf", to: Routes.home_path(@conn, :books) %>
                 </li>
                 |
                 <li>

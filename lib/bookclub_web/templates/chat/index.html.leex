@@ -16,9 +16,8 @@
           />
         </form>
         <div class="online-users-list">
-
         <%= for user <- @users do %>
-          <div class="single-user-details">
+          <div class="single-user-details" id="<%= user.user_id %>">
             <div class="user-propix">
               <img src="<%= Routes.static_path(@socket, "/images/profiles/" <> user.propix) %>" alt="" />
 
@@ -29,6 +28,7 @@
 
               </span>
               <span><%= if user.typing, do: "is typing..." %></span>
+              </span>
             </div>
           </div>
         <% end %>
@@ -56,24 +56,36 @@
           </div> -->
 
         </div>
-        <div id="chat-body-id" class="chat-area-body">
+        <div id="chat-body-id" class="chat-area-body" phx-hook="NewMessage">
+        <!-- <button phx-click="load-more">Load more</button> -->
         <%= if @chats != [] do %>
+
+          <%= if Enum.count(@chats) < @all_chats do %>
+            <div id="loadmoremsg" class="load-more">
+              <!--<i class="fa fa-plus-circle fa-3x"></i>-->
+              <span>view previous</span>
+            </div>
+          <% end %>
+
+          <div class="lds-ripple" id="show-ripple"><div></div><div></div></div>
 
             <%= for chat <- @chats do %>
               <%= if (elem(Enum.at(@chats, (elem(chat, 1) - 1)), 0).inserted_at |> NaiveDateTime.to_date())
-              != (elem(chat, 0).inserted_at |> NaiveDateTime.to_date()) or elem(chat, 1) == 0
-              do %>
-                <div class="chat-fulldate">
-                  <span class="chat-fulldate-text">
-                    <%= elem(elem(chat, 0).inserted_at |> Timex.format("{D} {0Mfull} {YYYY}"), 1) %>
-                  </span>
-                </div>
-              <% end %>
+               != (elem(chat, 0).inserted_at |> NaiveDateTime.to_date()) or elem(chat, 1) == 0
+               do %>
+                 <div class="chat-fulldate">
+                   <span class="chat-fulldate-text">
+                     <%= elem(elem(chat, 0).inserted_at |> Timex.format("{D} {0Mfull} {YYYY}"), 1) %>
+                   </span>
+                 </div>
+               <% end %>
 
               <%= if @current_user.username == elem(chat, 0).user.username do %>
+              <div id="<%= elem(chat, 0).id %>">
                 <div class="chat-area-body-sender">
                   <div class="msg-sender">
-                    <div class="msg-sender-text">
+                    <div class="msg-sender-text
+                      <%= if elem(Enum.at(@chats, (elem(chat, 1) - 1)), 0).user.username == elem(chat, 0).user.username, do: "noborder" %> ">
                     <%= elem(chat, 0).message %>
                       <sub class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></sub>
                     </div>
@@ -81,14 +93,15 @@
                   </div>
                 </div>
                 <div class="clear-flt"></div>
+                </div>
 
               <% else %>
-
+              <div id="<%= elem(chat, 0).id %>">
                 <div class="chat-area-body-receiver">
                   <div class="msg-receiver">
-                    <div class="msg-receiver-name"><%= elem(chat, 0).user.username |> String.capitalize() %></div>
 
                     <div class="msg-receiver-text">
+                    <div class="msg-receiver-name" style="color: <%= elem(chat, 0).user.colour %>"><%= elem(chat, 0).user.username |> String.capitalize() %></div>
                     <%= elem(chat, 0).message %>
                     <sub class="msg-chat-time"><%= elem(elem(chat, 0).inserted_at |> Timex.local() |> Timex.format("{h12}:{0m} {am}"), 1) %></sub>
                   </div>
@@ -96,6 +109,7 @@
                   </div>
                 </div>
                 <div class="clear-flt"></div>
+                </div>
 
               <% end %>
             <% end %>
@@ -117,6 +131,8 @@
           <%= render "form.html", assigns %>
 
         </div>
+
+        <!--<div class="new-message-count"><span>1</span></div>-->
 
         <%= render "online_users.html", socket: @socket, users: @users, show_users: @show_users %>
 

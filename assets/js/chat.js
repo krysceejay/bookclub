@@ -1,7 +1,7 @@
 $(document).ready(function() {
-  const chatdivh = $("#chat-body-id").prop("scrollHeight");
-  chatDivScroll();
-  chatDivChange();
+  // const chatdivh = $("#chat-body-id").prop("scrollHeight");
+  // chatDivScroll();
+  // chatDivChange();
 
   // $("#chatareaform").submit(function(){
   //   chatDivScrollT();
@@ -11,21 +11,21 @@ $(document).ready(function() {
   //   chatDivScroll();
   // }
 
-  function chatDivScroll() {
-    $("#chat-body-id").scrollTop(chatdivh);
-  }
-
-  function chatDivScrollT() {
-    setTimeout(function() {
-      $("#chat-body-id").scrollTop(chatdivh);
-    }, 100);
-  }
-
-  function chatDivChange() {
-    $("#chat-body-id").bind("DOMSubtreeModified", function() {
-      chatDivScrollT();
-    });
-  }
+  // function chatDivScroll() {
+  //   $("#chat-body-id").scrollTop(chatdivh);
+  // }
+  //
+  // function chatDivScrollT() {
+  //   setTimeout(function() {
+  //     $("#chat-body-id").scrollTop(chatdivh);
+  //   }, 100);
+  // }
+  //
+  // function chatDivChange() {
+  //   $("#chat-body-id").bind("DOMSubtreeModified", function() {
+  //     chatDivScrollT();
+  //   });
+  // }
 
   $("#users-close-btn").click(function() {
     $(".chat-container-online-users").hide();
@@ -46,10 +46,10 @@ $(document).ready(function() {
   // $("#chat-area-input").focus(function() {
 
   // });
-  $(window).resize(function() {
-    chatDivScroll();
-    chatDivChange();
-  });
+  // $(window).resize(function() {
+  //   chatDivScroll();
+  //   chatDivChange();
+  // });
 
   $("#menu-bar-ellipsis").click(function() {
     $(".chat-container-menu-ellipsis").addClass("display-element");

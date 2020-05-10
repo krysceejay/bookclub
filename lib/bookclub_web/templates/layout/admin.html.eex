@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>Weetyview: Admin</title>
+    <title>Shelfvibe: Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/admin/vendors/iconfonts/ti-icons/css/themify-icons.css") %>"/>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/admin/vendors/css/vendor.bundle.base.css") %>"/>
@@ -378,6 +378,23 @@
                 <li class="nav-item">
                 <%= link "Manage Books", to: Routes.admin_path(@conn, :books), class: "nav-link" %>
               </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#genres" aria-expanded="false" aria-controls="genres">
+              <i class="ti-view-list menu-icon"></i>
+              <span class="menu-title">Genres</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="genres">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <%= link "Manage Genres", to: Routes.admin_path(@conn, :genres), class: "nav-link" %>
+                </li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="/post/addpost">Add Post</a></li> -->
+
               </ul>
             </div>
           </li>
