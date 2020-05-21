@@ -40,5 +40,10 @@ npm-debug.log
 # secrets files as long as you replace their contents by environment
 # variables.
 /config/dev.exs
+/config/prod.exs
 /config/*.secret.exs
-/lib/bookclub/repo.ex
+/config/config.exs
+/config/test.exs
+.deliver/releases/
+/priv/static/images/
+/priv/static/cache_manifest.json

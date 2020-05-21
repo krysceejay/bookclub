@@ -9,11 +9,14 @@ $medium-color: #ccc;
 $dark-color: #333;
 $overlay-color: rgba(0, 0, 0, 0.4);
 $bg-image: url("../img/beverage-books.jpg");
-$star-color: #e2cf00;
+$bg-img-how: url("../img/howtostart.jpg");
 $menu-speed: 0.75s;
 $text-color: #666666;
 $undernav-color: #fff7fb;
 $border-bottom: #e1e1e1;
+$star-background: #ddd;
+$star-color: #e2cf00;
+$star-size: 1rem;
 
 //Set Text Color
 @function set-text-color($color) {
@@ -29,5 +32,13 @@ $border-bottom: #e1e1e1;
     @return $main-color;
   } @else {
     @return $light-color;
+  }
+}
+
+@function display-users($display) {
+  @if ($display == 0) {
+    @return none;
+  } @else {
+    @return block;
   }
 }

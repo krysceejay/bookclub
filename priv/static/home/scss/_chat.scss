@@ -1,6 +1,7 @@
 #chat-page {
   display: flex;
   background: $light-color;
+  //overflow: hidden;
   #chat-nav {
     //flex: 1;
     background: #fff;
@@ -9,8 +10,16 @@
     .chat-nav-logo {
       background: $secondary-color;
       padding: 1.1rem 0;
-      text-align: center;
+      //text-align: center;
       margin-bottom: 2rem;
+      &-container {
+        height: 40px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
       a {
         color: #fff;
       }
@@ -36,6 +45,10 @@
         }
       }
     }
+  }
+
+  .chat-container-menu-ellipsis {
+    display: none;
   }
 
   #chat-section {
@@ -111,7 +124,7 @@
         height: 90vh;
         padding: 0 2rem;
         overflow: hidden;
-
+        position: relative;
         .chat-area-head {
           display: flex;
           align-items: center;
@@ -119,7 +132,7 @@
           border-bottom: 2px #e1e1e1 solid;
           .book-cover {
             flex: 1;
-            max-width: 60px;
+            min-width: 60px;
             height: 60px;
             margin-right: 1rem;
 
@@ -135,47 +148,83 @@
             text-transform: capitalize;
             font-weight: 900;
           }
+          .menu-bar-icon {
+            display: none;
+          }
+          // .chat-top-right-menu-icon {
+          //   display: none;
+          // }
         }
         .chat-area-body {
           margin: 1rem 0;
-          height: 66vh;
-          overflow: scroll;
-          border-bottom: 2px #e1e1e1 solid;
+          height: 72vh;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          padding: 2rem 0;
+          //border-bottom: 2px #e1e1e1 solid;
+          .chat-fulldate {
+            display: block;
+            text-align: center;
+            margin: 1rem auto;
+            &-text {
+              background: #f579b5;
+              border-radius: 5px;
+              padding: 0.4rem;
+              font-size: 0.8rem;
+              font-style: italic;
+              text-transform: uppercase;
+              color: $sec-fade-color;
+            }
+          }
           &-receiver {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-areas: "receiver . .";
-            grid-gap: 2rem;
-            margin: 1rem 0;
+            // display: grid;
+            // grid-template-columns: repeat(3, 1fr);
+            // grid-template-areas: "receiver . .";
+            // grid-gap: 2rem;
+            margin: 0.2rem 0;
+            display: block;
+            max-width: 80%;
+            float: left;
             .msg-receiver {
-              grid-area: receiver;
-              &-name {
-                font-size: 0.8rem;
-              }
+              //grid-area: receiver;
               &-text {
+                display: block;
+                overflow-wrap: break-word;
                 background: #fff;
-                padding: 0.6rem 1rem;
+                padding: 0.3rem 1rem;
                 border-radius: 0 15px 15px 15px;
               }
             }
           }
           &-sender {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-areas: ". . sender";
-            grid-gap: 2rem;
-            margin: 1rem 0;
+            // display: grid;
+            // grid-template-columns: repeat(3, 1fr);
+            // grid-template-areas: ". . sender";
+            // grid-gap: 2rem;
+            margin: 0.2rem 0;
+            display: block;
+            max-width: 80%;
+            float: right;
             .msg-sender {
-              grid-area: sender;
+              //grid-area: sender;
               &-text {
+                display: block;
+                overflow-wrap: break-word;
                 background: #cdcdcd;
-                padding: 0.6rem 1rem;
-                border-radius: 15px 15px 0 15px;
+                padding: 0.3rem 1rem;
+                border-radius: 15px 0px 15px 15px;
               }
+            }
+            .noborder {
+              border-radius: 15px;
             }
           }
         }
         .chat-area-input {
+          position: absolute;
+          bottom: 0;
+          left: 0.5rem;
+          right: 0.5rem;
           form {
             // background: $dark-color;
             width: 100%;
@@ -183,12 +232,13 @@
             display: inline-block;
             line-height: 0;
             position: relative;
-            input {
+            textarea {
               width: 100%;
               height: 45px;
               outline: none;
               border: none;
               border-radius: 5px;
+              padding-right: 42px;
               &:focus {
                 outline: none;
               }
@@ -225,6 +275,19 @@
               }
             }
           }
+        }
+        .new-message-count {
+          position: absolute;
+          bottom: 10rem;
+          right: 5rem;
+        }
+
+        .chat-container-online-users-sm {
+          display: none;
+        }
+
+        .chat-container-bookdetails-sm {
+          display: none;
         }
       }
       &-bookdetails {
@@ -272,9 +335,37 @@
                 border-bottom: 0;
               }
             }
-            .list-active {
-              border-left: 4px $main-color solid;
-              background: $border-bottom;
+            .list-0 {
+              color: #818182;
+            }
+
+            .list-1 {
+              color: #155724;
+              border-left: 2px $main-color solid;
+            }
+            .list-2 {
+              color: #721c24;
+            }
+            %list-topic-shared {
+              font-size: 0.8rem;
+              display: block;
+              text-align: right;
+              font-weight: bolder;
+            }
+            .list-0:after {
+              content: "coming soon";
+              color: orange;
+              @extend %list-topic-shared;
+            }
+            .list-1:after {
+              content: "on-going";
+              color: green;
+              @extend %list-topic-shared;
+            }
+            .list-2:after {
+              content: "done";
+              color: red;
+              @extend %list-topic-shared;
             }
           }
         }

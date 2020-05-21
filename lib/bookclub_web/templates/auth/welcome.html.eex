@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WittyReviews</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+</head>
+
+<body style = "width: 100% !important; -webkit-text-size-adjust: 100%; overflow-wrap:break-word; word-wrap:break-word;hyphens:auto; background: #efefef !important; -ms-text-size-adjust: 100%; margin: 0;
+padding: 0; font-family: 'Poppins',sans-serif; line-height: 160%; font-size: .9em;color: #222;}">
+
+    <table align="center" width="500px !important" cellspacing="0" cellpadding="0" style="">
+        <tbody>
+
+            <tr>
+                <td style="height: 60px; ">
+                    <div></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:#3a4155;">
+                    <div style="display: block;	text-align:left; margin: 0px;  padding:30px 40px; color: #ffffff;">
+
+                          <h1 style="font-size: 30px;">
+                            <span style="color: #f53ba3;">Witty</span>Reviews
+                          </h1>
+
+
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td style="background-color:#fff; font-family: 'Poppins', sans-serif; ">
+                    <div style="display: block; margin: 0px; padding:40px; background-color:#fff; font-family: 'Poppins', sans-serif; ">
+                        <div style="text-align: center; margin-bottom: 50px;">
+                            <img src="http://localhost:4000/home/img/celebration.png" width="80%" alt="" srcset="">
+                        </div>
+                        <h2 style="color:#242c42; margin-bottom:30px">Hi Chris,</h2> <h3 style="">Welcome to WittyReviews!</h3>
+                        <p style="line-height: 1.8">We are pleased to have you join our community of readers. It’s time to get started. We’ve created a personal account for you, please confirm your email address and use our services to the maximum</p>
+
+                        <a href="verify.com" style="background: #f53ba3; padding:16px 32px; border-radius:5px; font-size:16px; text-decoration: none; color:#fff; display: inline-block; margin:20px 0px;">Confirm your Email</a>
+
+                        <p style="line-height: 1.8">You can also click the link below: <br><br>
+                            <a href="verify.com" style="color: #f53ba3; text-decoration:none;">verify.com</a> </p>
+
+                        <p style="line-height: 1.8">We're glad you're here.</p>
+                        <p><br>Our Best!<br>The WittyReviews Team</span><br></p>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:40px; text-align:left; background-color:#fff7fb; color:#222; font-family: 'Poppins', sans-serif; ">
+
+                    <div >
+                      <h1 style="font-size: 30px;">
+                        <span style="color: #f53ba3;">Witty</span>Reviews
+                      </h1>
+                    </div>
+                    <div>
+                        <p style="font-size:0.7em;line-height:140%; margin-bottom:20px;">Talk about it if it's so interesting.</p>
+                        <p style="font-size:0.8em;line-height:140%;"><strong>Contact: </strong><br> info@wittyreviews.club </p>
+                    </div>
+                    <div style="display:block; margin-bottom:20px;">
+                        <a href="https://www.facebook.com/wittyreviews/"><img src="https://www.crowdyvest.com/storage/img/facebook.png" style="width:30px; height:30px;" alt="Facebook"></a>
+                        <a href="https://www.twitter.com/wittyreviews/"><img src="https://www.crowdyvest.com/storage/img/twitter.png" style="width:30px; height:30px;" alt="Twitter"></a>
+                        <a href="https://www.instagram.com/wittyreviews/"><img src="https://www.crowdyvest.com/storage/img/instagram.png" style="width:30px; height:30px;" alt="Instagram"></a>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 60px; ">
+                    <div></div>
+                </td>
+            </tr>
+          </tbody>
+          </table>
+
+
+          </body>
+
+          </html>

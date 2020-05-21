@@ -6,10 +6,10 @@ defmodule Bookclub.Content do
   import Ecto.Query, warn: false
   alias Bookclub.Repo
 
-  alias Bookclub.Content.Book
+  alias Bookclub.Content.{Book, Topic}
 
   def data() do
-      Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
+    Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
   end
 
   def query(queryable, _params) do
@@ -33,20 +33,25 @@ defmodule Bookclub.Content do
   def list_books do
     Repo.all(
       from b in Book,
+        where: b.published == true,
         order_by: [desc: b.id]
-    ) |> Repo.preload(:user)
+    )
+    |> Repo.preload(:user)
   end
 
   def top_books(per_page) do
     Repo.all(
       from b in Book,
+        where: b.published == true,
         order_by: [desc: b.id],
-        limit: ^per_page
-    ) |> Repo.preload(:user)
+        limit: ^per_page,
+        preload: [:user, :ratings]
+    )
   end
 
   def all_books do
     Book
+    |> where(published: true)
     |> order_by(desc: :id)
     |> preload(:user)
   end
@@ -73,6 +78,13 @@ defmodule Bookclub.Content do
 
   def get_book_by_slug!(slug), do: Repo.get_by!(Book, slug: slug) |> Repo.preload(:user)
 
+  def get_book_by_slug_with_t!(slug),
+        do: Repo.get_by!(Book, slug: slug) |> Repo.preload(:user) |> Repo.preload(topics: from(t in Topic, order_by: [desc: t.id]))
+
+  def get_only_book!(id), do: Repo.get!(Book, id)
+
+
+
   @doc """
   Creates a book.
 
@@ -88,7 +100,7 @@ defmodule Bookclub.Content do
   def create_book(user, attrs \\ %{}) do
     user
     |> Ecto.build_assoc(:books)
-    |> Book.changeset(attrs)
+    |> Book.changeset_c(attrs)
     |> Repo.insert()
   end
 
@@ -106,7 +118,7 @@ defmodule Bookclub.Content do
   """
   def update_book(%Book{} = book, attrs) do
     book
-    |> Book.changeset(attrs)
+    |> Book.changeset(attrs, book)
     |> Repo.update()
   end
 
@@ -141,23 +153,72 @@ defmodule Bookclub.Content do
 
   def search_books_by_fields(genre \\ "", txt \\ "") do
     genres = [genre]
+
     query =
       from b in Book,
-      where: fragment("? @> ?", b.genre, ^genres),
-      where: ilike(b.title, ^"%#{txt}%") or
-      ilike(b.author, ^"%#{txt}%") or
-      ilike(b.description, ^"%#{txt}%"),
-      order_by: [desc: b.id],
-      preload: [:user]
+        where: b.published == true,
+        where:
+          fragment("? @> ?", b.genre, ^genres) or
+            ilike(b.title, ^"%#{txt}%") or
+            ilike(b.author, ^"%#{txt}%") or
+            ilike(b.description, ^"%#{txt}%"),
+        order_by: [desc: b.id],
+        preload: [:user]
 
-      # Enum.reduce(filters, Book, fn {key, value},
-      # query ->
-      #   from q in query,
-      #   where: fragment("? @> ?", q.genre, ^genres),
-      #   where: field(q, ^key) == ^value,
-      #   order_by: [desc: q.id],
-      #   preload: [:user]
-      # end)
+    # Enum.reduce(filters, Book, fn {key, value},
+    # query ->
+    #   from q in query,
+    #   where: fragment("? @> ?", q.genre, ^genres),
+    #   where: field(q, ^key) == ^value,
+    #   order_by: [desc: q.id],
+    #   preload: [:user]
+    # end)
+    query
+
+  end
+
+  def books_by_genre (genre) do
+
+    query =
+      from b in Book,
+        where: b.published == true,
+        where:
+          fragment("? @> ?", b.genre, ^genre),
+        order_by: [desc: b.id],
+        preload: [:user]
+
+    query
+
+  end
+
+  def recommended_books(id) do
+    Repo.all(
+      from b in Book,
+        where: b.published == true,
+        where: b.id != ^id,
+        order_by: [desc: b.id],
+        limit: 2,
+        preload: [:user, :ratings]
+    )
+  end
+
+  def book_by_user(user_id) do
+    query =
+      from b in Book,
+        where: b.user_id == ^user_id,
+        order_by: [desc: b.id]
+
+    query
+  end
+
+  def check_if_user_owns_book(user_id, book_id) do
+    query =
+      from b in Book,
+        where: b.user_id == ^user_id,
+        where: b.id == ^book_id
+
+    Repo.exists?(query)
+
   end
 
   alias Bookclub.Content.Genre
@@ -256,4 +317,428 @@ defmodule Bookclub.Content do
     Genre.changeset(genre, %{})
   end
 
+  alias Bookclub.Content.Reader
+
+  @doc """
+  Returns the list of readers.
+
+  ## Examples
+
+      iex> list_readers()
+      [%Reader{}, ...]
+
+  """
+  def list_readers do
+    Repo.all(Reader)
+  end
+
+  @doc """
+  Gets a single reader.
+
+  Raises `Ecto.NoResultsError` if the Reader does not exist.
+
+  ## Examples
+
+      iex> get_reader!(123)
+      %Reader{}
+
+      iex> get_reader!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_reader!(id), do: Repo.get!(Reader, id)
+
+  def get_reader_with_book!(id), do: Repo.get!(Reader, id) |> Repo.preload(:book)
+
+  def check_if_reader_exist(user_id, book_id) do
+    query =
+      from r in Reader,
+        where: r.user_id == ^user_id,
+        where: r.book_id == ^book_id
+
+    Repo.exists?(query)
+
+  end
+
+  def check_reader_status(user_id, book_id) do
+    query =
+      from r in Reader,
+        where: r.user_id == ^user_id,
+        where: r.book_id == ^book_id,
+        where: r.status == true
+
+    Repo.exists?(query)
+
+  end
+
+  def get_readers_by_book(book_id) do
+    query =
+      from r in Reader,
+        where: r.book_id == ^book_id,
+        order_by: [desc: r.id],
+        preload: [:user]
+
+    query
+  end
+
+  def get_reader_joined_list(user_id) do
+    query =
+      from r in Reader,
+        where: r.user_id == ^user_id,
+        order_by: [desc: r.id],
+        preload: [book: :user]
+
+    query
+  end
+
+  def get_reader_by_book_user(userid, bookid) do
+    query =
+      from r in Reader,
+        where: r.user_id == ^userid,
+        where: r.book_id == ^bookid
+
+    Repo.one(query)
+
+  end
+
+
+  @doc """
+  Creates a reader.
+
+  ## Examples
+
+      iex> create_reader(%{field: value})
+      {:ok, %Reader{}}
+
+      iex> create_reader(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  # def create_reader(attrs \\ %{}) do
+  #   %Reader{}
+  #   |> Reader.changeset(attrs)
+  #   |> Repo.insert()
+  # end
+
+  def create_reader(user, %{id: bookid}, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:readers, book_id: bookid)
+    |> Reader.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_readerp(user, %{id: bookid}, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:readers, book_id: bookid)
+    |> Reader.changesetp(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a reader.
+
+  ## Examples
+
+      iex> update_reader(reader, %{field: new_value})
+      {:ok, %Reader{}}
+
+      iex> update_reader(reader, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_reader(%Reader{} = reader, attrs) do
+    reader
+    |> Reader.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def update_reader_status(%Reader{} = reader, attrs) do
+    reader
+    |> Reader.set_status(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Reader.
+
+  ## Examples
+
+      iex> delete_reader(reader)
+      {:ok, %Reader{}}
+
+      iex> delete_reader(reader)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_reader(%Reader{} = reader) do
+    Repo.delete(reader)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking reader changes.
+
+  ## Examples
+
+      iex> change_reader(reader)
+      %Ecto.Changeset{source: %Reader{}}
+
+  """
+  def change_reader(%Reader{} = reader) do
+    Reader.changeset(reader, %{})
+  end
+
+  alias Bookclub.Content.Rating
+
+  @doc """
+  Returns the list of ratings.
+
+  ## Examples
+
+      iex> list_ratings()
+      [%Rating{}, ...]
+
+  """
+  def list_ratings do
+    Repo.all(Rating)
+  end
+
+  @doc """
+  Gets a single rating.
+
+  Raises `Ecto.NoResultsError` if the Rating does not exist.
+
+  ## Examples
+
+      iex> get_rating!(123)
+      %Rating{}
+
+      iex> get_rating!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_rating!(id), do: Repo.get!(Rating, id)
+
+  def check_if_user_rated(user_id, book_id) do
+    query =
+      from r in Rating,
+        where: r.user_id == ^user_id,
+        where: r.book_id == ^book_id
+
+    Repo.exists?(query)
+
+  end
+
+  def get_rating_by_book_user(userid, bookid) do
+    query =
+      from r in Rating,
+        where: r.user_id == ^userid,
+        where: r.book_id == ^bookid
+
+    Repo.one(query)
+
+  end
+
+  @doc """
+  Creates a rating.
+
+  ## Examples
+
+      iex> create_rating(%{field: value})
+      {:ok, %Rating{}}
+
+      iex> create_rating(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+
+
+  def create_rating(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:ratings)
+    |> Rating.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a rating.
+
+  ## Examples
+
+      iex> update_rating(rating, %{field: new_value})
+      {:ok, %Rating{}}
+
+      iex> update_rating(rating, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_rating(%Rating{} = rating, attrs) do
+    rating
+    |> Rating.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Rating.
+
+  ## Examples
+
+      iex> delete_rating(rating)
+      {:ok, %Rating{}}
+
+      iex> delete_rating(rating)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_rating(%Rating{} = rating) do
+    Repo.delete(rating)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking rating changes.
+
+  ## Examples
+
+      iex> change_rating(rating)
+      %Ecto.Changeset{source: %Rating{}}
+
+  """
+  def change_rating(%Rating{} = rating) do
+    Rating.changeset(rating, %{})
+  end
+
+  def get_ratings_by_book(book_id) do
+    query =
+      from r in Rating,
+        where: r.book_id == ^book_id,
+        order_by: [desc: r.id]
+
+    query
+  end
+
+  def get_ratings_by_book_user(book_id) do
+    query =
+      from r in Rating,
+        where: r.book_id == ^book_id,
+        order_by: [desc: r.id],
+        preload: [:user]
+
+    query
+  end
+
+  def get_rating_by_book_num(bookid, num) do
+    query =
+      from r in Rating,
+        where: r.book_id == ^bookid,
+        where: r.rating == ^num
+
+    query
+
+  end
+
+
+  @doc """
+  Returns the list of topics.
+
+  ## Examples
+
+      iex> list_topics()
+      [%Topic{}, ...]
+
+  """
+  def list_topics do
+    Repo.all(Topic)
+  end
+
+  @doc """
+  Gets a single topic.
+
+  Raises `Ecto.NoResultsError` if the Topic does not exist.
+
+  ## Examples
+
+      iex> get_topic!(123)
+      %Topic{}
+
+      iex> get_topic!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_topic!(id), do: Repo.get!(Topic, id)
+
+  def get_topic_with_book!(id), do: Repo.get!(Topic, id) |> Repo.preload(:book)
+
+  def get_topics_by_book(book_id) do
+    query =
+      from t in Topic,
+        where: t.book_id == ^book_id,
+        order_by: [desc: t.id]
+
+    query
+  end
+
+  @doc """
+  Creates a topic.
+
+  ## Examples
+
+      iex> create_topic(%{field: value})
+      {:ok, %Topic{}}
+
+      iex> create_topic(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_topic(book, attrs \\ %{}) do
+    book
+    |> Ecto.build_assoc(:topics)
+    |> Topic.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a topic.
+
+  ## Examples
+
+      iex> update_topic(topic, %{field: new_value})
+      {:ok, %Topic{}}
+
+      iex> update_topic(topic, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_topic(%Topic{} = topic, attrs) do
+    topic
+    |> Topic.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Topic.
+
+  ## Examples
+
+      iex> delete_topic(topic)
+      {:ok, %Topic{}}
+
+      iex> delete_topic(topic)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_topic(%Topic{} = topic) do
+    Repo.delete(topic)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking topic changes.
+
+  ## Examples
+
+      iex> change_topic(topic)
+      %Ecto.Changeset{source: %Topic{}}
+
+  """
+  def change_topic(%Topic{} = topic) do
+    Topic.changeset(topic, %{})
+  end
 end

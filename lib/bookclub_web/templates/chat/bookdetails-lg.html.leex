@@ -1,0 +1,33 @@
+<div class="chat-container-bookdetails">
+  <div class="chat-head-section">
+    <h2>Details</h2>
+    <div id="detail-close-btn" class="details-close-btn">
+      <i class="fa fa-close"></i>
+    </div>
+  </div>
+  <div class="book-chat-anchor">
+    <div class="book-chat-anchor-img">
+      <img src="<%= Routes.static_path(@socket,"/images/profiles/" <> @book.user.propix) %>" alt="" />
+    </div>
+    <div class="book-chat-anchor-det">
+      <span class="text-primary">Anchor:</span>
+      <%= @book.user.username |> String.capitalize() %>
+    </div>
+  </div>
+  <div class="book-chat-topics">
+    <div class="book-chat-topics-head">
+      Topics
+    </div>
+    <%= if @book.topics != [] do %>
+      <ul class="book-chat-topics-list">
+        <%= for topic <- @book.topics do %>
+          <li class="list-<%= topic.topic_status %>">
+            <%= topic.topic_text %>
+          </li>
+        <% end %>
+      </ul>
+      <% else %>
+      <div class="center-div">No topic yet</div>
+    <% end %>
+  </div>
+</div>

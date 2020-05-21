@@ -22,21 +22,21 @@
       position: relative;
       cursor: pointer;
       //margin-bottom: 0.5rem;
-      ul {
-        display: none;
-      }
-      &:hover ul {
-        display: block;
-        position: absolute;
-        left: 3rem;
-        margin-top: 1rem;
+      // ul {
+      //   display: none;
+      // }
+      // &:hover ul {
+      //   display: block;
+      //   position: absolute;
+      //   left: 3rem;
+      //   margin-top: 1rem;
 
-        li:hover {
-          a {
-            color: $main-color;
-          }
-        }
-      }
+      //   li:hover {
+      //     a {
+      //       color: $main-color;
+      //     }
+      //   }
+      // }
       a {
         color: set-text-color($sec-fade-color);
       }
@@ -46,10 +46,13 @@
         color: #f53ba3;
       }
     }
+    .top_right-menu-icon {
+      display: none;
+    }
   }
   &-section {
     flex: 5;
-    margin-left: 200px;
+    margin-left: 180px;
     // head nav
     #dashboard-main-nav {
       .header_top {
@@ -85,16 +88,107 @@
       }
     }
 
+    //Dashboard home
+    .dashboard-home {
+      &-welcome {
+        margin-bottom: 2rem;
+      }
+
+      &-search {
+        form {
+          .form-group {
+            display: flex;
+            justify-content: center;
+            width: 50%;
+            margin: auto;
+            input {
+              //width: 100%;
+              flex: 3;
+              border: none;
+              outline: none;
+              box-shadow: none;
+              //display: inline-block;
+            }
+            button {
+              height: 50px;
+              width: 50px;
+              padding: 0.6rem;
+              display: inline-block;
+              border: none;
+              outline: none;
+              text-align: center;
+              background-color: #ffffff !important;
+              i {
+                color: $secondary-color;
+              }
+            }
+          }
+        }
+      }
+      &-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        align-content: space-between;
+        margin-top: 3rem;
+        &-stats {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-gap: 1.5rem;
+          justify-content: center;
+          align-content: center;
+          margin-right: 3rem;
+        }
+        &-tips {
+          height: 100px;
+          width: 300px;
+          background: #ffffff;
+        }
+      }
+    }
+
     //Manage Books
     .dash-book-list {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       grid-gap: 1rem;
       &-single {
-        border-radius: 5px;
-        background: #ffffff;
+        //border-radius: 5px;
+        padding-bottom: 1rem;
+        //background: #ffffff;
+        //background: #cdcdcd;
+        .dash-book-img {
+          height: 10rem;
+          margin-bottom: 1rem;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
         .dash-books-text {
-          padding: 1rem;
+          text-align: center;
+          padding: 0 0.6rem;
+          .booktext {
+            &-title {
+              text-transform: capitalize;
+              font-size: 1rem;
+              font-weight: 700;
+            }
+            &-author {
+              text-transform: capitalize;
+              font-size: 0.9rem;
+              color: #444444;
+            }
+            &-user {
+              a {
+                text-transform: capitalize;
+                font-size: 0.9rem;
+                color: #7a7a7a;
+              }
+            }
+          }
+
           .users-and-rating {
             .users {
               color: $sec-fade-color;
@@ -103,6 +197,7 @@
             }
           }
           .dash-link-btn {
+            margin-top: 1rem;
             .fa {
               margin-right: 1rem;
               border: 2px $main-color solid;
@@ -123,8 +218,134 @@
       }
     }
 
+    //Book Readers
+    .dash-reader-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 2rem;
+      &-single {
+        padding: 1rem;
+        background: #e6e6e6;
+
+        .dash-reader-img {
+          height: 5rem;
+          width: 5rem;
+          margin: 0 auto;
+          margin-bottom: 1rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+          }
+        }
+        .dash-reader-text {
+          text-align: left;
+          padding: 0;
+          //background: #ffffff;
+          .reader {
+            &-name {
+              text-transform: capitalize;
+              font-size: 0.9rem;
+              font-weight: 500;
+              padding-left: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+
     //Add book
     .dashboard-addbook {
+      .field {
+        &-form {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 2rem;
+          //background: $main-color;
+          .form-group {
+            margin-bottom: 10px;
+            display: inline-block;
+            input,
+            textarea,
+            select {
+              width: 100%;
+            }
+
+            input[type="radio"] {
+              padding: 1rem;
+              width: 20px;
+              border: 1px $light-color solid;
+              font-size: 0.5rem;
+              height: 20px;
+              margin: 0.6rem;
+            }
+          }
+        }
+      }
+      .btn {
+        width: 25%;
+        text-align: center;
+      }
+    }
+
+    //User Profile
+    .dash-user-profile {
+      display: block;
+      margin: 2rem auto;
+      background: #fff;
+      width: 70%;
+      padding: 1.5rem;
+      border-radius: 25px;
+      position: relative;
+
+      &-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 60%;
+        //background: chartreuse;
+        margin-bottom: 2rem;
+        &-name {
+          .full-name {
+            font-size: 1.5rem;
+            display: block;
+          }
+          .user-name {
+            font-size: 1rem;
+            display: block;
+          }
+        }
+      }
+
+      &-pic {
+        position: absolute;
+        top: -3rem;
+        right: 3rem;
+        height: 180px;
+        width: 180px;
+        img {
+          border: 12px solid #fff;
+          border-radius: 50%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &-about {
+        .profile-about-head {
+          color: $main-color;
+          letter-spacing: 0.2rem;
+          font-weight: 600;
+          margin-bottom: 1.2rem;
+        }
+      }
+    }
+
+    //edit profile
+    .dashboard-editprofile {
       .field {
         &-form {
           display: grid;

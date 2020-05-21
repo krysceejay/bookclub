@@ -1,0 +1,27 @@
+<%= if @changeset.action do %>
+  
+    <!-- <p>Oops, something went wrong! Please check the errors below.</p> -->
+    <div class="pop pop-error">Oops, something went wrong! Please check the errors below.</div>
+
+<% end %>
+              <%= form_for @changeset, @action, fn f -> %>
+                <div class="field-form">
+                  <div class="form-group">
+                    <%= label f, :topic_text %>
+                    <%= textarea f, :topic_text, placeholder: "Enter topic" %>
+                    <%= error_tag f, :topic_text %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= label f, :topic_status %>
+                    <%= radio_button f, :topic_status, "0", checked: @topic.topic_status == 0 %> Not Active
+                    <%= radio_button f, :topic_status, "1", checked: @topic.topic_status == 1 %> Active
+                    <%= radio_button f, :topic_status, "2", checked: @topic.topic_status == 2 %> Done
+                    <%= error_tag f, :topic_status %>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <%= submit "Submit", class: "btn btn-dark" %>
+                </div>
+            <% end %>

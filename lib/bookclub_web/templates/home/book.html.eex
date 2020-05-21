@@ -2,12 +2,13 @@
         <div class="container">
                 <ul class="below-nav-list">
                         <li><%= link "Home", to: Routes.home_path(@conn, :index) %> /</li>
-                        <li><%= link "Books", to: Routes.home_path(@conn, :books) %> /</li>
+                        <li><%= link "Shelf", to: Routes.home_path(@conn, :books) %> /</li>
                         <li class="last-breadcrumb"><a href="#"><%= @book.title |> String.downcase() |> String.replace(" ", "-") %></a></li>
                     </ul>
         </div>
 
     </section>
+    <%= render BookclubWeb.MsgView, "msg.html", conn: @conn %>
 
     <!-- Section A: Book Details -->
     <section id="bdetails-a" class="py-4">
@@ -16,37 +17,79 @@
           <div class="bdetails-main">
             <div class="bdetails-main-top">
               <div class="bdetails-img">
+
+                <%= if @conn.assigns[:user] do %>
+                  <%= if @book.user.email == @conn.assigns[:user].email do %>
+                    <%= link to: Routes.user_path(@conn, :editbook, @book), onclick: "return confirm('Are you sure you want to edit this book club?');" do %>
+                    <span class="bdetails-img-icon"
+                      ><i class="fa fa-pencil" aria-hidden="true"></i>
+                      Edit</span>
+                    <% end %>
+                  <% end %>
+                <% end %>
+
                 <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> @book.bookcover) %>" alt="" />
+
               </div>
               <div class="bdetails-beside-img">
                 <h2>
-                  <span><%= @book.title %></span>
+                  <%= @book.title %>
                 </h2>
+
                 <p class="author text-trans-cap">
                   <%= @book.author %>
                 </p>
                 <div class="details-cat-div">
-                  <span class="details-cat">Fiction </span>
+                  <span class="details-cat"><%= Enum.join(@book.genre, ", ") %> </span>
+                  <div>
+                    <!-- <span class="fill"
+                      ><i class="fa fa-star" aria-hidden="true"></i
+                    ></span>
+                    <span class="fill"
+                      ><i class="fa fa-star" aria-hidden="true"></i
+                    ></span>
+                    <span class="fill"
+                      ><i class="fa fa-star" aria-hidden="true"></i
+                    ></span>
+                    <span class="fill"
+                      ><i class="fa fa-star" aria-hidden="true"></i
+                    ></span>
+                    <span class="fill">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                        &#x2605;
+                    </span> -->
+                    <!-- <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-full">&#x2605;</span>
+                    </span>
+                    <span class="star-container">
+                        <span class="star-half">&#x2605;</span>
+                    </span> -->
 
-                  <span class="fill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
-                  <span class="fill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
-                  <span class="fill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
-                  <span class="fill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
-                  <span class="nofill"
-                    ><i class="fa fa-star" aria-hidden="true"></i
-                  ></span>
+                    <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: @book.id %>
+                  </div>
+
+
+
                 </div>
                 <div class="details-meetings">
                   <p class="details-meetings-head">
                     Meeting Details
+                    <%= if @book.public == true do %>
+                      <span class="badge badge-public">public</span>
+                    <% else %>
+                      <span class="badge badge-private">private</span>
+                    <% end %>
+
+
                   </p>
                   <p>
                     <span class="meet-icon"
@@ -61,112 +104,88 @@
                 <div class="join-chat">
                   <p class="join-chat-head">Join The Discussion</p>
 
-                  <%= link to: Routes.chat_path(@conn, :index, @book) do %>
-                  <span class="join-chat-icon"
-                    ><i class="fa fa-comment-o" aria-hidden="true"></i>
-                    Chat</span
-                  >
+                  <%= cond do %>
+                    <% @status -> %>
+                      <%= link to: Routes.chat_path(@conn, :index, @book) do %>
+                      <span class="join-chat-icon"
+                        ><i class="fa fa-comment-o" aria-hidden="true"></i>
+                        Chat</span>
+                      <% end %>
+                    <% @reader -> %>
+                      <span class="waiting-list">Waiting for approval...</span>
+                    <% true -> %>
+                      <%= link to: Routes.user_path(@conn, :joinreaders, @book), onclick: "return confirm('Are you sure you want to join this book club?');" do %>
+                      <span class="join-chat-icon"
+                        ><i class="fa fa-handshake-o" aria-hidden="true"></i>
+                        Join</span>
+                      <% end %>
                   <% end %>
 
-                  <span class="join-chat-icon"
+                    <!-- <%= if @status do %>
+
+                      <%= link to: Routes.chat_path(@conn, :index, @book) do %>
+                      <span class="join-chat-icon"
+                        ><i class="fa fa-comment-o" aria-hidden="true"></i>
+                        Chat</span>
+                      <% end %>
+
+
+                    <% else %>
+
+                    <%= link to: Routes.user_path(@conn, :joinreaders, @book), onclick: "return confirm('Are you sure you want to join this book club?');" do %>
+                    <span class="join-chat-icon"
+                      ><i class="fa fa-handshake-o" aria-hidden="true"></i>
+                      Join</span>
+                    <% end %>
+
+                  <% end %> -->
+
+
+
+                  <!-- <span class="join-chat-icon"
                     ><i class="fa fa-video-camera" aria-hidden="true"></i>
                     Video</span
                   >
                   <span class="join-chat-icon"
                     ><i class="fa fa-phone" aria-hidden="true"></i>Audio</span
-                  >
+                  > -->
                 </div>
               </div>
             </div>
-            <div class="book-vendor">
+            <!-- <div class="book-vendor">
               <i class="fa fa-comment-o" aria-hidden="true"></i> Roven Bird
-            </div>
+            </div> -->
 
             <div class="bdetails-rest py-3">
-              <h3>Book Details</h3>
+              <h3>Description</h3>
 
               <p>
                 <%= @book.description %>
               </p>
             </div>
-          </div>
+            <div class="bdetails-rate py-3">
+              <h3>Rate This Piece
+                <%= if !@conn.assigns[:user] do %>
+                  <span class="waiting-list">(login required)</span>
+                <% end %>
 
-          <div class="bdetails-popular">
-            <div class="book-sidebar-content toprated-sidebar">
-              <div class="book-sidebar-heading py-1"><h3>Recommended Books</h3></div>
-              <div class="toprated-sidebar-single">
-                <div class="pop-img">
-                  <img src="<%= Routes.static_path(@conn, "/home/img/letters-to-husband.jpg") %>" alt="" />
-                </div>
-                <div class="pop-content">
-                  <p>
-                    Lorem ipsum dolor, sit amet
-                  </p>
-                  <p>
-                    By Emma Watson
-                  </p>
-                  <p>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="nofill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                  </p>
-                </div>
-              </div>
-              <div class="toprated-sidebar-single">
-                <div class="pop-img">
-                  <img src="<%= Routes.static_path(@conn, "/home/img/tessoftheroad.jpeg") %>" alt="" />
-                </div>
-                <div class="pop-content">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  </p>
-
-                  <p>
-                    By Emma Watson
-                  </p>
-                  <p>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="fill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                    <span class="nofill"
-                      ><i class="fa fa-star" aria-hidden="true"></i
-                    ></span>
-                  </p>
-                </div>
-              </div>
+              </h3>
+              <%= render "rating_form.html", Map.put(assigns, :action, Routes.home_path(@conn, :createrating)) %>
             </div>
           </div>
 
+          <%= render BookclubWeb.HomeView, "recommended.html", conn: @conn, recommended_books: @recommended_books %>
+
           <div class="top-cat">
                 <div class="book-sidebar-content toprated-sidebar">
-                        <div class="book-sidebar-heading py-1"><h3>Top Categories</h3></div>
+                        <div class="book-sidebar-heading py-1"><h3>Top Genres</h3></div>
 
             <ul class="top-cat-list">
-              <li>Fantasy</li>
-              <li>Fantasy</li>
-              <li>Fantasy</li>
-              <li>Fantasy</li>
+              <%= for gen <- @genre_sort do %>
+                <%= link to: Routes.home_path(@conn, :genre, elem(gen, 0)) do %>
+                  <li class="text-trans-cap"><%= elem(gen, 0) %> (<%= elem(gen, 1) %> books)</li>
+                <% end %>
+              <% end %>
 
             </ul>
 

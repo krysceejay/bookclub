@@ -3,5 +3,4 @@ defmodule Bookclub.Repo do
     otp_app: :bookclub,
     adapter: Ecto.Adapters.Postgres
 
-    use Kerosene, per_page: 2
 end

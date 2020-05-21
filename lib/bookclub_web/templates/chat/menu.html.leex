@@ -1,0 +1,15 @@
+<div class="chat-container-menu-ellipsis <%= if @show_othermenu == 1, do: "display-element", else: '' %>">
+  <div class="chat-head-section">
+    <div class="details-close-btn" phx-click="hide-othermenu">
+      <i class="fa fa-close"></i>
+    </div>
+  </div>
+
+  <ul>
+    <li>
+      <%= link to: Routes.auth_path(@socket, :delete), method: :delete do %>
+      <i class="fa fa-power-off"></i>
+      <% end %>
+    </li>
+  </ul>
+</div>

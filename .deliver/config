@@ -1,50 +1,19 @@
 APP="bookclub"
 
-BUILD_HOST="107.173.190.199"
-BUILD_USER="root"
-BUILD_AT="/tmp/edeliver/bookclub/builds"
+BUILD_HOST="shelfvibe.com"
+BUILD_USER="chrisusr"
+BUILD_AT="/home/chrisusr/app_build"
 
-PRODUCTION_HOSTS="107.173.190.199"
-PRODUCTION_USER="root"
-DELIVER_TO="/var/www/html/bookclub"
+PRODUCTION_HOSTS="shelfvibe.com"
+PRODUCTION_USER="chrisusr"
+DELIVER_TO="/home/chrisusr/app_release"
 
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
-  local _prod_secret_path="/var/www/html/bk_config/prod.secret.exs"
+  local _prod_secret_path="/home/chrisusr/app_config/prod.secret.exs"
   if [ "$TARGET_MIX_ENV" = "prod" ]; then
     __sync_remote "
       ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
     "
   fi
-}
-
-pre_erlang_clean_compile() {
-  status "Installing NPM dependencies"
-  __sync_remote "
-    [ -f ~/.profile ] && source ~/.profile
-    set -e
-
-    cd '$BUILD_AT/assets'
-    npm install $SILENCE
-  "
-
-  status "Building static files"
-    __sync_remote "
-      [ -f ~/.profile ] && source ~/.profile
-      set -e
-
-      cd '$BUILD_AT'
-      mkdir -p priv/static
-      cd '$BUILD_AT/assets'
-      npm run deploy $SILENCE
-   "
-
-   status "Running phx.digest"
-   __sync_remote "
-     [ -f ~/.profile ] && source ~/.profile
-     set -e
-
-     cd '$BUILD_AT'
-     APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
-   "
 }

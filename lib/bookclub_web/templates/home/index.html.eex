@@ -1,10 +1,10 @@
 <header id="header-home">
   <div class="container">
     <div class="header-content">
-      <h1>Bootstrap starter template</h1>
+      <h2>Welcome To </h2><br><h1>Shelfvibe</h1>
       <p class="lead">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,
-        fugiat!
+        Talk about it if it's so interesting!!
+        <!-- Let's build a community of people that love to read!! -->
       </p>
       <%= link "Get Started", to: Routes.home_path(@conn, :books), class: "btn btn-main" %>
     </div>
@@ -18,62 +18,82 @@
     <h2 class="section-title">
       <span class="text-primary">What</span> We Do
     </h2>
-    <p class="lead">
+    <!-- <p class="lead">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
       ducimus sapiente reiciendis
-    </p>
+    </p> -->
     <div class="what">
       <div class="what-content">
-        <img src="<%= Routes.static_path(@conn, "/home/img/love.svg") %>" alt="" />
+        <div class="what-content-img">
+          <img src="<%= Routes.static_path(@conn, "/home/img/connected.svg") %>" alt="" />
+        </div>
+
         <div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-            rerum totam temporibus culpa nesciunt maiores.
+            <div class="what-content-head">Meet people of like interest</div>
+            Seize the opportunity to connect with people that share your reading vibe and enthusiasm.
           </p>
         </div>
       </div>
       <div class="what-content">
-        <img src="<%= Routes.static_path(@conn, "/home/img/mobile_life.svg") %>" alt="" />
+        <div class="what-content-img">
+          <img src="<%= Routes.static_path(@conn, "/home/img/manageshelf.svg") %>" alt="" />
+        </div>
+
         <div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-            rerum totam temporibus culpa nesciunt maiores.
+            <div class="what-content-head">Manage your shelf</div>
+            <!-- Add a book, See who joined to read with you,  -->
+            Grant access to the discussion page for private club schedule meeting time and day.
           </p>
         </div>
       </div>
       <div class="what-content">
-        <img src="<%= Routes.static_path(@conn, "/home/img/reading.svg") %>" alt="" />
+        <div class="what-content-img">
+          <img src="<%= Routes.static_path(@conn, "/home/img/discussion.svg") %>" alt="" />
+        </div>
+
         <div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-            rerum totam temporibus culpa nesciunt maiores.
+            <div class="what-content-head">Discussion</div>
+            Discuss, dissect, agree and disagree over every little detail of a book.
           </p>
         </div>
       </div>
       <div class="what-content">
-        <img src="<%= Routes.static_path(@conn, "/home/img/reading_book.svg") %>" alt="" />
+        <div class="what-content-img">
+          <img src="<%= Routes.static_path(@conn, "/home/img/list.svg") %>" alt="" />
+        </div>
+
         <div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-            rerum totam temporibus culpa nesciunt maiores.
+            <div class="what-content-head">See recommendations for your next read.</div>
+            Choose from a list of interesting books for your next read. You can choose from your preferred genre.
           </p>
         </div>
       </div>
       <div class="what-content">
-        <img src="<%= Routes.static_path(@conn, "/home/img/reading_list.svg") %>" alt="" />
+        <div class="what-content-img">
+          <img src="<%= Routes.static_path(@conn, "/home/img/feedback.svg") %>" alt="" />
+        </div>
+
         <div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-            rerum totam temporibus culpa nesciunt maiores.
+            <div class="what-content-head">Rate and Review</div>
+            Rate a book and help fellow book enthusiast decide on what to read.
           </p>
         </div>
       </div>
       <div class="what-content">
-        <img src="<%= Routes.static_path(@conn, "/home/img/taking_notes.svg") %>" alt="" />
+        <div class="what-content-img">
+          <img src="<%= Routes.static_path(@conn, "/home/img/goal.svg") %>" alt="" />
+        </div>
+
         <div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-            rerum totam temporibus culpa nesciunt maiores.
+            <div class="what-content-head">Smash your reading goals</div>
+            <!-- Engage in learning and self improvement. -->
+            Meet up with the number of books you planned to read weekly, monthly as the case may be.
           </p>
         </div>
       </div>
@@ -84,52 +104,53 @@
 
 <!-- Section B: How -->
 <section id="home-b" class="text-center py-4">
+  <div id="home-b-view">
   <div class="container">
     <h2 class="section-title">
       <span class="text-primary">How</span> To Start
     </h2>
     <p class="lead">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-      ducimus sapiente reiciendis
+      Start shelfvibing in three easy steps.
     </p>
     <div class="how">
       <div class="how-content">
-        <div>
+        <div class="how-content-top">
           <i class="fa fa-file fa-2x how-icon my-2">
             <div class="how-step">1</div>
           </i>
+          <h3>Create an account</h3>
         </div>
-        <h3>Discuss The Project</h3>
+
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Necessitatibus dolorum temporibus at, sapiente error tempore!
+          Sign-up with your email to create an account.
         </p>
       </div>
       <div class="how-content">
-        <div>
+        <div class="how-content-top">
           <i class="fa fa-desktop fa-2x how-icon my-2">
             <div class="how-step">2</div>
           </i>
+          <h3>Start or Join a book club</h3>
         </div>
-        <h3>Brainstorming</h3>
+
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Necessitatibus dolorum temporibus at, sapiente error tempore!
+          Select a book from the shelf to start discussions or add to your virtual shelf from your dashboard.
         </p>
       </div>
       <div class="how-content">
-        <div>
+        <div class="how-content-top">
           <i class="fa fa-users fa-2x how-icon my-2">
             <div class="how-step">3</div>
           </i>
+          <h3>Share With Your Friends</h3>
         </div>
-        <h3>UI/UX Planning</h3>
+
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Necessitatibus dolorum temporibus at, sapiente error tempore!
+          Share the book link with friends that might be interested to read and discuss with you.
         </p>
       </div>
     </div>
+  </div>
   </div>
 </section>
 <!-- / End Section B -->
@@ -138,12 +159,9 @@
 <section id="home-c" class="text-center py-4">
   <div class="container">
     <h2 class="section-title">
-      <span class="text-primary">Top</span> Rated
+      <span class="text-primary">Latest</span>
     </h2>
-    <p class="lead">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-      ducimus sapiente reiciendis. Nisi nulla sint ut perferendis.
-    </p>
+    <p class="lead"></p>
     <div class="top-rated">
       <%= for book <- @top_rated do %>
       <div class="top-rated-content">
@@ -153,26 +171,20 @@
         </div>
         <% end %>
         <div class="top-rated-text">
-          <div class="toprated-title"><%= book.title %></div>
+          <div class="toprated-title">
+            <%= if String.length(book.title) <= 12, do: book.title, else: String.slice(book.title, 0..11)<>"..." %>
+          </div>
           <div class="toprated-author"><%= book.author %></div>
-          <div>Added By <span class="toprated-user"> <%= book.user.first_name %></span></div>
-          <p>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="fill"
-              ><i class="fa fa-star" aria-hidden="true"></i
-            ></span>
-            <span class="nofill"
-              ><i class="fa fa-star-o" aria-hidden="true"></i
-            ></span>
-            <span class="nofill"
-              ><i class="fa fa-star-o" aria-hidden="true"></i
-            ></span>
-          </p>
+          <div class="added_by">Added By
+            <span class="toprated-user">
+              <%= link to: Routes.user_path(@conn, :profile, book.user.email |> Base.encode64()) do %>
+                <%= book.user.first_name %>
+              <% end %>
+
+            </span>
+          </div>
+
+
           <!-- <p class="top-rated-desc">
             <%= book.description |> String.slice(0..60) %>...
           </p>
@@ -198,11 +210,12 @@
         Start A Book Club
       </h2>
       <p>
-        Join thousand of anchors and earn money hassle free!
+        <!-- Join thousands of anchors and earn money hassle free! -->
+        Build your reading habit with like minds and interests!
       </p>
     </div>
     <div>
-      <%= link "Add A Book Now", to: Routes.user_path(@conn, :addbook), class: "btn btn-lighten" %>
+      <%= link "Add To Shelf", to: Routes.user_path(@conn, :addbook), class: "btn btn-lighten" %>
     </div>
   </div>
 </section>

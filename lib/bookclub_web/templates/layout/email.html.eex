@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shelfvibe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+</head>
+
+<body style = "width: 100% !important; -webkit-text-size-adjust: 100%; overflow-wrap:break-word; word-wrap:break-word;hyphens:auto; background: #efefef !important; -ms-text-size-adjust: 100%; margin: 0;
+padding: 0; font-family: 'Poppins',sans-serif; line-height: 160%; font-size: .9em;color: #222;}">
+
+    <table align="center" width="500px !important" cellspacing="0" cellpadding="0" style="">
+        <tbody>
+
+            <tr>
+                <td style="height: 60px; ">
+                    <div></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:#3a4155;">
+                    <div style="display: block;	text-align:left; margin: 0px;  padding:30px 40px; color: #ffffff;">
+
+                          <h1 style="font-size: 30px;">
+                            <span style="color: #f53ba3;">Shelf</span>vibe
+                          </h1>
+
+
+                    </div>
+
+                </td>
+            </tr>
+    <%= render @view_module, @view_template, assigns %>
+    <tr>
+        <td style="padding:40px; text-align:left; background-color:#fff7fb; color:#222; font-family: 'Poppins', sans-serif; ">
+
+            <div >
+              <h1 style="font-size: 30px;">
+                <span style="color: #f53ba3;">Shelf</span>vibe
+              </h1>
+            </div>
+            <div>
+                <p style="font-size:0.7em;line-height:140%; margin-bottom:20px;">Talk about it if it's so interesting.</p>
+                <p style="font-size:0.8em;line-height:140%;"><strong>Contact: </strong><br> info@shelfvibe.com </p>
+            </div>
+            <div style="display:block; margin-bottom:20px;">
+                <a href="https://www.facebook.com/shelfvibe/"><img src="http://shelfvibe.com/home/img/fbook.png" style="width:30px; height:30px;" alt="Facebook"></a>
+                <a href="https://www.twitter.com/shelfvibe/"><img src="http://shelfvibe.com/home/img/twttr.png" style="width:30px; height:30px;" alt="Twitter"></a>
+                <a href="https://www.instagram.com/shelfvibe/"><img src="http://shelfvibe.com/home/img/insta.png" style="width:30px; height:30px;" alt="Instagram"></a>
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 60px; ">
+            <div></div>
+        </td>
+    </tr>
+  </tbody>
+  </table>
+
+
+  </body>
+
+  </html>
