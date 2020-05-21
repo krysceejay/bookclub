@@ -110,6 +110,9 @@ defmodule Bookclub.Content.Book do
       uploadFileName =
         Upload.create_upload_from_plug_upload(attrs["bookcover_field"], "bookcover", "noimage.jpg")
       put_change(changeset, :bookcover, uploadFileName)
+      # IO.puts "+++++++++++++++++"
+      # IO.inspect(attrs["bookcover_field"])
+      # IO.puts "+++++++++++++++++"
     else
       put_change(changeset, :bookcover, "noimage.jpg")
     end

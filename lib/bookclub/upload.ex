@@ -30,4 +30,9 @@ defmodule Bookclub.Upload do
 
   end
 
+  # def imgur do
+  #   base_url = "https://api.imgur.com/3/image/"
+  #   headers = 'Authorization: Client-ID 707b8c3154421ea'
+  # end
+
 end

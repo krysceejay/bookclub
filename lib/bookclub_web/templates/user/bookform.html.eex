@@ -21,7 +21,7 @@
 
                   <div class="form-group">
                     <%= label f, :bookcover_field, "Cover" %>
-                    <%= file_input f, :bookcover_field %>
+                    <%= file_input f, :bookcover_field, accept: "image/*" %>
                     <%= error_tag f, :bookcover_field %>
                     <%= if @book.bookcover != nil do %>
                       <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> @book.bookcover) %>" alt="" class="book_cover"/>
@@ -54,8 +54,15 @@
                     <%= textarea f, :description, placeholder: "Enter Description" %>
                     <%= error_tag f, :description %>
                   </div>
+                  <div class="form-group">
+                    <%= label f, :description %>
+                    <%= textarea f, :description, placeholder: "Enter meeting link" %>
+                    <%= error_tag f, :description %>
+                  </div>
                 </div>
                 <div class="form-group">
                   <%= submit "Submit", class: "btn btn-dark" %>
                 </div>
             <% end %>
+
+            <%= link "Upload", to: Routes.user_path(@conn, :upload) %>
