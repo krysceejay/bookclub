@@ -1,0 +1,226 @@
+//Dashboard
+#dashboard-main {
+  display: flex;
+  justify-content: flex-start;
+  &-aside {
+    flex: 1;
+    background: $sec-fade-color;
+    box-shadow: 2px 3px 5px 0.5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    //border: 1px $main-color solid;
+    padding: 1rem 0;
+    //width: 230px;
+    min-height: 100vh;
+    font-size: 1.1rem;
+    .main-aside-li {
+      //border-bottom: 1px $secondary-color dotted;
+      padding: 1rem 2rem;
+      color: set-text-color($sec-fade-color);
+      position: relative;
+      cursor: pointer;
+      //margin-bottom: 0.5rem;
+      ul {
+        display: none;
+      }
+      &:hover ul {
+        display: block;
+        position: absolute;
+        left: 3rem;
+        margin-top: 1rem;
+
+        li:hover {
+          a {
+            color: $main-color;
+          }
+        }
+      }
+      a {
+        color: set-text-color($sec-fade-color);
+      }
+
+      i {
+        margin-right: 1rem;
+        color: #f53ba3;
+      }
+    }
+    .top_right-menu-icon {
+      display: none;
+    }
+  }
+  &-section {
+    flex: 5;
+    margin-left: 180px;
+    // head nav
+    #dashboard-main-nav {
+      .header_top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: $light-color;
+        color: set-text-color($light-color);
+        padding: 0.7rem 3rem;
+        .top_right {
+          ul {
+            li {
+              display: inline-block;
+
+              a {
+                color: set-text-color($medium-color);
+              }
+            }
+          }
+        }
+        .top_left {
+          .nav-img {
+            height: 40px;
+            width: 40px;
+            img {
+              border-radius: 50%;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+
+    //Manage Books
+    .dash-book-list {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: 1rem;
+      &-single {
+        //border-radius: 5px;
+        padding-bottom: 1rem;
+        //background: #ffffff;
+        //background: #cdcdcd;
+        .dash-book-img {
+          height: 10rem;
+          margin-bottom: 1rem;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+        .dash-books-text {
+          text-align: center;
+          padding: 0 0.6rem;
+          .booktext {
+            &-title {
+              text-transform: capitalize;
+              font-size: 1rem;
+              font-weight: 700;
+            }
+            &-author {
+              text-transform: capitalize;
+              font-size: 0.9rem;
+              color: #444444;
+            }
+          }
+
+          .users-and-rating {
+            .users {
+              color: $sec-fade-color;
+              font-size: 1.3rem;
+              margin-right: 0.3rem;
+            }
+          }
+          .dash-link-btn {
+            .fa {
+              margin-right: 1rem;
+              border: 2px $main-color solid;
+              color: $sec-fade-color;
+              border-radius: 50%;
+              height: 40px;
+              width: 40px;
+              //line-height: 20px;
+              text-align: center;
+              padding: 0.5rem;
+              &:hover {
+                background: $main-light-color;
+                color: $light-color;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    //Book Readers
+    .dash-reader-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 2rem;
+      &-single {
+        padding: 1rem;
+        background: #e6e6e6;
+
+        .dash-reader-img {
+          height: 5rem;
+          width: 5rem;
+          margin: 0 auto;
+          margin-bottom: 1rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+          }
+        }
+        .dash-reader-text {
+          text-align: left;
+          padding: 0;
+          //background: #ffffff;
+          .reader {
+            &-name {
+              text-transform: capitalize;
+              font-size: 0.9rem;
+              font-weight: 500;
+              padding-left: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    //Add book
+    .dashboard-addbook {
+      .field {
+        &-form {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 2rem;
+          //background: $main-color;
+          .form-group {
+            margin-bottom: 10px;
+            display: inline-block;
+            input,
+            textarea,
+            select {
+              width: 100%;
+            }
+
+            input[type="radio"] {
+              padding: 1rem;
+              width: 20px;
+              border: 1px $light-color solid;
+              font-size: 0.5rem;
+              height: 20px;
+              margin: 0.6rem;
+            }
+          }
+        }
+      }
+      .btn {
+        width: 25%;
+        text-align: center;
+      }
+    }
+  }
+}

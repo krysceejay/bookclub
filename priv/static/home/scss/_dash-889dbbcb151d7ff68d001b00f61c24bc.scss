@@ -1,0 +1,67 @@
+//Dashboard
+#dashboard-main {
+  display: flex;
+  justify-content: flex-start;
+  &-aside {
+    flex: 1;
+    background: $sec-fade-color;
+
+    //border: 1px $main-color solid;
+    padding: 1rem 0;
+    //width: 230px;
+    min-height: 100vh;
+    font-size: 1.1rem;
+    li {
+      border-bottom: 1px $secondary-color dotted;
+      padding: 1rem 2rem;
+      color: set-text-color($sec-fade-color);
+      //margin-bottom: 0.5rem;
+      i {
+        margin-right: 1rem;
+      }
+    }
+  }
+  &-section {
+    flex: 5;
+
+    //Manage Books
+    .dashboard-managebook {
+      .manage-img-cover {
+        height: 60px;
+        width: 60px;
+        //background: $main-color;
+
+        &-img {
+          border-radius: 50%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    //Add book
+    .dashboard-addbook {
+      .field {
+        &-form {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 2rem;
+          .form-group {
+            margin-bottom: 10px;
+            display: block;
+            input,
+            textarea,
+            select {
+              width: 100%;
+            }
+          }
+        }
+      }
+      .btn {
+        width: 25%;
+        text-align: center;
+      }
+    }
+  }
+}

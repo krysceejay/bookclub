@@ -1,0 +1,35 @@
+//Variables
+$website-width: 1100px;
+$main-color: #f53ba3;
+$secondary-color: #242c42;
+$main-light-color: #eb3573;
+$sec-fade-color: #3a4155;
+$light-color: #f4f4f4;
+$medium-color: #ccc;
+$dark-color: #333;
+$overlay-color: rgba(0, 0, 0, 0.4);
+$bg-image: url("../img/beverage-books.jpg");
+$menu-speed: 0.75s;
+$text-color: #666666;
+$undernav-color: #fff7fb;
+$border-bottom: #e1e1e1;
+$star-background: #ddd;
+$star-color: #e2cf00;
+$star-size: 1rem;
+
+//Set Text Color
+@function set-text-color($color) {
+  @if (lightness($color) > 50) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
+@function set-btn-hover-color($color) {
+  @if ($color == $secondary-color) {
+    @return $main-color;
+  } @else {
+    @return $light-color;
+  }
+}
