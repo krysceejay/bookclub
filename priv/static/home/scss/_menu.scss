@@ -15,6 +15,7 @@
       // Toggler Animation
       & + .hamburger > div {
         transform: rotate(135deg);
+        background: #fff;
 
         // Turn lines into X;
         &::before,
@@ -61,7 +62,7 @@
       flex: none;
       width: 100%;
       height: 2px;
-      background: #fff;
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;

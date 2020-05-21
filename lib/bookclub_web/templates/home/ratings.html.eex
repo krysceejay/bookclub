@@ -1,0 +1,58 @@
+<section id="below-nav">
+        <div class="container">
+                <ul class="below-nav-list">
+                        <li><%= link "Home", to: Routes.home_path(@conn, :index) %> /</li>
+                        <li><%= link "Shelf", to: Routes.home_path(@conn, :books) %> /</li>
+                        <li class="last-breadcrumb"><a href="#"><%= @book.title |> String.downcase() |> String.replace(" ", "-") %></a></li>
+                    </ul>
+        </div>
+
+    </section>
+
+    <!-- Section A: Rating Details -->
+    <section id="bratings-a" class="py-4">
+      <div class="container">
+        <div class="bratings-content">
+          <div class="bratings-main">
+            <div class="bratings-main-stats">
+                <%= render BookclubWeb.StarView, "star.html", conn: @conn, book_id: @book.id %>
+
+            </div>
+            <div class="bratings-main-reviews">
+              <div class="bratings-main-reviews-head">REVIEWS</div>
+              <%= if @bk_ratings != [] do %>
+                <%= for rating <- @bk_ratings do %>
+                  <div class="bratings-main-reviews-card">
+                    <div class="bratings-main-reviews-card-top">
+                      <div class="reviews-stars" style="--userrating: <%= rating.rating %>"></div>
+                      <div class="reviews-date"><%= rating.inserted_at |> NaiveDateTime.to_date() %></div>
+                    </div>
+                    <div class="bratings-main-reviews-card-body">
+                      <%= rating.comment %>
+                      <p class="reviewer">by <%= rating.user.username %></p>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="">No review for this book</div>
+              <% end %>
+            </div>
+            <!-- pagination -->
+            <div class="paginate-links my-4">
+
+                <%= if @num_links != 1 do %>
+                <%= render BookclubWeb.PaginationView, "pagination.html", conn: @conn, num_links: @num_links %>
+                <% end %>
+
+            </div>
+            <!-- End pagination -->
+          </div>
+            <%= render BookclubWeb.HomeView, "recommended.html", conn: @conn, recommended_books: @recommended_books %>
+            <div class="top-cat"></div>
+          </div>
+
+
+          </div>
+
+    </section>
+    <!-- / End Section A -->

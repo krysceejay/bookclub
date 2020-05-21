@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+    <link rel="icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+
     <!-- Fontawesome -->
     <link
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -30,24 +34,28 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>Bookclub</title>
+    <title>Shelfvibe: <%= if assigns[:pagetitle], do: @pagetitle, else: "" %></title>
   </head>
   <body>
 
     <!-- Nav -->
     <nav id="main-nav">
       <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
-      <h1 class="logo">
+
         <%= link to: Routes.home_path(@conn, :index) do %>
-          <span class="text-primary">My</span>Logo
+          <div class="logo">
+          <!-- <img src="<%= Routes.static_path(@conn, "/home/img/shelfvibeweblogo.png") %>" alt="logo"> -->
+          <img src="<%= Routes.static_path(@conn, "/home/img/logodark.png") %>" alt="logo">
+          </div>
+          <!-- <span class="text-primary">Shelf</span>vibe -->
         <% end %>
-      </h1>
+
       <ul class="main-nav-menu">
         <li>
           <%= link "Home", to: Routes.home_path(@conn, :index),  class: if @conn.request_path == "/", do: "current", else: "" %>
         </li>
         <li>
-          <%= link "Books", to: Routes.home_path(@conn, :books), class: if @conn.request_path == "/books" or @conn.request_path == "/book/:slug", do: "current", else: "" %>
+          <%= link "Shelf", to: Routes.home_path(@conn, :books), class: if @conn.request_path == "/shelf" or @conn.request_path == "/shelf/:slug", do: "current", else: "" %>
         </li>
         <li>
           <%= link "Contact", to: Routes.home_path(@conn, :contact), class: if @conn.request_path == "/contact", do: "current", else: "" %>
@@ -86,7 +94,7 @@
             <div>
               <ul>
                 <li><%= link "Home", to: Routes.home_path(@conn, :index), class: "current" %></li>
-                <li><%= link "Books", to: Routes.home_path(@conn, :books) %></li>
+                <li><%= link "Shelf", to: Routes.home_path(@conn, :books) %></li>
                 <li>
                   <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
                 </li>
@@ -123,24 +131,27 @@
     </nav>
     <!-- End Nav -->
 
+
     <%= render @view_module, @view_template, assigns %>
 
     <!-- Footer -->
     <footer id="main-footer" class="py-4">
       <div class="footer-content container">
         <div>
-          <h2>Lorem ipsum dolor sit.</h2>
-          <a href="www.twitter.com">
+          <div class="logo">
+          <img src="<%= Routes.static_path(@conn, "/home/img/logodark.png") %>" alt="logo">
+          </div>
+          <a href="#">
             <i class="fa fa-twitter fa-2x"></i>
           </a>
-          <a href="www.facebook.com">
+          <a href="#">
             <i class="fa fa-facebook fa-2x"></i>
           </a>
-          <a href="www.youtube.com">
+          <a href="#">
             <i class="fa fa-youtube fa-2x"></i>
           </a>
         </div>
-        <div>
+        <!-- <div>
           <h3>Company Info</h3>
           <ul>
             <li>
@@ -156,8 +167,8 @@
               <a href="#"><i class="fa fa-angle-right"></i>Terms Of Service</a>
             </li>
           </ul>
-        </div>
-        <div>
+        </div> -->
+        <!-- <div>
           <h3>Blog Posts</h3>
           <ul>
             <li><a href="#">Lorem ipsum dolor sit.</a></li>
@@ -165,11 +176,11 @@
             <li><a href="#">Lorem ipsum dolor sit.</a></li>
             <li><a href="#">Lorem ipsum dolor sit.</a></li>
           </ul>
-        </div>
+        </div> -->
         <div>
           <h3>Subscribe</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Enter your email to subscribe to our newsletter
           </p>
           <form name="email-form" method="POST">
             <div class="email-form">
@@ -206,5 +217,10 @@
     ></script>
     <script src="js/bootstrap.min.js"></script> -->
     <!-- /End Bootstrap Js -->
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/script.js") %>"></script>
   </body>
 </html>

@@ -1,7 +1,5 @@
 <%= if @changeset.action do %>
-  <div class="alert alert-danger">
-    <p>Oops, something went wrong! Please check the errors below.</p>
-  </div>
+  <div class="pop pop-error">Oops, something went wrong! Please check the errors below.</div>
 <% end %>
               <%= form_for @changeset, @action, [multipart: true], fn f -> %>
                 <div class="field-form">
@@ -22,8 +20,8 @@
                   </div>
 
                   <div class="form-group">
-                    <%= label f, :bookcover_field, "Book Cover" %>
-                    <%= file_input f, :bookcover_field %>
+                    <%= label f, :bookcover_field, "Cover" %>
+                    <%= file_input f, :bookcover_field, accept: "image/*" %>
                     <%= error_tag f, :bookcover_field %>
                     <%= if @book.bookcover != nil do %>
                       <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> @book.bookcover) %>" alt="" class="book_cover"/>
@@ -39,20 +37,32 @@
                     <%= time_input f, :meeting_time %>
                     <%= error_tag f, :meeting_time %>
                   </div>
-
-                  <div class="form-group">
-                    <%= label f, :description %>
-                    <%= textarea f, :description, placeholder: "Enter Description" %>
-                    <%= error_tag f, :description %>
-                  </div>
                   <div class="form-group">
                     <%= label f, :published %>
                     <%= radio_button f, :published, "1", checked: @book.published == true %> Yes
                     <%= radio_button f, :published, "0", checked: @book.published == false %> No
                     <%= error_tag f, :published %>
                   </div>
+                  <div class="form-group">
+                    <%= label f, :public, "Join Status" %>
+                    <%= radio_button f, :public, "1", checked: @book.public == true %> Public
+                    <%= radio_button f, :public, "0", checked: @book.public == false %> Private
+                    <%= error_tag f, :public %>
+                  </div>
+                  <div class="form-group">
+                    <%= label f, :description %>
+                    <%= textarea f, :description, placeholder: "Enter Description" %>
+                    <%= error_tag f, :description %>
+                  </div>
+                  <div class="form-group">
+                    <%= label f, :description %>
+                    <%= textarea f, :description, placeholder: "Enter meeting link" %>
+                    <%= error_tag f, :description %>
+                  </div>
                 </div>
                 <div class="form-group">
                   <%= submit "Submit", class: "btn btn-dark" %>
                 </div>
             <% end %>
+
+            <%= link "Upload", to: Routes.user_path(@conn, :upload) %>

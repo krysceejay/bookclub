@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+    <link rel="icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
     <!-- Fontawesome -->
     <link
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -26,7 +29,9 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>Bookclub: Chat</title>
+    <!-- CSRF Token -->
+    <%= csrf_meta_tag() %>
+    <title>Shelfvibe: Chat</title>
   </head>
   <body>
 <main id="chat-page">
@@ -34,13 +39,22 @@
   <nav id="chat-nav">
     <!-- <img src="img/logo.png" alt="My Portfolio" id="logo" /> -->
     <div class="chat-nav-logo">
-      <h1 class="logo">
-        <%= link "Logo", to: Routes.home_path(@conn, :index) %>
-      </h1>
+
+        <div class="chat-nav-logo-container">
+          <%= link to: Routes.home_path(@conn, :index) do %>
+          <img src="<%= Routes.static_path(@conn, "/home/img/svwhite.png") %>" alt="logo">
+          <% end %>
+        </div>
+
     </div>
 
     <ul class="chat-nav-menu">
       <div class="chat-nav-menu-up">
+        <li>
+          <%= link to: Routes.user_path(@conn, :index) do %>
+          <i class="fa fa-dashboard"></i>
+          <% end %>
+        </li>
         <li>
           <a id="online-users-show" class="current"
             ><i class="fa fa-users"></i
@@ -51,21 +65,17 @@
             ><i class="fa fa-book"></i
           ></a>
         </li>
-        <li>
-          <a href="index.html" class="current"
-            ><i class="fa fa-star-o"></i
-          ></a>
-        </li>
+
       </div>
 
       <div class="chat-nav-menu-down">
         <li>
-          <a href="index.html" class="current"
+          <a href="#" class="current"
             ><i class="fa fa-pencil"></i
           ></a>
         </li>
         <li>
-          <a href="index.html" class="current"
+          <a href="#" class="current"
             ><i class="fa fa-gears"></i
           ></a>
         </li>
@@ -77,6 +87,20 @@
       </div>
     </ul>
   </nav>
+
+  <div class="chat-container-menu-ellipsis">
+    <div class="chat-head-section">
+      <div class="details-close-btn" id="menu-ellipsis-close">
+        <i class="fa fa-close"></i>
+      </div>
+    </div>
+
+    <ul>
+      <li><%= link "Home", to: Routes.home_path(@conn, :index) %></li>
+      <li><%= link "Dashboard", to: Routes.user_path(@conn, :index) %></li>
+      <li><%= link "Log out", to: Routes.auth_path(@conn, :delete), method: :delete %></li>
+    </ul>
+  </div>
   <!-- / End Nav -->
     <%= render @view_module, @view_template, assigns %>
 

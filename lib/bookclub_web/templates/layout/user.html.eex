@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+    <link rel="icon" href="<%= Routes.static_path(@conn, "/home/img/favicon.ico") %>" type="image/x-icon">
+
     <!-- Fontawesome -->
     <link
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -23,9 +27,12 @@
     />
     <!-- /End Google Font -->
 
+    <!-- Apex css -->
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/apexcharts.css") %>" />
+
     <!-- Style CSS -->
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/home/css/main.min.css") %>" />
-    <title>Bookclub: Dashboard</title>
+    <title>Shelfvibe: Dashboard</title>
   </head>
   <body>
     <main id="dashboard-main">
@@ -39,23 +46,43 @@
           </li>
           <!-- <a href="managebook.html"
             > -->
-          <li class="main-aside-li">
-            <i class="fa fa-book"></i>Books
-            <i class="fa fa-angle-down"></i>
+          <li class="main-aside-li drop-acc-li">
+            <input type="checkbox" checked>
+            <i class="fa fa-book"></i>My Shelf
+            <!-- <i class="fa fa-angle-down"></i> -->
+
+            <i class="angle-icon"></i>
             <ul>
               <li>
-                <%= link "Manage Books", to: Routes.user_path(@conn, :managebooks) %>
+                <%= link "Manage Shelf", to: Routes.user_path(@conn, :managebooks) %>
               </li>
               <li>
-                <%= link "Add Book", to: Routes.user_path(@conn, :addbook) %>
+                <%= link "Add To Shelf", to: Routes.user_path(@conn, :addbook) %>
               </li>
+
+              <li>
+                <%= link "Joined List", to: Routes.user_path(@conn, :joinedlist) %>
+              </li>
+
             </ul>
           </li>
-          <!-- </a> -->
-          <!-- <a href="addbook.html"
-            ><li><i class="fa fa-book"></i> Add Books</li></a
-          > -->
+
+          <li class="main-aside-li">
+            <%= link to: Routes.user_path(@conn, :profile, @conn.assigns.user.email |> Base.encode64()) do %>
+            <i class="fa fa-user"></i>Profile
+            <% end %>
+          </li>
+
+          <li class="main-aside-li">
+            <%= link to: Routes.auth_path(@conn, :delete), method: :delete do %>
+            <i class="fa fa-power-off"></i>Log out
+            <% end %>
+          </li>
         </ul>
+            <div id="dash-bar" class="top_right-menu-icon">
+            <%# <span id="dash-bar"><i id="dash-icon-id" class="fa fa-bars fa-2x" aria-hidden="true"></i></span> %>
+            <span></span>
+            </div>
       </aside>
       <!-- End Sidebar -->
 
@@ -63,33 +90,49 @@
       <section id="dashboard-main-section">
         <nav id="dashboard-main-nav">
           <div class="header_top">
-            <div class="top_right">
+
+            <div class="top_left">
+              <div class="nav-img">
+                <img src="<%= Routes.static_path(@conn,"/images/profiles/" <> @user.propix) %>" alt="proimage" />
+              </div>
+              <!-- <form action="">
+                <button type="submit" class="">Log Out</button>
+              </form> -->
+
+            </div>
+             <div class="top_right">
               <ul>
                 <li>
                   <%= link "Home", to: Routes.home_path(@conn, :index) %>
                 </li>
                 |
                 <li>
+                  <%= link "Shelf", to: Routes.home_path(@conn, :books) %>
+                </li>
+                |
+                <li>
                   <%= link "Contact", to: Routes.home_path(@conn, :contact) %>
                 </li>
               </ul>
+              <div class="clear-flt"></div>
             </div>
-            <div class="top_left">
-              <div class="nav-img">
-                <img src="<%= Routes.static_path(@conn, "/home/img/the-way.jpg") %>" alt="proimage" />
-              </div>
-              <!-- <form action="">
-                <button type="submit" class="">Log Out</button>
-              </form> -->
-            </div>
+
           </div>
         </nav>
-
-      <%= render @view_module, @view_template, assigns %>
+        <div class="dashboard-main-section-content">
+          <%= render BookclubWeb.MsgView, "msg.html", conn: @conn %>
+          <%= render @view_module, @view_template, assigns %>
+        </div>
       </section>
     </main>
     <!-- / End Section A -->
 
     <!-- Bootstrap Js -->
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/apex.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/script.js") %>"></script>
   </body>
 </html>

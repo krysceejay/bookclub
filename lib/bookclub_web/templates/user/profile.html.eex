@@ -1,0 +1,28 @@
+  <h3 class="dashboard-content-header">profile</h3>
+
+  <div class="dash-user-profile">
+    <div class="dash-user-profile-top">
+      <div class="dash-user-profile-top-name">
+        <span class="full-name"><%= @userprof.first_name <> " " <> @userprof.last_name %></span>
+        <span class="user-name"><%= @userprof.username %></span>
+        <span class="user-name">Member Since: <%= NaiveDateTime.to_date(@userprof.inserted_at) %></span>
+      </div>
+
+      <%= if @userprof.email == @user.email do %>
+        <%= link to: Routes.user_path(@conn, :editprofile), class: "btn btn-profile" do %>
+        <i class="fa fa-pencil"></i>
+        <% end %>
+      <% end %>
+
+    </div>
+
+    <div class="dash-user-profile-pic">
+      <img src="<%= Routes.static_path(@conn,"/images/profiles/" <> @userprof.propix) %>" alt="proimage" />
+    </div>
+
+    <div class="dash-user-profile-about">
+      <h4 class="profile-about-head">About</h4>
+      <%= @userprof.about %>
+    </div>
+
+  </div>

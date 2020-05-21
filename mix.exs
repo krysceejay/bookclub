@@ -4,7 +4,7 @@ defmodule Bookclub.MixProject do
   def project do
     [
       app: :bookclub,
-      version: "0.1.0",
+      version: "0.1.2",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -20,7 +20,7 @@ defmodule Bookclub.MixProject do
   def application do
     [
       mod: {Bookclub.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
@@ -33,18 +33,18 @@ defmodule Bookclub.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0"},
+      {:phoenix, "~> 1.4.13"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix_html, "~> 2.14"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
 
-      ##ADDED DEPS ##
+      ## ADDED DEPS ##
       {:comeonin, "~> 5.1"},
       {:argon2_elixir, "~> 2.0"},
       {:absinthe, "~> 1.4"},
@@ -52,8 +52,13 @@ defmodule Bookclub.MixProject do
       {:dataloader, "~> 1.0"},
       {:guardian, "~> 1.0"},
       {:absinthe_phoenix, "~> 1.4"},
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
-      {:kerosene, "~> 0.9.0"}
+      {:phoenix_live_view, "~> 0.8.0"},
+      {:floki, ">= 0.0.0", only: :test},
+      {:edeliver, "~> 1.7"},
+      {:distillery, "~> 2.0", warn_missing: false},
+      {:timex, "~> 3.6"},
+      {:bamboo, "~> 1.3"},
+      {:httpoison, "~> 1.6"}
     ]
   end
 

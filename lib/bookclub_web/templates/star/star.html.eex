@@ -1,0 +1,32 @@
+
+<%= if @conn.request_path == Routes.home_path(@conn, :ratings, @book_id |> to_string() |> Base.encode64()) do %>
+
+<div class="bratings-main-stats-cal">
+  <div class="rating-number"><span class="num-main"><%= elem(calculate_ratings(@book_id), 1) %></span>/5</div>
+  <div class="stars" style="--rating: <%= elem(calculate_ratings(@book_id), 1) %>;"></div>
+  <div class="total-num-rating"><%= total_reviewers(@book_id) %> rating(s)</div>
+</div>
+
+<div class="bratings-main-stats-progress">
+  <%= for x <- 5..1 do %>
+    <div class="progress-d">
+      <span class="progress-d-numberr"><%= x %></span>
+      <span class="progress-d-onestar"></span>
+      <span class="progress-d-onerating">(<%= elem(total_reviewers_num(@book_id, x), 0) %>)</span>
+      <div class="progress-d-ratingprog">
+        <div style="--progwidth: <%= elem(total_reviewers_num(@book_id, x), 1) %>%"></div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+<% else %>
+<div class="stars" style="--rating: <%= elem(calculate_ratings(@book_id), 1) %>;"></div>
+  <span class="review-text">
+    <%= elem(calculate_ratings(@book_id), 1) %> of
+    <%= link to: Routes.home_path(@conn, :ratings, @book_id |> to_string() |> Base.encode64()) do %>
+      <%= elem(calculate_ratings(@book_id), 0) %> rating(s)
+    <% end %>
+  </span>
+<% end %>
