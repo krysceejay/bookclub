@@ -42,6 +42,8 @@ npm-debug.log
 /config/dev.exs
 /config/prod.exs
 /config/*.secret.exs
+/config/config.exs
+/config/test.exs
 .deliver/releases/
 /priv/static/images/
 /priv/static/cache_manifest.json
