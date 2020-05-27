@@ -57,8 +57,7 @@ defmodule Bookclub.MixProject do
       {:edeliver, "~> 1.7"},
       {:distillery, "~> 2.0", warn_missing: false},
       {:timex, "~> 3.6"},
-      {:bamboo, "~> 1.3"},
-      {:httpoison, "~> 1.6"}
+      {:bamboo, "~> 1.3"}
     ]
   end
 
