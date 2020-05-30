@@ -14,8 +14,8 @@ defmodule Bookclub.Content.Book do
     field :public, :boolean, default: true
     field :title, :string
     field :slug, :string
-    field :meeting_date, :string
-    field :meeting_time, :time
+    field :meeting_details, :string
+
     # Virtual Fields
     field :bookcover_field, :string, virtual: true
 
@@ -39,8 +39,7 @@ defmodule Bookclub.Content.Book do
       :published,
       :public,
       :user_id,
-      :meeting_date,
-      :meeting_time
+      :meeting_details
     ])
     |> validate_required([
       :title,
@@ -50,8 +49,7 @@ defmodule Bookclub.Content.Book do
       :published,
       :public,
       :user_id,
-      :meeting_date,
-      :meeting_time
+      :meeting_details
     ])
     |> uploadfile(attrs, bk)
     |> slug_map(attrs, bk)
@@ -67,8 +65,7 @@ defmodule Bookclub.Content.Book do
       :published,
       :public,
       :user_id,
-      :meeting_date,
-      :meeting_time
+      :meeting_details
     ])
     |> validate_required([
       :title,
@@ -78,8 +75,7 @@ defmodule Bookclub.Content.Book do
       :published,
       :public,
       :user_id,
-      :meeting_date,
-      :meeting_time
+      :meeting_details
     ])
     |> upload_oncreation(attrs)
     |> slug_map_c(attrs)

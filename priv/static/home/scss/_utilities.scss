@@ -805,7 +805,7 @@ tr:nth-child(even) {
       content: "";
       transition: all 0.25s ease-in-out;
       position: absolute;
-      background-color: #f53ba3;
+      background-color: $main-color;
       width: 3px;
       height: 9px;
     }
@@ -972,13 +972,13 @@ tr:nth-child(even) {
 .pills {
   display: inline-block;
   background: #ffffff;
-  border: 1px solid #f53ba2;
+  border: 1px solid $main-color;
   font-size: 0.8rem;
   border-radius: 14px;
   padding: 0.2rem 0.5rem;
   margin-bottom: 0.5rem;
   i {
-    color: #f53ba2;
+    color: $main-color;
     margin-right: 0.2rem;
     font-size: 0.8rem;
   }
@@ -1157,4 +1157,43 @@ tr:nth-child(even) {
     padding: 0.2rem 0.5rem;
     font-size: 0.7rem;
   }
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  //padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 300px auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }

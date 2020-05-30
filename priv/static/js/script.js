@@ -15,34 +15,46 @@ $(document).ready(function() {
     }
   });
 
-  // $('*[id^="rt-"]').click(function() {
-  //   let strnum = $(this).attr('num');
-  //   //let strid = $(this).attr('id');
-  //   if (strnum == 2) {
-  //     $("#rt-1").toggleClass("fill");
-  //     $("#rt-2").toggleClass("fill");
+  // Get the modal
+  //var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  //var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  //var span = document.getElementsByClassName("close")[0];
+
+  $("#myBtn").click(function() {
+    $("#myModal").css("display","block");
+  });
+
+  $("#closeModal").click(function() {
+    $("#myModal").css("display","none");
+  });
+
+  $(window).click(function(e) {
+      if ($(e.target).is("#myModal")) {
+        $("#myModal").css("display","none");
+      }
+
+});
+
+  // When the user clicks the button, open the modal
+  // btn.onclick = function() {
+  //   modal.style.display = "block";
+  // }
+
+  // When the user clicks on <span> (x), close the modal
+  // span.onclick = function() {
+  //   modal.style.display = "none";
+  // }
+
+  // When the user clicks anywhere outside of the modal, close it
+  // window.onclick = function(event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
   //   }
-  //   if (strnum == 3) {
-  //     $("#rt-1").toggleClass("fill");
-  //     $("#rt-2").toggleClass("fill");
-  //     $("#rt-3").toggleClass("fill");
-  //   }
-  //   if (strnum == 4) {
-  //     $("#rt-1").toggleClass("fill");
-  //     $("#rt-2").toggleClass("fill");
-  //     $("#rt-3").toggleClass("fill");
-  //     $("#rt-4").toggleClass("fill");
-  //   }
-  //   if (strnum == 5) {
-  //     $("#rt-1").toggleClass("fill");
-  //     $("#rt-2").toggleClass("fill");
-  //     $("#rt-3").toggleClass("fill");
-  //     $("#rt-4").toggleClass("fill");
-  //     $("#rt-5").toggleClass("fill");
-  //   }
-  //   //$("#"+strid).toggleClass("fill");
-  //   //alert(strid);
-  // });
+  // }
 
   const options1 = {
          series: [{

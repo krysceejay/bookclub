@@ -68,6 +68,8 @@ defmodule BookclubWeb.Router do
     get "/edittopic/:slug", UserController, :edittopic
     put "/updatetopic/:slug", UserController, :updatetopic
 
+    get "/shelf/read/:slug", UserController, :readbook
+
 
   end
 

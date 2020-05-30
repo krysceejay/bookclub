@@ -1,0 +1,4 @@
+
+<iframe src="<%= Routes.static_path(@conn, "/home/img/cdoc.docx") %>" style="width: 100%; height: 100vh;">
+
+</iframe>

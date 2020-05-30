@@ -82,7 +82,7 @@ div[class^="btn-"],
   }
 
   .logo {
-    width: 180px;
+    width: 160px;
     height: 60px;
     img {
       width: 100%;
@@ -220,20 +220,20 @@ div[class^="btn-"],
   //Home Section B
   &-b {
     //background-color: rgba(36, 44, 66, 0.1);
-    background: $bg-img-how no-repeat center center/cover;
-    //background-color: rgba(0, 0, 0, 0.7);
+    //background: $bg-img-how no-repeat center center/cover;
+    background-color: #ccecf5;
 
     //background-color: $secondary-color;
-    color: #fff;
+    //color: #fff;
     position: relative;
     height: 30rem;
 
-    &-view {
-      @extend %overlay;
-      background-color: rgba(0, 0, 0, 0.3);
-      height: 100%;
-      padding-top: 2rem;
-    }
+    // &-view {
+    //   @extend %overlay;
+    //   background-color: rgba(0, 0, 0, 0.3);
+    //   height: 100%;
+    //   padding-top: 2rem;
+    // }
     .how {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -807,13 +807,13 @@ div[class^="btn-"],
             &-icon {
               display: inline-block;
               background: #ffffff;
-              border: 1px solid #f53ba2;
+              border: 1px solid $main-color;
               font-size: 0.8rem;
               border-radius: 14px;
               padding: 0.2rem 0.5rem;
               margin-bottom: 0.5rem;
               i {
-                color: #f53ba2;
+                color: $main-color;
                 margin-right: 0.2rem;
                 font-size: 0.8rem;
               }
@@ -876,7 +876,7 @@ div[class^="btn-"],
               height: 95px;
               margin: 2rem 0;
               border-radius: 5px;
-              border: 1px solid #ffe2f2;
+              border: 1px solid $main-light-color;
               padding: 0.9rem;
               text-align: center;
               &-head {
@@ -888,13 +888,14 @@ div[class^="btn-"],
               &-icon {
                 display: inline-block;
                 background: #ffffff;
-                border: 1px solid #f53ba2;
+                border: 1px solid $main-color;
                 border-radius: 3px;
                 padding: 0.2rem 0.5rem;
                 margin-top: 0.5rem;
                 margin-right: 0.5rem;
+                cursor: pointer;
                 i {
-                  color: #f53ba2;
+                  color: $main-color;
                   margin-right: 0.3rem;
                 }
               }

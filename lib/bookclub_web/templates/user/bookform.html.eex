@@ -27,7 +27,7 @@
                       <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> @book.bookcover) %>" alt="" class="book_cover"/>
                     <% end %>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <%= label f, :meeting_date %>
                     <%= date_input f, :meeting_date %>
                     <%= error_tag f, :meeting_date %>
@@ -36,7 +36,7 @@
                     <%= label f, :meeting_time %>
                     <%= time_input f, :meeting_time %>
                     <%= error_tag f, :meeting_time %>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <%= label f, :published %>
                     <%= radio_button f, :published, "1", checked: @book.published == true %> Yes
@@ -51,18 +51,24 @@
                   </div>
                   <div class="form-group">
                     <%= label f, :description %>
-                    <%= textarea f, :description, placeholder: "Enter Description" %>
+                    <%= textarea f, :description, id: "editor1", placeholder: "Enter Description" %>
                     <%= error_tag f, :description %>
                   </div>
                   <div class="form-group">
-                    <%= label f, :description %>
-                    <%= textarea f, :description, placeholder: "Enter meeting link" %>
-                    <%= error_tag f, :description %>
+                    <%= label f, :meeting_details %>
+                    <%= textarea f, :meeting_details, id: "editor2", placeholder: "Enter Meeting Details e.g zoom, google meet links, address, meeting time, meeting day e.t.c" %>
+                    <%= error_tag f, :meeting_details %>
                   </div>
+                  <!-- <div class="form-group">
+                    <%= label f, :bookcover_field, "Cover" %>
+                    <%= file_input f, :bookcover_field %>
+                    <%= error_tag f, :bookcover_field %>
+                    <%= if @book.bookcover != nil do %>
+                      <img src="<%= Routes.static_path(@conn,"/images/bookcover/" <> @book.bookcover) %>" alt="" class="book_cover"/>
+                    <% end %>
+                  </div> -->
                 </div>
                 <div class="form-group">
                   <%= submit "Submit", class: "btn btn-dark" %>
                 </div>
             <% end %>
-
-            <%= link "Upload", to: Routes.user_path(@conn, :upload) %>
