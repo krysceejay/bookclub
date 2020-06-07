@@ -2,6 +2,7 @@
 #dashboard-main {
   display: flex;
   justify-content: flex-start;
+  //overflow: hidden;
   &-aside {
     flex: 1;
     background: $sec-fade-color;
@@ -267,6 +268,7 @@
           .form-group {
             margin-bottom: 10px;
             display: inline-block;
+            max-width: 95%;
             input,
             textarea,
             select {
