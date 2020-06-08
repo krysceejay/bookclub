@@ -182,7 +182,7 @@
               <h3>Description</h3>
 
               <p>
-                <%= @book.description %>
+                <%= raw @book.description %>
               </p>
             </div>
             <div class="bdetails-rate py-3">
