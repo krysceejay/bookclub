@@ -15,7 +15,7 @@ defmodule BookclubWeb.Plugs.Context do
     """
     def build_context(conn) do
       with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
-      {:ok, claims} <- Bookclub.Guardian. decode_and_verify(token),
+      {:ok, claims} <- Bookclub.Guardian.decode_and_verify(token),
       {:ok, user} <- Bookclub.Guardian.resource_from_claims(claims) do
         %{current_user: user}
       else

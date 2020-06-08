@@ -11,6 +11,7 @@ defmodule BookclubWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
     plug BookclubWeb.Plugs.Context
   end

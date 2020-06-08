@@ -28,14 +28,14 @@ end
     @desc "Get all users"
     field :users, list_of(:user_type) do
       #Resolver
-      middleware Middleware.Authorize, 1
+      middleware Middleware.Authorize, 2
       resolve &Resolvers.UserResolver.users/3
     end
 
     @desc "Get single user"
     field :user, :user_type do
       #Resolver
-      #middleware Middleware.Authorize, 1
+      middleware Middleware.Authorize, :any
       arg :id, non_null(:id)
       resolve &Resolvers.UserResolver.user/3
     end
