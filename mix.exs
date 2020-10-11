@@ -58,7 +58,8 @@ defmodule Bookclub.MixProject do
       {:distillery, "~> 2.0", warn_missing: false},
       {:timex, "~> 3.6"},
       {:bamboo, "~> 1.3"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:absinthe_error_payload, "~> 1.1"}
     ]
   end
 

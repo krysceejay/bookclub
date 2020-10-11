@@ -1,7 +1,7 @@
 defmodule BookclubWeb.Schema.Types.SessionType do
   use Absinthe.Schema.Notation
 
-  object :session_type do
+object :session_type do
   field :token, :string
   field :user, :user_type
 end

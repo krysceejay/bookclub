@@ -58,9 +58,9 @@ end
 
   mutation do
     @desc "Register user"
-    field :register_user, type: :user_type do
+    field :register_user, type: :user_payload do
       arg :input, non_null(:user_input_type)
-      resolve &Resolvers.UserResolver.register_user/3
+      resolve &Resolvers.UserResolver.create/2
     end
 
     @desc "Login a user and return JWT token"
