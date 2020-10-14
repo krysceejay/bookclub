@@ -13,21 +13,27 @@ defmodule BookclubWeb.Resolvers.UserResolver do
   end
 
   def user(_,%{id: id}, _resolution) do
-
     case Accounts.get_user!(id) do
       nil -> {:error, "User ID #{id} not found"}
       user -> {:ok, user}
 
     end
-
   end
 
   def create(%{input: input}, _resolution) do
     case Accounts.create_user(input) do
-      {:ok, user} -> {:ok, success_payload(user)}
+      {:ok, user} ->
+        with false <- createverify(user) do
+          {:error, "Soomething went wrong, please check your internet connection."}
+        else
+          vtoken ->
+              Email.confirm_email(user, user.email, vtoken)
+              |> Mailer.deliver_now(response: true)
+
+            {:ok, success_payload(user)}
+        end
       {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
     end
-
   end
 
   defp createverify(user) do

@@ -26,7 +26,6 @@ defmodule BookclubWeb.Schema.Types.Usertype do
       field :email, non_null(:string)
       field :username, non_null(:string)
       field :passwordfield, non_null(:string)
-      field :passwordfield_confirmation, non_null(:string)
     end
 
     payload_object(:user_payload, :user_type)

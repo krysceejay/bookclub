@@ -40,7 +40,6 @@ defmodule Bookclub.Accounts.User do
     |> validate_length(:passwordfield, min: 6, max: 100)
     |> unique_constraint(:email)
     |> unique_constraint(:username)
-    |> validate_confirmation(:passwordfield)
     |> encrypt_password
     |> default_pic
   end
