@@ -24,7 +24,7 @@ defmodule BookclubWeb.Resolvers.UserResolver do
     case Accounts.create_user(input) do
       {:ok, user} ->
         with false <- createverify(user) do
-          {:error, "Soomething went wrong, please check your internet connection."}
+          {:error, "Something went wrong, please check your internet connection."}
         else
           vtoken ->
               Email.confirm_email(user, user.email, vtoken)
