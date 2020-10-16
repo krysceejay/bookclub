@@ -6,7 +6,6 @@ defmodule BookclubWeb.Schema.Types.Usertype do
   import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
   alias Bookclub.Accounts
-  alias BookclubWeb.Resolvers
 
       object :user_type do
         field :id, :id

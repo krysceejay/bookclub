@@ -7,4 +7,5 @@ defmodule BookclubWeb.Schema.Types do
   import_types Types.Roletype
   import_types Types.SessionType
   import_types Types.Booktype
+  import_types Types.TopicType
 end
