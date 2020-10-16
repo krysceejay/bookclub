@@ -12,7 +12,7 @@ defmodule BookclubWeb.Schema.Types.TopicType do
         field :book, :book_type, resolve: dataloader(Content)
       end
 
-    input_object :user_input_type do
+    input_object :title_input_type do
       field :topic_text, non_null(:string)
       field :topic_status, non_null(:integer)
     end
