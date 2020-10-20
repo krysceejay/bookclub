@@ -16,4 +16,5 @@ defmodule BookclubWeb.Resolvers.BookResolver do
     {:ok, Content.list_books()}
   end
 
+
 end

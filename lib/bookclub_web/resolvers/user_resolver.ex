@@ -12,12 +12,21 @@ defmodule BookclubWeb.Resolvers.UserResolver do
     {:ok, Accounts.list_users()}
   end
 
-  def user(_,%{id: id}, _resolution) do
-    case Accounts.get_user!(id) do
-      nil -> {:error, "User ID #{id} not found"}
-      user -> {:ok, user}
+  # def user(_,%{id: id}, _resolution) do
+  #   case Accounts.get_user!(id) do
+  #     user -> {:ok, user}
+  #     Ecto.NoResultsError -> {:error, "No result found"}
+  #   end
+  # end
 
-    end
+  def user(_,%{id: id}, _resolution) do
+    try do
+      user = Accounts.get_user!(id)
+      {:ok, user}
+    rescue
+      Ecto.NoResultsError ->
+        {:error, "No result found"}
+    end  
   end
 
   def create(%{input: input}, _resolution) do

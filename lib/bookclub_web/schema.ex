@@ -34,23 +34,19 @@ end
 
     @desc "Get single user"
     field :user, :user_type do
-      #Resolver
-      middleware Middleware.Authorize, :any
+      #middleware Middleware.Authorize, :any
       arg :id, non_null(:id)
       resolve &Resolvers.UserResolver.user/3
     end
 
     @desc "Get all roles"
     field :roles, list_of(:role_type) do
-      #Resolver
-      #middleware Middleware.Authorize, :any
+      middleware Middleware.Authorize, 2
       resolve &Resolvers.RoleResolver.roles/3
     end
 
     @desc "Get all books"
     field :allbooks, list_of(:book_type) do
-      #Resolver
-      #middleware Middleware.Authorize, :any
       resolve &Resolvers.BookResolver.all_books/3
     end
 
