@@ -10,4 +10,5 @@ defmodule BookclubWeb.Schema.Types do
   import_types Types.Booktype
   import_types Types.TopicType
   import_types Types.RatingType
+  import_types Types.ReaderType
 end

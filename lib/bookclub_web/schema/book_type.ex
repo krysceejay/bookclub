@@ -18,6 +18,7 @@ defmodule BookclubWeb.Schema.Types.Booktype do
         field :user, :user_type, resolve: dataloader(Content)
         field :topics, list_of(:topic_type), resolve: dataloader(Content)
         field :ratings, list_of(:rating_type), resolve: dataloader(Content)
+        field :readers, list_of(:reader_type), resolve: dataloader(Content)
     end
 
     input_object :book_input_type do
