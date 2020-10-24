@@ -50,6 +50,11 @@ end
       resolve &Resolvers.BookResolver.all_books/3
     end
 
+    @desc "Get all clubs"
+    field :allclubs, list_of(:club_type) do
+      resolve &Resolvers.ClubResolver.all_clubs/3
+    end
+
   end
 
   mutation do
@@ -77,6 +82,13 @@ end
       resolve &Resolvers.BookResolver.create_book/3
     end
 
+    @desc "Create club"
+    field :create_club, :club_payload do
+      middleware Middleware.Authorize, :any
+      arg :input, non_null(:club_input_type)
+      resolve &Resolvers.ClubResolver.create_club/3
+    end
+
     @desc "Upload file"
     field :upload_file, :string do
       arg :file_data, non_null(:upload)
@@ -87,8 +99,6 @@ end
         {:ok, "success"}
       end
     end
-
-
   end
 
   subscription do
