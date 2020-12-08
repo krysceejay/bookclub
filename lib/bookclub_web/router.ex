@@ -16,6 +16,11 @@ defmodule BookclubWeb.Router do
     plug BookclubWeb.Plugs.Context
   end
 
+  pipeline :upload do
+    plug CORSPlug, origin: "*"
+    plug :accepts, ["json"]
+  end
+
   pipeline :admin_dashboard do
     plug :put_layout, {BookclubWeb.LayoutView, :admin}
   end
@@ -30,6 +35,12 @@ defmodule BookclubWeb.Router do
 
   pipeline :nolayout_layout do
     plug :put_layout, {BookclubWeb.LayoutView, :nolayout}
+  end
+
+  scope "/upload", BookclubWeb do
+    pipe_through :upload
+
+    post "/:path", UploadController, :uploadFile
   end
 
   scope "/bkadmin", BookclubWeb do

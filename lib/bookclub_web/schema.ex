@@ -55,6 +55,36 @@ end
       resolve &Resolvers.ClubResolver.all_clubs/3
     end
 
+    @desc "Get club"
+    field :club, :club_type do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.single_club/3
+    end
+
+    @desc "Get club polls"
+    field :clubpolls, list_of(:poll_type) do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.all_club_polls/3
+    end
+
+    @desc "Get club lists"
+    field :clublists, list_of(:list_type) do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.all_club_lists/3
+    end
+
+    @desc "Get poll votes"
+    field :get_poll_votes, list_of(:collect_poll_type) do
+      arg :poll_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.get_poll_votes/3
+    end
+
+    @desc "Get club members"
+    field :get_club_members, list_of(:member_type) do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.get_club_members/3
+    end
+
   end
 
   mutation do
@@ -87,6 +117,98 @@ end
       middleware Middleware.Authorize, :any
       arg :input, non_null(:club_input_type)
       resolve &Resolvers.ClubResolver.create_club/3
+    end
+
+    @desc "Create member"
+    field :create_member, :member_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :input, non_null(:member_input_type)
+      resolve &Resolvers.ClubResolver.create_member/3
+    end
+
+    @desc "Add Rating"
+    field :create_rate, :rate_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :input, non_null(:rate_input_type)
+      resolve &Resolvers.ClubResolver.create_rate/3
+    end
+
+    @desc "Create Poll"
+    field :create_poll, :poll_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :input, non_null(:poll_input_type)
+      resolve &Resolvers.ClubResolver.create_poll/3
+    end
+
+    @desc "Create List"
+    field :create_list, :list_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :input, non_null(:list_input_type)
+      resolve &Resolvers.ClubResolver.create_list/3
+    end
+
+    @desc "Set Poll Status"
+    field :set_poll_status, :poll_type do
+      middleware Middleware.Authorize, :any
+      arg :poll_id, non_null(:id)
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.setPollStatus/3
+    end
+
+    @desc "Set Book Status"
+    field :set_book_status, :list_type do
+      middleware Middleware.Authorize, :any
+      arg :list_id, non_null(:id)
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.setBookStatus/3
+    end
+
+    @desc "Vote Poll"
+    field :vote_poll, :collect_poll_type do
+      middleware Middleware.Authorize, :any
+      arg :poll_id, non_null(:id)
+      arg :input, non_null(:collect_poll_input_type)
+      resolve &Resolvers.ClubResolver.vote_poll/3
+    end
+
+    @desc "Remove Vote"
+    field :remove_vote, :collect_poll_type do
+      middleware Middleware.Authorize, :any
+      arg :vote_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.removeVote/3
+    end
+
+    @desc "Update Club Public"
+    field :club_public, :club_type do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.setClubPublic/3
+    end
+
+    @desc "Update Club Publish"
+    field :club_publish, :club_type do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.setClubPublish/3
+    end
+
+    @desc "Report Club"
+    field :report_club, :report_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :input, non_null(:report_input_type)
+      resolve &Resolvers.ClubResolver.create_report/3
+    end
+
+    @desc "Favorite Club"
+    field :fav_club, :favorite_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.add_favorite/3
     end
 
     @desc "Upload file"

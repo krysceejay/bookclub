@@ -12,13 +12,24 @@ defmodule BookclubWeb.Schema.Types.ClubType do
         field :name, :string
         field :image, :string
         field :public, :boolean
+        field :publish, :boolean
+        field :description, :string
+        field :genre, list_of(:string)
+        field :inserted_at, :date
+        field :updated_at, :date
         field :user, :user_type, resolve: dataloader(Content)
+        field :members, list_of(:member_type), resolve: dataloader(Content)
+        field :rates, list_of(:rate_type), resolve: dataloader(Content)
+        field :polls, list_of(:poll_type), resolve: dataloader(Content)
     end
 
     input_object :club_input_type do
       field :name, non_null(:string)
-      field :image_field, :string
+      field :image, :string
       field :public, :boolean
+      field :publish, :boolean
+      field :description, non_null(:string)
+      field :genre, list_of(non_null(:string))
     end
 
     payload_object(:club_payload, :club_type)

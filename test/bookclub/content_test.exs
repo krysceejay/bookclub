@@ -382,4 +382,419 @@ defmodule Bookclub.ContentTest do
       assert %Ecto.Changeset{} = Content.change_club(club)
     end
   end
+
+  describe "members" do
+    alias Bookclub.Content.Member
+
+    @valid_attrs %{status: "some status", user_id: "some user_id"}
+    @update_attrs %{status: "some updated status", user_id: "some updated user_id"}
+    @invalid_attrs %{status: nil, user_id: nil}
+
+    def member_fixture(attrs \\ %{}) do
+      {:ok, member} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_member()
+
+      member
+    end
+
+    test "list_members/0 returns all members" do
+      member = member_fixture()
+      assert Content.list_members() == [member]
+    end
+
+    test "get_member!/1 returns the member with given id" do
+      member = member_fixture()
+      assert Content.get_member!(member.id) == member
+    end
+
+    test "create_member/1 with valid data creates a member" do
+      assert {:ok, %Member{} = member} = Content.create_member(@valid_attrs)
+      assert member.status == "some status"
+      assert member.user_id == "some user_id"
+    end
+
+    test "create_member/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_member(@invalid_attrs)
+    end
+
+    test "update_member/2 with valid data updates the member" do
+      member = member_fixture()
+      assert {:ok, %Member{} = member} = Content.update_member(member, @update_attrs)
+      assert member.status == "some updated status"
+      assert member.user_id == "some updated user_id"
+    end
+
+    test "update_member/2 with invalid data returns error changeset" do
+      member = member_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_member(member, @invalid_attrs)
+      assert member == Content.get_member!(member.id)
+    end
+
+    test "delete_member/1 deletes the member" do
+      member = member_fixture()
+      assert {:ok, %Member{}} = Content.delete_member(member)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_member!(member.id) end
+    end
+
+    test "change_member/1 returns a member changeset" do
+      member = member_fixture()
+      assert %Ecto.Changeset{} = Content.change_member(member)
+    end
+  end
+
+  describe "rates" do
+    alias Bookclub.Content.Rate
+
+    @valid_attrs %{first_name: "some first_name"}
+    @update_attrs %{first_name: "some updated first_name"}
+    @invalid_attrs %{first_name: nil}
+
+    def rate_fixture(attrs \\ %{}) do
+      {:ok, rate} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_rate()
+
+      rate
+    end
+
+    test "list_rates/0 returns all rates" do
+      rate = rate_fixture()
+      assert Content.list_rates() == [rate]
+    end
+
+    test "get_rate!/1 returns the rate with given id" do
+      rate = rate_fixture()
+      assert Content.get_rate!(rate.id) == rate
+    end
+
+    test "create_rate/1 with valid data creates a rate" do
+      assert {:ok, %Rate{} = rate} = Content.create_rate(@valid_attrs)
+      assert rate.first_name == "some first_name"
+    end
+
+    test "create_rate/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_rate(@invalid_attrs)
+    end
+
+    test "update_rate/2 with valid data updates the rate" do
+      rate = rate_fixture()
+      assert {:ok, %Rate{} = rate} = Content.update_rate(rate, @update_attrs)
+      assert rate.first_name == "some updated first_name"
+    end
+
+    test "update_rate/2 with invalid data returns error changeset" do
+      rate = rate_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_rate(rate, @invalid_attrs)
+      assert rate == Content.get_rate!(rate.id)
+    end
+
+    test "delete_rate/1 deletes the rate" do
+      rate = rate_fixture()
+      assert {:ok, %Rate{}} = Content.delete_rate(rate)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_rate!(rate.id) end
+    end
+
+    test "change_rate/1 returns a rate changeset" do
+      rate = rate_fixture()
+      assert %Ecto.Changeset{} = Content.change_rate(rate)
+    end
+  end
+
+  describe "polls" do
+    alias Bookclub.Content.Poll
+
+    @valid_attrs %{first_name: "some first_name"}
+    @update_attrs %{first_name: "some updated first_name"}
+    @invalid_attrs %{first_name: nil}
+
+    def poll_fixture(attrs \\ %{}) do
+      {:ok, poll} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_poll()
+
+      poll
+    end
+
+    test "list_polls/0 returns all polls" do
+      poll = poll_fixture()
+      assert Content.list_polls() == [poll]
+    end
+
+    test "get_poll!/1 returns the poll with given id" do
+      poll = poll_fixture()
+      assert Content.get_poll!(poll.id) == poll
+    end
+
+    test "create_poll/1 with valid data creates a poll" do
+      assert {:ok, %Poll{} = poll} = Content.create_poll(@valid_attrs)
+      assert poll.first_name == "some first_name"
+    end
+
+    test "create_poll/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_poll(@invalid_attrs)
+    end
+
+    test "update_poll/2 with valid data updates the poll" do
+      poll = poll_fixture()
+      assert {:ok, %Poll{} = poll} = Content.update_poll(poll, @update_attrs)
+      assert poll.first_name == "some updated first_name"
+    end
+
+    test "update_poll/2 with invalid data returns error changeset" do
+      poll = poll_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_poll(poll, @invalid_attrs)
+      assert poll == Content.get_poll!(poll.id)
+    end
+
+    test "delete_poll/1 deletes the poll" do
+      poll = poll_fixture()
+      assert {:ok, %Poll{}} = Content.delete_poll(poll)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_poll!(poll.id) end
+    end
+
+    test "change_poll/1 returns a poll changeset" do
+      poll = poll_fixture()
+      assert %Ecto.Changeset{} = Content.change_poll(poll)
+    end
+  end
+
+  describe "lists" do
+    alias Bookclub.Content.List
+
+    @valid_attrs %{first_name: "some first_name"}
+    @update_attrs %{first_name: "some updated first_name"}
+    @invalid_attrs %{first_name: nil}
+
+    def list_fixture(attrs \\ %{}) do
+      {:ok, list} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_list()
+
+      list
+    end
+
+    test "list_lists/0 returns all lists" do
+      list = list_fixture()
+      assert Content.list_lists() == [list]
+    end
+
+    test "get_list!/1 returns the list with given id" do
+      list = list_fixture()
+      assert Content.get_list!(list.id) == list
+    end
+
+    test "create_list/1 with valid data creates a list" do
+      assert {:ok, %List{} = list} = Content.create_list(@valid_attrs)
+      assert list.first_name == "some first_name"
+    end
+
+    test "create_list/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_list(@invalid_attrs)
+    end
+
+    test "update_list/2 with valid data updates the list" do
+      list = list_fixture()
+      assert {:ok, %List{} = list} = Content.update_list(list, @update_attrs)
+      assert list.first_name == "some updated first_name"
+    end
+
+    test "update_list/2 with invalid data returns error changeset" do
+      list = list_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_list(list, @invalid_attrs)
+      assert list == Content.get_list!(list.id)
+    end
+
+    test "delete_list/1 deletes the list" do
+      list = list_fixture()
+      assert {:ok, %List{}} = Content.delete_list(list)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_list!(list.id) end
+    end
+
+    test "change_list/1 returns a list changeset" do
+      list = list_fixture()
+      assert %Ecto.Changeset{} = Content.change_list(list)
+    end
+  end
+
+  describe "collectpolls" do
+    alias Bookclub.Content.CollectPoll
+
+    @valid_attrs %{first_name: "some first_name"}
+    @update_attrs %{first_name: "some updated first_name"}
+    @invalid_attrs %{first_name: nil}
+
+    def collect_poll_fixture(attrs \\ %{}) do
+      {:ok, collect_poll} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_collect_poll()
+
+      collect_poll
+    end
+
+    test "list_collectpolls/0 returns all collectpolls" do
+      collect_poll = collect_poll_fixture()
+      assert Content.list_collectpolls() == [collect_poll]
+    end
+
+    test "get_collect_poll!/1 returns the collect_poll with given id" do
+      collect_poll = collect_poll_fixture()
+      assert Content.get_collect_poll!(collect_poll.id) == collect_poll
+    end
+
+    test "create_collect_poll/1 with valid data creates a collect_poll" do
+      assert {:ok, %CollectPoll{} = collect_poll} = Content.create_collect_poll(@valid_attrs)
+      assert collect_poll.first_name == "some first_name"
+    end
+
+    test "create_collect_poll/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_collect_poll(@invalid_attrs)
+    end
+
+    test "update_collect_poll/2 with valid data updates the collect_poll" do
+      collect_poll = collect_poll_fixture()
+      assert {:ok, %CollectPoll{} = collect_poll} = Content.update_collect_poll(collect_poll, @update_attrs)
+      assert collect_poll.first_name == "some updated first_name"
+    end
+
+    test "update_collect_poll/2 with invalid data returns error changeset" do
+      collect_poll = collect_poll_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_collect_poll(collect_poll, @invalid_attrs)
+      assert collect_poll == Content.get_collect_poll!(collect_poll.id)
+    end
+
+    test "delete_collect_poll/1 deletes the collect_poll" do
+      collect_poll = collect_poll_fixture()
+      assert {:ok, %CollectPoll{}} = Content.delete_collect_poll(collect_poll)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_collect_poll!(collect_poll.id) end
+    end
+
+    test "change_collect_poll/1 returns a collect_poll changeset" do
+      collect_poll = collect_poll_fixture()
+      assert %Ecto.Changeset{} = Content.change_collect_poll(collect_poll)
+    end
+  end
+
+  describe "reports" do
+    alias Bookclub.Content.Report
+
+    @valid_attrs %{first_name: "some first_name"}
+    @update_attrs %{first_name: "some updated first_name"}
+    @invalid_attrs %{first_name: nil}
+
+    def report_fixture(attrs \\ %{}) do
+      {:ok, report} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_report()
+
+      report
+    end
+
+    test "list_reports/0 returns all reports" do
+      report = report_fixture()
+      assert Content.list_reports() == [report]
+    end
+
+    test "get_report!/1 returns the report with given id" do
+      report = report_fixture()
+      assert Content.get_report!(report.id) == report
+    end
+
+    test "create_report/1 with valid data creates a report" do
+      assert {:ok, %Report{} = report} = Content.create_report(@valid_attrs)
+      assert report.first_name == "some first_name"
+    end
+
+    test "create_report/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_report(@invalid_attrs)
+    end
+
+    test "update_report/2 with valid data updates the report" do
+      report = report_fixture()
+      assert {:ok, %Report{} = report} = Content.update_report(report, @update_attrs)
+      assert report.first_name == "some updated first_name"
+    end
+
+    test "update_report/2 with invalid data returns error changeset" do
+      report = report_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_report(report, @invalid_attrs)
+      assert report == Content.get_report!(report.id)
+    end
+
+    test "delete_report/1 deletes the report" do
+      report = report_fixture()
+      assert {:ok, %Report{}} = Content.delete_report(report)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_report!(report.id) end
+    end
+
+    test "change_report/1 returns a report changeset" do
+      report = report_fixture()
+      assert %Ecto.Changeset{} = Content.change_report(report)
+    end
+  end
+
+  describe "favorites" do
+    alias Bookclub.Content.Favorite
+
+    @valid_attrs %{first_name: "some first_name"}
+    @update_attrs %{first_name: "some updated first_name"}
+    @invalid_attrs %{first_name: nil}
+
+    def favorite_fixture(attrs \\ %{}) do
+      {:ok, favorite} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_favorite()
+
+      favorite
+    end
+
+    test "list_favorites/0 returns all favorites" do
+      favorite = favorite_fixture()
+      assert Content.list_favorites() == [favorite]
+    end
+
+    test "get_favorite!/1 returns the favorite with given id" do
+      favorite = favorite_fixture()
+      assert Content.get_favorite!(favorite.id) == favorite
+    end
+
+    test "create_favorite/1 with valid data creates a favorite" do
+      assert {:ok, %Favorite{} = favorite} = Content.create_favorite(@valid_attrs)
+      assert favorite.first_name == "some first_name"
+    end
+
+    test "create_favorite/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_favorite(@invalid_attrs)
+    end
+
+    test "update_favorite/2 with valid data updates the favorite" do
+      favorite = favorite_fixture()
+      assert {:ok, %Favorite{} = favorite} = Content.update_favorite(favorite, @update_attrs)
+      assert favorite.first_name == "some updated first_name"
+    end
+
+    test "update_favorite/2 with invalid data returns error changeset" do
+      favorite = favorite_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_favorite(favorite, @invalid_attrs)
+      assert favorite == Content.get_favorite!(favorite.id)
+    end
+
+    test "delete_favorite/1 deletes the favorite" do
+      favorite = favorite_fixture()
+      assert {:ok, %Favorite{}} = Content.delete_favorite(favorite)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_favorite!(favorite.id) end
+    end
+
+    test "change_favorite/1 returns a favorite changeset" do
+      favorite = favorite_fixture()
+      assert %Ecto.Changeset{} = Content.change_favorite(favorite)
+    end
+  end
 end

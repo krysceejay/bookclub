@@ -23,6 +23,10 @@ defmodule Bookclub.Accounts.User do
     has_many :readers, Bookclub.Content.Reader
     has_many :ratings, Bookclub.Content.Rating
     has_one :verify, Bookclub.Accounts.Verify
+    has_many :members, Bookclub.Content.Member
+    has_many :collectpolls, Bookclub.Content.CollectPoll
+    has_many :reports, Bookclub.Content.Report
+    has_many :favorites, Bookclub.Content.Favorite
 
     ##Virtual Fields ##
     field :passwordfield, :string, virtual: true

@@ -12,8 +12,9 @@ defmodule Bookclub.Content do
     Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
   end
 
-  def query(queryable, _params) do
-    queryable
+  def query(queryable, params) do
+    field = params[:order] || :id
+    from q in queryable, order_by: [desc: field(q, ^field)]
   end
 
   @doc """
@@ -754,7 +755,11 @@ defmodule Bookclub.Content do
 
   """
   def list_clubs do
-    Repo.all(Club)
+    Repo.all(
+      from c in Club,
+      where: c.publish == true,
+      order_by: [desc: c.id]
+    )
   end
 
   @doc """
@@ -773,6 +778,15 @@ defmodule Bookclub.Content do
   """
   def get_club!(id), do: Repo.get!(Club, id)
 
+  def get_club_by_id_and_user(userid, clubid) do
+    query =
+      from c in Club,
+        where: c.user_id == ^userid,
+        where: c.id == ^clubid
+
+    Repo.one(query)
+  end
+
   @doc """
   Creates a club.
 
@@ -790,10 +804,15 @@ defmodule Bookclub.Content do
   #   |> Club.changeset(attrs)
   #   |> Repo.insert()
   # end
+  # def create_club(attrs \\ %{}) do
+  #   %Club{}
+  #   |> Club.changeset_c(attrs)
+  #   |> Repo.insert()
+  # end
 
   def create_club(attrs \\ %{}) do
     %Club{}
-    |> Club.changeset_c(attrs)
+    |> Club.changeset_app(attrs)
     |> Repo.insert()
   end
 
@@ -811,7 +830,19 @@ defmodule Bookclub.Content do
   """
   def update_club(%Club{} = club, attrs) do
     club
-    |> Club.changeset(attrs)
+    |> Club.changeset_app(attrs)
+    |> Repo.update()
+  end
+
+  def update_club_public(%Club{} = club, attrs) do
+    club
+    |> Club.set_public(attrs)
+    |> Repo.update()
+  end
+
+  def update_club_publish(%Club{} = club, attrs) do
+    club
+    |> Club.set_publish(attrs)
     |> Repo.update()
   end
 
@@ -842,5 +873,787 @@ defmodule Bookclub.Content do
   """
   def change_club(%Club{} = club) do
     Club.changeset(club, %{})
+  end
+
+  alias Bookclub.Content.Member
+
+  @doc """
+  Returns the list of members.
+
+  ## Examples
+
+      iex> list_members()
+      [%Member{}, ...]
+
+  """
+  def list_members do
+    Repo.all(Member)
+  end
+
+  @doc """
+  Gets a single member.
+
+  Raises `Ecto.NoResultsError` if the Member does not exist.
+
+  ## Examples
+
+      iex> get_member!(123)
+      %Member{}
+
+      iex> get_member!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_member!(id), do: Repo.get!(Member, id)
+
+  def get_club_members(club_id) do
+    Repo.all(
+      from m in Member,
+      where: m.club_id == ^club_id,
+      order_by: [asc: m.id]
+    )
+  end
+
+
+  @doc """
+  Creates a member.
+
+  ## Examples
+
+      iex> create_member(%{field: value})
+      {:ok, %Member{}}
+
+      iex> create_member(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_member(attrs \\ %{}) do
+    %Member{}
+    |> Member.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a member.
+
+  ## Examples
+
+      iex> update_member(member, %{field: new_value})
+      {:ok, %Member{}}
+
+      iex> update_member(member, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_member(%Member{} = member, attrs) do
+    member
+    |> Member.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a member.
+
+  ## Examples
+
+      iex> delete_member(member)
+      {:ok, %Member{}}
+
+      iex> delete_member(member)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_member(%Member{} = member) do
+    Repo.delete(member)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking member changes.
+
+  ## Examples
+
+      iex> change_member(member)
+      %Ecto.Changeset{source: %Member{}}
+
+  """
+  def change_member(%Member{} = member) do
+    Member.changeset(member, %{})
+  end
+
+  alias Bookclub.Content.Rate
+
+  @doc """
+  Returns the list of rates.
+
+  ## Examples
+
+      iex> list_rates()
+      [%Rate{}, ...]
+
+  """
+  def list_rates do
+    Repo.all(Rate)
+  end
+
+  @doc """
+  Gets a single rate.
+
+  Raises `Ecto.NoResultsError` if the Rate does not exist.
+
+  ## Examples
+
+      iex> get_rate!(123)
+      %Rate{}
+
+      iex> get_rate!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_rate!(id), do: Repo.get!(Rate, id)
+
+  def check_if_user_rated_club(user_id, club_id) do
+    query =
+      from r in Rate,
+        where: r.user_id == ^user_id,
+        where: r.club_id == ^club_id
+
+    Repo.exists?(query)
+  end
+
+  def get_rating_by_club_user(userid, clubid) do
+    query =
+      from r in Rate,
+        where: r.user_id == ^userid,
+        where: r.club_id == ^clubid
+
+    Repo.one(query)
+
+  end
+
+  @doc """
+  Creates a rate.
+
+  ## Examples
+
+      iex> create_rate(%{field: value})
+      {:ok, %Rate{}}
+
+      iex> create_rate(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_rate(attrs \\ %{}) do
+    %Rate{}
+    |> Rate.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a rate.
+
+  ## Examples
+
+      iex> update_rate(rate, %{field: new_value})
+      {:ok, %Rate{}}
+
+      iex> update_rate(rate, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_rate(%Rate{} = rate, attrs) do
+    rate
+    |> Rate.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a rate.
+
+  ## Examples
+
+      iex> delete_rate(rate)
+      {:ok, %Rate{}}
+
+      iex> delete_rate(rate)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_rate(%Rate{} = rate) do
+    Repo.delete(rate)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking rate changes.
+
+  ## Examples
+
+      iex> change_rate(rate)
+      %Ecto.Changeset{source: %Rate{}}
+
+  """
+  def change_rate(%Rate{} = rate) do
+    Rate.changeset(rate, %{})
+  end
+
+  alias Bookclub.Content.Poll
+
+  @doc """
+  Returns the list of polls.
+
+  ## Examples
+
+      iex> list_polls()
+      [%Poll{}, ...]
+
+  """
+  def list_polls do
+    Repo.all(Poll)
+  end
+
+  def get_polls_by_club(club_id) do
+    Repo.all(
+      from p in Poll,
+      where: p.club_id == ^club_id,
+      order_by: [desc: p.id]
+    )
+  end
+
+  @doc """
+  Gets a single poll.
+
+  Raises `Ecto.NoResultsError` if the Poll does not exist.
+
+  ## Examples
+
+      iex> get_poll!(123)
+      %Poll{}
+
+      iex> get_poll!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_poll!(id), do: Repo.get!(Poll, id)
+
+  def check_if_any_club_poll_is_current(club_id) do
+    query =
+      from p in Poll,
+        where: p.club_id == ^club_id,
+        where: p.current == true
+
+    Repo.exists?(query)
+  end
+
+  def get_club_current_poll(club_id) do
+    query =
+      from p in Poll,
+        where: p.club_id == ^club_id,
+        where: p.current == true
+    Repo.one(query)
+  end
+
+  def get_poll_by_id(poll_id) do
+    query =
+      from p in Poll,
+        where: p.id == ^poll_id
+    Repo.one(query)
+  end
+
+  @doc """
+  Creates a poll.
+
+  ## Examples
+
+      iex> create_poll(%{field: value})
+      {:ok, %Poll{}}
+
+      iex> create_poll(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_poll(attrs \\ %{}) do
+    %Poll{}
+    |> Poll.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a poll.
+
+  ## Examples
+
+      iex> update_poll(poll, %{field: new_value})
+      {:ok, %Poll{}}
+
+      iex> update_poll(poll, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_poll(%Poll{} = poll, attrs) do
+    poll
+    |> Poll.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def update_poll_status(%Poll{} = poll, attrs) do
+    poll
+    |> Poll.set_status(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a poll.
+
+  ## Examples
+
+      iex> delete_poll(poll)
+      {:ok, %Poll{}}
+
+      iex> delete_poll(poll)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_poll(%Poll{} = poll) do
+    Repo.delete(poll)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking poll changes.
+
+  ## Examples
+
+      iex> change_poll(poll)
+      %Ecto.Changeset{source: %Poll{}}
+
+  """
+  def change_poll(%Poll{} = poll) do
+    Poll.changeset(poll, %{})
+  end
+
+  alias Bookclub.Content.List
+
+  @doc """
+  Returns the list of lists.
+
+  ## Examples
+
+      iex> list_lists()
+      [%List{}, ...]
+
+  """
+  def list_lists do
+    Repo.all(List)
+  end
+
+  @doc """
+  Gets a single list.
+
+  Raises `Ecto.NoResultsError` if the List does not exist.
+
+  ## Examples
+
+      iex> get_list!(123)
+      %List{}
+
+      iex> get_list!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_list!(id), do: Repo.get!(List, id)
+
+  def get_lists_by_club(club_id) do
+    Repo.all(
+      from l in List,
+      where: l.club_id == ^club_id,
+      order_by: [desc: l.id]
+    )
+  end
+
+  def get_list_by_id(list_id) do
+    query =
+      from l in List,
+        where: l.id == ^list_id
+
+    Repo.one(query)
+  end
+
+  def get_club_current_book(club_id) do
+    query =
+      from l in List,
+        where: l.club_id == ^club_id,
+        where: l.current == true
+    Repo.one(query)
+  end
+
+  @doc """
+  Creates a list.
+
+  ## Examples
+
+      iex> create_list(%{field: value})
+      {:ok, %List{}}
+
+      iex> create_list(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_list(attrs \\ %{}) do
+    %List{}
+    |> List.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a list.
+
+  ## Examples
+
+      iex> update_list(list, %{field: new_value})
+      {:ok, %List{}}
+
+      iex> update_list(list, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_list(%List{} = list, attrs) do
+    list
+    |> List.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def update_list_status(%List{} = list, attrs) do
+    list
+    |> List.set_status(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a list.
+
+  ## Examples
+
+      iex> delete_list(list)
+      {:ok, %List{}}
+
+      iex> delete_list(list)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_list(%List{} = list) do
+    Repo.delete(list)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking list changes.
+
+  ## Examples
+
+      iex> change_list(list)
+      %Ecto.Changeset{source: %List{}}
+
+  """
+  def change_list(%List{} = list) do
+    List.changeset(list, %{})
+  end
+
+  alias Bookclub.Content.CollectPoll
+
+  @doc """
+  Returns the list of collectpolls.
+
+  ## Examples
+
+      iex> list_collectpolls()
+      [%CollectPoll{}, ...]
+
+  """
+  def list_collectpolls do
+    Repo.all(CollectPoll)
+  end
+
+  @doc """
+  Gets a single collect_poll.
+
+  Raises `Ecto.NoResultsError` if the Collect poll does not exist.
+
+  ## Examples
+
+      iex> get_collect_poll!(123)
+      %CollectPoll{}
+
+      iex> get_collect_poll!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_collect_poll!(id), do: Repo.get!(CollectPoll, id)
+
+  def get_votes_by_poll(poll_id) do
+    Repo.all(
+      from c in CollectPoll,
+      where: c.poll_id == ^poll_id
+    )
+  end
+
+  def get_votes_by_poll_and_user(poll_id, user_id) do
+    query =
+      from c in CollectPoll,
+        where: c.poll_id == ^poll_id,
+        where: c.user_id == ^user_id
+    Repo.one(query)
+  end
+  @doc """
+  Creates a collect_poll.
+
+  ## Examples
+
+      iex> create_collect_poll(%{field: value})
+      {:ok, %CollectPoll{}}
+
+      iex> create_collect_poll(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_collect_poll(attrs \\ %{}) do
+    %CollectPoll{}
+    |> CollectPoll.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a collect_poll.
+
+  ## Examples
+
+      iex> update_collect_poll(collect_poll, %{field: new_value})
+      {:ok, %CollectPoll{}}
+
+      iex> update_collect_poll(collect_poll, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_collect_poll(%CollectPoll{} = collect_poll, attrs) do
+    collect_poll
+    |> CollectPoll.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a collect_poll.
+
+  ## Examples
+
+      iex> delete_collect_poll(collect_poll)
+      {:ok, %CollectPoll{}}
+
+      iex> delete_collect_poll(collect_poll)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_collect_poll(%CollectPoll{} = collect_poll) do
+    Repo.delete(collect_poll)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking collect_poll changes.
+
+  ## Examples
+
+      iex> change_collect_poll(collect_poll)
+      %Ecto.Changeset{source: %CollectPoll{}}
+
+  """
+  def change_collect_poll(%CollectPoll{} = collect_poll) do
+    CollectPoll.changeset(collect_poll, %{})
+  end
+
+  alias Bookclub.Content.Report
+
+  @doc """
+  Returns the list of reports.
+
+  ## Examples
+
+      iex> list_reports()
+      [%Report{}, ...]
+
+  """
+  def list_reports do
+    Repo.all(Report)
+  end
+
+  @doc """
+  Gets a single report.
+
+  Raises `Ecto.NoResultsError` if the Report does not exist.
+
+  ## Examples
+
+      iex> get_report!(123)
+      %Report{}
+
+      iex> get_report!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_report!(id), do: Repo.get!(Report, id)
+
+  @doc """
+  Creates a report.
+
+  ## Examples
+
+      iex> create_report(%{field: value})
+      {:ok, %Report{}}
+
+      iex> create_report(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_report(attrs \\ %{}) do
+    %Report{}
+    |> Report.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a report.
+
+  ## Examples
+
+      iex> update_report(report, %{field: new_value})
+      {:ok, %Report{}}
+
+      iex> update_report(report, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_report(%Report{} = report, attrs) do
+    report
+    |> Report.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a report.
+
+  ## Examples
+
+      iex> delete_report(report)
+      {:ok, %Report{}}
+
+      iex> delete_report(report)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_report(%Report{} = report) do
+    Repo.delete(report)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking report changes.
+
+  ## Examples
+
+      iex> change_report(report)
+      %Ecto.Changeset{source: %Report{}}
+
+  """
+  def change_report(%Report{} = report) do
+    Report.changeset(report, %{})
+  end
+
+  alias Bookclub.Content.Favorite
+
+  @doc """
+  Returns the list of favorites.
+
+  ## Examples
+
+      iex> list_favorites()
+      [%Favorite{}, ...]
+
+  """
+  def list_favorites do
+    Repo.all(Favorite)
+  end
+
+  @doc """
+  Gets a single favorite.
+
+  Raises `Ecto.NoResultsError` if the Favorite does not exist.
+
+  ## Examples
+
+      iex> get_favorite!(123)
+      %Favorite{}
+
+      iex> get_favorite!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_favorite!(id), do: Repo.get!(Favorite, id)
+
+  @doc """
+  Creates a favorite.
+
+  ## Examples
+
+      iex> create_favorite(%{field: value})
+      {:ok, %Favorite{}}
+
+      iex> create_favorite(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_favorite(attrs \\ %{}) do
+    %Favorite{}
+    |> Favorite.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a favorite.
+
+  ## Examples
+
+      iex> update_favorite(favorite, %{field: new_value})
+      {:ok, %Favorite{}}
+
+      iex> update_favorite(favorite, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_favorite(%Favorite{} = favorite, attrs) do
+    favorite
+    |> Favorite.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a favorite.
+
+  ## Examples
+
+      iex> delete_favorite(favorite)
+      {:ok, %Favorite{}}
+
+      iex> delete_favorite(favorite)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_favorite(%Favorite{} = favorite) do
+    Repo.delete(favorite)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking favorite changes.
+
+  ## Examples
+
+      iex> change_favorite(favorite)
+      %Ecto.Changeset{source: %Favorite{}}
+
+  """
+  def change_favorite(%Favorite{} = favorite) do
+    Favorite.changeset(favorite, %{})
   end
 end

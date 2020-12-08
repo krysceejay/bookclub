@@ -1,8 +1,7 @@
 defmodule BookclubWeb.UserController do
   use BookclubWeb, :controller
 
-  alias Bookclub.Accounts
-  alias Bookclub.Content
+  alias Bookclub.{Accounts, Content}
   alias Bookclub.Content.{Book, Topic}
   alias BookclubWeb.Pagination
 
