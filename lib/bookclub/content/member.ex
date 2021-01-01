@@ -17,4 +17,10 @@ defmodule Bookclub.Content.Member do
     |> cast(attrs, [:user_id, :club_id, :status])
     |> validate_required([:user_id, :club_id])
   end
+
+  def set_status(member, attrs) do
+    member
+    |> cast(attrs, [:status])
+  end
+
 end

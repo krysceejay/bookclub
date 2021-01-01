@@ -85,6 +85,24 @@ end
       resolve &Resolvers.ClubResolver.get_club_members/3
     end
 
+    @desc "Get fav by user and club"
+    field :get_fav_by_user_and_club, :favorite_type do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.get_fav_by_user_and_club/3
+    end
+
+    @desc "Get club ratings"
+    field :get_club_ratings, list_of(:rate_type) do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.get_club_ratings/3
+    end
+
+    @desc "Check If User Rated"
+    field :check_if_user_rated, :boolean do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.check_if_user_rated/3
+    end
+
   end
 
   mutation do
@@ -135,12 +153,36 @@ end
       resolve &Resolvers.ClubResolver.create_rate/3
     end
 
+    @desc "Update Rating"
+    field :update_rate, :rate_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :input, non_null(:rate_input_type)
+      resolve &Resolvers.ClubResolver.update_rate/3
+    end
+
     @desc "Create Poll"
     field :create_poll, :poll_payload do
       middleware Middleware.Authorize, :any
       arg :club_id, non_null(:id)
       arg :input, non_null(:poll_input_type)
       resolve &Resolvers.ClubResolver.create_poll/3
+    end
+
+    @desc "Update Poll"
+    field :update_poll, :poll_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :poll_id, non_null(:id)
+      arg :input, non_null(:poll_input_type)
+      resolve &Resolvers.ClubResolver.update_poll/3
+    end
+
+    @desc "Remove Poll"
+    field :remove_poll, :poll_type do
+      middleware Middleware.Authorize, :any
+      arg :poll_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.delete_poll/3
     end
 
     @desc "Create List"
@@ -205,10 +247,32 @@ end
     end
 
     @desc "Favorite Club"
-    field :fav_club, :favorite_payload do
+    field :fav_club, :favorite_type do
       middleware Middleware.Authorize, :any
       arg :club_id, non_null(:id)
       resolve &Resolvers.ClubResolver.add_favorite/3
+    end
+
+    @desc "Unfavorite Club"
+    field :unfav_club, :favorite_type do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.remove_favorite/3
+    end
+
+    @desc "Set Member Status"
+    field :set_member_status, :member_type do
+      middleware Middleware.Authorize, :any
+      arg :user_id, non_null(:id)
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.setMemberStatus/3
+    end
+
+    @desc "Remove Member"
+    field :remove_member, :member_type do
+      middleware Middleware.Authorize, :any
+      arg :member_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.removeMember/3
     end
 
     @desc "Upload file"

@@ -914,6 +914,15 @@ defmodule Bookclub.Content do
     )
   end
 
+  def get_member_by_id_and_clubid(userid, clubid) do
+    query =
+      from m in Member,
+        where: m.user_id == ^userid,
+        where: m.club_id == ^clubid
+
+    Repo.one(query)
+  end
+
 
   @doc """
   Creates a member.
@@ -948,6 +957,12 @@ defmodule Bookclub.Content do
   def update_member(%Member{} = member, attrs) do
     member
     |> Member.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def update_member_status(%Member{} = member, attrs) do
+    member
+    |> Member.set_status(attrs)
     |> Repo.update()
   end
 
@@ -1027,7 +1042,14 @@ defmodule Bookclub.Content do
         where: r.club_id == ^clubid
 
     Repo.one(query)
+  end
 
+  def get_ratings_by_club(club_id) do
+    Repo.all(
+      from r in Rate,
+      where: r.club_id == ^club_id,
+      order_by: [desc: r.id]
+    )
   end
 
   @doc """
@@ -1591,6 +1613,14 @@ defmodule Bookclub.Content do
 
   """
   def get_favorite!(id), do: Repo.get!(Favorite, id)
+
+  def get_fav_by_club_and_user(club_id, user_id) do
+    query =
+      from f in Favorite,
+        where: f.club_id == ^club_id,
+        where: f.user_id == ^user_id
+    Repo.one(query)
+  end
 
   @doc """
   Creates a favorite.

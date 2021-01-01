@@ -15,6 +15,6 @@ defmodule BookclubWeb.Schema.Types.FavoriteType do
         field :club, :club_type, resolve: dataloader(Content)
       end
 
-  payload_object(:favorite_payload, :favorite_type)
+  # payload_object(:favorite_payload, :favorite_type)
 
   end

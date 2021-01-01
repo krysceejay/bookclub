@@ -20,21 +20,45 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     end
   end
 
+  # def create_rate(_,%{input: input, club_id: club_id},%{context: %{current_user: current_user}}) do
+  #   rate_inputs = Map.merge(input, %{user_id: current_user.id, club_id: club_id})
+  #
+  #   with true <- Content.check_if_user_rated_club(current_user.id, club_id) do
+  #     rating = Content.get_rating_by_club_user(current_user.id, club_id)
+  #     case Content.update_rate(rating, rate_inputs) do
+  #       {:ok, rate} -> {:ok, success_payload(rate)}
+  #       {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+  #     end
+  #   else
+  #     false ->
+  #       case Content.create_rate(rate_inputs) do
+  #         {:ok, rate} -> {:ok, success_payload(rate)}
+  #         {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+  #       end
+  #   end
+  # end
+
+  def check_if_user_rated(_,%{club_id: club_id},%{context: %{current_user: current_user}}) do
+    case Content.check_if_user_rated_club(current_user.id, club_id) do
+        false -> {:ok, false}
+        true -> {:ok, true}
+    end
+  end
+
   def create_rate(_,%{input: input, club_id: club_id},%{context: %{current_user: current_user}}) do
     rate_inputs = Map.merge(input, %{user_id: current_user.id, club_id: club_id})
+    case Content.create_rate(rate_inputs) do
+      {:ok, rate} -> {:ok, success_payload(rate)}
+      {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+    end
+  end
 
-    with true <- Content.check_if_user_rated_club(current_user.id, club_id) do
-      rating = Content.get_rating_by_club_user(current_user.id, club_id)
-      case Content.update_rate(rating, rate_inputs) do
-        {:ok, rate} -> {:ok, success_payload(rate)}
-        {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
-      end
-    else
-      false ->
-        case Content.create_rate(rate_inputs) do
-          {:ok, rate} -> {:ok, success_payload(rate)}
-          {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
-        end
+  def update_rate(_,%{input: input, club_id: club_id},%{context: %{current_user: current_user}}) do
+    rate_inputs = Map.merge(input, %{user_id: current_user.id, club_id: club_id})
+    rating = Content.get_rating_by_club_user(current_user.id, club_id)
+    case Content.update_rate(rating, rate_inputs) do
+      {:ok, rate} -> {:ok, success_payload(rate)}
+      {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
     end
   end
 
@@ -43,6 +67,23 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     case Content.create_poll(poll_inputs) do
       {:ok, poll} -> {:ok, success_payload(poll)}
       {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+    end
+  end
+
+  def update_poll(_,%{input: input, club_id: club_id, poll_id: poll_id},_) do
+    poll_inputs = Map.merge(input, %{club_id: club_id})
+    poll = Content.get_poll!(poll_id)
+    case Content.update_poll(poll, poll_inputs) do
+      {:ok, poll} -> {:ok, success_payload(poll)}
+      {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+    end
+  end
+
+  def delete_poll(_,%{poll_id: poll_id},_) do
+    poll = Content.get_poll!(poll_id)
+    case Content.delete_poll(poll) do
+      {:ok, poll} -> {:ok, poll}
+      {:error, _} -> {:error, "Some error occured, please check your internet connection and retry."}
     end
   end
 
@@ -153,9 +194,47 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
   def add_favorite(_,%{club_id: club_id},%{context: %{current_user: current_user}}) do
     favorite_input = %{user_id: current_user.id, club_id: club_id}
-    case Content.create_favorite(favorite_input) do
-      {:ok, fav} -> {:ok, success_payload(fav)}
-      {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+    case Content.get_fav_by_club_and_user(club_id, current_user.id) do
+      nil ->
+        case Content.create_favorite(favorite_input) do
+          {:ok, fav} -> {:ok, fav}
+          {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+        end
+      fav ->
+        {:error, "You have favorite this club already"}
+    end
+  end
+
+  def remove_favorite(_,%{club_id: club_id},%{context: %{current_user: current_user}}) do
+    case Content.get_fav_by_club_and_user(club_id, current_user.id) do
+      nil -> {:error, "You have not favorite this club yet"}
+      fav ->
+        case Content.delete_favorite(fav) do
+          {:ok, fav} -> {:ok, fav}
+          {:error, _} -> {:error, "Some error occured, please check your internet connection and retry."}
+        end
+    end
+  end
+
+  def setMemberStatus(_,%{club_id: club_id, user_id: user_id},_) do
+    getMember = Content.get_member_by_id_and_clubid(user_id, club_id)
+    attr =
+      case getMember.status do
+        false -> %{status: true}
+        true -> %{status: false}
+      end
+
+    case Content.update_member_status(getMember,attr) do
+      {:ok, member} -> {:ok, member}
+      {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+    end
+  end
+
+  def removeMember(_,%{member_id: member_id},_) do
+    member = Content.get_member!(member_id)
+    case Content.delete_member(member) do
+      {:ok, member} -> {:ok, member}
+      {:error, _} -> {:error, "Some error occured, please check your internet connection and retry."}
     end
   end
 
@@ -185,6 +264,14 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
   def single_club(_,%{club_id: club_id},_) do
     {:ok, Content.get_club!(club_id)}
+  end
+
+  def get_fav_by_user_and_club(_,%{club_id: club_id},%{context: %{current_user: current_user}}) do
+    {:ok, Content.get_fav_by_club_and_user(club_id, current_user.id)}
+  end
+
+  def get_club_ratings(_,%{club_id: club_id},_) do
+    {:ok, Content.get_ratings_by_club(club_id)}
   end
 
 end
