@@ -41,6 +41,7 @@ defmodule BookclubWeb.Router do
     pipe_through :upload
 
     post "/:path", UploadController, :uploadFile
+    post "/delete/:path", UploadController, :deleteFile
   end
 
   scope "/bkadmin", BookclubWeb do

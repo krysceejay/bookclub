@@ -923,6 +923,15 @@ defmodule Bookclub.Content do
     Repo.one(query)
   end
 
+  def check_if_user_is_member(user_id, club_id) do
+    query =
+      from m in Member,
+        where: m.user_id == ^user_id,
+        where: m.club_id == ^club_id
+
+    Repo.exists?(query)
+  end
+
 
   @doc """
   Creates a member.

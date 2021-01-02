@@ -14,10 +14,16 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
   def create_member(_,%{input: input, club_id: club_id},%{context: %{current_user: current_user}}) do
     member_inputs = Map.merge(input, %{user_id: current_user.id, club_id: club_id})
-    case Content.create_member(member_inputs) do
-      {:ok, member} -> {:ok, success_payload(member)}
-      {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
-    end
+      with true <- Content.check_if_user_is_member(current_user.id, club_id) do
+        {:error, "You are a member already."}
+      else
+        false ->
+          case Content.create_member(member_inputs) do
+            {:ok, member} -> {:ok, success_payload(member)}
+            {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+          end
+      end
+
   end
 
   # def create_rate(_,%{input: input, club_id: club_id},%{context: %{current_user: current_user}}) do
@@ -92,6 +98,23 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     case Content.create_list(list_inputs) do
       {:ok, list} -> {:ok, success_payload(list)}
       {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+    end
+  end
+
+  def update_list(_,%{input: input, club_id: club_id, list_id: list_id},_) do
+    list_inputs = Map.merge(input, %{club_id: club_id})
+    list = Content.get_list!(list_id)
+    case Content.update_list(list, list_inputs) do
+      {:ok, list} -> {:ok, success_payload(list)}
+      {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+    end
+  end
+
+  def delete_list(_,%{list_id: list_id},_) do
+    list = Content.get_list!(list_id)
+    case Content.delete_list(list) do
+      {:ok, list} -> {:ok, list}
+      {:error, _} -> {:error, "Some error occured, please check your internet connection and retry."}
     end
   end
 
@@ -272,6 +295,10 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
   def get_club_ratings(_,%{club_id: club_id},_) do
     {:ok, Content.get_ratings_by_club(club_id)}
+  end
+
+  def check_if_user_is_member(_,%{club_id: club_id},%{context: %{current_user: current_user}}) do
+    {:ok, Content.check_if_user_is_member(current_user.id, club_id)}
   end
 
 end

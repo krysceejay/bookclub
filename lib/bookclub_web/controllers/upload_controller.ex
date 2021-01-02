@@ -10,5 +10,12 @@ defmodule BookclubWeb.UploadController do
       |> json(%{data: uploadFileName})
   end
 
+  def deleteFile(conn, %{"path" => path, "filename" => newFilename}) do
+    rmFile = Upload.delete_img(path, newFilename)
+      conn
+      |> put_status(200)
+      |> json(%{data: rmFile})
+  end
+
 
 end

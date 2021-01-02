@@ -103,6 +103,12 @@ end
       resolve &Resolvers.ClubResolver.check_if_user_rated/3
     end
 
+    @desc "Check If User Is Member"
+    field :check_if_user_is_member, :boolean do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.check_if_user_is_member/3
+    end
+
   end
 
   mutation do
@@ -191,6 +197,22 @@ end
       arg :club_id, non_null(:id)
       arg :input, non_null(:list_input_type)
       resolve &Resolvers.ClubResolver.create_list/3
+    end
+
+    @desc "Update List"
+    field :update_list, :list_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :list_id, non_null(:id)
+      arg :input, non_null(:list_input_type)
+      resolve &Resolvers.ClubResolver.update_list/3
+    end
+
+    @desc "Remove List"
+    field :remove_list, :list_type do
+      middleware Middleware.Authorize, :any
+      arg :list_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.delete_list/3
     end
 
     @desc "Set Poll Status"

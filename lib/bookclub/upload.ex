@@ -35,4 +35,12 @@ defmodule Bookclub.Upload do
   #   headers = 'Authorization: Client-ID 707b8c3154421ea'
   # end
 
+  def delete_img(folder, newFilename) do
+    with :ok <- File.rm(local_path(folder, newFilename)) do
+      newFilename
+    else
+      {:error, _reason} -> "an error occured"
+    end
+  end
+
 end
