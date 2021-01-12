@@ -18,12 +18,21 @@ defmodule Bookclub.Accounts do
 
   """
 
+  # def data() do
+  #     Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
+  # end
+  #
+  # def query(queryable, _params) do
+  #   queryable
+  # end
+
   def data() do
-      Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
+    Dataloader.Ecto.new(Bookclub.Repo, query: &query/2)
   end
 
-  def query(queryable, _params) do
-    queryable
+  def query(queryable, params) do
+    field = params[:order] || :id
+    from q in queryable, order_by: [desc: field(q, ^field)]
   end
 
   def list_roles do

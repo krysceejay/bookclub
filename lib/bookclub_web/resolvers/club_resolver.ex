@@ -12,6 +12,23 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     end
   end
 
+  def update_club(_,%{input: input, club_id: club_id},%{context: %{current_user: current_user}}) do
+    club_inputs = Map.merge(input, %{club_id: club_id, user_id: current_user.id})
+    club = Content.get_club!(club_id)
+    case Content.update_club(club, club_inputs) do
+      {:ok, club} -> {:ok, success_payload(club)}
+      {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+    end
+  end
+
+  def delete_club(_,%{club_id: club_id},_) do
+    club = Content.get_club!(club_id)
+    case Content.delete_club(club) do
+      {:ok, club} -> {:ok, club}
+      {:error, _} -> {:error, "Some error occured, please check your internet connection and retry."}
+    end
+  end
+
   def create_member(_,%{input: input, club_id: club_id},%{context: %{current_user: current_user}}) do
     member_inputs = Map.merge(input, %{user_id: current_user.id, club_id: club_id})
       with true <- Content.check_if_user_is_member(current_user.id, club_id) do
@@ -123,14 +140,14 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     case Content.get_club_current_poll(club_id) do
       nil ->
           case Content.update_poll_status(poll, %{current: true}) do
-            {:ok, _poll} -> {:ok, _poll}
-            {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+            {:ok, poll} -> {:ok, poll}
+            {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
           end
       current_poll ->
             if current_poll.id == poll.id do
               case Content.update_poll_status(poll, %{current: false}) do
-                {:ok, _poll} -> {:ok, _poll}
-                {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+                {:ok, poll} -> {:ok, poll}
+                {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
               end
             else
               {:error, "You already have a current poll"}
@@ -143,14 +160,14 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     case Content.get_club_current_book(club_id) do
       nil ->
           case Content.update_list_status(book, %{current: true}) do
-            {:ok, _book} -> {:ok, _book}
-            {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+            {:ok, book} -> {:ok, book}
+            {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
           end
       current_book ->
             if current_book.id == book.id do
               case Content.update_list_status(book, %{current: false}) do
-                {:ok, _book} -> {:ok, _book}
-                {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+                {:ok, book} -> {:ok, book}
+                {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
               end
             else
               {:error, "You already have a current book"}
@@ -164,9 +181,9 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
       nil ->
         case Content.create_collect_poll(vote_inputs) do
           {:ok, vote} -> {:ok, vote}
-          {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+          {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
         end
-      vote ->
+      _vote ->
         {:error, "You have voted"}
     end
   end
@@ -189,7 +206,7 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
     case Content.update_club_public(getClub,attr) do
       {:ok, club} -> {:ok, club}
-      {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+      {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
     end
   end
 
@@ -203,7 +220,7 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
     case Content.update_club_publish(getClub,attr) do
       {:ok, club} -> {:ok, club}
-      {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+      {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
     end
   end
 
@@ -221,9 +238,9 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
       nil ->
         case Content.create_favorite(favorite_input) do
           {:ok, fav} -> {:ok, fav}
-          {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+          {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
         end
-      fav ->
+      _fav ->
         {:error, "You have favorite this club already"}
     end
   end
@@ -249,7 +266,7 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
     case Content.update_member_status(getMember,attr) do
       {:ok, member} -> {:ok, member}
-      {:error, %Ecto.Changeset{} = changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
+      {:error, %Ecto.Changeset{} = _changeset} -> {:error, "Some error occured, please check your internet connection and retry."}
     end
   end
 
@@ -263,6 +280,10 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
   def all_clubs(_,_,_) do
     {:ok, Content.list_clubs()}
+  end
+
+  def genre_list(_,_,_) do
+    {:ok, Content.list_genres()}
   end
 
   def all_club_polls(_,%{club_id: club_id},_) do
@@ -299,6 +320,10 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
 
   def check_if_user_is_member(_,%{club_id: club_id},%{context: %{current_user: current_user}}) do
     {:ok, Content.check_if_user_is_member(current_user.id, club_id)}
+  end
+
+  def get_joined_list(_,_,%{context: %{current_user: current_user}}) do
+    {:ok, Content.get_user_joined_club(current_user.id)}
   end
 
 end

@@ -872,7 +872,7 @@ defmodule Bookclub.Content do
 
   """
   def change_club(%Club{} = club) do
-    Club.changeset(club, %{})
+    Club.changeset_c(club, %{})
   end
 
   alias Bookclub.Content.Member
@@ -911,6 +911,14 @@ defmodule Bookclub.Content do
       from m in Member,
       where: m.club_id == ^club_id,
       order_by: [asc: m.id]
+    )
+  end
+
+  def get_user_joined_club(user_id) do
+    Repo.all(
+      from m in Member,
+      where: m.user_id == ^user_id,
+      order_by: [desc: m.id]
     )
   end
 

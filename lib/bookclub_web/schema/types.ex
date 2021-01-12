@@ -19,4 +19,5 @@ defmodule BookclubWeb.Schema.Types do
   import_types Types.CollectPoll
   import_types Types.ReportType
   import_types Types.FavoriteType
+  import_types Types.GenreType
 end

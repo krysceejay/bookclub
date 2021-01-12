@@ -316,7 +316,7 @@ defmodule BookclubWeb.UserController do
       end
   end
 
-  def readbook(conn, %{"slug" => slug}) do
+  def readbook(conn, %{"slug" => _slug}) do
      render(conn, "readbook.html", layout: {BookclubWeb.LayoutView, "nolayout.html"})
   end
 

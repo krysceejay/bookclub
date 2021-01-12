@@ -55,6 +55,11 @@ end
       resolve &Resolvers.ClubResolver.all_clubs/3
     end
 
+    @desc "Get all genre"
+    field :allgenre, list_of(:genre_type) do
+      resolve &Resolvers.ClubResolver.genre_list/3
+    end
+
     @desc "Get club"
     field :club, :club_type do
       arg :club_id, non_null(:id)
@@ -83,6 +88,11 @@ end
     field :get_club_members, list_of(:member_type) do
       arg :club_id, non_null(:id)
       resolve &Resolvers.ClubResolver.get_club_members/3
+    end
+
+    @desc "Get user joined list"
+    field :get_joined_club, list_of(:member_type) do
+      resolve &Resolvers.ClubResolver.get_joined_list/3
     end
 
     @desc "Get fav by user and club"
@@ -141,6 +151,21 @@ end
       middleware Middleware.Authorize, :any
       arg :input, non_null(:club_input_type)
       resolve &Resolvers.ClubResolver.create_club/3
+    end
+
+    @desc "Update club"
+    field :update_club, :club_payload do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :input, non_null(:club_input_type)
+      resolve &Resolvers.ClubResolver.update_club/3
+    end
+
+    @desc "Delete Club"
+    field :delete_club, :club_type do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.delete_club/3
     end
 
     @desc "Create member"
