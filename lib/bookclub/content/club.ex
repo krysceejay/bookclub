@@ -11,6 +11,7 @@ defmodule Bookclub.Content.Club do
     field :description, :string
     field :genre, {:array, :string}
     field :publish, :boolean, default: false
+    field :feat, :boolean, default: false
 
     # Virtual Fields
     field :image_field, :string, virtual: true
@@ -49,6 +50,11 @@ defmodule Bookclub.Content.Club do
   def set_publish(club, attrs) do
     club
     |> cast(attrs, [:publish])
+  end
+
+  def set_featured(club, attrs) do
+    club
+    |> cast(attrs, [:feat])
   end
 
 

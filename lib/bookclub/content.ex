@@ -846,6 +846,12 @@ defmodule Bookclub.Content do
     |> Repo.update()
   end
 
+  def update_club_feature(%Club{} = club, attrs) do
+    club
+    |> Club.set_featured(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a club.
 
