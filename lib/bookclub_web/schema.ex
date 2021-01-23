@@ -60,6 +60,16 @@ end
       resolve &Resolvers.ClubResolver.genre_list/3
     end
 
+    @desc "Get featured books"
+    field :all_featured_books, list_of(:feat_book_type) do
+      resolve &Resolvers.FeatureResolver.get_featured_books/3
+    end
+
+    @desc "Get bookstores"
+    field :all_bookstores, list_of(:bookstore_type) do
+      resolve &Resolvers.FeatureResolver.get_bookstores/3
+    end
+
     @desc "Get club"
     field :club, :club_type do
       arg :club_id, non_null(:id)
@@ -320,6 +330,13 @@ end
       middleware Middleware.Authorize, :any
       arg :member_id, non_null(:id)
       resolve &Resolvers.ClubResolver.removeMember/3
+    end
+
+    @desc "Leave Club"
+    field :leave_club, :member_type do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.leave_club/3
     end
 
     @desc "Upload file"

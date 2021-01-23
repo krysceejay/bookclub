@@ -29,6 +29,14 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     end
   end
 
+  def leave_club(_,%{club_id: club_id}, %{context: %{current_user: current_user}}) do
+    member = Content.get_member_by_id_and_clubid(current_user.id, club_id)
+    case Content.delete_member(member) do
+      {:ok, member} -> {:ok, member}
+      {:error, _} -> {:error, "Some error occured, please check your internet connection and retry."}
+    end
+  end
+
   def create_member(_,%{input: input, club_id: club_id},%{context: %{current_user: current_user}}) do
     member_inputs = Map.merge(input, %{user_id: current_user.id, club_id: club_id})
       with true <- Content.check_if_user_is_member(current_user.id, club_id) do

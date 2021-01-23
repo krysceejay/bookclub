@@ -797,4 +797,65 @@ defmodule Bookclub.ContentTest do
       assert %Ecto.Changeset{} = Content.change_favorite(favorite)
     end
   end
+
+  describe "featured_books" do
+    alias Bookclub.Content.FeaturedBook
+
+    @valid_attrs %{first_name: "some first_name", last_name: "some last_name"}
+    @update_attrs %{first_name: "some updated first_name", last_name: "some updated last_name"}
+    @invalid_attrs %{first_name: nil, last_name: nil}
+
+    def featured_book_fixture(attrs \\ %{}) do
+      {:ok, featured_book} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_featured_book()
+
+      featured_book
+    end
+
+    test "list_featured_books/0 returns all featured_books" do
+      featured_book = featured_book_fixture()
+      assert Content.list_featured_books() == [featured_book]
+    end
+
+    test "get_featured_book!/1 returns the featured_book with given id" do
+      featured_book = featured_book_fixture()
+      assert Content.get_featured_book!(featured_book.id) == featured_book
+    end
+
+    test "create_featured_book/1 with valid data creates a featured_book" do
+      assert {:ok, %FeaturedBook{} = featured_book} = Content.create_featured_book(@valid_attrs)
+      assert featured_book.first_name == "some first_name"
+      assert featured_book.last_name == "some last_name"
+    end
+
+    test "create_featured_book/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_featured_book(@invalid_attrs)
+    end
+
+    test "update_featured_book/2 with valid data updates the featured_book" do
+      featured_book = featured_book_fixture()
+      assert {:ok, %FeaturedBook{} = featured_book} = Content.update_featured_book(featured_book, @update_attrs)
+      assert featured_book.first_name == "some updated first_name"
+      assert featured_book.last_name == "some updated last_name"
+    end
+
+    test "update_featured_book/2 with invalid data returns error changeset" do
+      featured_book = featured_book_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_featured_book(featured_book, @invalid_attrs)
+      assert featured_book == Content.get_featured_book!(featured_book.id)
+    end
+
+    test "delete_featured_book/1 deletes the featured_book" do
+      featured_book = featured_book_fixture()
+      assert {:ok, %FeaturedBook{}} = Content.delete_featured_book(featured_book)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_featured_book!(featured_book.id) end
+    end
+
+    test "change_featured_book/1 returns a featured_book changeset" do
+      featured_book = featured_book_fixture()
+      assert %Ecto.Changeset{} = Content.change_featured_book(featured_book)
+    end
+  end
 end

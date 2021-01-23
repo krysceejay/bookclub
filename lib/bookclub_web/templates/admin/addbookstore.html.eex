@@ -1,0 +1,4 @@
+<h3>Add Bookstore</h3>
+<div class="field">
+  <%= render "bookstoreform.html", Map.put(assigns, :action, Routes.admin_path(@conn, :createbookstore)) %>
+</div>

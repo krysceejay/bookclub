@@ -1,0 +1,61 @@
+<%= if @changeset.action do %>
+  <div class="pop pop-error">Oops, something went wrong! Please check the errors below.</div>
+<% end %>
+              <%= form_for @changeset, @action, [multipart: true], fn f -> %>
+                <div class="field-form">
+                  <div class="form-group">
+                    <%= label f, :name %>
+                    <%= text_input f, :name, placeholder: "Enter name" %>
+                    <%= error_tag f, :name %>
+                  </div>
+                  <div class="form-group">
+                    <%= label f, :address %>
+                    <%= text_input f, :address, placeholder: "Enter address" %>
+                    <%= error_tag f, :address %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= label f, :email %>
+                    <%= text_input f, :email, placeholder: "Enter email" %>
+                    <%= error_tag f, :email %>
+                  </div>
+                  <div class="form-group">
+                    <%= label f, :phone %>
+                    <%= text_input f, :phone, placeholder: "Enter phone" %>
+                    <%= error_tag f, :phone %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= label f, :displayimg_field, "Cover" %>
+                    <%= file_input f, :displayimg_field, accept: "image/*" %>
+                    <%= error_tag f, :displayimg_field %>
+                    <%= if @store.displayimg != nil do %>
+                      <img src="<%= Routes.static_path(@conn,"/images/featured/" <> @store.displayimg) %>" alt="display image"/>
+                    <% end %>
+                  </div>
+                  <!-- <div class="form-group">
+                    <%= label f, :meeting_date %>
+                    <%= date_input f, :meeting_date %>
+                    <%= error_tag f, :meeting_date %>
+                  </div>
+                  <div class="form-group">
+                    <%= label f, :meeting_time %>
+                    <%= time_input f, :meeting_time %>
+                    <%= error_tag f, :meeting_time %>
+                  </div> -->
+                  <div class="form-group">
+                    <%= label f, :status %>
+                    <%= radio_button f, :status, "1", checked: @store.status == true %> Yes
+                    <%= radio_button f, :status, "0", checked: @store.status == false %> No
+                    <%= error_tag f, :status %>
+                  </div>
+                  <div class="form-group">
+                    <%= label f, :description %>
+                    <%= textarea f, :description, id: "editor1", placeholder: "Enter Description" %>
+                    <%= error_tag f, :description %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= submit "Submit", class: "btn btn-dark" %>
+                </div>
+            <% end %>

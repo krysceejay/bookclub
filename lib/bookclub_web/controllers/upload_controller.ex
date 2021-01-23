@@ -4,7 +4,7 @@ defmodule BookclubWeb.UploadController do
   alias Bookclub.Upload
 
   def uploadFile(conn, %{"path" => path, "photo" => upload}) do
-    uploadFileName = Upload.create_upload_from_plug_upload(upload, path, "noimage.jpg")
+    uploadFileName = Upload.create_upload_from_plug_upload(upload, path, "noimage.png")
       conn
       |> put_status(200)
       |> json(%{data: uploadFileName})

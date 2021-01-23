@@ -1,8 +1,9 @@
 defmodule BookclubWeb.AdminController do
   use BookclubWeb, :controller
 
-  alias Bookclub.{Accounts, Content}
-  alias Bookclub.Content.Genre
+  alias Bookclub.{Accounts, Content, Features}
+  alias Bookclub.Content.{Genre, FeaturedBook}
+  alias Bookclub.Features.Bookstore
 
   plug BookclubWeb.Plugs.RequireAuth
 
@@ -53,6 +54,58 @@ defmodule BookclubWeb.AdminController do
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "addgenre.html", changeset: changeset)
       end
+  end
+
+  def featbooks(conn, _params) do
+    feat_books = Content.list_featured_books()
+    render(conn, "feat_books.html", feat_books: feat_books)
+  end
+
+  def addfeaturebook(conn, _params) do
+    book = %FeaturedBook{}
+    changeset = Content.change_featured_book(book)
+    render(conn, "addfeaturebook.html", changeset: changeset, book: book)
+  end
+
+  def createfeatbook(conn, %{"featured_book" => book_params}) do
+    book = %FeaturedBook{}
+    case Content.create_featured_book(book_params) do
+      {:ok, _book} ->
+        conn
+        |> put_flash(:info, "Book added successfully.")
+        |> redirect(to: Routes.admin_path(conn, :featbooks))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "addfeaturebook.html", changeset: changeset, book: book)
+    end
+
+  end
+
+  def bookstore(conn, _params) do
+    bookstore = Features.list_bookstores()
+    render(conn, "bookstore.html", bookstore: bookstore)
+  end
+
+  def addbookstore(conn, _params) do
+    store = %Bookstore{}
+    changeset = Features.change_bookstore(store)
+    render(conn, "addbookstore.html", changeset: changeset, store: store)
+  end
+
+  def createbookstore(conn, %{"bookstore" => store_params}) do
+
+    store = %Bookstore{}
+    case Features.create_bookstore(store_params) do
+      {:ok, _book} ->
+        conn
+        |> put_flash(:info, "Store added successfully.")
+        |> redirect(to: Routes.admin_path(conn, :bookstore))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "addbookstore.html", changeset: changeset, store: store)
+    end
+
+
   end
 
 

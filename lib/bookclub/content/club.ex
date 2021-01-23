@@ -56,11 +56,11 @@ defmodule Bookclub.Content.Club do
     if attrs["image_field"] do
 
       uploadFileName =
-        Upload.create_upload_from_plug_upload(attrs["image_field"], "club", "noimage.jpg")
+        Upload.create_upload_from_plug_upload(attrs["image_field"], "club", "noimage.png")
       put_change(changeset, :image, uploadFileName)
 
     else
-      put_change(changeset, :image, "noimage.jpg")
+      put_change(changeset, :image, "noimage.png")
     end
   end
 

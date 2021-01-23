@@ -1703,4 +1703,108 @@ defmodule Bookclub.Content do
   def change_favorite(%Favorite{} = favorite) do
     Favorite.changeset(favorite, %{})
   end
+
+  alias Bookclub.Content.FeaturedBook
+
+  @doc """
+  Returns the list of featured_books.
+
+  ## Examples
+
+      iex> list_featured_books()
+      [%FeaturedBook{}, ...]
+
+  """
+  def list_featured_books do
+    Repo.all(FeaturedBook)
+  end
+
+  def list_feat_books_by_status() do
+    Repo.all(
+      from f in FeaturedBook,
+      where: f.status == true,
+      order_by: [desc: f.id]
+    )
+  end
+
+  @doc """
+  Gets a single featured_book.
+
+  Raises `Ecto.NoResultsError` if the Featured book does not exist.
+
+  ## Examples
+
+      iex> get_featured_book!(123)
+      %FeaturedBook{}
+
+      iex> get_featured_book!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_featured_book!(id), do: Repo.get!(FeaturedBook, id)
+
+  @doc """
+  Creates a featured_book.
+
+  ## Examples
+
+      iex> create_featured_book(%{field: value})
+      {:ok, %FeaturedBook{}}
+
+      iex> create_featured_book(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_featured_book(attrs \\ %{}) do
+    %FeaturedBook{}
+    |> FeaturedBook.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a featured_book.
+
+  ## Examples
+
+      iex> update_featured_book(featured_book, %{field: new_value})
+      {:ok, %FeaturedBook{}}
+
+      iex> update_featured_book(featured_book, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_featured_book(%FeaturedBook{} = featured_book, attrs) do
+    featured_book
+    |> FeaturedBook.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a featured_book.
+
+  ## Examples
+
+      iex> delete_featured_book(featured_book)
+      {:ok, %FeaturedBook{}}
+
+      iex> delete_featured_book(featured_book)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_featured_book(%FeaturedBook{} = featured_book) do
+    Repo.delete(featured_book)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking featured_book changes.
+
+  ## Examples
+
+      iex> change_featured_book(featured_book)
+      %Ecto.Changeset{source: %FeaturedBook{}}
+
+  """
+  def change_featured_book(%FeaturedBook{} = featured_book) do
+    FeaturedBook.changeset(featured_book, %{})
+  end
 end

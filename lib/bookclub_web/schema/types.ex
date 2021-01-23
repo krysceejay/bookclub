@@ -20,4 +20,6 @@ defmodule BookclubWeb.Schema.Types do
   import_types Types.ReportType
   import_types Types.FavoriteType
   import_types Types.GenreType
+  import_types Types.FeatureBook
+  import_types Types.BookStore
 end

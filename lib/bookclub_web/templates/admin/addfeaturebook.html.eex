@@ -1,0 +1,4 @@
+<h3>Add Featured Book</h3>
+<div class="field">
+  <%= render "featbookform.html", Map.put(assigns, :action, Routes.admin_path(@conn, :createfeatbook)) %>
+</div>
