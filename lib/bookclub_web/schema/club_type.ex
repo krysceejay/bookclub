@@ -21,6 +21,7 @@ defmodule BookclubWeb.Schema.Types.ClubType do
         field :members, list_of(:member_type), resolve: dataloader(Content)
         field :rates, list_of(:rate_type), resolve: dataloader(Content)
         field :polls, list_of(:poll_type), resolve: dataloader(Content)
+        field :lists, list_of(:list_type), resolve: dataloader(Content)
     end
 
     input_object :club_input_type do

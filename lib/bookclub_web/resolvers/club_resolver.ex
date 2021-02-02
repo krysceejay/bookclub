@@ -221,7 +221,7 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
   def setClubPublish(_,%{club_id: club_id},%{context: %{current_user: current_user}}) do
     getClub = Content.get_club_by_id_and_user(current_user.id, club_id)
     attr =
-      case getClub.public do
+      case getClub.publish do
         false -> %{publish: true}
         true -> %{publish: false}
       end

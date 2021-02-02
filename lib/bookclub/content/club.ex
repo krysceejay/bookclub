@@ -20,6 +20,7 @@ defmodule Bookclub.Content.Club do
     has_many :members, Bookclub.Content.Member
     has_many :rates, Bookclub.Content.Rate
     has_many :polls, Bookclub.Content.Poll
+    has_many :lists, Bookclub.Content.List
     has_many :reports, Bookclub.Content.Report
     has_many :favorites, Bookclub.Content.Favorite
 
