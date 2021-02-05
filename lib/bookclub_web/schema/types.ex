@@ -22,4 +22,6 @@ defmodule BookclubWeb.Schema.Types do
   import_types Types.GenreType
   import_types Types.FeatureBook
   import_types Types.BookStore
+  import_types Types.NotificationType
+
 end

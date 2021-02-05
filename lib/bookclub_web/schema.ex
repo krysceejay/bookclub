@@ -4,7 +4,7 @@ defmodule BookclubWeb.Schema do
   alias BookclubWeb.Schema.Types
   alias BookclubWeb.Resolvers
   alias BookclubWeb.Schema.Middleware
-  alias Bookclub.{Accounts, Content}
+  alias Bookclub.{Accounts, Content, Alerts}
 
   #import Types
   import_types Types
@@ -15,6 +15,7 @@ defmodule BookclubWeb.Schema do
     Dataloader.new
     |> Dataloader.add_source(Accounts, Accounts.data())
     |> Dataloader.add_source(Content, Content.data())
+    |> Dataloader.add_source(Alerts, Alerts.data())
 
   Map.put(ctx, :loader, loader)
   end
@@ -127,6 +128,18 @@ end
     field :check_if_user_is_member, :boolean do
       arg :club_id, non_null(:id)
       resolve &Resolvers.ClubResolver.check_if_user_is_member/3
+    end
+
+    @desc "Get user notifications"
+    field :get_user_notifications, list_of(:notification_type) do
+      middleware Middleware.Authorize, :any
+      resolve &Resolvers.NotificationResolver.get_user_notifications/3
+    end
+
+    @desc "Get user not seen notifications"
+    field :get_user_not_seen_note, list_of(:notification_type) do
+      middleware Middleware.Authorize, :any
+      resolve &Resolvers.NotificationResolver.get_user_not_seen_note/3
     end
 
   end
@@ -337,6 +350,21 @@ end
       middleware Middleware.Authorize, :any
       arg :club_id, non_null(:id)
       resolve &Resolvers.ClubResolver.leave_club/3
+    end
+
+    @desc "Send Notification"
+    field :send_notification, :notification_type do
+      middleware Middleware.Authorize, :any
+      arg :club_id, non_null(:id)
+      arg :receiver_user_id, non_null(:id)
+      arg :input, non_null(:notification_input_type)
+      resolve &Resolvers.NotificationResolver.create_notification/3
+    end
+
+    @desc "Update Notification Seen"
+    field :update_notification_seen, :integer do
+      middleware Middleware.Authorize, :any
+      resolve &Resolvers.NotificationResolver.update_notification/3
     end
 
     @desc "Upload file"
