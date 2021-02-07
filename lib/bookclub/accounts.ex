@@ -209,6 +209,12 @@ defmodule Bookclub.Accounts do
     |> Repo.update()
   end
 
+  def update_user_app(%User{} = user, attrs) do
+    user
+    |> User.changeset_ap(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a User.
 

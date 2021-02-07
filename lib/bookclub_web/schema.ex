@@ -157,6 +157,13 @@ end
       resolve &Resolvers.SessionResolver.login_user/3
     end
 
+    @desc "Update user"
+    field :update_user, :user_payload do
+      middleware Middleware.Authorize, :any
+      arg :input, non_null(:user_update_input_type)
+      resolve &Resolvers.UserResolver.update_user/3
+    end
+
     @desc "Create role"
     field :create_role, type: :role_type do
       arg :input, non_null(:role_input_type)

@@ -12,6 +12,14 @@ defmodule BookclubWeb.Resolvers.UserResolver do
     {:ok, Accounts.list_users()}
   end
 
+  def update_user(_,%{input: input},%{context: %{current_user: current_user}}) do
+    user = Accounts.get_user!(current_user.id)
+    case Accounts.update_user_app(user, input) do
+      {:ok, user} -> {:ok, success_payload(user)}
+      {:error, %Ecto.Changeset{} = changeset} -> {:ok, error_payload(ChangesetParser.extract_messages(changeset))}
+    end
+  end
+
   # def user(_,%{id: id}, _resolution) do
   #   case Accounts.get_user!(id) do
   #     user -> {:ok, user}
@@ -26,7 +34,7 @@ defmodule BookclubWeb.Resolvers.UserResolver do
     rescue
       Ecto.NoResultsError ->
         {:error, "No result found"}
-    end  
+    end
   end
 
   def create(%{input: input}, _resolution) do

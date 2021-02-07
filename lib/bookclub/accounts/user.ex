@@ -57,6 +57,13 @@ defmodule Bookclub.Accounts.User do
     |> uploadfile(attrs, user)
   end
 
+  def changeset_ap(user, attrs) do
+    user
+    |> cast(attrs, [:first_name, :last_name, :username, :about])
+    |> validate_required([:first_name, :last_name, :username])
+    |> unique_constraint(:username)
+  end
+
   def changeset_for_status(user, attrs) do
     user
     |> cast(attrs, [:status])

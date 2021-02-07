@@ -32,6 +32,13 @@ defmodule BookclubWeb.Schema.Types.Usertype do
       field :passwordfield, non_null(:string)
     end
 
+    input_object :user_update_input_type do
+      field :first_name, non_null(:string)
+      field :last_name, non_null(:string)
+      field :username, non_null(:string)
+      field :about, non_null(:string)
+    end
+
     payload_object(:user_payload, :user_type)
 
 end
