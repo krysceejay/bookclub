@@ -10,7 +10,7 @@ defmodule Bookclub.Accounts.Session do
       true ->
         case user.status do
           1 -> {:ok, user}
-          _ -> {:error, "Your account is not verified"}
+          _ -> {:error, "Your account is not verified, kindly verify."}
         end
       _   ->  {:error, "Incorrect login credentials"}
     end

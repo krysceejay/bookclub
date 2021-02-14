@@ -58,7 +58,7 @@ defmodule BookclubWeb.Resolvers.UserResolver do
       nil -> {:error, "User does not exist"}
       user ->
         with false <- resend_verification_code(user) do
-          {:error, "Something went wrong, please check your internet connection."}
+          {:error, "Something went wrong."}
         else
           vtoken -> Email.resend_code(user, user.email, vtoken) |> Mailer.deliver_now(response: true)
             {:ok, user}

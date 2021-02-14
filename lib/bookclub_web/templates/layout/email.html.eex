@@ -22,7 +22,7 @@ padding: 0; font-family: 'Poppins',sans-serif; line-height: 160%; font-size: .9e
             <tr>
                 <td style="background-color:#3a4155;">
                     <div style="display: block;	text-align:left; margin: 0px;  padding:20px 40px; color: #ffffff;">
-                        <img src="http://shelfvibe.com/home/img/logowhite.png" width="80px" height="40px" alt="" srcset="">
+                        <img src="http://shelfvibe.com/home/img/logowhite.png" width="150px" height="45px" alt="" srcset="">
                           <!-- <h1 style="font-size: 30px;">
                             <span style="color: #00a2cc;">Shelf</span>vibe
                           </h1> -->
@@ -31,15 +31,15 @@ padding: 0; font-family: 'Poppins',sans-serif; line-height: 160%; font-size: .9e
             </tr>
     <%= render @view_module, @view_template, assigns %>
     <tr>
-        <td style="padding:40px; text-align:left; background-color:#fff7fb; color:#222; font-family: 'Poppins', sans-serif; ">
+        <td style="padding:40px; text-align:left; background-color:#ccecf5; color:#222; font-family: 'Poppins', sans-serif; ">
 
             <div>
               <h1 style="font-size: 30px;">
                 <span style="color: #00a2cc;">Shelf</span>vibe
               </h1>
+              <p style="font-size:0.7em;line-height:140%; margin-bottom:20px;">...let the shelf vibe!!!</p>
             </div>
             <div>
-                <p style="font-size:0.7em;line-height:140%; margin-bottom:20px;">Talk about it if it's so interesting.</p>
                 <p style="font-size:0.8em;line-height:140%;"><strong>Contact: </strong><br> info@shelfvibe.com </p>
             </div>
             <div style="display:block; margin-bottom:20px;">

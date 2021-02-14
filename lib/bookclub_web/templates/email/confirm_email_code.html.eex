@@ -5,12 +5,12 @@
           <img src="http://shelfvibe.com/home/img/success.png" width="80%" alt="" srcset="">
       </div>
       <h2 style="color:#242c42; margin-bottom:30px">Hi <%= @user.first_name %>,</h2> <h3 style="">Welcome to Shelfvibe!</h3>
-      <p style="line-height: 1.8">We are pleased to have you join our community of readers. It’s time to get started. We’ve created a personal account for you, please confirm your email address and use our services to the maximum</p>
-      <p style="line-height: 1.8">Below is your verification code</p>
-      <h2 style="color:#242c42; margin-bottom:30px; margin-top: 30px;"><%= @token %></h2>
+      <p style="line-height: 1.8">We are pleased to have you join our community of readers. It’s time to get started. We’ve created a personal account for you, please confirm your email address and use our services to the maximum.</p>
+      <p style="line-height: 1.8">Below is your verification code.</p>
+      <h2 style="color:#242c42; margin-bottom:15px; margin-top: 15px;"><%= @token %></h2>
 
       <p style="line-height: 1.8">We're glad you're here.</p>
-      <p><br>Our Best!<br>The Shelfvibe Team</span><br></p>
+      <p><br>Our Best!<br>The Shelfvibe Team.</span><br></p>
     </div>
   </td>
 </tr>
