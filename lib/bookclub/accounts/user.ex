@@ -85,11 +85,9 @@ defmodule Bookclub.Accounts.User do
       encrypted_password = Encryption.hash_password(password).password_hash
 
       put_change(changeset, :password, encrypted_password)
-
     else
       changeset
     end
-
   end
 
   defp uploadfile(changeset, attrs, pr) do

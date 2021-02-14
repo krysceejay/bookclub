@@ -6,12 +6,14 @@ defmodule Bookclub.Accounts.Session do
 
   def authenticate(args) do
     user = Repo.get_by(User, email: String.downcase(args.email))
-
     case check_password(user, args.passwordfield) do
-      true -> {:ok, user}
+      true ->
+        case user.status do
+          1 -> {:ok, user}
+          _ -> {:error, "Your account is not verified"}
+        end
       _   ->  {:error, "Incorrect login credentials"}
     end
-
   end
 
   defp check_password(user, passwordfield) do

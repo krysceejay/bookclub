@@ -77,6 +77,11 @@ end
       resolve &Resolvers.ClubResolver.single_club/3
     end
 
+    @desc "Get featured clubs"
+    field :featured_clubs, list_of(:club_type) do
+      resolve &Resolvers.ClubResolver.get_featured_clubs/3
+    end
+
     @desc "Get club polls"
     field :clubpolls, list_of(:poll_type) do
       arg :club_id, non_null(:id)
@@ -142,6 +147,19 @@ end
       resolve &Resolvers.NotificationResolver.get_user_not_seen_note/3
     end
 
+    @desc "Resend Verification Code"
+    field :resend_code, :user_type do
+      arg :email, non_null(:string)
+      resolve &Resolvers.UserResolver.resend_code/2
+    end
+
+    @desc "Check Verification Code"
+    field :check_code, :boolean do
+      arg :email, non_null(:string)
+      arg :token, non_null(:string)
+      resolve &Resolvers.UserResolver.verify_token/2
+    end
+
   end
 
   mutation do
@@ -149,6 +167,13 @@ end
     field :register_user, type: :user_payload do
       arg :input, non_null(:user_input_type)
       resolve &Resolvers.UserResolver.create/2
+    end
+
+    @desc "Change User Password"
+    field :new_password, type: :user_payload do
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
+      resolve &Resolvers.UserResolver.new_password/2
     end
 
     @desc "Login a user and return JWT token"

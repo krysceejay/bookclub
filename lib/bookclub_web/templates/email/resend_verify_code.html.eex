@@ -1,0 +1,12 @@
+<tr>
+  <td style="background-color:#fff; font-family: 'Poppins', sans-serif; ">
+    <div style="display: block; margin: 0px; padding:40px; background-color:#fff; font-family: 'Poppins', sans-serif; ">
+      <h2 style="color:#242c42; margin-bottom:30px">Hi <%= @user.first_name %>,</h2>
+      <p style="line-height: 1.8">Please confirm your email address with the verification code below</p>
+      <h2 style="color:#242c42; margin-bottom:30px; margin-top: 30px;"><%= @token %></h2>
+
+      <p style="line-height: 1.8">We're glad you're here.</p>
+      <p><br>Our Best!<br>The Shelfvibe Team</span><br></p>
+    </div>
+  </td>
+</tr>

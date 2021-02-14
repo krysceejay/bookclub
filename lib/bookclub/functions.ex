@@ -38,4 +38,8 @@ defmodule Bookclub.Functions do
     |> binary_part(0, length)
   end
 
+  def rand_digit do
+    Enum.random(1_000..9_999) |> Integer.to_string
+  end
+
 end

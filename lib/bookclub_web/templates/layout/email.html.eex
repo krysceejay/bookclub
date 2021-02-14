@@ -21,24 +21,21 @@ padding: 0; font-family: 'Poppins',sans-serif; line-height: 160%; font-size: .9e
             </tr>
             <tr>
                 <td style="background-color:#3a4155;">
-                    <div style="display: block;	text-align:left; margin: 0px;  padding:30px 40px; color: #ffffff;">
-
-                          <h1 style="font-size: 30px;">
-                            <span style="color: #f53ba3;">Shelf</span>vibe
-                          </h1>
-
-
+                    <div style="display: block;	text-align:left; margin: 0px;  padding:20px 40px; color: #ffffff;">
+                        <img src="http://shelfvibe.com/home/img/logowhite.png" width="80px" height="40px" alt="" srcset="">
+                          <!-- <h1 style="font-size: 30px;">
+                            <span style="color: #00a2cc;">Shelf</span>vibe
+                          </h1> -->
                     </div>
-
                 </td>
             </tr>
     <%= render @view_module, @view_template, assigns %>
     <tr>
         <td style="padding:40px; text-align:left; background-color:#fff7fb; color:#222; font-family: 'Poppins', sans-serif; ">
 
-            <div >
+            <div>
               <h1 style="font-size: 30px;">
-                <span style="color: #f53ba3;">Shelf</span>vibe
+                <span style="color: #00a2cc;">Shelf</span>vibe
               </h1>
             </div>
             <div>

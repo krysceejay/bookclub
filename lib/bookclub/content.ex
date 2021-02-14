@@ -787,6 +787,15 @@ defmodule Bookclub.Content do
     Repo.one(query)
   end
 
+  def get_featured_clubs() do
+    Repo.all(
+      from c in Club,
+      where: c.publish == true,
+      where: c.feat == true,
+      order_by: [desc: c.id]
+    )
+  end
+
   @doc """
   Creates a club.
 

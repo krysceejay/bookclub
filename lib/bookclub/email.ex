@@ -17,6 +17,20 @@ defmodule Bookclub.Email do
       |> render("confirm_email.html", user: user, token: token)
   end
 
+  def confirm_email_code(user, email, token) do
+    base_email()
+      |> to(email)
+      |> subject("Verification Code")
+      |> render("confirm_email_code.html", user: user, token: token)
+  end
+
+  def resend_code(user, email, token) do
+    base_email()
+      |> to(email)
+      |> subject("Verification Code")
+      |> render("resend_verify_code.html", user: user, token: token)
+  end
+
   def reset_password_email(name, email, token) do
     base_email()
       |> to(email)

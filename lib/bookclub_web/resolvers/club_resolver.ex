@@ -334,4 +334,8 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     {:ok, Content.get_user_joined_club(current_user.id)}
   end
 
+  def get_featured_clubs(_,_,_) do
+    {:ok, Content.get_featured_clubs()}
+  end
+
 end

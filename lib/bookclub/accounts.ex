@@ -153,7 +153,7 @@ defmodule Bookclub.Accounts do
 
   def get_user_by_username(name), do: Repo.get_by(User, username: name)
 
-  def get_user_by_email(email), do: Repo.get_by(User, email: email)
+  def get_user_by_email(email), do: Repo.get_by(User, email: String.downcase(email))
 
   @doc """
   Creates a user.
@@ -279,6 +279,15 @@ defmodule Bookclub.Accounts do
   def get_verify_userid(userid), do: Repo.get_by(Verify, user_id: userid)
 
   def get_verify_by_token(token), do: Repo.get_by(Verify, token: token)
+
+  def check_verify_token(userid, token) do
+    query =
+      from v in Verify,
+        where: v.user_id == ^userid,
+        where: v.token == ^token
+
+    Repo.exists?(query)
+  end
 
   @doc """
   Creates a verify.
