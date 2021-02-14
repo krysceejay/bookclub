@@ -20,6 +20,14 @@ defmodule BookclubWeb.Resolvers.UserResolver do
     end
   end
 
+  def update_propix(%{input: input}, %{context: %{current_user: current_user}}) do
+    user = Accounts.get_user!(current_user.id)
+      case Accounts.update_user_propix(user, %{propix: input}) do
+        {:ok, _} -> {:ok, true}
+        {:error, _changeset} -> {:ok, false}
+      end
+  end
+
   # def user(_,%{id: id}, _resolution) do
   #   case Accounts.get_user!(id) do
   #     user -> {:ok, user}

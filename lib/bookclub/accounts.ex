@@ -203,6 +203,12 @@ defmodule Bookclub.Accounts do
     |> Repo.update()
   end
 
+  def update_user_propix(%User{} = user, attrs) do
+    user
+    |> User.changeset_for_propix(attrs)
+    |> Repo.update()
+  end
+
   def update_user_password(%User{} = user, attrs) do
     user
     |> User.changeset_password_reset(attrs)

@@ -176,6 +176,13 @@ end
       resolve &Resolvers.UserResolver.new_password/2
     end
 
+    @desc "Change User Propix"
+    field :update_propix, :boolean do
+      middleware Middleware.Authorize, :any
+      arg :input, non_null(:string)
+      resolve &Resolvers.UserResolver.update_propix/2
+    end
+
     @desc "Login a user and return JWT token"
     field :login_user, type: :session_type do
       arg :input, non_null(:session_input_type)

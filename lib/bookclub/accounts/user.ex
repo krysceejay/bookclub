@@ -70,6 +70,12 @@ defmodule Bookclub.Accounts.User do
     |> validate_required([:status])
   end
 
+  def changeset_for_propix(user, attrs) do
+    user
+    |> cast(attrs, [:propix])
+    |> validate_required([:propix])
+  end
+
   def changeset_password_reset(user, attrs) do
     user
     |> cast(attrs, [:passwordfield])
