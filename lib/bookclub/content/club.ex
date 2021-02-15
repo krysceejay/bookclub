@@ -9,6 +9,7 @@ defmodule Bookclub.Content.Club do
     field :name, :string
     field :public, :boolean, default: true
     field :description, :string
+    field :details, :string
     field :genre, {:array, :string}
     field :publish, :boolean, default: false
     field :feat, :boolean, default: false
@@ -30,7 +31,7 @@ defmodule Bookclub.Content.Club do
   @doc false
   def changeset_c(club, attrs) do
     club
-    |> cast(attrs, [:name, :public, :user_id, :description, :genre, :publish])
+    |> cast(attrs, [:name, :public, :user_id, :description, :details, :genre, :publish])
     |> validate_required([:name, :public, :user_id, :description, :genre, :publish])
     |> unique_constraint(:name)
     |> upload_oncreation(attrs)
@@ -38,7 +39,7 @@ defmodule Bookclub.Content.Club do
 
   def changeset_app(club, attrs) do
     club
-    |> cast(attrs, [:name, :public, :user_id, :description, :genre, :publish, :image])
+    |> cast(attrs, [:name, :public, :user_id, :description, :details, :genre, :publish, :image])
     |> validate_required([:name, :public, :user_id, :description, :genre, :publish, :image])
     |> unique_constraint(:name)
   end

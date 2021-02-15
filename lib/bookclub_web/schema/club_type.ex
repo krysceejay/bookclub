@@ -13,6 +13,7 @@ defmodule BookclubWeb.Schema.Types.ClubType do
         field :image, :string
         field :public, :boolean
         field :publish, :boolean
+        field :details, :string
         field :description, :string
         field :genre, list_of(:string)
         field :inserted_at, :date
@@ -30,6 +31,7 @@ defmodule BookclubWeb.Schema.Types.ClubType do
       field :public, :boolean
       field :publish, :boolean
       field :description, non_null(:string)
+      field :details, :string
       field :genre, list_of(non_null(:string))
     end
 
