@@ -25,7 +25,7 @@ defmodule BookclubWeb.Endpoint do
     at: "/",
     from: :bookclub,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt vendors admin home chat)
+    only: ~w(css fonts images js .well-known favicon.ico robots.txt vendors admin home chat)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
