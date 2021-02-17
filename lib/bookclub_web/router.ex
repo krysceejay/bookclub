@@ -21,6 +21,11 @@ defmodule BookclubWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :wellknown do
+    plug CORSPlug, origin: "*"
+    plug :accepts, ["json"]
+  end
+
   pipeline :admin_dashboard do
     plug :put_layout, {BookclubWeb.LayoutView, :admin}
   end
@@ -42,6 +47,12 @@ defmodule BookclubWeb.Router do
 
     post "/:path", UploadController, :uploadFile
     post "/delete/:path", UploadController, :deleteFile
+  end
+
+  scope "/.well-known", BookclubWeb do
+    pipe_through :wellknown
+
+    get "/apple-app-site-association", WellknownController, :index
   end
 
   scope "/bkadmin", BookclubWeb do
