@@ -315,7 +315,13 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
   end
 
   def single_club(_,%{club_id: club_id},_) do
-    {:ok, Content.get_club!(club_id)}
+    try do
+      club = Content.get_club!(club_id)
+      {:ok, club}
+    rescue
+      Ecto.NoResultsError ->
+        {:error, "No result found"}
+    end
   end
 
   def get_fav_by_user_and_club(_,%{club_id: club_id},%{context: %{current_user: current_user}}) do

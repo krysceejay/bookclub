@@ -88,6 +88,12 @@ end
       resolve &Resolvers.ClubResolver.all_club_polls/3
     end
 
+    @desc "Get club current polls"
+    field :club_current_poll, :poll_type do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.get_club_current_poll/3
+    end
+
     @desc "Get club lists"
     field :clublists, list_of(:list_type) do
       arg :club_id, non_null(:id)
