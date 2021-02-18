@@ -344,4 +344,12 @@ defmodule BookclubWeb.Resolvers.ClubResolver do
     {:ok, Content.get_featured_clubs()}
   end
 
+  def decode_club_id(_,%{input: input},_) do
+   Base.decode32(input, [padding: false, case: :lower])
+  end
+
+  def encode_club_id(_,%{club_id: club_id},_) do
+     {:ok, Base.encode32(club_id,[padding: false, case: :lower])}
+  end
+
 end

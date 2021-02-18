@@ -59,6 +59,11 @@ defmodule Bookclub.Content.Club do
     |> cast(attrs, [:feat])
   end
 
+  # defp slug(changeset) do
+  #   date_time = DateTime.utc_now() |> DateTime.to_unix()
+  #   enc_hash = date_time |> Base.encode32([padding: false, case: :lower])
+  #     put_change(changeset, :slug, enc_hash)
+  # end
 
   defp upload_oncreation(changeset, attrs) do
     if attrs["image_field"] do

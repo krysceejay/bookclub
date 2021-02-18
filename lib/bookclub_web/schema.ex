@@ -33,6 +33,18 @@ end
       resolve &Resolvers.UserResolver.users/3
     end
 
+    @desc "Decode ClubId"
+    field :decode_club_id, :string do
+      arg :input, non_null(:string)
+      resolve &Resolvers.ClubResolver.decode_club_id/3
+    end
+
+    @desc "Encode ClubId"
+    field :encode_club_id, :string do
+      arg :club_id, non_null(:id)
+      resolve &Resolvers.ClubResolver.encode_club_id/3
+    end
+
     @desc "Get single user"
     field :user, :user_type do
       #middleware Middleware.Authorize, :any
