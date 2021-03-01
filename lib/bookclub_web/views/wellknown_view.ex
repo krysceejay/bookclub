@@ -8,7 +8,7 @@ defmodule BookclubWeb.WellknownView do
         apps: [],
         details: [
          %{
-           appID: "org.reactjs.native.example.Shelfvibe",
+           appID: "com.shelfvibe.Shelfvibe",
            paths: [
              "*"
            ]

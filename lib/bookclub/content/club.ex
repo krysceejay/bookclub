@@ -59,6 +59,11 @@ defmodule Bookclub.Content.Club do
     |> cast(attrs, [:feat])
   end
 
+  def set_meeting_details(club, attrs) do
+    club
+    |> cast(attrs, [:details])
+  end
+
   # defp slug(changeset) do
   #   date_time = DateTime.utc_now() |> DateTime.to_unix()
   #   enc_hash = date_time |> Base.encode32([padding: false, case: :lower])

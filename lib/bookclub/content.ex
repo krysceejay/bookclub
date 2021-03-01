@@ -849,6 +849,12 @@ defmodule Bookclub.Content do
     |> Repo.update()
   end
 
+  def update_club_details(%Club{} = club, attrs) do
+    club
+    |> Club.set_meeting_details(attrs)
+    |> Repo.update()
+  end
+
   def update_club_publish(%Club{} = club, attrs) do
     club
     |> Club.set_publish(attrs)
