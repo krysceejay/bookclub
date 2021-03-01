@@ -11,7 +11,7 @@
     </section>
 <section id="book-cat">
       <div class="container pandsort">
-        <%= form_for @conn, Routes.home_path(@conn, :searchbooks), [method: :get],  fn f -> %>
+        <%= form_for @conn, Routes.home_path(@conn, :searchbooks), [method: :get],  fn _f -> %>
           <div class="sort-form">
             <select name="book-genre">
               <option value="">All genres</option>

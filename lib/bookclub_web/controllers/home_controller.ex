@@ -14,6 +14,10 @@ defmodule BookclubWeb.HomeController do
     render(conn, "index.html", top_rated: top_rated, pagetitle: pagetitle)
   end
 
+  def privacy(conn, _params) do
+    render(conn, "privacypolicy.html")
+  end
+
   def books(conn, _params) do
 
     genres = Content.list_genres()

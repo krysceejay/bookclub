@@ -144,6 +144,8 @@ defmodule BookclubWeb.Router do
     put "/reset-password/:slug", AuthController, :resetpass
     post "/reset-password/:slug", AuthController, :resetpass
 
+    get "/privacy-policy", HomeController, :privacy
+
   end
 
   # Other scopes may use custom stacks.

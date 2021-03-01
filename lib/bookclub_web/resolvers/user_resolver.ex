@@ -97,13 +97,6 @@ defmodule BookclubWeb.Resolvers.UserResolver do
     end
   end
 
-  defp createverify(user) do
-    case Accounts.create_verify(user, %{token: Functions.rand_string(20)}) do
-      {:ok, verify} -> verify.token
-      {:error, _changeset} -> false
-    end
-  end
-
   defp create_verification_code(user) do
     case Accounts.create_verify(user, %{token: Functions.rand_digit()}) do
       {:ok, verify} -> verify.token
